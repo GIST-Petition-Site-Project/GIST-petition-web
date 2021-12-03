@@ -1,9 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
+import PrivateRoute from './PrivateRouter'
 import Login from '../containers/Login/Login'
 import Register from '../containers/Register/Register'
 import Home from '../containers/Home/Home'
 import Posts from '../containers/Posts/Posts'
 import Post from '../containers/Posts/Post'
+import NotFound from '../containers/NotFound/NotFound'
 
 const MainRouter = (): JSX.Element => {
   return (
@@ -12,10 +14,11 @@ const MainRouter = (): JSX.Element => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/posts">
+        <Route path="/posts" element={<PrivateRoute />}>
           <Route index element={<Posts />} />
           <Route path=":postId" element={<Post />} />
         </Route>
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
   )
