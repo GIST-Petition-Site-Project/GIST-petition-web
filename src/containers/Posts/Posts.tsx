@@ -1,3 +1,4 @@
+// 청원 글 목록
 import { Link, Outlet } from 'react-router-dom'
 const Posts = (): JSX.Element => {
   const posts = [
