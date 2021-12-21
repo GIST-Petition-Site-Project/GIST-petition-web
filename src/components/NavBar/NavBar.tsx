@@ -56,7 +56,9 @@ const NavBar = (): JSX.Element => {
           <ItemName className="item__menu">나의 청원</ItemName>
         </li>
         <li className="item">
-          <ItemName className="item__menu">로그인</ItemName>
+          <ItemName className="item__menu">
+            <a href="/login">로그인</a>
+          </ItemName>
         </li>
       </Menu>
     </Header>

@@ -21,8 +21,8 @@ const SearchCurrentPetition = styled.div`
   top: 400px;
 `
 const SearchCurrentPetition__Input = styled.input`
-  width: 720px;
-  height: 60px;
+  width: 680px;
+  height: 56px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 0 20px;
@@ -56,14 +56,7 @@ const Home = (): JSX.Element => {
           <div>
             <SearchCurrentPetition>
               <SearchCurrentPetition__Input placeholder="현재 진행중인 청원 검색" />
-              <Search2Icon
-                style={{
-                  position: 'absolute',
-                  right: '520px',
-                }}
-                w={6}
-                h={6}
-              />
+              <Search2Icon style={{ marginLeft: '-40px' }} w={6} h={6} />
             </SearchCurrentPetition>
           </div>
         </MainBackgroundImage>
