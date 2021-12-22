@@ -3,9 +3,11 @@ import styled from '@emotion/styled'
 
 const Header = styled.header`
   height: 100px;
-  position: sticky; /* 모바일 환경에선 sticky를 없애거나 헤더를 줄이기 */
+  width: 100%;
+  position: fixed; /* 모바일 환경에선 sticky를 없애거나 헤더를 줄이기 */
   top: 0;
-  margin-bottom: -100px;
+  // margin-bottom: -100px;
+  z-index: 1000;
   background-color: rgba(35, 37, 36, 0.7);
   //#5a5e5d, rgba로 opacity를 먹여야 children 요소가 투명해지지 않습니다.
 `

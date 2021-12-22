@@ -10,10 +10,18 @@ const App = (): JSX.Element => {
     <ChakraProvider>
       <GlobalStyle /> {/* css reset */}
       <NavBar />
-      <div className="App">
+      <div
+        className="App"
+        style={{
+          position: 'relative',
+          display: 'block',
+          margin: '0 auto',
+          background: 'white',
+        }}
+      >
         <RootRouter />
-        <Footer />
       </div>
+      <Footer />
     </ChakraProvider>
   )
 }

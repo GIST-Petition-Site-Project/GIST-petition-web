@@ -47,7 +47,7 @@ const Login = (): JSX.Element => {
           spacing={4}
           style={{
             position: 'absolute',
-            top: '250px',
+            top: '300px',
             left: '0',
             right: '0',
             height: '360px',
