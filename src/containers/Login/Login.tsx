@@ -89,7 +89,7 @@ const Login = (): JSX.Element => {
             </InputGroup>
           </FormControl>
           <Text mb="4px" align="right" decoration="underline">
-            <a href="/">비밀번호를 잊으셨나요?</a>
+            <a href="#">비밀번호를 잊으셨나요?</a>
           </Text>
 
           <LoginButton type="submit" className="submit__btn">

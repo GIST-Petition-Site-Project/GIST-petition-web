@@ -8,7 +8,7 @@ import GlobalStyle from './style/Global'
 const App = (): JSX.Element => {
   return (
     <ChakraProvider>
-      <GlobalStyle /> {/* css reset */}
+      <GlobalStyle /> {/*css reset*/}
       <NavBar />
       <div
         className="App"
@@ -17,6 +17,7 @@ const App = (): JSX.Element => {
           display: 'block',
           margin: '0 auto',
           background: 'white',
+          minHeight: '1000px',
         }}
       >
         <RootRouter />

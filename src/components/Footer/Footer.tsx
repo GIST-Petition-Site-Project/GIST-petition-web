@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 
 const Footer_ = styled.div`
-  height: 10vh;
+  height: 100px;
   background-color: #84838b;
   display: block;
   position: absolute;
-  top: 100vh;
+  bottom: 0;
   width: 100%;
 `
 const Footer = (): JSX.Element => {
