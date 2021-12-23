@@ -2,7 +2,7 @@ import logo from '../../assets/img/logo_example.png'
 import styled from '@emotion/styled'
 
 const Header = styled.header`
-  height: 100px;
+  height: 80px;
   width: 100%;
   position: fixed; /* 모바일 환경에선 sticky를 없애거나 헤더를 줄이기 */ /* fixed -> display: block 자동 적용 */
   top: 0;
