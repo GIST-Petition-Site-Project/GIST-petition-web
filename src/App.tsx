@@ -22,7 +22,7 @@ const App = (): JSX.Element => {
       >
         <RootRouter />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </ChakraProvider>
   )
 }
