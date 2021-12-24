@@ -8,12 +8,21 @@ import GlobalStyle from './style/Global'
 const App = (): JSX.Element => {
   return (
     <ChakraProvider>
-      <GlobalStyle /> {/* css reset */}
+      <GlobalStyle /> {/*css reset*/}
       <NavBar />
-      <div className="App">
+      <div
+        className="App"
+        style={{
+          position: 'relative',
+          display: 'block',
+          margin: '0 auto',
+          background: 'white',
+          minHeight: '1000px',
+        }}
+      >
         <RootRouter />
-        <Footer />
       </div>
+      <Footer />
     </ChakraProvider>
   )
 }

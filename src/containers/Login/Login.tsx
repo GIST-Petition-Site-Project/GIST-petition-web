@@ -47,7 +47,7 @@ const Login = (): JSX.Element => {
           spacing={4}
           style={{
             position: 'absolute',
-            top: '250px',
+            top: '300px',
             left: '0',
             right: '0',
             height: '360px',
@@ -89,7 +89,7 @@ const Login = (): JSX.Element => {
             </InputGroup>
           </FormControl>
           <Text mb="4px" align="right" decoration="underline">
-            <a href="/">비밀번호를 잊으셨나요?</a>
+            <a href="#">비밀번호를 잊으셨나요?</a>
           </Text>
 
           <LoginButton type="submit" className="submit__btn">
