@@ -8,8 +8,6 @@ import GlobalStyle from './style/Global'
 const App = (): JSX.Element => {
   return (
     <ChakraProvider>
-      <GlobalStyle /> {/*css reset*/}
-      <NavBar />
       <div
         className="App"
         style={{
@@ -20,9 +18,12 @@ const App = (): JSX.Element => {
           minHeight: '1000px',
         }}
       >
+        <GlobalStyle /> {/*css reset*/}
+        <NavBar />
+        <Footer />
         <RootRouter />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </ChakraProvider>
   )
 }

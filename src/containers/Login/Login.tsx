@@ -18,6 +18,7 @@ const LoginButton = styled.button`
   background-color: #d52425;
   border-radius: 5px;
   height: 36px;
+  font-weight: bold;
 `
 const Login = (): JSX.Element => {
   // chakra icon
@@ -55,7 +56,9 @@ const Login = (): JSX.Element => {
             margin: 'auto',
           }}
         >
-          <Text fontSize="4xl">로그인</Text>
+          <Text fontSize="4xl" fontWeight="bold">
+            로그인
+          </Text>
 
           <FormControl isRequired>
             <Text mb="8px">이메일</Text>
