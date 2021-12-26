@@ -11,7 +11,6 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import CollapseEx from './Collpase'
 import styled from '@emotion/styled'
 
 const LoginButton = styled.button`
@@ -108,7 +107,6 @@ const Login = (): JSX.Element => {
           </Text>
         </Stack>
       </form>
-      <CollapseEx />
     </div>
   )
 }
