@@ -4,7 +4,6 @@ const Footer_ = styled.div`
   height: 100px;
   background-color: #84838b;
   display: block;
-  position: absolute;
   bottom: 0;
   width: 100%;
 `
