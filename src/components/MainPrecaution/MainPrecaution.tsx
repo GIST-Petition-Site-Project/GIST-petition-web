@@ -12,6 +12,12 @@ import {
 import styled from '@emotion/styled'
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
 
+const Inner = styled.div`
+  position: relative;
+  margin: 0 auto;
+  max-width: 900px;
+  height: 100%;
+`
 const CollapseInner = styled.div`
   position: relative;
   margin: 0 auto;
@@ -25,44 +31,47 @@ function MainPrecaution() {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          if (rightOpen === true) {
-            setRightOpen(!rightOpen)
-          }
-          setLeftOpen(leftOpen => !leftOpen)
-        }}
-        height="80px"
-        width="50%"
-        colorScheme="red"
-        color="white"
-        borderRadius="0"
-        textAlign="right"
-      >
-        <Heading as="h2" fontSize="20px" mr="10px" display="flex">
-          이런 청원은 삭제·숨김 처리될 수 있습니다
-        </Heading>
-        <IoMdArrowDropdownCircle size="25px" />
-      </Button>
-      <Button
-        bg="#5a5e5d"
-        colorScheme="gray.500"
-        color="white"
-        borderRadius="0"
-        height="80px"
-        width="50%"
-        onClick={() => {
-          if (leftOpen === true) {
-            setLeftOpen(!leftOpen)
-          }
-          setRightOpen(rightOpen => !rightOpen)
-        }}
-      >
-        <Heading as="h2" fontSize="20px" mr="10px">
-          이런 청원은 답변이 어려울 수 있습니다
-        </Heading>
-        <IoMdArrowDropdownCircle size="25px" />
-      </Button>
+      <Inner>
+        <Button
+          onClick={() => {
+            if (rightOpen === true) {
+              setRightOpen(!rightOpen)
+            }
+            setLeftOpen(leftOpen => !leftOpen)
+          }}
+          height="62px"
+          width="50%  "
+          colorScheme="red"
+          color="white"
+          borderRadius="0"
+          textAlign="right"
+        >
+          <Heading as="h2" fontSize="16px">
+            이런 청원은 삭제·숨김 처리될 수 있습니다
+          </Heading>
+          <IoMdArrowDropdownCircle size="25px" />
+        </Button>
+        <Button
+          bg="#5a5e5d"
+          colorScheme="gray.500"
+          color="white"
+          borderRadius="0"
+          height="62px"
+          width="50%"
+          onClick={() => {
+            if (leftOpen === true) {
+              setLeftOpen(!leftOpen)
+            }
+            setRightOpen(rightOpen => !rightOpen)
+          }}
+        >
+          <Heading as="h2" fontSize="16px">
+            이런 청원은 답변이 어려울 수 있습니다
+          </Heading>
+          <IoMdArrowDropdownCircle size="25px" />
+        </Button>
+      </Inner>
+
       <Collapse in={leftOpen} animateOpacity animate={{ opacity: 0 }}>
         <Box
           p="40px"

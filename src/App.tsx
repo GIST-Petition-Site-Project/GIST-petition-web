@@ -2,7 +2,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import RootRouter from './route/RootRouter'
 import NavBar from './components/NavBar/NavBar'
-import Footer from './components/Footer/Footer'
+// import Footer from './components/Footer/Footer'
 import GlobalStyle from './style/Global'
 
 const App = (): JSX.Element => {
@@ -20,7 +20,7 @@ const App = (): JSX.Element => {
       >
         <GlobalStyle /> {/*css reset*/}
         <NavBar />
-        <Footer />
+        {/* <Footer /> */}
         <RootRouter />
       </div>
       {/* <Footer /> */}

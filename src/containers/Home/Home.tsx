@@ -1,7 +1,7 @@
 import MainImg from '../../assets/img/gist_summer.jpg'
 import { Search2Icon } from '@chakra-ui/icons'
 import styled from '@emotion/styled'
-import MainPrecaution from './MainPrecaution'
+import MainPrecaution from '../../components/MainPrecaution/MainPrecaution'
 
 const MainBackgroundImage = styled.div`
   height: 80vh;
