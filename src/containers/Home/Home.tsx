@@ -50,9 +50,6 @@ const SearchCurrentPetition__Input = styled.input`
 //   background-color: #c4c4c4; // 잠정적인 컬러
 //   height: 50px;
 // `
-const Container = styled.div`
-  display: block;
-`
 
 const DashBoard = styled.div`
   position: relative;
