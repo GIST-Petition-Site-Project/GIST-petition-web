@@ -46,7 +46,7 @@ function MainPrecaution() {
               }
               setLeftOpen(leftOpen => !leftOpen)
             }}
-            height="62px"
+            height="54px"
             width="50%"
             colorScheme="#df3127"
             // colorScheme red가 red_primary가 아닌 secondary로 정의돼있어서 일단 color코드로 써놓겠습니다. (피그마 참고)
@@ -69,7 +69,7 @@ function MainPrecaution() {
             colorScheme="gray.500"
             color="white"
             borderRadius="0"
-            height="62px"
+            height="54px"
             width="50%"
             onClick={() => {
               if (leftOpen === true) {
