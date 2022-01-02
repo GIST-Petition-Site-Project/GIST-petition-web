@@ -6,6 +6,7 @@ import Home from '../containers/Home/Home'
 import Posts from '../containers/Posts/Posts'
 import Post from '../containers/Posts/Post'
 import NotFound from '../containers/NotFound/NotFound'
+import Write from '../containers/Write/Write'
 
 const MainRouter = (): JSX.Element => {
   return (
@@ -14,6 +15,7 @@ const MainRouter = (): JSX.Element => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/write" element={<Write />} />
         <Route path="/posts" element={<PrivateRoute />}>
           <Route index element={<Posts />} />
           <Route path=":postId" element={<Post />} />
