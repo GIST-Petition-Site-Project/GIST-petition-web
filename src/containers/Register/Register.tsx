@@ -81,7 +81,7 @@ const Register = (): JSX.Element => {
               </InputLeftElement>
               <Input
                 type="password"
-                placeholder="비밀번호를 입력하세요"
+                placeholder="영문과 숫자를 포함하여 8자리 이상의 비밀번호를 입력하세요"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               ></Input>
