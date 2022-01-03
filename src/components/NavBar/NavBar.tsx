@@ -8,7 +8,6 @@ const Header = styled.header`
   top: 0;
   z-index: 1000;
   background-color: rgba(47, 54, 60, 0.9);
-
   //#384046, rgba로 opacity를 먹여야 children 요소가 투명해지지 않습니다.
 `
 const Inner = styled.div`
@@ -17,6 +16,7 @@ const Inner = styled.div`
   max-width: 900px;
   height: 100%;
 `
+
 const Logo = styled.div``
 
 const Logo__Image = styled.img`
@@ -59,7 +59,9 @@ const NavBar = (): JSX.Element => {
             <ItemName className="item__menu">청원하기</ItemName>
           </li>
           <li className="item">
-            <ItemName className="item__menu">모든 청원</ItemName>
+            <ItemName className="item__menu">
+              <a href="/posts">모든 청원</a>
+            </ItemName>
           </li>
           <li className="item">
             <ItemName className="item__menu">나의 청원</ItemName>

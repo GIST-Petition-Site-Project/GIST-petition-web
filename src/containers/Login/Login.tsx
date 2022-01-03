@@ -15,7 +15,7 @@ import styled from '@emotion/styled'
 
 const LoginButton = styled.button`
   color: white;
-  background-color: #d52425;
+  background-color: #df3127;
   border-radius: 5px;
   height: 36px;
   font-weight: bold;

@@ -6,7 +6,6 @@ import Home from '../containers/Home/Home'
 import Posts from '../containers/Posts/Posts'
 import Post from '../containers/Posts/Post'
 import NotFound from '../containers/NotFound/NotFound'
-
 const MainRouter = (): JSX.Element => {
   return (
     <>
