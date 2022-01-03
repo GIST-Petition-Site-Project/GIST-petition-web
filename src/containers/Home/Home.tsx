@@ -41,16 +41,6 @@ const SearchCurrentPetition__Input = styled.input`
   box-sizing: border-box;
 `
 
-// 토글 기능 추가해야합니다.
-// styled 컴포넌트를 쓰니까 블록이 겹치는 현상이 있네요...
-// 일단 주석처리 해놨습니다.
-// const Precautions = styled.div`
-//   position: relative;
-//   margin: 0 auto;
-//   background-color: #c4c4c4; // 잠정적인 컬러
-//   height: 50px;
-// `
-
 const DashBoard = styled.div`
   position: relative;
   text-align: center;
