@@ -115,7 +115,7 @@ const Posts = (): JSX.Element => {
         className="petition_board"
         style={{
           position: 'relative',
-          top: '200px',
+          top: '150px',
           textAlign: 'center',
         }}
       >
@@ -174,6 +174,7 @@ const Posts = (): JSX.Element => {
                 bg="#fff"
                 border="1px solid #ccc"
                 borderRadius="0"
+                w={'92px'}
               >
                 이전
               </PaginationPrevious>
@@ -207,6 +208,7 @@ const Posts = (): JSX.Element => {
                 bg="#fff"
                 border="1px solid #ccc"
                 borderRadius="0"
+                w={'92px'}
               >
                 다음
               </PaginationNext>
