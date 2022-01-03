@@ -29,10 +29,12 @@ const Register = (): JSX.Element => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const gistAddress = '@gist.ac.kr'
-    const gmAddress = '@gm.gist.ac.kr'
-    if (!email.includes(gistAddress) || email.includes(gmAddress)) {
+    const emailRegex = /@(gm.)?gist.ac.kr$/
+    const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
+    if (!emailRegex.test(email)) {
       alert('이메일 주소를 확인해주세요')
+    } else if (!passwordRegex.test(password)) {
+      alert('영문과 숫자를 포함하여 8자리 이상의 비밀번호를 설정해주세요')
     } else if (password !== passwordCheck) {
       alert('비밀번호를 확인해주세요')
     }
@@ -79,7 +81,7 @@ const Register = (): JSX.Element => {
               </InputLeftElement>
               <Input
                 type="password"
-                placeholder="비밀번호를 입력하세요"
+                placeholder="영문과 숫자를 포함하여 8자리 이상의 비밀번호를 입력하세요"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               ></Input>
