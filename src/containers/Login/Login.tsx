@@ -1,6 +1,6 @@
-import { FormEvent, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { login } from '../../app/slices/user/userSlice'
+import { addUserAsync, User } from '../../app/slices/user/userSlice'
 import {
   chakra,
   FormControl,
@@ -24,23 +24,18 @@ const Login = (): JSX.Element => {
   // chakra icon
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
+  const [user, setUser] = useState<User>({ email: '', password: '' })
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  // Fake
+  const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target)
+    const { type, value } = e.target
+    setUser({ ...user, [type]: value })
+  }
   const dispatch = useDispatch()
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(
-      login({
-        email: email,
-        password: password,
-        // loggedIn: true,
-      }),
-    )
+    dispatch(addUserAsync(user))
   }
-
   return (
     <div className="login">
       <form className="login__form" onSubmit={e => handleSubmit(e)}>
@@ -70,8 +65,8 @@ const Login = (): JSX.Element => {
               <Input
                 type="email"
                 placeholder="이메일을 입력하세요."
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                value={user.email}
+                onChange={e => handleChangeUser(e)}
               />
             </InputGroup>
           </FormControl>
@@ -86,8 +81,8 @@ const Login = (): JSX.Element => {
               <Input
                 type="password"
                 placeholder="비밀번호를 입력하세요."
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+                value={user.password}
+                onChange={e => handleChangeUser(e)}
               />
             </InputGroup>
           </FormControl>

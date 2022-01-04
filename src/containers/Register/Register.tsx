@@ -104,6 +104,13 @@ const Register = (): JSX.Element => {
           <RegisterButton type="submit" className="submit__btn">
             회원가입
           </RegisterButton>
+
+          <Text mb="4px" align="center">
+            이미 가입하셨나요?{' '}
+            <a href="/login" style={{ textDecoration: 'underline' }}>
+              로그인
+            </a>
+          </Text>
         </Stack>
       </form>
     </section>
