@@ -58,6 +58,9 @@ function MainPrecaution() {
             display="inline-flex"
             justifyContent="space-between"
             pl="0"
+            _focus={{
+              outline: 'none',
+            }}
           >
             <Heading as="h2" fontSize="16px">
               이런 청원은 삭제·숨김 처리될 수 있습니다
@@ -80,6 +83,9 @@ function MainPrecaution() {
             display="inline-flex"
             justifyContent="space-between"
             pr="0"
+            _focus={{
+              outline: 'none',
+            }}
           >
             <Heading as="h2" fontSize="16px">
               이런 청원은 답변이 어려울 수 있습니다

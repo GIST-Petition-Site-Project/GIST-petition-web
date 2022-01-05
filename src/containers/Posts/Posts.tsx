@@ -151,7 +151,7 @@ const Posts = (): JSX.Element => {
             <PetitionItem>
               <PetitionCategory>{post.category}</PetitionCategory>
               <PetitionSubject>
-                <Link to={`/posts/${post.title}`} key={post.id}>
+                <Link to={`/posts/${post.id}`} key={post.id}>
                   {post.title}
                 </Link>
               </PetitionSubject>
