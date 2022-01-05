@@ -14,18 +14,21 @@ import { List, ListItem, Container, Heading } from '@chakra-ui/react'
 function GuideModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
-    <>
+    <div style={{ margin: '0 auto' }}>
       <Button
+        display={'block'}
         onClick={onOpen}
-        bg={'#616463'}
+        bg={'#2F363C'}
+        width={'400px'}
         color={'white'}
-        _hover={{ background: '#616463' }}
+        colorScheme={'#2F363C'}
+        _focus={{ outline: 'none' }}
       >
         청원 작성 요령 안내
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size={'xl'} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent borderRadius={0}>
           <ModalHeader m="15px"> GIST 청원, 이렇게 등록하세요</ModalHeader>
           <ModalCloseButton />
           <ModalBody m="15px" textAlign={'justify'}>
@@ -81,13 +84,19 @@ function GuideModal() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+            <Button
+              bg="#5A5E5D"
+              colorScheme="#5A5E5D"
+              mr={3}
+              onClick={onClose}
+              _focus={{ outline: 'none' }}
+            >
+              닫기
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </div>
   )
 }
 export default GuideModal

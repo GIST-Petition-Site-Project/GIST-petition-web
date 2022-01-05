@@ -12,7 +12,7 @@ function WritePrecaution() {
   `
   return (
     <>
-      <Heading as="h2" fontSize="25px">
+      <Heading as="h2" fontSize="20px">
         GIST 청원 게시판 운영 원칙
       </Heading>
       <StylePrecaution>
