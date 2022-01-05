@@ -4,41 +4,43 @@ import { Heading, Box, Stack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 // 청원글 작성
 
-const StyledBody = styled.div`
+const Inner = styled.div`
   position: relative;
-  margin: 60px auto;
-  padding: 50px 10px;
+  margin: 0 auto;
   max-width: 900px;
+  height: 100%;
 `
+
 const StyledBoxInner = styled.div`
   margin: 30px;
 `
 const Write = (): JSX.Element => {
   return (
     <div>
-      <StyledBody>
-        <Heading as="h2" fontSize="32px">
-          청원하기
-        </Heading>
-
-        <Box
-          border="1px"
-          borderColor="#D8D8D8"
-          boxShadow="xl"
-          m="60px 40px"
-          p="10px"
-          rounded="xl"
-          verticalAlign={'baseline'}
-          letterSpacing="wide"
+      <Inner>
+        <Stack
+          spacing={6}
+          style={{ position: 'absolute', top: '150px', width: '100%' }}
         >
-          <StyledBoxInner>
-            <Stack>
-              <WritePrecaution />
-              <GuideModal />
-            </Stack>
-          </StyledBoxInner>
-        </Box>
-      </StyledBody>
+          <Heading as="h2" fontSize="20px">
+            청원하기
+          </Heading>
+
+          <Box
+            border="1px solid #ccc"
+            borderRadius="0"
+            p="10px"
+            letterSpacing="wide"
+          >
+            <StyledBoxInner>
+              <Stack>
+                <WritePrecaution />
+                <GuideModal />
+              </Stack>
+            </StyledBoxInner>
+          </Box>
+        </Stack>
+      </Inner>
     </div>
   )
 }
