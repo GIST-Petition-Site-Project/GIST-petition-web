@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { loginUserAsync, User } from '../../app/userSlice'
+// import { useDispatch } from 'react-redux'
+import { User } from '../../app/userSlice'
 import {
   chakra,
   FormControl,
@@ -12,6 +12,8 @@ import {
 } from '@chakra-ui/react'
 import { stackStyle, LoginButton, ErrorText } from './style'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
+import { checkLoginError } from '../../utils/checkUser'
+import { postLogin } from '../../utils/api/postLogin'
 
 const Login = (): JSX.Element => {
   // chakra icon
@@ -25,10 +27,9 @@ const Login = (): JSX.Element => {
     const { name, value } = e.target
     setUser({ ...user, [name]: value })
   }
-  const dispatch = useDispatch()
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(loginUserAsync(user))
+    postLogin(user.username, user.password)
   }
   return (
     <div className="login">
