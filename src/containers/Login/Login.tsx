@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 // import { useDispatch } from 'react-redux'
 import { User } from '../../app/userSlice'
 import {
@@ -21,15 +22,25 @@ const Login = (): JSX.Element => {
   const CFaLock = chakra(FaLock)
 
   const [user, setUser] = useState<User>({ username: '', password: '' })
+  const [responseState, setResponseState] = useState(0)
 
   const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.name)
     const { name, value } = e.target
     setUser({ ...user, [name]: value })
   }
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate()
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    postLogin(user.username, user.password)
+    try {
+      const loginStatus = await postLogin(user.username, user.password)
+      setResponseState(loginStatus)
+
+      if (loginStatus < 400) {
+        navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <div className="login">
@@ -53,7 +64,6 @@ const Login = (): JSX.Element => {
               />
             </InputGroup>
           </FormControl>
-          <ErrorText>아이디가 존재하지 않습니다.</ErrorText>
           <FormControl>
             <Text mb="8px">비밀번호</Text>
             <InputGroup borderColor="#ccc">
@@ -69,7 +79,7 @@ const Login = (): JSX.Element => {
               />
             </InputGroup>
           </FormControl>
-          <ErrorText>비밀번호가 일치하지 않습니다.</ErrorText>
+          <ErrorText>{checkLoginError(responseState)}</ErrorText>
           <Text mb="4px" align="right" decoration="underline">
             <a href="#">비밀번호를 잊으셨나요?</a>
           </Text>
