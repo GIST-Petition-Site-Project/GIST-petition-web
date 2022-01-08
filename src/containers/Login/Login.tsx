@@ -10,21 +10,14 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { stackStyle } from './style'
+import { stackStyle, LoginButton, ErrorText } from './style'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import styled from '@emotion/styled'
 
-const LoginButton = styled.button`
-  color: white;
-  background-color: #df3127;
-  border-radius: 5px;
-  height: 36px;
-  font-weight: bold;
-`
 const Login = (): JSX.Element => {
   // chakra icon
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
+
   const [user, setUser] = useState<User>({ username: '', password: '' })
 
   const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +52,7 @@ const Login = (): JSX.Element => {
               />
             </InputGroup>
           </FormControl>
-          <p></p>
+          <ErrorText>아이디가 존재하지 않습니다.</ErrorText>
           <FormControl>
             <Text mb="8px">비밀번호</Text>
             <InputGroup borderColor="#ccc">
@@ -75,6 +68,7 @@ const Login = (): JSX.Element => {
               />
             </InputGroup>
           </FormControl>
+          <ErrorText>비밀번호가 일치하지 않습니다.</ErrorText>
           <Text mb="4px" align="right" decoration="underline">
             <a href="#">비밀번호를 잊으셨나요?</a>
           </Text>
