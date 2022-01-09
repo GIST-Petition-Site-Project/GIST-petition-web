@@ -9,6 +9,7 @@ export const postLogin = async (username: string, password: string) => {
       validateStatus: function (status) {
         return status < 500
       },
+      timeout: 10000,
     },
   )
   console.log(response.status)
