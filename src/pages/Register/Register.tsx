@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react'
 // import { useDispatch } from 'react-redux'
-import { User } from '../../app/userSlice'
+
 import {
   chakra,
   FormControl,

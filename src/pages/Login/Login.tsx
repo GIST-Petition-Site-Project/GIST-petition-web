@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-// import { useDispatch } from 'react-redux'
-import { User } from '../../app/userSlice'
+import { useDispatch } from 'react-redux'
+import { setLogin } from '../../redux/auth/authSlice'
 import {
   chakra,
   FormControl,
@@ -29,14 +29,18 @@ const Login = (): JSX.Element => {
     setUser({ ...user, [name]: value })
   }
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
+      console.log(user.username, user.password)
+      console.log(user)
       const loginStatus = await postLogin(user.username, user.password)
       setResponseState(loginStatus)
 
       if (loginStatus < 400) {
         navigate('/')
+        dispatch(setLogin())
       }
     } catch (error) {
       console.log(error)
