@@ -1,4 +1,6 @@
-import { FormEvent, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
+// import { useDispatch } from 'react-redux'
+import { User } from '../../app/userSlice'
 import {
   chakra,
   FormControl,
@@ -23,22 +25,27 @@ const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [user, setUser] = useState<User>({ username: '', password: '' })
   const [passwordCheck, setPasswordCheck] = useState('')
 
+  const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setUser({ ...user, [name]: value })
+  }
+  // const dispatch = useDispatch()
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const emailRegex = /@(gm.)?gist.ac.kr$/
-    const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
-    if (!emailRegex.test(email)) {
-      alert('이메일 주소를 확인해주세요')
-    } else if (!passwordRegex.test(password)) {
-      alert('영문과 숫자를 포함하여 8자리 이상의 비밀번호를 설정해주세요')
-    } else if (password !== passwordCheck) {
-      alert('비밀번호를 확인해주세요')
-    }
-    return
+    // const emailRegex = /@(gm.)?gist.ac.kr$/
+    // const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
+    // if (!emailRegex.test(email)) {
+    //   alert('이메일 주소를 확인해주세요')
+    // } else if (!passwordRegex.test(password)) {
+    //   alert('영문과 숫자를 포함하여 8자리 이상의 비밀번호를 설정해주세요')
+    // } else if (password !== passwordCheck) {
+    //   alert('비밀번호를 확인해주세요')
+    // }
+    // return
+    // dispatch(registerUserAsync(user))
   }
 
   return (
@@ -67,9 +74,10 @@ const Register = (): JSX.Element => {
               </InputLeftElement>
               <Input
                 type="email"
+                name="username"
                 placeholder="gm.gist 혹은 gist 메일을 입력하세요"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                value={user.username}
+                onChange={e => handleChangeUser(e)}
               ></Input>
             </InputGroup>
           </FormControl>
@@ -81,9 +89,10 @@ const Register = (): JSX.Element => {
               </InputLeftElement>
               <Input
                 type="password"
+                name="password"
                 placeholder="영문과 숫자를 포함하여 8자리 이상의 비밀번호를 입력하세요"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+                value={user.password}
+                onChange={e => handleChangeUser(e)}
               ></Input>
             </InputGroup>
           </FormControl>
