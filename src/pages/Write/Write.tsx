@@ -1,19 +1,9 @@
 import WritePrecaution from '../../components/WritePrecaution/WritePrecaution'
 import GuideModal from '../../components/PrecautionModal/GuideModal'
 import { Heading, Box, Stack } from '@chakra-ui/react'
-import styled from '@emotion/styled'
+import { Inner, StyledBoxInner } from './style'
 // 청원글 작성
 
-const Inner = styled.div`
-  position: relative;
-  margin: 0 auto;
-  max-width: 900px;
-  height: 100%;
-`
-
-const StyledBoxInner = styled.div`
-  margin: 30px;
-`
 const Write = (): JSX.Element => {
   return (
     <div>
