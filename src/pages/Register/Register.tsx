@@ -1,6 +1,5 @@
 import React, { FormEvent, useState } from 'react'
 // import { useDispatch } from 'react-redux'
-
 import {
   chakra,
   FormControl,
@@ -11,15 +10,7 @@ import {
   Input,
 } from '@chakra-ui/react'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import styled from '@emotion/styled'
-
-const RegisterButton = styled.button`
-  color: white;
-  background-color: #5a5e5d;
-  border-radius: 5px;
-  height: 36px;
-  font-weight: bold;
-`
+import { RegisterButton, stackStyle } from './style'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -51,18 +42,7 @@ const Register = (): JSX.Element => {
   return (
     <section className="register">
       <form onSubmit={e => handleSubmit(e)} className="register__form">
-        <Stack
-          spacing={4}
-          style={{
-            position: 'absolute',
-            top: '300px',
-            left: '0',
-            right: '0',
-            height: '360px',
-            width: '400px',
-            margin: 'auto',
-          }}
-        >
+        <Stack spacing={4} style={stackStyle}>
           <Text fontSize="4xl" fontWeight="bold">
             회원가입
           </Text>
