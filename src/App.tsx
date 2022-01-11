@@ -18,7 +18,8 @@ const App = (): JSX.Element => {
           minHeight: '1000px',
         }}
       >
-        <GlobalStyle /> {/*css reset*/}
+        <GlobalStyle />
+        {/*css reset*/}
         <NavBar />
         {/* <Footer /> */}
         <RootRouter />
