@@ -18,11 +18,20 @@ const Inner = styled.div`
   max-width: 900px;
   height: 100%;
 `
+const StyledDiv3 = styled.div`
+  padding: 40px 0;
+  margin-top: 0;
+  color: white;
+  background-color: #dd433b;
+  /* shadow: md; */
+  position: relative;
+`
 const CollapseInner = styled.div`
   position: relative;
   margin: 0 auto;
   max-width: 1000px;
   height: 100%;
+  transition: 0.5s 0.5s;
 `
 
 const Precaution = styled.div`
@@ -31,6 +40,7 @@ const Precaution = styled.div`
   /* 반은 빨간색, 반은 회색으로 설정해줍니다. */
   /* 이 방식이 제일 간단한 것 같아요! */
 `
+
 function MainPrecaution() {
   const [leftOpen, setLeftOpen] = useState(false)
   const [rightOpen, setRightOpen] = useState(false)
@@ -95,15 +105,8 @@ function MainPrecaution() {
         </Inner>
       </Precaution>
 
-      <Collapse in={leftOpen} animateOpacity animate={{ opacity: 0 }}>
-        <Box
-          p="40px 0"
-          color="white"
-          mt="0"
-          bg="#DD433B"
-          shadow="md"
-          position="relative"
-        >
+      <Collapse in={leftOpen}>
+        <StyledDiv3>
           <CollapseInner>
             <Inner>
               <List spacing={3} margin="0">
@@ -130,10 +133,10 @@ function MainPrecaution() {
               </List>
             </Inner>
           </CollapseInner>
-        </Box>
+        </StyledDiv3>
       </Collapse>
 
-      <Collapse in={rightOpen} animateOpacity>
+      <Collapse in={rightOpen}>
         <Box p="40px 0" color="white" bg="#616463" shadow="md" display="block">
           <CollapseInner>
             <Inner>
