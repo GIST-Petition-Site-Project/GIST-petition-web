@@ -1,5 +1,10 @@
 import logo from '../../assets/img/logo_light.png'
 import styled from '@emotion/styled'
+import { getUsersMe } from '../../utils/api/getUsersMe'
+import { setLogin, setLogout } from '../../redux/auth/authSlice'
+import { useDispatch } from 'react-redux'
+import { useAppSelect } from '../../redux/store.hooks'
+import { postLogout } from '../../utils/api/postLogout'
 
 const Header = styled.header`
   height: 60px;
@@ -46,6 +51,21 @@ const ItemName = styled.div`
 `
 
 const NavBar = (): JSX.Element => {
+  const dispatch = useDispatch()
+  const isSessionValid = async () => {
+    const status = await getUsersMe()
+    if (status < 400) {
+      dispatch(setLogin())
+    }
+  }
+
+  const handleLogout = async () => {
+    const status = await postLogout()
+    console.log(status)
+    dispatch(setLogout())
+  }
+
+  isSessionValid()
   return (
     <Header>
       <Inner>
@@ -70,7 +90,11 @@ const NavBar = (): JSX.Element => {
           </li>
           <li className="item">
             <ItemName className="item__menu">
-              <a href="/login">로그인</a>
+              {useAppSelect(select => select.auth.isAuthorized) ? (
+                <a onClick={handleLogout}>로그아웃</a>
+              ) : (
+                <a href="/login">로그인</a>
+              )}
             </ItemName>
           </li>
         </Menu>
