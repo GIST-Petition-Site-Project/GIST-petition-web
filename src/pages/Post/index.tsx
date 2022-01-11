@@ -1,6 +1,6 @@
 // 청원 Id로 해당 글, 글 좋아요, 댓글 조회
 import { useParams } from 'react-router'
-import { Inner, PetitionWrapper, PetitionView } from './style'
+import { Inner, PetitionWrapper, PetitionView } from './styles'
 import { Stack, Text } from '@chakra-ui/react'
 import PetitionContents from './PetitionContents'
 import CommentForm from './CommentForm'

@@ -1,7 +1,7 @@
 import WritePrecaution from '../../components/WritePrecaution/WritePrecaution'
 import GuideModal from '../../components/PrecautionModal/GuideModal'
 import { Heading, Box, Stack } from '@chakra-ui/react'
-import { Inner, StyledBoxInner } from './style'
+import { Inner, StyledBoxInner } from './styles'
 // 청원글 작성
 
 const Write = (): JSX.Element => {
