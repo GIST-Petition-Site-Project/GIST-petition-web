@@ -33,9 +33,7 @@ const Login = (): JSX.Element => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      console.log(user.username, user.password)
-      console.log(user)
-      const loginStatus = await postLogin(user.username, user.password)
+      const loginStatus = await postLogin(user)
       setResponseState(loginStatus)
 
       if (loginStatus < 400) {
