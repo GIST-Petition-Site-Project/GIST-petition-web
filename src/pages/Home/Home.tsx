@@ -1,5 +1,6 @@
 import MainImg from '../../assets/img/gist_summer.jpg'
 import { Search2Icon } from '@chakra-ui/icons'
+<<<<<<< HEAD:src/containers/Home/Home.tsx
 import styled from '@emotion/styled'
 import MainPrecaution from './MainPrecaution'
 
@@ -51,6 +52,16 @@ const DashBoard = styled.div`
   letter-spacing: 0.1em;
   margin: 50px 0;
 `
+=======
+import MainPrecaution from '../../components/MainPrecaution/MainPrecaution'
+import {
+  MainBackgroundImage,
+  Inner,
+  SearchCurrentPetition,
+  SearchCurrentPetition__Input,
+  DashBoard,
+} from './style'
+>>>>>>> 81b4ef4b73ef798d6029bf274411df2879ed052f:src/pages/Home/Home.tsx
 
 const Home = (): JSX.Element => {
   return (

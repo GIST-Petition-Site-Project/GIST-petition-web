@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addUserAsync, User } from '../../app/slices/user/userSlice'
+import { setLogin } from '../../redux/auth/authSlice'
 import {
   chakra,
   FormControl,
@@ -10,82 +11,79 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
+import { stackStyle, LoginButton, ErrorText } from './style'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import styled from '@emotion/styled'
+import { checkLoginError } from '../../utils/checkUser'
+import { postLogin } from '../../utils/api/postLogin'
 
-const LoginButton = styled.button`
-  color: white;
-  background-color: #df3127;
-  border-radius: 5px;
-  height: 36px;
-  font-weight: bold;
-`
 const Login = (): JSX.Element => {
   // chakra icon
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
-  const [user, setUser] = useState<User>({ email: '', password: '' })
+
+  const [user, setUser] = useState<User>({ username: '', password: '' })
+  const [responseState, setResponseState] = useState(0)
 
   const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target)
-    const { type, value } = e.target
-    setUser({ ...user, [type]: value })
+    const { name, value } = e.target
+    setUser({ ...user, [name]: value })
   }
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(addUserAsync(user))
+    try {
+      console.log(user.username, user.password)
+      console.log(user)
+      const loginStatus = await postLogin(user.username, user.password)
+      setResponseState(loginStatus)
+
+      if (loginStatus < 400) {
+        navigate('/')
+        dispatch(setLogin())
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <div className="login">
-      <form className="login__form" onSubmit={e => handleSubmit(e)}>
-        <Stack
-          spacing={4}
-          style={{
-            position: 'absolute',
-            top: '300px',
-            left: '0',
-            right: '0',
-            height: '360px',
-            width: '400px',
-            margin: 'auto',
-          }}
-        >
+      <form className="login__form" onSubmit={handleSubmit}>
+        <Stack spacing={4} style={stackStyle}>
           <Text fontSize="4xl" fontWeight="bold">
             로그인
           </Text>
-
           <FormControl isRequired>
             <Text mb="8px">이메일</Text>
             <InputGroup borderColor="#ccc">
               <InputLeftElement pointerEvents="none">
                 {<CFaUserAlt color="gray.300" />}
               </InputLeftElement>
-
               <Input
                 type="email"
+                name="username"
                 placeholder="이메일을 입력하세요."
-                value={user.email}
-                onChange={e => handleChangeUser(e)}
+                value={user.username}
+                onChange={handleChangeUser}
               />
             </InputGroup>
           </FormControl>
-
           <FormControl>
             <Text mb="8px">비밀번호</Text>
-
             <InputGroup borderColor="#ccc">
               <InputLeftElement pointerEvents="none">
                 {<CFaLock color="gray.300" />}
               </InputLeftElement>
               <Input
                 type="password"
+                name="password"
                 placeholder="비밀번호를 입력하세요."
                 value={user.password}
-                onChange={e => handleChangeUser(e)}
+                onChange={handleChangeUser}
               />
             </InputGroup>
           </FormControl>
+          <ErrorText>{checkLoginError(responseState)}</ErrorText>
           <Text mb="4px" align="right" decoration="underline">
             <a href="#">비밀번호를 잊으셨나요?</a>
           </Text>
