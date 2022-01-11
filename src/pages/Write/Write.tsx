@@ -1,7 +1,8 @@
 import WritePrecaution from '../../components/WritePrecaution/WritePrecaution'
 import GuideModal from '../../components/PrecautionModal/GuideModal'
-import { Heading, Box, Stack } from '@chakra-ui/react'
+import { Heading, Box, Stack, Divider } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import PostEditor from '../../components/PostEditor/PostEditor'
 // 청원글 작성
 
 const Inner = styled.div`
@@ -14,6 +15,9 @@ const Inner = styled.div`
 const StyledBoxInner = styled.div`
   margin: 30px;
 `
+const StyledPostEditor = styled.div`
+  margin: 60px 30px;
+`
 const Write = (): JSX.Element => {
   return (
     <div>
@@ -25,7 +29,6 @@ const Write = (): JSX.Element => {
           <Heading as="h2" fontSize="20px">
             청원하기
           </Heading>
-
           <Box
             border="1px solid #ccc"
             borderRadius="0"
@@ -33,10 +36,14 @@ const Write = (): JSX.Element => {
             letterSpacing="wide"
           >
             <StyledBoxInner>
-              <Stack>
+              <Stack m="50px 2px">
                 <WritePrecaution />
                 <GuideModal />
               </Stack>
+              <Divider orientation="horizontal" />
+              <StyledPostEditor>
+                <PostEditor />
+              </StyledPostEditor>
             </StyledBoxInner>
           </Box>
         </Stack>
