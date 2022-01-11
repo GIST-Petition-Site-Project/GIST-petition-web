@@ -7,6 +7,7 @@ const config: AxiosRequestConfig = {
     return status < 500
   },
   timeout: 10000,
+  withCredentials: true,
 }
 
 export { config, API_URL }
