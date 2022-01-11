@@ -10,7 +10,7 @@ import {
   Input,
 } from '@chakra-ui/react'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { RegisterButton, stackStyle } from './style'
+import { RegisterButton, stackStyle } from './styles'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)

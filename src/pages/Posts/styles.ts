@@ -90,20 +90,6 @@ const PetitionAgreement = styled.div`
   font-weight: bold;
 `
 
-const PetitionWrapper = styled.div`
-  display: flex;
-  border: 1px solid #ccc;
-  position: relative;
-  top: 150px;
-`
-
-const PetitionView = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 50px 35px;
-  text-align: center;
-`
-
 export {
   Inner,
   PostsTitle,
@@ -119,6 +105,4 @@ export {
   PetitionSubject,
   PetitionDate,
   PetitionAgreement,
-  PetitionWrapper,
-  PetitionView,
 }

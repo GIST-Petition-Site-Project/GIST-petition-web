@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom'
 import PrivateRoute from './PrivateRouter'
-import Login from '../pages/Login/Login'
-import Register from '../pages/Register/Register'
-import Home from '../pages/Home/Home'
-import Posts from '../pages/Posts/Posts'
-import Post from '../pages/Posts/Post'
-import NotFound from '../pages/NotFound/NotFound'
-import Write from '../pages/Write/Write'
+import Login from '../pages/Login'
+import Register from '../pages/Register'
+import Home from '../pages/Home'
+import Posts from '../pages/Posts'
+import Post from '../pages/Post'
+import NotFound from '../pages/NotFound'
+import Write from '../pages/Write'
 
 const MainRouter = (): JSX.Element => {
   return (

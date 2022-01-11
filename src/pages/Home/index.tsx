@@ -7,7 +7,7 @@ import {
   SearchCurrentPetition,
   SearchCurrentPetition__Input,
   DashBoard,
-} from './style'
+} from './styles'
 
 const Home = (): JSX.Element => {
   return (
