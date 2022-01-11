@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios'
 
-const API_URL = 'http://dev-api.gist-petition.com/v1/'
+const API_URL = 'https://dev-api.gist-petition.com/v1/'
 
 const config: AxiosRequestConfig = {
   validateStatus: function (status: number) {
