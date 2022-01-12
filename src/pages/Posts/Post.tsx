@@ -1,6 +1,6 @@
 // 청원 Id로 해당 글, 글 좋아요, 댓글 조회
 import { useParams } from 'react-router'
-import styled from '@emotion/styled'
+import { Inner, PetitionContents } from './style'
 import {
   Button,
   Divider,
@@ -13,22 +13,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { FaFileSignature } from 'react-icons/fa'
-
 const CFaFileSignature = chakra(FaFileSignature)
-
-const Inner = styled.div`
-  position: relative;
-  margin: 0 auto;
-  max-width: 900px;
-  height: 100%;
-`
-
-const PetitionContents = styled.div`
-  display: flex;
-  border: 1px solid #ccc;
-  position: relative;
-  top: 150px;
-`
 
 const Post = (): JSX.Element => {
   const params = useParams()
