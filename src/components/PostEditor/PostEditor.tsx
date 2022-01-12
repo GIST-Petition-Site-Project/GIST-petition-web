@@ -99,8 +99,8 @@ const PostEditor = () => {
           </FormControl>
 
           <ButtonGroup justifyContent="space-around">
-            <SubmitButton>작성 취소</SubmitButton>
-            <BackButton
+            <BackButton>작성 취소</BackButton>
+            <SubmitButton
               onClick={() => {
                 if (checkTitle(title)) {
                   alert('제목 길이가 너무 짧습니다. 10자 이상 입력해주세요.')
@@ -108,7 +108,7 @@ const PostEditor = () => {
               }}
             >
               작성 완료
-            </BackButton>
+            </SubmitButton>
           </ButtonGroup>
         </Stack>
       </Flex>
