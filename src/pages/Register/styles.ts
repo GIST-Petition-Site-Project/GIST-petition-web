@@ -17,5 +17,8 @@ const RegisterButton = styled.button`
   height: 36px;
   font-weight: bold;
 `
+const ErrorText = styled.p`
+  color: red;
+`
 
-export { stackStyle, RegisterButton }
+export { stackStyle, RegisterButton, ErrorText }
