@@ -9,16 +9,24 @@ import { postLogout } from '../../utils/api/postLogout'
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
   const isSessionValid = async () => {
-    const status = await getUsersMe()
-    if (status < 400) {
-      dispatch(setLogin())
+    try {
+      const status = await getUsersMe()
+      if (status < 400) {
+        dispatch(setLogin())
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
   const handleLogout = async () => {
-    const status = await postLogout()
-    console.log(status)
-    dispatch(setLogout())
+    try {
+      const status = await postLogout()
+      console.log(status)
+      dispatch(setLogout())
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   isSessionValid()
