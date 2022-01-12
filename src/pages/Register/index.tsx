@@ -38,7 +38,8 @@ const Register = (): JSX.Element => {
 
   const handleCreateCode = async () => {
     const emailRegex = /@(gm.)?gist.ac.kr$/
-    if (!emailRegex.test(input.username)) {
+    if (emailRegex.test(input.username)) {
+      setErrorText('')
       const status = await postCreateVerificationCode({
         username: input.username,
       })
@@ -55,8 +56,14 @@ const Register = (): JSX.Element => {
       username: input.username,
       verificationCode: input.verificationCode,
     })
+    if (status >= 400) {
+      setErrorText('인증 코드가 일치하지 않습니다')
+    } else {
+      setErrorText('')
+    }
     setVerficationStatus(status)
   }
+
   const navigate = useNavigate()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -91,9 +98,27 @@ const Register = (): JSX.Element => {
                 placeholder="gm.gist 혹은 gist 메일을 입력하세요"
                 value={input.username}
                 onChange={handleChange}
+                disabled={isCodeRequested}
               ></Input>
             </InputGroup>
           </FormControl>
+          {isCodeRequested && (
+            <FormControl isRequired>
+              <Text mb="8px">인증 번호</Text>
+              <InputGroup borderColor="#ccc">
+                <InputLeftElement>
+                  {<CFaLock color="gray.300" />}
+                </InputLeftElement>
+                <Input
+                  type="password"
+                  name="verificationCode"
+                  placeholder="인증코드를 입력하세요"
+                  value={input.verificationCode}
+                  onChange={handleChange}
+                ></Input>
+              </InputGroup>
+            </FormControl>
+          )}
           {verificationStatus < 400 && (
             <FormControl isRequired>
               <Text mb="8px">비밀번호</Text>
@@ -113,7 +138,7 @@ const Register = (): JSX.Element => {
           )}
           {verificationStatus < 400 && (
             <FormControl isRequired>
-              <Text mb="8px">비밀번호확인</Text>
+              <Text mb="8px">비밀번호 확인</Text>
               <InputGroup borderColor="#ccc">
                 <InputLeftElement>
                   {<CFaLock color="gray.300" />}
