@@ -26,7 +26,7 @@ function GuideModal() {
       >
         청원 작성 요령 안내
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size={'xl'} isCentered>
+      <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
         <ModalOverlay />
         <ModalContent borderRadius={0}>
           <ModalHeader m="15px"> GIST 청원, 이렇게 등록하세요</ModalHeader>
