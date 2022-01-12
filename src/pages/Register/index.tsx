@@ -1,5 +1,9 @@
 import React, { FormEvent, useState } from 'react'
-// import { useDispatch } from 'react-redux'
+import {
+  postRegister,
+  postConfirmVerificationCode,
+  postCreateVerificationCode,
+} from '../../utils/api'
 import {
   chakra,
   FormControl,
@@ -16,27 +20,41 @@ const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const [user, setUser] = useState<User>({ username: '', password: '' })
-  const [passwordCheck, setPasswordCheck] = useState('')
+  const [input, setInput] = useState<RegisterForm>({
+    username: '',
+    password: '',
+    verificationCode: '',
+    passwordConfirm: '',
+  })
+  const [isCodeRequested, setIsCodeRequested] = useState(false)
+  const [verificationStatus, setVerficationStatus] = useState(500)
+  const [registerStatus, setRegisterStatus] = useState(500)
 
-  const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setUser({ ...user, [name]: value })
+    setInput({ ...input, [name]: value })
   }
-  // const dispatch = useDispatch()
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+  const handleCreateCode = async () => {
+    const status = await postCreateVerificationCode({
+      username: input.username,
+    })
+    if (status < 400) {
+      setIsCodeRequested(true)
+    }
+  }
+
+  const handleConfirmCode = async () => {
+    const status = await postConfirmVerificationCode({
+      username: input.username,
+      verificationCode: input.verificationCode,
+    })
+    setVerficationStatus(status)
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // const emailRegex = /@(gm.)?gist.ac.kr$/
-    // const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
-    // if (!emailRegex.test(email)) {
-    //   alert('이메일 주소를 확인해주세요')
-    // } else if (!passwordRegex.test(password)) {
-    //   alert('영문과 숫자를 포함하여 8자리 이상의 비밀번호를 설정해주세요')
-    // } else if (password !== passwordCheck) {
-    //   alert('비밀번호를 확인해주세요')
-    // }
-    // return
-    // dispatch(registerUserAsync(user))
+    const status = await postRegister(input)
   }
 
   return (
@@ -56,44 +74,53 @@ const Register = (): JSX.Element => {
                 type="email"
                 name="username"
                 placeholder="gm.gist 혹은 gist 메일을 입력하세요"
-                value={user.username}
-                onChange={e => handleChangeUser(e)}
+                value={input.username}
+                onChange={handleChange}
               ></Input>
             </InputGroup>
           </FormControl>
-          <FormControl isRequired>
-            <Text mb="8px">비밀번호</Text>
-            <InputGroup borderColor="#ccc">
-              <InputLeftElement>
-                {<CFaLock color="gray.300" />}
-              </InputLeftElement>
-              <Input
-                type="password"
-                name="password"
-                placeholder="영문과 숫자를 포함하여 8자리 이상의 비밀번호를 입력하세요"
-                value={user.password}
-                onChange={e => handleChangeUser(e)}
-              ></Input>
-            </InputGroup>
-          </FormControl>
-          <FormControl isRequired>
-            <Text mb="8px">비밀번호확인</Text>
-            <InputGroup borderColor="#ccc">
-              <InputLeftElement>
-                {<CFaLock color="gray.300" />}
-              </InputLeftElement>
-              <Input
-                type="password"
-                placeholder="비밀번호를 재 입력하세요"
-                value={passwordCheck}
-                onChange={e => setPasswordCheck(e.target.value)}
-              ></Input>
-            </InputGroup>
-          </FormControl>
-          <RegisterButton type="submit" className="submit__btn">
-            회원가입
-          </RegisterButton>
-
+          {verificationStatus < 400 && (
+            <FormControl isRequired>
+              <Text mb="8px">비밀번호</Text>
+              <InputGroup borderColor="#ccc">
+                <InputLeftElement>
+                  {<CFaLock color="gray.300" />}
+                </InputLeftElement>
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="영문과 숫자를 포함하여 8자리 이상의 비밀번호를 입력하세요"
+                  value={input.password}
+                  onChange={handleChange}
+                ></Input>
+              </InputGroup>
+            </FormControl>
+          )}
+          {verificationStatus < 400 && (
+            <FormControl isRequired>
+              <Text mb="8px">비밀번호확인</Text>
+              <InputGroup borderColor="#ccc">
+                <InputLeftElement>
+                  {<CFaLock color="gray.300" />}
+                </InputLeftElement>
+                <Input
+                  type="password"
+                  placeholder="비밀번호를 재 입력하세요"
+                  value={input.passwordConfirm}
+                  onChange={handleChange}
+                ></Input>
+              </InputGroup>
+            </FormControl>
+          )}
+          {!isCodeRequested && (
+            <button onClick={handleCreateCode}>인증 번호 전송</button>
+          )}
+          {isCodeRequested && <button onClick={handleConfirmCode}>인증</button>}
+          {verificationStatus < 400 && (
+            <RegisterButton type="submit" className="submit__btn">
+              회원가입
+            </RegisterButton>
+          )}
           <Text mb="4px" align="center">
             이미 가입하셨나요?{' '}
             <a href="/login" style={{ textDecoration: 'underline' }}>

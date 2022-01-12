@@ -1,6 +1,6 @@
 import api from './axiosConfigs'
 
-export const postLogin = async (user: User) => {
-  const response = await api.post('register', user)
+export const postRegister = async (payload: Register) => {
+  const response = await api.post('users', payload)
   return response.status
 }
