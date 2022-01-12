@@ -9,5 +9,8 @@ const Inner = styled.div`
 const StyledBoxInner = styled.div`
   margin: 30px;
 `
+const StyledPostEditor = styled.div`
+  margin: 60px 30px;
+`
 
-export { Inner, StyledBoxInner }
+export { Inner, StyledBoxInner, StyledPostEditor }
