@@ -1,27 +1,19 @@
-import styled from '@emotion/styled'
 import { Heading, Container, OrderedList, ListItem } from '@chakra-ui/react'
+import { StylePrecaution, StyleStrong } from './style'
 
 function WritePrecaution() {
-  const StylePrecaution = styled.div`
-    margin: 30px;
-    padding: 20px;
-  `
-  const StyleStrong = styled.span`
-    opacity: 1;
-    font-weight: 900;
-  `
   return (
     <>
       <Heading as="h2" fontSize="20px">
         GIST 청원 게시판 운영 원칙
       </Heading>
       <StylePrecaution>
-        <OrderedList spacing={5}>
+        <OrderedList spacing={6} mb="30px">
           <ListItem>
             <Container
               m="0"
               lineHeight={'160%'}
-              maxWidth={'75ch'}
+              maxWidth={'85ch'}
               textAlign={'justify'}
               opacity={'0.85'}
             >
@@ -39,7 +31,7 @@ function WritePrecaution() {
             <Container
               m="0"
               lineHeight={'160%'}
-              maxWidth={'75ch'}
+              maxWidth={'85ch'}
               textAlign={'justify'}
               opacity={'0.85'}
             >
@@ -51,7 +43,7 @@ function WritePrecaution() {
             <Container
               m="0"
               lineHeight={'160%'}
-              maxWidth={'75ch'}
+              maxWidth={'85ch'}
               textAlign={'justify'}
               opacity={'0.85'}
             >
@@ -66,7 +58,7 @@ function WritePrecaution() {
             <Container
               m="0"
               lineHeight={'160%'}
-              maxWidth={'75ch'}
+              maxWidth={'85ch'}
               textAlign={'justify'}
               opacity={'0.85'}
             >
