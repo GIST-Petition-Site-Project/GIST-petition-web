@@ -1,7 +1,6 @@
-import axios from 'axios'
-import { config, API_URL } from './axiosConfigs'
+import api from './axiosConfigs'
 
 export const getUsersMe = async () => {
-  const response = await axios.get(`${API_URL}users/me`, config)
+  const response = await api.get('users/me')
   return response.status
 }
