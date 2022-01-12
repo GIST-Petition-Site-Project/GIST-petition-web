@@ -145,6 +145,7 @@ const Register = (): JSX.Element => {
                 </InputLeftElement>
                 <Input
                   type="password"
+                  name="passwordConfirm"
                   placeholder="비밀번호를 재 입력하세요"
                   value={input.passwordConfirm}
                   onChange={handleChange}
