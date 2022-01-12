@@ -90,13 +90,6 @@ const PetitionAgreement = styled.div`
   font-weight: bold;
 `
 
-const PetitionContents = styled.div`
-  display: flex;
-  border: 1px solid #ccc;
-  position: relative;
-  top: 150px;
-`
-
 export {
   Inner,
   PostsTitle,
@@ -112,5 +105,4 @@ export {
   PetitionSubject,
   PetitionDate,
   PetitionAgreement,
-  PetitionContents,
 }

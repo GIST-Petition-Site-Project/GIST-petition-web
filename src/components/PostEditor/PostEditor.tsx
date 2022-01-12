@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   ButtonGroup,
   Select,
@@ -21,33 +21,38 @@ const PostEditor = () => {
 
   const { title, description, category } = postInfo
 
-  const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value
-    setPostInfo({ ...postInfo, [category]: value })
-    console.log(postInfo)
-  }
-
-  const onEditorChange = (
+  const onContentChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const { value, name } = e.target
     setPostInfo({ ...postInfo, [name]: value })
     console.log(postInfo)
   }
 
+  function checkTitle(title: string) {
+    const value = title.length
+    if (value > 10) {
+      return false
+    } else return true
+  }
+  // const history = useHistory()
+  // const goBack = (path: string) => {
+  //   history.push(path)
+  // }
+
   return (
     <>
       <Flex gap="10px" justifyContent="center" flexDirection="column">
-        <Stack spacing={4}>
+        <Stack spacing={6}>
           <FormControl isRequired>
             <FormLabel>제목</FormLabel>
             <InputGroup borderColor="#ccc">
               <Input
-                variant="posting"
                 placeholder="제목을 작성해 주세요. (10자 이상)"
-                onChange={onEditorChange}
+                onChange={onContentChange}
                 name="title"
                 value={title}
               />
@@ -59,10 +64,12 @@ const PostEditor = () => {
             <Select
               defaultValue="기숙사"
               focusBorderColor="none"
-              onChange={handleOption}
+              onChange={onContentChange}
               border="1px solid"
               borderColor="#ccc"
               borderRadius="0"
+              name="category"
+              value={category}
             >
               <option selected disabled>
                 카테고리를 선택해주세요.
@@ -82,16 +89,26 @@ const PostEditor = () => {
             <FormLabel> 청원내용</FormLabel>
             <Textarea
               placeholder="내용을 작성해 주세요."
-              onChange={onEditorChange}
+              onChange={onContentChange}
               name="description"
               value={description}
-              height={'200px'}
+              height={'50vh'}
+              mb="20px"
+              resize="none"
             />
           </FormControl>
 
           <ButtonGroup justifyContent="space-around">
             <SubmitButton>작성 취소</SubmitButton>
-            <BackButton>작성 완료</BackButton>
+            <BackButton
+              onClick={() => {
+                if (checkTitle(title)) {
+                  alert('제목 길이가 너무 짧습니다. 10자 이상 입력해주세요.')
+                }
+              }}
+            >
+              작성 완료
+            </BackButton>
           </ButtonGroup>
         </Stack>
       </Flex>

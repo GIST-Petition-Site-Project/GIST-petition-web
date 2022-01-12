@@ -11,7 +11,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { stackStyle, LoginButton, ErrorText } from './style'
+import { stackStyle, LoginButton, ErrorText } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api/postLogin'

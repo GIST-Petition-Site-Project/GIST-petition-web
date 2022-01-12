@@ -1,13 +1,13 @@
 import MainImg from '../../assets/img/gist_summer.jpg'
 import { Search2Icon } from '@chakra-ui/icons'
-import MainPrecaution from '../../components/MainPrecaution/MainPrecaution'
+import MainPrecaution from './MainPrecaution'
 import {
   MainBackgroundImage,
   Inner,
   SearchCurrentPetition,
   SearchCurrentPetition__Input,
   DashBoard,
-} from './style'
+} from './styles'
 
 const Home = (): JSX.Element => {
   return (

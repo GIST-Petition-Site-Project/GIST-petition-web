@@ -2,7 +2,8 @@ import WritePrecaution from '../../components/WritePrecaution/WritePrecaution'
 import GuideModal from '../../components/PrecautionModal/GuideModal'
 import { Heading, Box, Stack, Divider } from '@chakra-ui/react'
 import PostEditor from '../../components/PostEditor/PostEditor'
-import { Inner, StyledBoxInner, StyledPostEditor } from './style'
+import { Inner, StyledBoxInner, StyledPostEditor } from './styles'
+
 // 청원글 작성
 
 const Write = (): JSX.Element => {
@@ -11,7 +12,12 @@ const Write = (): JSX.Element => {
       <Inner>
         <Stack
           spacing={6}
-          style={{ position: 'absolute', top: '150px', width: '100%' }}
+          style={{
+            position: 'absolute',
+            top: '150px',
+            bottom: '20px',
+            width: '100%',
+          }}
         >
           <Heading as="h2" fontSize="20px">
             청원하기

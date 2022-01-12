@@ -16,7 +16,7 @@ import {
   PetitionSubject,
   PetitionDate,
   PetitionAgreement,
-} from './style'
+} from './styles'
 import { Button, Select, Stack, Text } from '@chakra-ui/react'
 import {
   Pagination,
