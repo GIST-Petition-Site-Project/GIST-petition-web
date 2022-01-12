@@ -14,7 +14,8 @@ import {
   Input,
 } from '@chakra-ui/react'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { RegisterButton, stackStyle } from './styles'
+import { RegisterButton, stackStyle, ErrorText } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -28,7 +29,7 @@ const Register = (): JSX.Element => {
   })
   const [isCodeRequested, setIsCodeRequested] = useState(false)
   const [verificationStatus, setVerficationStatus] = useState(500)
-  const [registerStatus, setRegisterStatus] = useState(500)
+  const [errorText, setErrorText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -36,11 +37,16 @@ const Register = (): JSX.Element => {
   }
 
   const handleCreateCode = async () => {
-    const status = await postCreateVerificationCode({
-      username: input.username,
-    })
-    if (status < 400) {
-      setIsCodeRequested(true)
+    const emailRegex = /@(gm.)?gist.ac.kr$/
+    if (!emailRegex.test(input.username)) {
+      const status = await postCreateVerificationCode({
+        username: input.username,
+      })
+      if (status < 400) {
+        setIsCodeRequested(true)
+      }
+    } else {
+      setErrorText('지스트 메일을 이용해주세요')
     }
   }
 
@@ -51,10 +57,19 @@ const Register = (): JSX.Element => {
     })
     setVerficationStatus(status)
   }
-
+  const navigate = useNavigate()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const status = await postRegister(input)
+    if (input.password == input.passwordConfirm) {
+      const status = await postRegister({
+        username: input.username,
+        verificationCode: input.verificationCode,
+        password: input.password,
+      })
+      if (status < 400) {
+        navigate('/login')
+      }
+    }
   }
 
   return (
@@ -113,14 +128,19 @@ const Register = (): JSX.Element => {
             </FormControl>
           )}
           {!isCodeRequested && (
-            <button onClick={handleCreateCode}>인증 번호 전송</button>
+            <RegisterButton onClick={handleCreateCode}>
+              인증 번호 전송
+            </RegisterButton>
           )}
-          {isCodeRequested && <button onClick={handleConfirmCode}>인증</button>}
+          {isCodeRequested && (
+            <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
+          )}
           {verificationStatus < 400 && (
             <RegisterButton type="submit" className="submit__btn">
               회원가입
             </RegisterButton>
           )}
+          <ErrorText>{errorText}</ErrorText>
           <Text mb="4px" align="center">
             이미 가입하셨나요?{' '}
             <a href="/login" style={{ textDecoration: 'underline' }}>
