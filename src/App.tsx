@@ -4,8 +4,23 @@ import RootRouter from './route/RootRouter'
 import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import GlobalStyle from './style/Global'
+import { useDispatch } from 'react-redux'
+import { setLogin } from './redux/auth/authSlice'
+import { getUsersMe } from './utils/api'
 
 const App = (): JSX.Element => {
+  const dispatch = useDispatch()
+  const isSessionValid = async () => {
+    try {
+      const status = await getUsersMe()
+      if (status < 400) {
+        dispatch(setLogin())
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  isSessionValid()
   return (
     <ChakraProvider>
       <div

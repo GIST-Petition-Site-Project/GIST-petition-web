@@ -7,17 +7,6 @@ import { useAppSelect } from '../../redux/store.hooks'
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
-  const isSessionValid = async () => {
-    try {
-      const status = await getUsersMe()
-      if (status < 400) {
-        dispatch(setLogin())
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const handleLogout = async () => {
     try {
       const status = await postLogout()
@@ -27,8 +16,6 @@ const NavBar = (): JSX.Element => {
       console.log(error)
     }
   }
-
-  isSessionValid()
   return (
     <Header>
       <Inner>
