@@ -11,7 +11,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { SubmitButton, BackButton } from './styles'
-import { getCreatePost } from '../../../utils/api/getCreatePost'
+import { getCreatePost } from '../../../utils/api'
 import { useNavigate } from 'react-router-dom'
 
 const PostEditor = () => {
