@@ -12,7 +12,7 @@ import {
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
 import { Inner, StyledDiv3, CollapseInner, Precaution } from './styles'
 
-function MainPrecaution() {
+const MainPrecaution = (): JSX.Element => {
   const [leftOpen, setLeftOpen] = useState(false)
   const [rightOpen, setRightOpen] = useState(false)
   const ButtonStyle = {

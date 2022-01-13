@@ -1,4 +1,4 @@
-import api from './axiosConfigs'
+import api from '../axiosConfigs'
 
 export const postLogout = async () => {
   const response = await api.post('logout', null)
