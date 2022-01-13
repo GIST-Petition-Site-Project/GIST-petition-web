@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { useAppSelect } from '../../../redux/store.hooks'
 import { getRetrieveAllPost } from '../../../utils/api'
 import {
   PetitionAgreement,
@@ -31,11 +32,11 @@ const PetitionList = (): JSX.Element => {
       console.log(error)
     }
   }
-
+  const query = useAppSelect(select => select.query)
   useEffect(() => {
     getAllPost()
-  }, [])
-  // const getAll
+    console.log(query)
+  }, [useAppSelect(select => select.query)])
   return (
     <>
       <PostsTitle>
