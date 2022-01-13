@@ -1,0 +1,3 @@
+interface CommentInput {
+  content: string
+}
