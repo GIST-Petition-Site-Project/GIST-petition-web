@@ -8350,7 +8350,7 @@ redux@^4.0.0, redux@^4.1.2:
 
 reduxjs-toolkit-persist@^7.0.7:
   version "7.0.7"
-  resolved "https://registry.yarnpkg.com/reduxjs-toolkit-persist/-/reduxjs-toolkit-persist-7.0.7.tgz#0c7365b9a7f26ef4ed9bf61411eec361b8fd5c62"
+  resolved "https://registry.npmjs.org/reduxjs-toolkit-persist/-/reduxjs-toolkit-persist-7.0.7.tgz"
   integrity sha512-dWBU/+jT77t2oNU45OgDJPFmNFjkHHfB7q/wDkVnOtL4GUVfZZtYHiP8BwUXFU5N7pM2KC4C/u221eZwUCLqpA==
 
 regenerate-unicode-properties@^9.0.0:
@@ -10033,6 +10033,11 @@ yargs@^16.2.0:
     string-width "^4.2.0"
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
+
+yarn@^1.22.17:
+  version "1.22.17"
+  resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.17.tgz"
+  integrity sha512-H0p241BXaH0UN9IeH//RT82tl5PfNraVpSpEoW+ET7lmopNC61eZ+A+IDvU8FM6Go5vx162SncDL8J1ZjRBriQ==
 
 yocto-queue@^0.1.0:
   version "0.1.0"
