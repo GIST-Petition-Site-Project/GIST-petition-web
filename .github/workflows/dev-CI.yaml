@@ -1,4 +1,4 @@
-name: Dev deploy # Workflow 이름
+name: Dev CI # Workflow 이름
 on: # Event 감지
   pull_request:
     branches:
