@@ -8348,6 +8348,11 @@ redux@^4.0.0, redux@^4.1.2:
   dependencies:
     "@babel/runtime" "^7.9.2"
 
+reduxjs-toolkit-persist@^7.0.7:
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/reduxjs-toolkit-persist/-/reduxjs-toolkit-persist-7.0.7.tgz#0c7365b9a7f26ef4ed9bf61411eec361b8fd5c62"
+  integrity sha512-dWBU/+jT77t2oNU45OgDJPFmNFjkHHfB7q/wDkVnOtL4GUVfZZtYHiP8BwUXFU5N7pM2KC4C/u221eZwUCLqpA==
+
 regenerate-unicode-properties@^9.0.0:
   version "9.0.0"
   resolved "https://registry.npmjs.org/regenerate-unicode-properties/-/regenerate-unicode-properties-9.0.0.tgz"
