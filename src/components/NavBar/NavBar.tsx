@@ -1,24 +1,12 @@
 import logo from '../../assets/img/logo_light.png'
 import { Header, Inner, Logo, Logo__Image, Menu, ItemName } from './style'
-import { getUsersMe } from '../../utils/api/getUsersMe'
+import { getUsersMe, postLogout } from '../../utils/api'
 import { setLogin, setLogout } from '../../redux/auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { useAppSelect } from '../../redux/store.hooks'
-import { postLogout } from '../../utils/api/postLogout'
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
-  const isSessionValid = async () => {
-    try {
-      const status = await getUsersMe()
-      if (status < 400) {
-        dispatch(setLogin())
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const handleLogout = async () => {
     try {
       const status = await postLogout()
@@ -28,8 +16,6 @@ const NavBar = (): JSX.Element => {
       console.log(error)
     }
   }
-
-  isSessionValid()
   return (
     <Header>
       <Inner>

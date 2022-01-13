@@ -14,30 +14,30 @@ import {
 import { stackStyle, LoginButton, ErrorText } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
-import { postLogin } from '../../utils/api/postLogin'
+import { postLogin } from '../../utils/api'
 
 const Login = (): JSX.Element => {
   // chakra icon
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const [user, setUser] = useState<User>({ username: '', password: '' })
+  const [input, setInput] = useState<User>({ username: '', password: '' })
   const [responseState, setResponseState] = useState(0)
 
   const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setUser({ ...user, [name]: value })
+    setInput({ ...input, [name]: value })
   }
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const loginStatus = await postLogin(user)
+      const loginStatus = await postLogin(input)
       setResponseState(loginStatus)
 
       if (loginStatus < 400) {
-        navigate('/')
+        navigate(-1)
         dispatch(setLogin())
       }
     } catch (error) {
@@ -61,7 +61,7 @@ const Login = (): JSX.Element => {
                 type="email"
                 name="username"
                 placeholder="이메일을 입력하세요."
-                value={user.username}
+                value={input.username}
                 onChange={handleChangeUser}
               />
             </InputGroup>
@@ -76,7 +76,7 @@ const Login = (): JSX.Element => {
                 type="password"
                 name="password"
                 placeholder="비밀번호를 입력하세요."
-                value={user.password}
+                value={input.password}
                 onChange={handleChangeUser}
               />
             </InputGroup>

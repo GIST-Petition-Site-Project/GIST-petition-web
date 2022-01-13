@@ -2,21 +2,22 @@ import { Heading, Container, OrderedList, ListItem } from '@chakra-ui/react'
 import { StylePrecaution, StyleStrong } from './styles'
 
 function WritePrecaution() {
+  const StyleContainer = {
+    m: '0',
+    'line-height': '160%',
+    'max-width': '85ch',
+    'text-align': 'justify',
+    opacity: '0.85',
+  }
   return (
     <>
       <Heading as="h2" fontSize="20px">
         GIST 청원 게시판 운영 원칙
       </Heading>
       <StylePrecaution>
-        <OrderedList spacing={5}>
+        <OrderedList spacing={6} mb="30px">
           <ListItem>
-            <Container
-              m="0"
-              lineHeight={'160%'}
-              maxWidth={'75ch'}
-              textAlign={'justify'}
-              opacity={'0.85'}
-            >
+            <Container style={StyleContainer}>
               타인의 권리를 침해하거나 명예를 훼손하는 내용은 제한합니다.
               방송통신심의위원회의 &apos;정보통신에 관한 심의 규정&apos;&sbquo;
               한국인터넷자율정책기구의 &apos;정책규정&apos; 등을 기반으로 문제
@@ -28,25 +29,13 @@ function WritePrecaution() {
             </Container>
           </ListItem>
           <ListItem>
-            <Container
-              m="0"
-              lineHeight={'160%'}
-              maxWidth={'75ch'}
-              textAlign={'justify'}
-              opacity={'0.85'}
-            >
+            <Container style={StyleContainer}>
               청원글 게시 후 50명의 동의를 받은 청원에 대해&sbquo; GIST대학 내
               관련 부서에 청원을 보내 답변을 받아 게시합니다.
             </Container>
           </ListItem>
           <ListItem>
-            <Container
-              m="0"
-              lineHeight={'160%'}
-              maxWidth={'75ch'}
-              textAlign={'justify'}
-              opacity={'0.85'}
-            >
+            <Container style={StyleContainer}>
               한 번 작성된 청원은{' '}
               <StyleStrong>수정 및 삭제가 불가능</StyleStrong>
               합니다. 최초 청원 취지와 다른 내용으로 변경되는 것을 방지하여 청원
@@ -55,13 +44,7 @@ function WritePrecaution() {
             </Container>
           </ListItem>
           <ListItem>
-            <Container
-              m="0"
-              lineHeight={'160%'}
-              maxWidth={'75ch'}
-              textAlign={'justify'}
-              opacity={'0.85'}
-            >
+            <Container style={StyleContainer}>
               동일한 내용으로 <StyleStrong>중복 게시</StyleStrong>된 청원은 가장
               동의수가 많은 청원만 남기고 <StyleStrong>삭제</StyleStrong>될 수
               있습니다.
