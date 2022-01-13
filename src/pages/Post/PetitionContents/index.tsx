@@ -1,7 +1,11 @@
 import { chakra, Divider, Flex, Stack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { FaFileSignature } from 'react-icons/fa'
-import { getRetrievePost } from '../../../utils/api'
+import {
+  getRetrievePost,
+  getStateOfAgreement,
+  postAgreePost,
+} from '../../../utils/api'
 import {
   PetitionProgress,
   PetitionTitleWrap,
@@ -31,15 +35,32 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
     updatedAt: '',
     userId: 0,
   })
+  const [isConsented, setIsConsented] = useState(false)
+
+  const handleAgreement = async () => {
+    const status = await postAgreePost(postId)
+    setIsConsented(true)
+  }
 
   useEffect(() => {
-    const getPostContentsFunction = async (id: string | undefined) => {
-      const status = await getRetrievePost(id)
-      if (status[0] < 400) {
-        setResponse(status[1])
+    const getPostInformation = async (id: string) => {
+      const getPost = await getRetrievePost(id)
+      console.log(getPost)
+      if (getPost[0] < 400) {
+        setResponse(getPost[1])
       }
     }
-    getPostContentsFunction(postId)
+    getPostInformation(postId)
+  }, [isConsented])
+
+  useEffect(() => {
+    const checkAgreeByMe = async (id: string) => {
+      const getStateAgree = await getStateOfAgreement(id)
+      if (getStateAgree[0] < 400) {
+        setIsConsented(getStateAgree[1])
+      }
+    }
+    checkAgreeByMe(postId)
   }, [])
 
   return (
@@ -58,7 +79,8 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
         </PetitionTitleWrap>
         <CurrentAgreementsText>
           <Text>
-            총 <CurrentAgreements>{response.accepted}</CurrentAgreements>
+            총{' '}
+            <CurrentAgreements>{response.agreements.length}</CurrentAgreements>
             명이 동의했습니다.
           </Text>
         </CurrentAgreementsText>
@@ -71,10 +93,15 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
         <PetitionDescription>{response.description}</PetitionDescription>
       </Stack>
       <div>
-        <AgreementButton colorScheme={'none'} _focus={{ outline: 'none' }}>
+        <AgreementButton
+          onClick={handleAgreement}
+          colorScheme={'none'}
+          _focus={{ outline: 'none' }}
+          disabled={isConsented}
+        >
           <Flex>
             <CFaFileSignature />
-            <Text>&nbsp;동의하기</Text>
+            <Text>&nbsp;{!isConsented ? '동의하기' : '동의완료'}</Text>
           </Flex>
         </AgreementButton>
       </div>

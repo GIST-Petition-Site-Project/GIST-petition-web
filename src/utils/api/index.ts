@@ -1,8 +1,12 @@
 // post
-export * from './post/getRetrieveAllPost'
-export * from './post/getRetrievePost'
-export * from './post/getPostCount'
-export * from './post/postCreatePost'
+export * from './posts/getRetrieveAllPost'
+export * from './posts/getRetrievePost'
+export * from './posts/getPostCount'
+export * from './posts/postCreatePost'
+export * from './posts/getNumberOfAgreement'
+export * from './posts/getStateOfAgreement'
+export * from './posts/postCreatePost'
+export * from './posts/postAgreePost'
 
 // user
 export * from './user/postLogin'
