@@ -1,15 +1,7 @@
-import styled from '@emotion/styled'
 import { Heading, Container, OrderedList, ListItem } from '@chakra-ui/react'
+import { StylePrecaution, StyleStrong } from './styles'
 
 function WritePrecaution() {
-  const StylePrecaution = styled.div`
-    margin: 30px;
-    padding: 20px;
-  `
-  const StyleStrong = styled.span`
-    opacity: 1;
-    font-weight: 900;
-  `
   return (
     <>
       <Heading as="h2" fontSize="20px">

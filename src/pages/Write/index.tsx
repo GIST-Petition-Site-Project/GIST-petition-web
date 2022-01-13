@@ -1,7 +1,7 @@
-import WritePrecaution from '../../components/WritePrecaution/WritePrecaution'
-import GuideModal from '../../components/PrecautionModal/GuideModal'
+import WritePrecaution from './WritePrecaution'
+import GuideModal from './PrecautionModal/GuideModal'
 import { Heading, Box, Stack, Divider } from '@chakra-ui/react'
-import PostEditor from '../../components/PostEditor/PostEditor'
+import PostEditor from './PostEditor'
 import { Inner, StyledBoxInner, StyledPostEditor } from './styles'
 
 // 청원글 작성

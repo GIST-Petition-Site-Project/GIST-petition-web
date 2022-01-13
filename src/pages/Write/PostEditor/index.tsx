@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import {
   ButtonGroup,
   Select,
@@ -11,7 +11,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { SubmitButton, BackButton } from './styles'
-import { getCreatePost } from '../../../utils/api/getCreatePost'
+import { getCreatePost } from '../../../utils/api/postCreatePost'
 import { useNavigate } from 'react-router-dom'
 
 const PostEditor = () => {
