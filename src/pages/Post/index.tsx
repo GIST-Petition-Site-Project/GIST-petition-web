@@ -7,18 +7,19 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 
 const Post = (): JSX.Element => {
-  const { params } = useParams()
+  const { postId } = useParams()
+  const castedPostId = postId as string
   return (
     <Inner>
       <PetitionWrapper>
         <PetitionView>
-          <PetitionContents></PetitionContents>
+          <PetitionContents postId={castedPostId}></PetitionContents>
           <Stack>
             <Text textAlign={'left'} fontWeight={'bold'} fontSize={'20px'}>
               의견보기
             </Text>
-            <CommentForm></CommentForm>
-            <CommentList></CommentList>
+            <CommentForm postId={castedPostId}></CommentForm>
+            <CommentList postId={castedPostId}></CommentList>
           </Stack>
         </PetitionView>
       </PetitionWrapper>

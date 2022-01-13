@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/react'
 import { CommentItem, CommentAnonymousName } from './styles'
 
-const CommentList = (): JSX.Element => {
+const CommentList = ({ postId }: PostId): JSX.Element => {
   return (
     <ul>
       <CommentItem>
