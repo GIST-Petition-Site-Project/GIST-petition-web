@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { getRetrieveAllPost } from '../../../utils/api/getRetrieveAllPost'
 import posts from '../posts.json'
 import {
   PetitionAgreement,
@@ -18,6 +20,41 @@ import {
 } from './styles'
 
 function PetitionList() {
+  const [postList, setPostList] = useState([
+    {
+      accepted: 0,
+      agreements: [
+        {
+          createdAt: '2022-01-13T04:51:16.369Z',
+          userId: 0,
+        },
+      ],
+      answered: true,
+      category: 'string',
+      createdAt: '2022-01-13T04:51:16.369Z',
+      description: 'string',
+      id: 0,
+      title: 'string',
+      updatedAt: '2022-01-13T04:51:16.369Z',
+      userId: 0,
+    },
+  ])
+
+  const getAllPost = async () => {
+    try {
+      const status = await getRetrieveAllPost()
+      if (status[0] < 400) {
+        setPostList(status[1])
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getAllPost()
+  }, [])
+  // const getAll
   return (
     <>
       <PostsTitle>
@@ -44,15 +81,13 @@ function PetitionList() {
       </PostsHead>
 
       <ul>
-        {posts.map(post => (
-          <PetitionItem>
+        {postList.map(post => (
+          <PetitionItem key={post.id}>
             <PetitionCategory>{post.category}</PetitionCategory>
             <PetitionSubject>
-              <Link to={`/posts/${post.id}`} key={post.id}>
-                {post.title}
-              </Link>
+              <Link to={`/posts/${post.id}`}>{post.title}</Link>
             </PetitionSubject>
-            <PetitionDate>{post.created}</PetitionDate>
+            <PetitionDate>{post.createdAt}</PetitionDate>
             <PetitionAgreement>{post.accepted}</PetitionAgreement>
           </PetitionItem>
         ))}
