@@ -38,17 +38,17 @@ const Register = (): JSX.Element => {
 
   const handleCreateCode = async () => {
     const emailRegex = /@(gm.)?gist.ac.kr$/
-    if (emailRegex.test(input.username)) {
-      const status = await postCreateVerificationCode({
-        username: input.username,
-      })
-      setErrorText(status[1])
-      if (status[0] < 400) {
-        setIsCodeRequested(true)
-        setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
-      }
-    } else {
+    if (!emailRegex.test(input.username)) {
       setErrorText('지스트 메일을 이용해주세요')
+      return
+    }
+    const status = await postCreateVerificationCode({
+      username: input.username,
+    })
+    setErrorText(status[1])
+    if (status[0] < 400) {
+      setIsCodeRequested(true)
+      setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
@@ -64,11 +64,11 @@ const Register = (): JSX.Element => {
   }
 
   const navigate = useNavigate()
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleRegister = async () => {
+    console.log('SUBMIT')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
-      setErrorText('영문 및 숫자를 조합하여 8자리 이상 비밀번호를 설정해주세요')
+      setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
       return
     }
     if (input.password === input.passwordConfirm) {
@@ -85,10 +85,13 @@ const Register = (): JSX.Element => {
       setErrorText('비밀번호를 정확하게 입력해주세요')
     }
   }
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
 
   return (
     <section className="register">
-      <form onSubmit={e => handleSubmit(e)} className="register__form">
+      <form onSubmit={handleSubmit} className="register__form">
         <Stack spacing={4} style={stackStyle}>
           <Text fontSize="4xl" fontWeight="bold">
             회원가입
@@ -170,7 +173,7 @@ const Register = (): JSX.Element => {
             <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
           )}
           {isVerificated && (
-            <RegisterButton type="submit" className="submit__btn">
+            <RegisterButton onClick={handleRegister} className="submit__btn">
               회원가입
             </RegisterButton>
           )}
