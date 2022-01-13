@@ -1,11 +1,11 @@
+interface Agreement {
+  createdAt: string
+  userId: number
+}
+
 interface PostResponse {
   accepted: number
-  agreements: [
-    {
-      createdAt: string
-      userId: number
-    },
-  ]
+  agreements: Array<Agreement>
   answered: boolean
   category: string
   createdAt: string
@@ -14,4 +14,8 @@ interface PostResponse {
   title: string
   updatedAt: string
   userId: number
+}
+
+interface PostId {
+  postId: string
 }
