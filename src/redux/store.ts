@@ -1,21 +1,43 @@
-import { configureStore } from '@reduxjs/toolkit'
+import {
+  combineReducers,
+  configureStore,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit'
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'reduxjs-toolkit-persist'
+import storage from 'reduxjs-toolkit-persist/lib/storage'
 import authReducer from './auth/authSlice'
 
-const store = configureStore({
-  reducer: {
-    auth: authReducer,
-  },
+const reducers = combineReducers({
+  auth: authReducer,
 })
 
-/* HMR
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./rootReducer', () => {
-    const newRootReducer = require('./rootReducer').preventDefault()
-    store.replaceReducer(newRootReducer)
-  })
+const persistConfig = {
+  key: 'root',
+  storage,
 }
-*/
 
-export default store
+const persistedReducer = persistReducer(persistConfig, reducers)
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
+
+export const persistor = persistStore(store)
+
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

@@ -1,7 +1,7 @@
 import { Heading, Container, OrderedList, ListItem } from '@chakra-ui/react'
 import { StylePrecaution, StyleStrong } from './styles'
 
-function WritePrecaution() {
+const WritePrecaution = (): JSX.Element => {
   const StyleContainer = {
     m: '0',
     'line-height': '160%',

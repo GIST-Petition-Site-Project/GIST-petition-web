@@ -1,7 +1,7 @@
 import { Flex, FormControl } from '@chakra-ui/react'
 import { CommentTextArea, CommentWriteButton } from './styles'
 
-function CommentForm() {
+const CommentForm = (): JSX.Element => {
   return (
     <>
       <FormControl>

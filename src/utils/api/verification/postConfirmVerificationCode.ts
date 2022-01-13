@@ -1,4 +1,4 @@
-import api from './axiosConfigs'
+import api from '../axiosConfigs'
 
 export const postConfirmVerificationCode = async (payload: {
   username: string

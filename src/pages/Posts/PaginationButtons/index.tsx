@@ -11,7 +11,7 @@ import {
   PostsPaginationPrevious,
 } from './styles'
 
-function PaginationButtons() {
+const PaginationButtons = (): JSX.Element => {
   const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
     pagesCount: 12,
     initialState: { currentPage: 1 },
