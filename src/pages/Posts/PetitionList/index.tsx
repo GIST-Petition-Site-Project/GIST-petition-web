@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { getRetrieveAllPost } from '../../../utils/api/getRetrieveAllPost'
-import posts from '../posts.json'
+import { getRetrieveAllPost } from '../../../utils/api/post/getRetrieveAllPost'
 import {
   PetitionAgreement,
   PetitionCategory,
@@ -19,7 +18,7 @@ import {
   PostsTitle,
 } from './styles'
 
-function PetitionList() {
+const PetitionList = (): JSX.Element => {
   const [postList, setPostList] = useState([
     {
       accepted: 0,

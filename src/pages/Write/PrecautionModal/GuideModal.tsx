@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { List, ListItem, Container, Heading } from '@chakra-ui/react'
 
-function GuideModal() {
+const GuideModal = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <div style={{ margin: '0 auto' }}>

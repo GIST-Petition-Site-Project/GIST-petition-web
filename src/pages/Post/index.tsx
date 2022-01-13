@@ -7,7 +7,7 @@ import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 
 const Post = (): JSX.Element => {
-  const params = useParams()
+  const { params } = useParams()
   return (
     <Inner>
       <PetitionWrapper>
