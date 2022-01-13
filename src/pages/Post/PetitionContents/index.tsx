@@ -32,22 +32,13 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
     userId: 0,
   })
 
-  const [progress, setProgress] = useState<string>('')
-
-  const getPostContentsFunction = async (id: string | undefined) => {
-    const status = await getRetrievePost(id)
-    if (status[0] < 400) {
-      setResponse(status[1])
-      console.log(response)
-      if (!response.answered) {
-        setProgress('청원진행중')
-      } else {
-        setProgress('답변완료')
+  useEffect(() => {
+    const getPostContentsFunction = async (id: string | undefined) => {
+      const status = await getRetrievePost(id)
+      if (status[0] < 400) {
+        setResponse(status[1])
       }
     }
-  }
-
-  useEffect(() => {
     getPostContentsFunction(postId)
   }, [])
 
@@ -56,7 +47,7 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
       <Stack spacing={6} color={'#333'}>
         <PetitionProgress>
           <Text fontWeight={'bold'} display={'inline-block'}>
-            {progress}&nbsp;
+            {!response.answered ? '청원진행중' : '답변완료'}&nbsp;
           </Text>
           <Text display={'inline'}>({response.createdAt}~)</Text>
         </PetitionProgress>
