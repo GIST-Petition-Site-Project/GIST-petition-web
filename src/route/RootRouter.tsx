@@ -16,7 +16,9 @@ const RootRouter = (): JSX.Element => {
         <Route path="/login" element={<UnauthRoute />}>
           <Route index element={<Login />} />
         </Route>
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<UnauthRoute />}>
+          <Route index element={<Register />} />
+        </Route>
         <Route path="/write" element={<AuthRoute />}>
           <Route index element={<Write />} />
         </Route>
