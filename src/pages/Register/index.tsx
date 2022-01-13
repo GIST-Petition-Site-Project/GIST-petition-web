@@ -104,13 +104,13 @@ const Register = (): JSX.Element => {
           </FormControl>
           {isCodeRequested && (
             <FormControl isRequired>
-              <Text mb="8px">인증 번호</Text>
+              <Text mb="8px">인증 코드</Text>
               <InputGroup borderColor="#ccc">
                 <InputLeftElement>
                   {<CFaLock color="gray.300" />}
                 </InputLeftElement>
                 <Input
-                  type="password"
+                  type="text"
                   name="verificationCode"
                   placeholder="인증코드를 입력하세요"
                   value={input.verificationCode}
