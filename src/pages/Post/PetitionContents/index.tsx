@@ -45,7 +45,6 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
   useEffect(() => {
     const getPostInformation = async (id: string) => {
       const getPost = await getRetrievePost(id)
-      console.log(getPost)
       if (getPost[0] < 400) {
         setResponse(getPost[1])
       }

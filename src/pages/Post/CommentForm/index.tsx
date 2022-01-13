@@ -2,6 +2,7 @@ import { Flex, FormControl } from '@chakra-ui/react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { postCreateComment } from '../../../utils/api'
 import { CommentTextArea, CommentWriteButton } from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const CommentForm = ({ postId }: PostId): JSX.Element => {
   const [input, setInput] = useState<CommentInput>({
@@ -12,15 +13,16 @@ const CommentForm = ({ postId }: PostId): JSX.Element => {
   // onContentChange 에서 handleChange로 이름을 변경합니다.
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ content: e.target.value })
-    // console.log(comment)
   }
 
+  const navigate = useNavigate()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
       const status = await postCreateComment(postId, input)
       if (status < 400) {
         console.log(status)
+        navigate(0)
       }
     } catch (error) {
       console.log(error)

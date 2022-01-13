@@ -1,4 +1,5 @@
 // comment
+export * from './comment/getComments'
 export * from './comment/postCreateComment'
 
 // post
