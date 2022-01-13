@@ -1,7 +1,6 @@
 import { chakra, Divider, Flex, Stack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { FaFileSignature } from 'react-icons/fa'
-import { useParams } from 'react-router-dom'
 import { getRetrievePost } from '../../../utils/api'
 import {
   PetitionProgress,
@@ -14,8 +13,7 @@ import {
 } from './styles'
 const CFaFileSignature = chakra(FaFileSignature)
 
-const PetitionContents = (): JSX.Element => {
-  const { postId } = useParams()
+const PetitionContents = ({ postId }: PostId): JSX.Element => {
   const [response, setResponse] = useState<PostResponse>({
     accepted: 0,
     agreements: [
@@ -34,10 +32,18 @@ const PetitionContents = (): JSX.Element => {
     userId: 0,
   })
 
+  const [progress, setProgress] = useState<string>('')
+
   const getPostContentsFunction = async (id: string | undefined) => {
     const status = await getRetrievePost(id)
     if (status[0] < 400) {
       setResponse(status[1])
+      console.log(response)
+      if (!response.answered) {
+        setProgress('청원진행중')
+      } else {
+        setProgress('답변완료')
+      }
     }
   }
 
@@ -50,7 +56,7 @@ const PetitionContents = (): JSX.Element => {
       <Stack spacing={6} color={'#333'}>
         <PetitionProgress>
           <Text fontWeight={'bold'} display={'inline-block'}>
-            {response.answered}청원진행중&nbsp;
+            {progress}&nbsp;
           </Text>
           <Text display={'inline'}>({response.createdAt}~)</Text>
         </PetitionProgress>

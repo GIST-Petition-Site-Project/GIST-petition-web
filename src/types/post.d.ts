@@ -15,3 +15,7 @@ interface PostResponse {
   updatedAt: string
   userId: number
 }
+
+interface PostId {
+  postId: string
+}
