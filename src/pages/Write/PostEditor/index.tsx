@@ -11,7 +11,7 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { SubmitButton, BackButton } from './styles'
-import { getCreatePost } from '../../../utils/api/postCreatePost'
+import { postCreatePost } from '../../../utils/api'
 import { useNavigate } from 'react-router-dom'
 
 const PostEditor = () => {
@@ -46,7 +46,7 @@ const PostEditor = () => {
     e.preventDefault()
     if (postInfo.title.length > 10) {
       try {
-        const postsStatus = await getCreatePost(postInfo)
+        const postsStatus = await postCreatePost(postInfo)
         if (postsStatus < 400) {
           navigate('/')
         }
