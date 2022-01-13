@@ -28,7 +28,7 @@ const Register = (): JSX.Element => {
     passwordConfirm: '',
   })
   const [isCodeRequested, setIsCodeRequested] = useState(false)
-  const [verificationStatus, setVerficationStatus] = useState(500)
+  const [isVerificated, setisVerificated] = useState(false)
   const [errorText, setErrorText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,12 +39,13 @@ const Register = (): JSX.Element => {
   const handleCreateCode = async () => {
     const emailRegex = /@(gm.)?gist.ac.kr$/
     if (emailRegex.test(input.username)) {
-      setErrorText('')
       const status = await postCreateVerificationCode({
         username: input.username,
       })
-      if (status < 400) {
+      setErrorText(status[1])
+      if (status[0] < 400) {
         setIsCodeRequested(true)
+        setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
       }
     } else {
       setErrorText('지스트 메일을 이용해주세요')
@@ -56,26 +57,32 @@ const Register = (): JSX.Element => {
       username: input.username,
       verificationCode: input.verificationCode,
     })
-    if (status >= 400) {
-      setErrorText('인증 코드가 일치하지 않습니다')
-    } else {
-      setErrorText('')
+    setErrorText(status[1])
+    if (status[0] < 400) {
+      setisVerificated(true)
     }
-    setVerficationStatus(status)
   }
 
   const navigate = useNavigate()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (input.password == input.passwordConfirm) {
+    const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
+    if (!passwordRegex.test(input.password)) {
+      setErrorText('영문 및 숫자를 조합하여 8자리 이상 비밀번호를 설정해주세요')
+      return
+    }
+    if (input.password === input.passwordConfirm) {
       const status = await postRegister({
         username: input.username,
         verificationCode: input.verificationCode,
         password: input.password,
       })
-      if (status < 400) {
+      if (status[0] < 400) {
         navigate('/login')
       }
+      setErrorText(status[1])
+    } else {
+      setErrorText('비밀번호를 정확하게 입력해주세요')
     }
   }
 
@@ -95,7 +102,7 @@ const Register = (): JSX.Element => {
               <Input
                 type="email"
                 name="username"
-                placeholder="gm.gist 혹은 gist 메일을 입력하세요"
+                placeholder="지스트 메일을 입력하세요"
                 value={input.username}
                 onChange={handleChange}
                 disabled={isCodeRequested}
@@ -112,14 +119,15 @@ const Register = (): JSX.Element => {
                 <Input
                   type="text"
                   name="verificationCode"
-                  placeholder="인증코드를 입력하세요"
+                  placeholder="이메일로 온 인증 코드를 입력하세요"
                   value={input.verificationCode}
                   onChange={handleChange}
+                  disabled={isVerificated}
                 ></Input>
               </InputGroup>
             </FormControl>
           )}
-          {verificationStatus < 400 && (
+          {isVerificated && (
             <FormControl isRequired>
               <Text mb="8px">비밀번호</Text>
               <InputGroup borderColor="#ccc">
@@ -129,14 +137,14 @@ const Register = (): JSX.Element => {
                 <Input
                   type="password"
                   name="password"
-                  placeholder="영문과 숫자를 포함하여 8자리 이상의 비밀번호를 입력하세요"
+                  placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
                   value={input.password}
                   onChange={handleChange}
                 ></Input>
               </InputGroup>
             </FormControl>
           )}
-          {verificationStatus < 400 && (
+          {isVerificated && (
             <FormControl isRequired>
               <Text mb="8px">비밀번호 확인</Text>
               <InputGroup borderColor="#ccc">
@@ -146,7 +154,7 @@ const Register = (): JSX.Element => {
                 <Input
                   type="password"
                   name="passwordConfirm"
-                  placeholder="비밀번호를 재 입력하세요"
+                  placeholder="비밀번호를 재입력하세요"
                   value={input.passwordConfirm}
                   onChange={handleChange}
                 ></Input>
@@ -155,13 +163,13 @@ const Register = (): JSX.Element => {
           )}
           {!isCodeRequested && (
             <RegisterButton onClick={handleCreateCode}>
-              인증 번호 전송
+              인증 코드 전송
             </RegisterButton>
           )}
-          {isCodeRequested && (
+          {isCodeRequested && !isVerificated && (
             <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
           )}
-          {verificationStatus < 400 && (
+          {isVerificated && (
             <RegisterButton type="submit" className="submit__btn">
               회원가입
             </RegisterButton>
