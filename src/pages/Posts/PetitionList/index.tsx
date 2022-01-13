@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { getRetrieveAllPost } from '../../../utils/api/post/getRetrieveAllPost'
+import { getRetrieveAllPost } from '../../../utils/api'
 import {
   PetitionAgreement,
   PetitionCategory,
@@ -19,25 +19,7 @@ import {
 } from './styles'
 
 const PetitionList = (): JSX.Element => {
-  const [postList, setPostList] = useState([
-    {
-      accepted: 0,
-      agreements: [
-        {
-          createdAt: '2022-01-13T04:51:16.369Z',
-          userId: 0,
-        },
-      ],
-      answered: true,
-      category: 'string',
-      createdAt: '2022-01-13T04:51:16.369Z',
-      description: 'string',
-      id: 0,
-      title: 'string',
-      updatedAt: '2022-01-13T04:51:16.369Z',
-      userId: 0,
-    },
-  ])
+  const [postList, setPostList] = useState<Array<PostResponse>>([])
 
   const getAllPost = async () => {
     try {
@@ -87,7 +69,7 @@ const PetitionList = (): JSX.Element => {
               <Link to={`/posts/${post.id}`}>{post.title}</Link>
             </PetitionSubject>
             <PetitionDate>{post.createdAt}</PetitionDate>
-            <PetitionAgreement>{post.accepted}</PetitionAgreement>
+            <PetitionAgreement>{post.agreements.length}</PetitionAgreement>
           </PetitionItem>
         ))}
       </ul>
