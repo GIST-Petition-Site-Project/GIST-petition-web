@@ -34,7 +34,7 @@ const PetitionDescription = styled.div`
 const AgreementButton = styled(Button)`
   width: 120px;
   height: 40px;
-  border-radius: 0;
+  border-radius: 2px;
   border: 2px solid #df3127;
   color: #df3127;
 `

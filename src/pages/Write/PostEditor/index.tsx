@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, useEffect } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import {
   ButtonGroup,
   Select,
@@ -10,7 +10,12 @@ import {
   FormLabel,
   Textarea,
 } from '@chakra-ui/react'
-import { SubmitButton, BackButton } from './styles'
+import {
+  SubmitButton,
+  BackButton,
+  CategorySelect,
+  DescriptionInputTextArea,
+} from './styles'
 import { postCreatePost } from '../../../utils/api'
 import { useNavigate } from 'react-router-dom'
 import { Category } from '../../../types/enums'
@@ -73,7 +78,7 @@ const PostEditor = () => {
                   onChange={handleChange}
                   name="title"
                   borderRadius="0"
-                  _focus={{ outline: 'none' }}
+                  focusBorderColor="none"
                   value={postInput.title}
                 />
               </InputGroup>
@@ -81,12 +86,9 @@ const PostEditor = () => {
 
             <FormControl isRequired>
               <FormLabel>카테고리</FormLabel>
-              <Select
+              <CategorySelect
                 focusBorderColor="none"
                 onChange={handleChange}
-                border="1px solid"
-                borderColor="#ccc"
-                borderRadius="0"
                 name="categoryId"
                 value={postInput.categoryId}
               >
@@ -98,22 +100,17 @@ const PostEditor = () => {
                     {Category[idx]}
                   </option>
                 ))}
-              </Select>
+              </CategorySelect>
             </FormControl>
 
             <FormControl isRequired>
               <FormLabel> 청원내용</FormLabel>
-              <Textarea
+              <DescriptionInputTextArea
                 placeholder="내용을 작성해 주세요."
                 onChange={handleChange}
                 name="description"
                 value={postInput.description}
-                height={'50vh'}
-                mb="20px"
-                borderRadius="0"
-                borderColor="#ccc"
-                _focus={{ outline: 'none' }}
-                resize="none"
+                focusBorderColor="none"
               />
             </FormControl>
 

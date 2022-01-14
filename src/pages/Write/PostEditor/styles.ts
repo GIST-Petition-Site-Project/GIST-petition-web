@@ -1,3 +1,4 @@
+import { Select, Textarea } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
 const SubmitButton = styled.button`
@@ -16,5 +17,16 @@ const BackButton = styled.button`
   font-weight: bold;
   width: 33.3333333%;
 `
+const CategorySelect = styled(Select)`
+  border: 1px solid #ccc;
+  border-radius: 0;
+`
+const DescriptionInputTextArea = styled(Textarea)`
+  height: 50vh;
+  margin-bottom: 20px;
+  border-radius: 0;
+  border-color: #ccc;
+  resize: none;
+`
 
-export { SubmitButton, BackButton }
+export { SubmitButton, BackButton, CategorySelect, DescriptionInputTextArea }

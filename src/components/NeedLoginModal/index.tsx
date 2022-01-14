@@ -37,7 +37,7 @@ const NeedLoginModal = (prop: Disclosure): JSX.Element => {
             <Button
               w={'112px'}
               h={'36px'}
-              borderRadius={'0'}
+              borderRadius="2px"
               _focus={{ outline: 'none' }}
               bg={'#2f363c'}
               color={'#fff'}
@@ -49,7 +49,7 @@ const NeedLoginModal = (prop: Disclosure): JSX.Element => {
             <Button
               w={'112px'}
               h={'36px'}
-              borderRadius={'0'}
+              borderRadius="2px"
               _focus={{ outline: 'none' }}
               bg={'#df3127'}
               color={'#fff'}
