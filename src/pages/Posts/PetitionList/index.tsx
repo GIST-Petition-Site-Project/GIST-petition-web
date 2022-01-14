@@ -27,7 +27,6 @@ const PetitionList = (): JSX.Element => {
     useAppSelect(select => select.query.category),
   )
   const [postList, setPostList] = useState<Array<PostResponse>>([])
-
   const getAllPost = async () => {
     try {
       const status = await getRetrieveAllPost()

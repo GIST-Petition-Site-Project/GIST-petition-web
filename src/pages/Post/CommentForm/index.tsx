@@ -20,6 +20,14 @@ const CommentForm = ({ postId }: PostId): JSX.Element => {
     e.preventDefault()
     try {
       const status = await postCreateComment(postId, input)
+      if (status === 401) {
+        /**모달 예시
+         * 댓글을 작성하시려면 로그인을 해야 합니다.
+         * 로그인 하시겠습니까?
+         * 예...........아니요
+         */
+        console.log('로그인 해야함')
+      }
       if (status < 400) {
         console.log(status)
         navigate(0)

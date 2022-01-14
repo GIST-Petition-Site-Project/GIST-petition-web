@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import NotFound from '../pages/NotFound'
@@ -22,7 +22,7 @@ const RootRouter = (): JSX.Element => {
         <Route path="/write" element={<AuthRoute />}>
           <Route index element={<Write />} />
         </Route>
-        <Route path="/posts" element={<AuthRoute />}>
+        <Route path="/posts" element={<Outlet />}>
           <Route index element={<Posts />} />
           <Route path=":postId" element={<Post />} />
         </Route>

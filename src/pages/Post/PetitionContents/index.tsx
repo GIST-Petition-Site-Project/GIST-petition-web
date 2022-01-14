@@ -20,12 +20,7 @@ const CFaFileSignature = chakra(FaFileSignature)
 const PetitionContents = ({ postId }: PostId): JSX.Element => {
   const [response, setResponse] = useState<PostResponse>({
     accepted: 0,
-    agreements: [
-      {
-        createdAt: '',
-        userId: 0,
-      },
-    ],
+    agreements: [],
     answered: true,
     category: '',
     createdAt: '',
@@ -39,7 +34,17 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
 
   const handleAgreement = async () => {
     const status = await postAgreePost(postId)
-    setIsConsented(true)
+    if (status === 401) {
+      /**모달 예시
+       * 동의하시려면 로그인을 해야 합니다.
+       * 로그인 하시겠습니까?
+       * 예...........아니요
+       */
+      console.log('로그인 해야함')
+    }
+    if (status < 400) {
+      setIsConsented(true)
+    }
   }
 
   useEffect(() => {
