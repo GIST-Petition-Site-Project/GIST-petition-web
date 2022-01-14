@@ -1,14 +1,12 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
 import {
   ButtonGroup,
-  Select,
   Stack,
   Flex,
   InputGroup,
   Input,
   FormControl,
   FormLabel,
-  Textarea,
 } from '@chakra-ui/react'
 import {
   SubmitButton,
@@ -115,7 +113,13 @@ const PostEditor = () => {
             </FormControl>
 
             <ButtonGroup justifyContent="space-around">
-              <BackButton>작성 취소</BackButton>
+              <BackButton
+                onClick={() => {
+                  navigate(-1)
+                }}
+              >
+                작성 취소
+              </BackButton>
               <SubmitButton type="submit" className="submit__btn">
                 작성 완료
               </SubmitButton>
