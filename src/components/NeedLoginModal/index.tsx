@@ -19,6 +19,7 @@ const NeedLoginModal = (prop: Disclosure): JSX.Element => {
         blockScrollOnMount={false}
         isOpen={prop.disclosure.isOpen}
         onClose={prop.disclosure.onClose}
+        isCentered
       >
         <ModalOverlay />
         <ModalContent borderRadius={'0'}>
