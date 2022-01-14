@@ -1,5 +1,5 @@
 import WritePrecaution from './WritePrecaution'
-import GuideModal from './PrecautionModal/GuideModal'
+import GuideModal from './PrecautionModal'
 import { Heading, Box, Stack, Divider } from '@chakra-ui/react'
 import PostEditor from './PostEditor'
 import { Inner, StyledBoxInner, StyledPostEditor } from './styles'
@@ -33,7 +33,7 @@ const Write = (): JSX.Element => {
                 <WritePrecaution />
                 <GuideModal />
               </Stack>
-              <Divider orientation="horizontal" />
+              <Divider color="#ccc" />
               <StyledPostEditor>
                 <PostEditor />
               </StyledPostEditor>

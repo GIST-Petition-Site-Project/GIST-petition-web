@@ -35,6 +35,9 @@ const SearchCurrentPetition__Input = styled.input`
   border-radius: 5px 5px 0px 5px;
   padding: 0 20px;
   box-sizing: border-box;
+  &:focus {
+    outline: none;
+  }
 `
 
 const DashBoard = styled.div`

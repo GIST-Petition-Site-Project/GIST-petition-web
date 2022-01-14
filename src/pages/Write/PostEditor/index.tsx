@@ -71,6 +71,8 @@ const PostEditor = () => {
                   placeholder="제목을 작성해 주세요. (10자 이상)"
                   onChange={handleChange}
                   name="title"
+                  borderRadius="0"
+                  _focus={{ outline: 'none' }}
                   value={postInput.title}
                 />
               </InputGroup>
@@ -107,6 +109,9 @@ const PostEditor = () => {
                 value={postInput.description}
                 height={'50vh'}
                 mb="20px"
+                borderRadius="0"
+                borderColor="#ccc"
+                _focus={{ outline: 'none' }}
                 resize="none"
               />
             </FormControl>
