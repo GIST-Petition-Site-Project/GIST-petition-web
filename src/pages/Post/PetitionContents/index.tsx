@@ -17,6 +17,9 @@ import {
 } from './styles'
 const CFaFileSignature = chakra(FaFileSignature)
 
+import { useDisclosure } from '@chakra-ui/react'
+import NeedLoginModal from '../../../components/NeedLoginModal'
+
 const PetitionContents = ({ postId }: PostId): JSX.Element => {
   const [response, setResponse] = useState<PostResponse>({
     accepted: 0,
@@ -30,16 +33,13 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
     updatedAt: '',
     userId: 0,
   })
-  const [isConsented, setIsConsented] = useState(false)
+  const [isConsented, setIsConsented] = useState<boolean>(false)
+  const { onOpen, isOpen, onClose } = useDisclosure()
 
   const handleAgreement = async () => {
     const status = await postAgreePost(postId)
     if (status === 401) {
-      /**모달 예시
-       * 동의하시려면 로그인을 해야 합니다.
-       * 로그인 하시겠습니까?
-       * 예...........아니요
-       */
+      onOpen()
       console.log('로그인 해야함')
     }
     if (status < 400) {
@@ -111,6 +111,7 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
           </Flex>
         </AgreementButton>
       </div>
+      <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
     </>
   )
 }
