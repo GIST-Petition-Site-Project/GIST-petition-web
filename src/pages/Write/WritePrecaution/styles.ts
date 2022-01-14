@@ -1,3 +1,4 @@
+import { Container } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
 const StylePrecaution = styled.div`
@@ -9,4 +10,11 @@ const StyleStrong = styled.span`
   font-weight: 900;
 `
 
-export { StylePrecaution, StyleStrong }
+const PrincipleContents = styled(Container)`
+  margin: 0;
+  line-height: 160%;
+  max-width: 85ch;
+  text-align: justify;
+`
+
+export { StylePrecaution, StyleStrong, PrincipleContents }

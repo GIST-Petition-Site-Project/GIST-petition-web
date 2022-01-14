@@ -29,7 +29,7 @@ const GuideModal = (): JSX.Element => {
           <ModalBody m="0 15px" textAlign={'justify'}>
             <List p="0 12px">
               {steps.map(step => (
-                <ListItem>
+                <ListItem key={step.id}>
                   <Heading as="h2" fontSize="16px">
                     Step {step.id}. {step.title}
                   </Heading>
