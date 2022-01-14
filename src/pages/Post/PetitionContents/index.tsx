@@ -69,7 +69,7 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
           <Text fontWeight={'bold'} display={'inline-block'}>
             {!response.answered ? '청원진행중' : '답변완료'}&nbsp;
           </Text>
-          <Text display={'inline'}>({response.createdAt}~)</Text>
+          <Text display={'inline'}>({response.createdAt.slice(0, 10)}~)</Text>
         </PetitionProgress>
         <PetitionTitleWrap>
           <PetitionTitle ml={'20px'} mr={'20px'}>
@@ -89,7 +89,9 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
           청원내용
         </Text>
         <Divider color={'#ccc'}></Divider>
-        <PetitionDescription>{response.description}</PetitionDescription>
+        <pre>
+          <PetitionDescription>{response.description}</PetitionDescription>
+        </pre>
       </Stack>
       <div>
         <AgreementButton
