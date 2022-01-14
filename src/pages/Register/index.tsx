@@ -33,6 +33,11 @@ const Register = (): JSX.Element => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+    if (name === 'verificationCode') {
+      const upperValue = value.toUpperCase()
+      console.log(upperValue)
+      setInput({ ...input, [name]: upperValue })
+    }
     setInput({ ...input, [name]: value })
   }
 
@@ -126,6 +131,7 @@ const Register = (): JSX.Element => {
                   value={input.verificationCode}
                   onChange={handleChange}
                   disabled={isVerificated}
+                  style={{ textTransform: 'uppercase' }}
                 ></Input>
               </InputGroup>
             </FormControl>
