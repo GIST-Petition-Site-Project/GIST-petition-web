@@ -25,7 +25,7 @@ const PostEditor = () => {
 
   const [postInput, setPostInput] = useState<PostsInput>({
     title: '',
-    category: 1,
+    categoryId: 1,
     description: '',
   })
 
@@ -36,7 +36,7 @@ const PostEditor = () => {
       | ChangeEvent<HTMLSelectElement>,
   ) => {
     const { value, name } = e.target
-    if (name === 'category') {
+    if (name === 'categoryId') {
       setPostInput({ ...postInput, [name]: Number(value) })
       return
     }
@@ -85,7 +85,7 @@ const PostEditor = () => {
                 borderColor="#ccc"
                 borderRadius="0"
                 name="category"
-                value={postInput.category}
+                value={postInput.categoryId}
               >
                 <option selected disabled>
                   카테고리를 선택해주세요.
