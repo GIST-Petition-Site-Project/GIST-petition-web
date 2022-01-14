@@ -34,9 +34,11 @@ const Register = (): JSX.Element => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (name === 'verificationCode') {
-      const upperValue = value.toUpperCase()
-      console.log(upperValue)
-      setInput({ ...input, [name]: upperValue })
+      if (value.length > 6) {
+        return
+      }
+      setInput({ ...input, [name]: value.toUpperCase() })
+      return
     }
     setInput({ ...input, [name]: value })
   }
