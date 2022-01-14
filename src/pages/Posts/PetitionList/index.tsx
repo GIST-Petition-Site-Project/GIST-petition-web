@@ -23,7 +23,9 @@ import {
 
 const PetitionList = (): JSX.Element => {
   const categories = Object.keys(Category).filter(v => !(parseInt(v) >= 0))
-  const [selected, setSelected] = useState(categories[0])
+  const [selected, setSelected] = useState(
+    useAppSelect(select => select.query.category),
+  )
   const [postList, setPostList] = useState<Array<PostResponse>>([])
 
   const getAllPost = async () => {
