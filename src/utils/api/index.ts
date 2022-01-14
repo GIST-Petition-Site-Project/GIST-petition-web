@@ -1,3 +1,7 @@
+// comment
+export * from './comment/getComments'
+export * from './comment/postCreateComment'
+
 // post
 export * from './posts/getRetrieveAllPost'
 export * from './posts/getRetrievePost'
