@@ -5,7 +5,7 @@ import NavBar from './components/NavBar/NavBar'
 import Footer from './components/Footer/Footer'
 import GlobalStyle from './style/Global'
 import { useDispatch } from 'react-redux'
-import { setLogin } from './redux/auth/authSlice'
+import { setLogin, setLogout } from './redux/auth/authSlice'
 import { getUsersMe } from './utils/api'
 
 const App = (): JSX.Element => {
@@ -15,6 +15,8 @@ const App = (): JSX.Element => {
       const status = await getUsersMe()
       if (status < 400) {
         dispatch(setLogin())
+      } else {
+        dispatch(setLogout())
       }
     } catch (error) {
       console.log(error)

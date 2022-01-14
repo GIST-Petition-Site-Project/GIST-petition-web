@@ -4,7 +4,7 @@ import {
   Pagination,
   usePagination,
 } from '@ajna/pagination'
-import { setOffset } from '../../../redux/query/querySlice'
+import { setPage } from '../../../redux/query/querySlice'
 import { useAppDispatch, useAppSelect } from '../../../redux/store.hooks'
 
 import {
@@ -15,14 +15,14 @@ import {
 
 const PaginationButtons = (): JSX.Element => {
   const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
-    pagesCount: 12,
-    initialState: { currentPage: useAppSelect(select => select.query.offset) },
+    pagesCount: 3,
+    initialState: { currentPage: useAppSelect(select => select.query.page) },
   })
 
   const dispatch = useAppDispatch()
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    dispatch(setOffset(page))
+    dispatch(setPage(page))
   }
   return (
     <Pagination
