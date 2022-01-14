@@ -1,24 +1,25 @@
 import styled from '@emotion/styled'
+import theme from '../../style/theme'
 
 const stackStyle: React.CSSProperties = {
   position: 'absolute',
-  top: '300px',
+  top: '18.75rem',
   left: '0',
   right: '0',
-  height: '500px',
-  width: '400px',
+  height: '31.25rem',
+  width: '25rem',
   margin: 'auto',
 }
 
 const RegisterButton = styled.button`
-  color: white;
-  background-color: #5a5e5d;
+  color: ${theme.color.white};
+  background-color: ${theme.color.tertiaryGray};
   border-radius: 5px;
-  height: 36px;
+  height: 2.25rem;
   font-weight: bold;
 `
 const ErrorText = styled.p`
-  color: red;
+  color: ${theme.color.primaryRed};
 `
 
 export { stackStyle, RegisterButton, ErrorText }

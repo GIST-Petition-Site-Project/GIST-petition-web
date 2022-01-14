@@ -2,22 +2,22 @@ import styled from '@emotion/styled'
 import { Button, Text } from '@chakra-ui/react'
 
 const PetitionProgress = styled.div`
-  font-size: 20px;
+  font-size: 1.25rem;
 `
 
 const PetitionTitleWrap = styled.div`
   text-align: center;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: bold;
 `
 
 const PetitionTitle = styled(Text)`
-  margin: 0 20px;
+  margin: 0 1.25em;
 `
 
 const CurrentAgreementsText = styled.div`
   text-align: center;
-  font-size: 20px;
+  font-size: 1.25em;
 `
 
 const CurrentAgreements = styled(Text)`
@@ -32,8 +32,8 @@ const PetitionDescription = styled.div`
 `
 
 const AgreementButton = styled(Button)`
-  width: 120px;
-  height: 40px;
+  width: 7.5rem;
+  height: 2.5rem;
   border-radius: 0;
   border: 2px solid #df3127;
   color: #df3127;

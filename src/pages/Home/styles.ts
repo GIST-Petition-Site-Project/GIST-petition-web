@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import theme from '../../style/theme'
 const MainBackgroundImage = styled.div`
   height: 80vh;
   background-position: top;
@@ -10,7 +11,7 @@ const MainBackgroundImage = styled.div`
 const Inner = styled.div`
   position: relative;
   margin: 0 auto;
-  max-width: 900px;
+  max-width: ${theme.space.innerMaxWidth};
   height: 100%;
 `
 
@@ -20,7 +21,7 @@ const SearchCurrentPetition = styled.div`
   align-items: center;
   position: absolute;
   margin: auto;
-  height: 100px;
+  height: 6.25rem;
   border-radius: 5px;
   background-color: rgba(56, 64, 70, 0.5);
   left: 0;
@@ -29,11 +30,11 @@ const SearchCurrentPetition = styled.div`
   bottom: 0;
 `
 const SearchCurrentPetition__Input = styled.input`
-  width: 680px;
-  height: 50px;
-  border: 2px solid black;
+  width: 42.5rem;
+  height: 3.125rem;
+  border: 2px solid ${theme.color.black};
   border-radius: 5px 5px 0px 5px;
-  padding: 0 20px;
+  padding: 0 1.25em;
   box-sizing: border-box;
 `
 
@@ -41,11 +42,11 @@ const DashBoard = styled.div`
   position: relative;
   text-align: center;
   line-height: 1.4;
-  font-size: 28px;
+  font-size: 1.75rem;
   font-weight: bold;
-  color: #333;
+  color: ${theme.color.black};
   letter-spacing: 0.1em;
-  margin: 50px 0;
+  margin: 3.125em 0;
 `
 
 export {
