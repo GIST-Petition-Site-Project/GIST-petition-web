@@ -38,7 +38,7 @@ const PetitionList = (): JSX.Element => {
   const queryPost = async (query: QueryParams) => {
     const status = await getQueryPosts(query)
     if (status[0] < 400) {
-      setPostList(status[1])
+      setPostList(status[1].content)
       console.log(status)
     }
   }

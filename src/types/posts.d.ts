@@ -1,6 +1,6 @@
 interface PostsInput {
   title: string
-  category: number
+  categoryId: number
   description: string
 }
 
