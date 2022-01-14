@@ -4,6 +4,8 @@ import {
   Pagination,
   usePagination,
 } from '@ajna/pagination'
+import { setOffset } from '../../../redux/query/querySlice'
+import { useAppDispatch } from '../../../redux/store.hooks'
 
 import {
   PostsPaginationNext,
@@ -17,11 +19,15 @@ const PaginationButtons = (): JSX.Element => {
     initialState: { currentPage: 1 },
   })
 
+  const dispatch = useAppDispatch()
   return (
     <Pagination
       pagesCount={pagesCount}
       currentPage={currentPage}
-      onPageChange={setCurrentPage}
+      onPageChange={page => {
+        setCurrentPage(page)
+        dispatch(setOffset(page))
+      }}
     >
       <PaginationContainer mt="40px">
         <PostsPaginationPrevious>이전</PostsPaginationPrevious>

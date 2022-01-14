@@ -15,9 +15,11 @@ import {
 } from 'reduxjs-toolkit-persist'
 import storage from 'reduxjs-toolkit-persist/lib/storage'
 import authReducer from './auth/authSlice'
+import queryReducer from './query/querySlice'
 
 const reducers = combineReducers({
   auth: authReducer,
+  query: queryReducer,
 })
 
 const persistConfig = {
