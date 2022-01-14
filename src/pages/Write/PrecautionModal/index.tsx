@@ -16,12 +16,12 @@ const GuideModal = (): JSX.Element => {
   return (
     <div style={{ margin: '0 auto' }}>
       <Button
-        display={'block'}
         onClick={onOpen}
         bg={'#2F363C'}
         width={'400px'}
         color={'white'}
         colorScheme={'#2F363C'}
+        borderRadius="2px"
         _focus={{ outline: 'none' }}
       >
         청원 작성 요령 안내
@@ -30,7 +30,6 @@ const GuideModal = (): JSX.Element => {
         <ModalOverlay />
         <ModalContent borderRadius={0}>
           <ModalHeader m="15px"> GIST 청원, 이렇게 등록하세요</ModalHeader>
-          <ModalCloseButton />
           <ModalBody m="15px" textAlign={'justify'}>
             <List spacing={7} m="10px" p="0 12px">
               <ListItem>
@@ -86,6 +85,7 @@ const GuideModal = (): JSX.Element => {
           <ModalFooter>
             <Button
               bg="#5A5E5D"
+              borderRadius="2px"
               colorScheme="#5A5E5D"
               mr={3}
               onClick={onClose}
