@@ -27,13 +27,15 @@ const CommentList = ({ postId }: PostId): JSX.Element => {
           <Stack>
             <Flex alignItems={'center'}>
               <CommentAnonymousName>{res.userId}&nbsp;</CommentAnonymousName>
-              <CommentCreatedAt style={{ fontSize: '12px' }}>
+              <CommentCreatedAt>
                 {res.createdAt.slice(5, 10) +
                   '  ' +
                   res.createdAt.slice(11, 16)}
               </CommentCreatedAt>
             </Flex>
-            <div>{res.content}</div>
+            <pre>
+              <div>{res.content}</div>
+            </pre>
           </Stack>
         </CommentItem>
       ))}

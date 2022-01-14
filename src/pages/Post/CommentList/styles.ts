@@ -11,7 +11,7 @@ const CommentAnonymousName = styled.div`
   font-weight: bold;
 `
 const CommentCreatedAt = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   color: #555;
 `
 

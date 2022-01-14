@@ -89,7 +89,9 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
           청원내용
         </Text>
         <Divider color={'#ccc'}></Divider>
-        <PetitionDescription>{response.description}</PetitionDescription>
+        <pre>
+          <PetitionDescription>{response.description}</PetitionDescription>
+        </pre>
       </Stack>
       <div>
         <AgreementButton
