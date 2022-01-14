@@ -37,6 +37,7 @@ const PetitionList = (): JSX.Element => {
     getAllPost()
     console.log(query)
   }, [useAppSelect(select => select.query)])
+
   return (
     <>
       <PostsTitle>
@@ -69,7 +70,7 @@ const PetitionList = (): JSX.Element => {
             <PetitionSubject>
               <Link to={`/posts/${post.id}`}>{post.title}</Link>
             </PetitionSubject>
-            <PetitionDate>{post.createdAt}</PetitionDate>
+            <PetitionDate>{post.createdAt.slice(0, 10)}</PetitionDate>
             <PetitionAgreement>{post.agreements.length}</PetitionAgreement>
           </PetitionItem>
         ))}

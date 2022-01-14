@@ -1,5 +1,5 @@
-import { Stack } from '@chakra-ui/react'
-import { CommentItem, CommentAnonymousName } from './styles'
+import { Flex, Stack } from '@chakra-ui/react'
+import { CommentItem, CommentAnonymousName, CommentCreatedAt } from './styles'
 import { getComments } from '../../../utils/api/comment/getComments'
 import { useEffect, useState } from 'react'
 
@@ -25,7 +25,14 @@ const CommentList = ({ postId }: PostId): JSX.Element => {
       {response.map(res => (
         <CommentItem>
           <Stack>
-            <CommentAnonymousName>{res.userId}</CommentAnonymousName>
+            <Flex alignItems={'center'}>
+              <CommentAnonymousName>{res.userId}&nbsp;</CommentAnonymousName>
+              <CommentCreatedAt style={{ fontSize: '12px' }}>
+                {res.createdAt.slice(5, 10) +
+                  '  ' +
+                  res.createdAt.slice(11, 16)}
+              </CommentCreatedAt>
+            </Flex>
             <div>{res.content}</div>
           </Stack>
         </CommentItem>

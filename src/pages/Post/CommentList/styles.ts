@@ -10,5 +10,9 @@ const CommentItem = styled.li`
 const CommentAnonymousName = styled.div`
   font-weight: bold;
 `
+const CommentCreatedAt = styled.div`
+  font-size: 14px;
+  color: #555;
+`
 
-export { CommentItem, CommentAnonymousName }
+export { CommentItem, CommentAnonymousName, CommentCreatedAt }
