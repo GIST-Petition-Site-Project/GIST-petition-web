@@ -31,15 +31,11 @@ const PetitionList = (): JSX.Element => {
     .fill(0)
     .map((_x, i) => i)
 
-  /**
-   *
-   * @param query 응답 바뀜 여기 수정 해야함 수정 해야함 수정 해야함
-   */
   const queryPost = async (query: QueryParams) => {
     const status = await getQueryPosts(query)
     if (status[0] < 400) {
+      console.log(status[1].content)
       setPostList(status[1].content)
-      console.log(status)
     }
   }
 
@@ -85,12 +81,12 @@ const PetitionList = (): JSX.Element => {
       <ul>
         {postList.map(post => (
           <PetitionItem key={post.id}>
-            <PetitionCategory>{post.category}</PetitionCategory>
+            <PetitionCategory>{post.categoryName}</PetitionCategory>
             <PetitionSubject>
               <Link to={`/posts/${post.id}`}>{post.title}</Link>
             </PetitionSubject>
             <PetitionDate>{post.createdAt.slice(0, 10)}</PetitionDate>
-            <PetitionAgreement>{post.agreements.length}</PetitionAgreement>
+            <PetitionAgreement>{post.agreements}</PetitionAgreement>
           </PetitionItem>
         ))}
       </ul>

@@ -22,10 +22,9 @@ import NeedLoginModal from '../../../components/NeedLoginModal'
 
 const PetitionContents = ({ postId }: PostId): JSX.Element => {
   const [response, setResponse] = useState<PostResponse>({
-    accepted: 0,
-    agreements: [],
+    agreements: 0,
     answered: true,
-    category: '',
+    categoryName: '',
     createdAt: '',
     description: '',
     id: 0,
@@ -83,8 +82,7 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
         </PetitionTitleWrap>
         <CurrentAgreementsText>
           <Text>
-            총{' '}
-            <CurrentAgreements>{response.agreements.length}</CurrentAgreements>
+            총 <CurrentAgreements>{response.agreements}</CurrentAgreements>
             명이 동의했습니다.
           </Text>
         </CurrentAgreementsText>

@@ -49,6 +49,7 @@ const PostEditor = () => {
     e.preventDefault()
     if (postInput.title.length > 10) {
       try {
+        console.log(postInput)
         const postsStatus = await postCreatePost(postInput)
         if (postsStatus < 400) {
           navigate('/')
@@ -84,7 +85,7 @@ const PostEditor = () => {
                 border="1px solid"
                 borderColor="#ccc"
                 borderRadius="0"
-                name="category"
+                name="categoryId"
                 value={postInput.categoryId}
               >
                 <option selected disabled>
