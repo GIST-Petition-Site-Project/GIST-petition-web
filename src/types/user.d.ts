@@ -20,3 +20,11 @@ interface Disclosure {
 }
 
 // 로그인 모달 띄우기 관련
+
+// 회원 가입 UI 관련
+interface WhichUI {
+  isCodeRequested: boolean
+  isLoading: boolean
+  isVerificated: boolean
+}
+// 회원 가입 UI 관련

@@ -12,6 +12,8 @@ import {
   Stack,
   Text,
   Input,
+  Spinner,
+  Flex,
 } from '@chakra-ui/react'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { RegisterButton, stackStyle, ErrorText } from './styles'
@@ -27,8 +29,13 @@ const Register = (): JSX.Element => {
     verificationCode: '',
     passwordConfirm: '',
   })
-  const [isCodeRequested, setIsCodeRequested] = useState(false)
-  const [isVerificated, setisVerificated] = useState(false)
+
+  const [whichUI, setWhichUI] = useState<WhichUI>({
+    isCodeRequested: false,
+    isLoading: false,
+    isVerificated: false,
+  })
+
   const [errorText, setErrorText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,12 +56,14 @@ const Register = (): JSX.Element => {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
+    setWhichUI({ ...whichUI, isLoading: true })
+
     const status = await postCreateVerificationCode({
       username: input.username,
     })
     setErrorText(status[1])
     if (status[0] < 400) {
-      setIsCodeRequested(true)
+      setWhichUI({ ...whichUI, isLoading: false, isCodeRequested: true })
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -66,7 +75,7 @@ const Register = (): JSX.Element => {
     })
     setErrorText(status[1])
     if (status[0] < 400) {
-      setisVerificated(true)
+      setWhichUI({ ...whichUI, isVerificated: true })
     }
   }
 
@@ -115,11 +124,11 @@ const Register = (): JSX.Element => {
                 placeholder="지스트 메일을 입력하세요"
                 value={input.username}
                 onChange={handleChange}
-                disabled={isCodeRequested}
+                disabled={whichUI.isCodeRequested}
               ></Input>
             </InputGroup>
           </FormControl>
-          {isCodeRequested && (
+          {whichUI.isCodeRequested && (
             <FormControl isRequired>
               <Text mb="8px">인증 코드</Text>
               <InputGroup borderColor="#ccc">
@@ -132,13 +141,13 @@ const Register = (): JSX.Element => {
                   placeholder="이메일로 온 인증 코드를 입력하세요"
                   value={input.verificationCode}
                   onChange={handleChange}
-                  disabled={isVerificated}
+                  disabled={whichUI.isVerificated}
                   style={{ textTransform: 'uppercase' }}
                 ></Input>
               </InputGroup>
             </FormControl>
           )}
-          {isVerificated && (
+          {whichUI.isVerificated && (
             <FormControl isRequired>
               <Text mb="8px">비밀번호</Text>
               <InputGroup borderColor="#ccc">
@@ -155,7 +164,7 @@ const Register = (): JSX.Element => {
               </InputGroup>
             </FormControl>
           )}
-          {isVerificated && (
+          {whichUI.isVerificated && (
             <FormControl isRequired>
               <Text mb="8px">비밀번호 확인</Text>
               <InputGroup borderColor="#ccc">
@@ -172,15 +181,30 @@ const Register = (): JSX.Element => {
               </InputGroup>
             </FormControl>
           )}
-          {!isCodeRequested && (
+          {!whichUI.isCodeRequested && !whichUI.isLoading && (
             <RegisterButton onClick={handleCreateCode}>
               인증 코드 전송
             </RegisterButton>
           )}
-          {isCodeRequested && !isVerificated && (
+          {whichUI.isLoading && (
+            <Flex flexDirection="column" alignItems="center">
+              <Spinner
+                m="auto"
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="#df3127"
+                size="xl"
+                mb="10px"
+              />
+              잠시만 기다려주세요...
+            </Flex>
+          )}
+
+          {whichUI.isCodeRequested && !whichUI.isVerificated && (
             <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
           )}
-          {isVerificated && (
+          {whichUI.isVerificated && (
             <RegisterButton onClick={handleRegister} className="submit__btn">
               회원가입
             </RegisterButton>
