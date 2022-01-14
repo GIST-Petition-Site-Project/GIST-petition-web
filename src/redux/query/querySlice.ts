@@ -1,27 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
-  limit: 10,
-  offset: 1,
-  category: '전체',
+const initialState: QueryParams = {
+  size: 10,
+  page: 1,
+  category: 0,
 }
 
 export const querySlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLimit: (state, action: PayloadAction<number>) => {
-      state.limit = action.payload
+    setSize: (state, action: PayloadAction<number>) => {
+      state.size = action.payload
     },
-    setOffset: (state, action: PayloadAction<number>) => {
-      state.offset = action.payload
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload
     },
-    setCategory: (state, action: PayloadAction<string>) => {
+    setCategory: (state, action: PayloadAction<number>) => {
       state.category = action.payload
     },
   },
 })
 
-export const { setLimit, setOffset, setCategory } = querySlice.actions
+export const { setSize, setPage, setCategory } = querySlice.actions
 
 export default querySlice.reducer

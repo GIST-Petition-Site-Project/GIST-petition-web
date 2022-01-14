@@ -1,11 +1,8 @@
 import api from '../axiosConfigs'
 
-export const getQueryPosts = async () => {
-  const pageSize = 10
-  const offset = 1
-  const category = '전체'
+export const getQueryPosts = async (query: QueryParams) => {
   const response = await api.get(
-    `posts?limit=${pageSize}&offset=${offset}&category=${category}`,
+    `posts?size=${query.size}&page=${query.page}&category=${query.category}`,
   )
   return [response.status, response.data]
 }
