@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { useAppSelect } from '../../../redux/store.hooks'
+import { setCategory } from '../../../redux/query/querySlice'
+import { useAppDispatch, useAppSelect } from '../../../redux/store.hooks'
+import { Category } from '../../../types/enums'
 import { getRetrieveAllPost } from '../../../utils/api'
 import {
   PetitionAgreement,
@@ -20,6 +22,8 @@ import {
 } from './styles'
 
 const PetitionList = (): JSX.Element => {
+  const categories = Object.keys(Category).filter(v => !(parseInt(v) >= 0))
+  const [selected, setSelected] = useState(categories[0])
   const [postList, setPostList] = useState<Array<PostResponse>>([])
 
   const getAllPost = async () => {
@@ -32,24 +36,29 @@ const PetitionList = (): JSX.Element => {
       console.log(error)
     }
   }
+
+  const dispatch = useAppDispatch()
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelected(e.target.value)
+    dispatch(setCategory(e.target.value))
+  }
+
   const query = useAppSelect(select => select.query)
   useEffect(() => {
     getAllPost()
     console.log(query)
   }, [useAppSelect(select => select.query)])
+
   return (
     <>
       <PostsTitle>
         <PostsText>모든 청원</PostsText>
-        <PostsSelect
-          placeholder="전체"
-          defaultValue={'전체'}
-          //width 바꾸면 button과 select창이 따로놀아
-          w={'128px'}
-        >
-          <option value="기숙사">기숙사</option>
-          <option value="학적">학적</option>
-          <option value="취업">취업</option>
+        <PostsSelect onChange={handleSelect} value={selected} w={'128px'}>
+          {categories.map(item => (
+            <option value={item} key={item}>
+              {item}
+            </option>
+          ))}
         </PostsSelect>
       </PostsTitle>
 
