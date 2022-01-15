@@ -1,9 +1,10 @@
 import styled from '@emotion/styled'
+import theme from '../../style/theme'
 
 const Inner = styled.div`
   position: relative;
   margin: 0 auto;
-  max-width: 900px;
+  max-width: ${theme.space.innerMaxWidth};
   height: 100%;
 `
 

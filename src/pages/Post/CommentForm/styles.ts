@@ -4,7 +4,7 @@ import { Button, Textarea } from '@chakra-ui/react'
 const CommentTextArea = styled(Textarea)`
   border-radius: 0;
   border-color: #ccc;
-  font-size: 14px;
+  font-size: 0.875rem;
   resize: none;
   box-sizing: border-box;
   &:hover {

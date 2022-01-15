@@ -15,6 +15,7 @@ import {
   Spinner,
   Flex,
 } from '@chakra-ui/react'
+import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { RegisterButton, stackStyle, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
@@ -114,7 +115,7 @@ const Register = (): JSX.Element => {
           </Text>
           <FormControl isRequired>
             <Text mb="8px">이메일</Text>
-            <InputGroup borderColor="#ccc">
+            <InputGroup borderColor={`${theme.color.ligthGray}`}>
               <InputLeftElement>
                 {<CFaUserAlt color="gray.300" />}
               </InputLeftElement>
@@ -131,7 +132,7 @@ const Register = (): JSX.Element => {
           {whichUI.isCodeRequested && (
             <FormControl isRequired>
               <Text mb="8px">인증 코드</Text>
-              <InputGroup borderColor="#ccc">
+              <InputGroup borderColor={`${theme.color.ligthGray}`}>
                 <InputLeftElement>
                   {<CFaLock color="gray.300" />}
                 </InputLeftElement>
@@ -150,7 +151,7 @@ const Register = (): JSX.Element => {
           {whichUI.isVerificated && (
             <FormControl isRequired>
               <Text mb="8px">비밀번호</Text>
-              <InputGroup borderColor="#ccc">
+              <InputGroup borderColor={`${theme.color.ligthGray}`}>
                 <InputLeftElement>
                   {<CFaLock color="gray.300" />}
                 </InputLeftElement>
@@ -167,7 +168,7 @@ const Register = (): JSX.Element => {
           {whichUI.isVerificated && (
             <FormControl isRequired>
               <Text mb="8px">비밀번호 확인</Text>
-              <InputGroup borderColor="#ccc">
+              <InputGroup borderColor={`${theme.color.ligthGray}`}>
                 <InputLeftElement>
                   {<CFaLock color="gray.300" />}
                 </InputLeftElement>
