@@ -7,6 +7,8 @@ import GlobalStyle from './style/Global'
 import { useDispatch } from 'react-redux'
 import { setLogin, setLogout } from './redux/auth/authSlice'
 import { getUsersMe } from './utils/api'
+import { ThemeProvider } from '@emotion/react'
+import theme from './style/theme'
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -31,11 +33,12 @@ const App = (): JSX.Element => {
           position: 'relative',
           display: 'block',
           margin: '0 auto',
-          background: 'white',
+          background: `${theme.color.white}`,
           minHeight: '1000px',
         }}
       >
         <GlobalStyle />
+        <ThemeProvider theme={theme}></ThemeProvider>
         {/*css reset*/}
         <NavBar />
         {/* <Footer /> */}

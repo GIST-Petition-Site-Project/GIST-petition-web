@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
+import theme from '../../style/theme'
 
 const Header = styled.header`
-  height: 60px;
+  height: 3.75rem;
   width: 100%;
   position: fixed; /* 모바일 환경에선 sticky를 없애거나 헤더를 줄이기 */ /* fixed -> display: block 자동 적용 */
   top: 0;
@@ -12,14 +13,14 @@ const Header = styled.header`
 const Inner = styled.div`
   position: relative;
   margin: 0 auto;
-  max-width: 900px;
+  max-width: ${theme.space.innerMaxWidth};
   height: 100%;
 `
 
 const Logo = styled.div``
 
 const Logo__Image = styled.img`
-  width: 128px;
+  width: ${theme.size.logoSize};
   position: absolute;
   top: 0;
   bottom: 0;
@@ -34,7 +35,7 @@ const Menu = styled.ul`
 const ItemName = styled.div`
   margin: 0px 0px 5px 40px;
   padding: 5px 0px 3px 0px;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: bold;
   color: white;
   border: 2px solid transparent;
