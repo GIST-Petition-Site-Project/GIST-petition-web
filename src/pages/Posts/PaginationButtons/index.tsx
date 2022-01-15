@@ -101,6 +101,9 @@ const PaginationButtons = (): JSX.Element => {
               _focus={{
                 outline: 'none',
               }}
+              _active={{
+                bg: '#2F363C',
+              }}
             />
           ))}
         </PostsPaginationPageGroup>
