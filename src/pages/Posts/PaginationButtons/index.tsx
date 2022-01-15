@@ -3,6 +3,7 @@ import {
   PaginationContainer,
   Pagination,
   usePagination,
+  PaginationSeparator,
 } from '@ajna/pagination'
 import { useEffect, useState } from 'react'
 import { setPage } from '../../../redux/query/querySlice'
@@ -54,8 +55,30 @@ const PaginationButtons = (): JSX.Element => {
       onPageChange={handlePageChange}
     >
       <PaginationContainer mt="40px">
-        <PostsPaginationPrevious>이전</PostsPaginationPrevious>
-        <PostsPaginationPageGroup>
+        <PostsPaginationPrevious _focus={{ outline: 'none' }}>
+          이전
+        </PostsPaginationPrevious>
+        <PostsPaginationPageGroup
+          separator={
+            <PaginationSeparator
+              bg="#fff"
+              border="1px solid #ccc"
+              borderRadius="0"
+              fontSize="sm"
+              w="30px"
+              jumpSize={10}
+              _focus={{
+                outline: 'none',
+              }}
+              _active={
+                {
+                  // bg: '#2F363C',
+                }
+              }
+              m="0 10px"
+            />
+          }
+        >
           {pages.map((page: number) => (
             <PaginationPage
               w={'40px'}
@@ -81,7 +104,9 @@ const PaginationButtons = (): JSX.Element => {
             />
           ))}
         </PostsPaginationPageGroup>
-        <PostsPaginationNext>다음</PostsPaginationNext>
+        <PostsPaginationNext _focus={{ outline: 'none' }}>
+          다음
+        </PostsPaginationNext>
       </PaginationContainer>
     </Pagination>
   )
