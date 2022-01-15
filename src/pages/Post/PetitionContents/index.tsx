@@ -14,6 +14,7 @@ import {
   CurrentAgreements,
   PetitionDescription,
   AgreementButton,
+  ContentWrap,
 } from './styles'
 const CFaFileSignature = chakra(FaFileSignature)
 
@@ -92,9 +93,11 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
           청원내용
         </Text>
         <Divider color={'#ccc'}></Divider>
-        <pre>
-          <PetitionDescription>{response.description}</PetitionDescription>
-        </pre>
+        <div>
+          <ContentWrap>
+            <PetitionDescription>{response.description}</PetitionDescription>
+          </ContentWrap>
+        </div>
       </Stack>
       <div>
         <AgreementButton

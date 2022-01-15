@@ -14,5 +14,8 @@ const CommentCreatedAt = styled.div`
   font-size: 12px;
   color: #555;
 `
+const ContentWrap = styled.div`
+  white-space: pre-line;
+`
 
-export { CommentItem, CommentAnonymousName, CommentCreatedAt }
+export { CommentItem, CommentAnonymousName, CommentCreatedAt, ContentWrap }
