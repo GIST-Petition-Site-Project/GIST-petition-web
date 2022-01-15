@@ -23,7 +23,7 @@ const CommentList = ({ postId }: PostId): JSX.Element => {
   return (
     <ul>
       {response.map(res => (
-        <CommentItem>
+        <CommentItem key={res.id}>
           <Stack>
             <Flex alignItems={'center'}>
               <CommentAnonymousName>{res.userId}&nbsp;</CommentAnonymousName>

@@ -1,5 +1,11 @@
 interface PostsInput {
   title: string
-  category: string
+  categoryId: number
   description: string
+}
+
+interface QueryParams {
+  size: number
+  page: number
+  category: number
 }

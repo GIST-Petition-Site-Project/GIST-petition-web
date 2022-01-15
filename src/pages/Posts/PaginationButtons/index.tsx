@@ -4,8 +4,10 @@ import {
   Pagination,
   usePagination,
 } from '@ajna/pagination'
-import { setOffset } from '../../../redux/query/querySlice'
+import { useEffect, useState } from 'react'
+import { setPage } from '../../../redux/query/querySlice'
 import { useAppDispatch, useAppSelect } from '../../../redux/store.hooks'
+import { getQueryPosts } from '../../../utils/api/posts/getQueryPosts'
 
 import {
   PostsPaginationNext,
@@ -14,15 +16,36 @@ import {
 } from './styles'
 
 const PaginationButtons = (): JSX.Element => {
+  const [totalPages, setTotalPages] = useState(0)
+
   const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
-    pagesCount: 12,
-    initialState: { currentPage: useAppSelect(select => select.query.offset) },
+    pagesCount: totalPages,
+    limits: {
+      outer: 2,
+      inner: 2,
+    },
+    initialState: { currentPage: useAppSelect(select => select.query.page) },
   })
+  const getPaginationInf = async (query: QueryParams) => {
+    const status = await getQueryPosts(query)
+    if (status[0] < 400) {
+      setTotalPages(status[1].totalPages)
+    }
+  }
+  const query = useAppSelect(select => select.query)
+  useEffect(() => {
+    setCurrentPage(1)
+    dispatch(setPage(1))
+  }, [query.category])
+
+  useEffect(() => {
+    getPaginationInf(query)
+  }, [query])
 
   const dispatch = useAppDispatch()
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    dispatch(setOffset(page))
+    dispatch(setPage(page))
   }
   return (
     <Pagination

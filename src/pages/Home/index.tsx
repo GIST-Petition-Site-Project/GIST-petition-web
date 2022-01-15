@@ -17,9 +17,7 @@ const Home = (): JSX.Element => {
   const getPostCountFunction = async () => {
     const status = await getPostCount()
     if (status[0] < 400) {
-      console.log(status[0])
       setPostCount(status[1])
-      console.log(status[1])
     }
   }
   useEffect(() => {

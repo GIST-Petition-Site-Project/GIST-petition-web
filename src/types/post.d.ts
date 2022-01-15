@@ -1,13 +1,7 @@
-interface Agreement {
-  createdAt: string
-  userId: number
-}
-
 interface PostResponse {
-  accepted: number
-  agreements: Array<Agreement>
+  agreements: number
   answered: boolean
-  category: string
+  categoryName: string
   createdAt: string
   description: string
   id: number

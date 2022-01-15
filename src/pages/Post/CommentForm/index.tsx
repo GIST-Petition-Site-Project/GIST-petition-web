@@ -1,8 +1,9 @@
-import { Flex, FormControl } from '@chakra-ui/react'
+import { Flex, FormControl, useDisclosure } from '@chakra-ui/react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { postCreateComment } from '../../../utils/api'
 import { CommentTextArea, CommentWriteButton } from './styles'
 import { useNavigate } from 'react-router-dom'
+import NeedLoginModal from '../../../components/NeedLoginModal'
 
 const CommentForm = ({ postId }: PostId): JSX.Element => {
   const [input, setInput] = useState<CommentInput>({
@@ -21,12 +22,7 @@ const CommentForm = ({ postId }: PostId): JSX.Element => {
     try {
       const status = await postCreateComment(postId, input)
       if (status === 401) {
-        /**모달 예시
-         * 댓글을 작성하시려면 로그인을 해야 합니다.
-         * 로그인 하시겠습니까?
-         * 예...........아니요
-         */
-        console.log('로그인 해야함')
+        onOpen()
       }
       if (status < 400) {
         console.log(status)
@@ -36,6 +32,7 @@ const CommentForm = ({ postId }: PostId): JSX.Element => {
       console.log(error)
     }
   }
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   postCreateComment
   return (
@@ -49,10 +46,13 @@ const CommentForm = ({ postId }: PostId): JSX.Element => {
               _focus={{ outline: 'none' }}
               onChange={handleChange}
             ></CommentTextArea>
-            <CommentWriteButton type="submit">등록</CommentWriteButton>
+            <CommentWriteButton _focus={{ outline: 'none' }} type="submit">
+              등록
+            </CommentWriteButton>
           </Flex>
         </FormControl>
       </form>
+      <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
     </>
   )
 }

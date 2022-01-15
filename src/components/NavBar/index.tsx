@@ -1,5 +1,5 @@
 import logo from '../../assets/img/logo_light.png'
-import { Header, Inner, Logo, Logo__Image, Menu, ItemName } from './style'
+import { Header, Inner, Logo, Logo__Image, Menu, ItemName } from './styles'
 import { getUsersMe, postLogout } from '../../utils/api'
 import { setLogin, setLogout } from '../../redux/auth/authSlice'
 import { useDispatch } from 'react-redux'
