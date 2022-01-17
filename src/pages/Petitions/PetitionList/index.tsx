@@ -3,23 +3,22 @@ import { Link, Outlet } from 'react-router-dom'
 import { setCategory } from '../../../redux/query/querySlice'
 import { useAppDispatch, useAppSelect } from '../../../redux/store.hooks'
 import { Category } from '../../../types/enums'
-import { getRetrieveAllPost } from '../../../utils/api'
-import { getQueryPosts } from '../../../utils/api/posts/getQueryPosts'
+import { getPetitionsByQuery } from '../../../utils/api'
 import {
   PetitionAgreement,
   PetitionCategory,
   PetitionDate,
   PetitionItem,
   PetitionSubject,
-  PostsAgreement,
-  PostsCategory,
-  PostsDate,
-  PostsHead,
-  PostsHeadWrap,
-  PostsSelect,
-  PostsSubject,
-  PostsText,
-  PostsTitle,
+  PetitionsAgreement,
+  PetitionsCategory,
+  PetitionsDate,
+  PetitionsHead,
+  PetitionsHeadWrap,
+  PetitionsSelect,
+  PetitionsSubject,
+  PetitionsText,
+  PetitionsTitle,
 } from './styles'
 
 const PetitionList = (): JSX.Element => {
@@ -32,17 +31,17 @@ const PetitionList = (): JSX.Element => {
     .map((_x, i) => i)
 
   const queryPost = async (query: QueryParams) => {
-    const status = await getQueryPosts(query)
+    const status = await getPetitionsByQuery(query)
     if (status[0] < 400) {
       console.log(status[1].content)
-      setPostList(status[1].content)
+      setPetitionList(status[1].content)
     }
   }
 
   const [selected, setSelected] = useState(
     useAppSelect(select => select.query.category),
   )
-  const [postList, setPostList] = useState<Array<PostResponse>>([]) // 수정해야함 api 변경
+  const [petitionList, setPetitionList] = useState<Array<Petition>>([]) // 수정해야함 api 변경
   const dispatch = useAppDispatch()
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelected(Number(e.target.value))
@@ -58,35 +57,35 @@ const PetitionList = (): JSX.Element => {
 
   return (
     <>
-      <PostsTitle>
-        <PostsText>모든 청원</PostsText>
-        <PostsSelect onChange={handleSelect} value={selected} w={'128px'}>
+      <PetitionsTitle>
+        <PetitionsText>모든 청원</PetitionsText>
+        <PetitionsSelect onChange={handleSelect} value={selected} w={'128px'}>
           {catergoryIdx.map(item => (
             <option value={item} key={item}>
               {Category[item]}
             </option>
           ))}
-        </PostsSelect>
-      </PostsTitle>
+        </PetitionsSelect>
+      </PetitionsTitle>
 
-      <PostsHead>
-        <PostsHeadWrap>
-          <PostsCategory>분류</PostsCategory>
-          <PostsSubject>제목</PostsSubject>
-          <PostsDate>날짜</PostsDate>
-          <PostsAgreement>참여인원</PostsAgreement>
-        </PostsHeadWrap>
-      </PostsHead>
+      <PetitionsHead>
+        <PetitionsHeadWrap>
+          <PetitionsCategory>분류</PetitionsCategory>
+          <PetitionsSubject>제목</PetitionsSubject>
+          <PetitionsDate>날짜</PetitionsDate>
+          <PetitionsAgreement>참여인원</PetitionsAgreement>
+        </PetitionsHeadWrap>
+      </PetitionsHead>
 
       <ul>
-        {postList.map(post => (
-          <PetitionItem key={post.id}>
-            <PetitionCategory>{post.categoryName}</PetitionCategory>
+        {petitionList.map(petition => (
+          <PetitionItem key={petition.id}>
+            <PetitionCategory>{petition.categoryName}</PetitionCategory>
             <PetitionSubject>
-              <Link to={`/posts/${post.id}`}>{post.title}</Link>
+              <Link to={`/petitions/${petition.id}`}>{petition.title}</Link>
             </PetitionSubject>
-            <PetitionDate>{post.createdAt.slice(0, 10)}</PetitionDate>
-            <PetitionAgreement>{post.agreements}</PetitionAgreement>
+            <PetitionDate>{petition.createdAt.slice(0, 10)}</PetitionDate>
+            <PetitionAgreement>{petition.agreements}</PetitionAgreement>
           </PetitionItem>
         ))}
       </ul>

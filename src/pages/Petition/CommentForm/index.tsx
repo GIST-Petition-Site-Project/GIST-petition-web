@@ -5,7 +5,7 @@ import { CommentTextArea, CommentWriteButton } from './styles'
 import { useNavigate } from 'react-router-dom'
 import NeedLoginModal from '../../../components/NeedLoginModal'
 
-const CommentForm = ({ postId }: PostId): JSX.Element => {
+const CommentForm = ({ petitionId }: PetitionId): JSX.Element => {
   const [input, setInput] = useState<CommentInput>({
     content: '',
   })
@@ -20,7 +20,7 @@ const CommentForm = ({ postId }: PostId): JSX.Element => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const status = await postCreateComment(postId, input)
+      const status = await postCreateComment(petitionId, input)
       if (status === 401) {
         onOpen()
       }

@@ -2,15 +2,15 @@
 export * from './comment/getComments'
 export * from './comment/postCreateComment'
 
-// post
-export * from './posts/getRetrieveAllPost'
-export * from './posts/getRetrievePost'
-export * from './posts/getPostCount'
-export * from './posts/postCreatePost'
-export * from './posts/getNumberOfAgreement'
-export * from './posts/getStateOfAgreement'
-export * from './posts/postCreatePost'
-export * from './posts/postAgreePost'
+// petitions
+export * from './petitions/getPetitionById'
+export * from './petitions/getPetitionCount'
+export * from './petitions/postCreatePetition'
+export * from './petitions/getAgreementCount'
+export * from './petitions/getStateOfAgreement'
+export * from './petitions/postCreatePetition'
+export * from './petitions/postAgreePetition'
+export * from './petitions/getPetitionsByQuery'
 
 // user
 export * from './user/postLogin'

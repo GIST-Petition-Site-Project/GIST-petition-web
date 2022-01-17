@@ -7,18 +7,18 @@ import {
 import theme from '../../../style/theme'
 import styled from '@emotion/styled'
 
-const PostsPaginationPrevious = styled(PaginationPrevious)`
+const PetitionsPaginationPrevious = styled(PaginationPrevious)`
   background-color: ${theme.color.white};
   border: 1px solid ${theme.color.ligthGray};
   border-radius: 0;
   width: ${theme.size.paginationWidth}; ;
 `
-const PostsPaginationPageGroup = styled(PaginationPageGroup)`
+const PetitionsPaginationPageGroup = styled(PaginationPageGroup)`
   width: 100%;
   justify-content: center;
 `
 
-const PostsPaginationNext = styled(PaginationNext)`
+const PetitionsPaginationNext = styled(PaginationNext)`
   background-color: ${theme.color.white};
   border: 1px solid ${theme.color.ligthGray};
   border-radius: 0;
@@ -26,7 +26,7 @@ const PostsPaginationNext = styled(PaginationNext)`
 `
 
 export {
-  PostsPaginationPrevious,
-  PostsPaginationNext,
-  PostsPaginationPageGroup,
+  PetitionsPaginationPrevious,
+  PetitionsPaginationNext,
+  PetitionsPaginationPageGroup,
 }

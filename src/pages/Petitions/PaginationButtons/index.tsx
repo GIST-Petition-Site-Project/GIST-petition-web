@@ -8,12 +8,12 @@ import {
 import { useEffect, useState } from 'react'
 import { setPage } from '../../../redux/query/querySlice'
 import { useAppDispatch, useAppSelect } from '../../../redux/store.hooks'
-import { getQueryPosts } from '../../../utils/api/posts/getQueryPosts'
+import { getPetitionsByQuery } from '../../../utils/api/petitions/getPetitionsByQuery'
 
 import {
-  PostsPaginationNext,
-  PostsPaginationPageGroup,
-  PostsPaginationPrevious,
+  PetitionsPaginationNext,
+  PetitionsPaginationPageGroup,
+  PetitionsPaginationPrevious,
 } from './styles'
 
 const PaginationButtons = (): JSX.Element => {
@@ -28,7 +28,7 @@ const PaginationButtons = (): JSX.Element => {
     initialState: { currentPage: useAppSelect(select => select.query.page) },
   })
   const getPaginationInf = async (query: QueryParams) => {
-    const status = await getQueryPosts(query)
+    const status = await getPetitionsByQuery(query)
     if (status[0] < 400) {
       setTotalPages(status[1].totalPages)
     }
@@ -55,10 +55,10 @@ const PaginationButtons = (): JSX.Element => {
       onPageChange={handlePageChange}
     >
       <PaginationContainer mt="40px">
-        <PostsPaginationPrevious _focus={{ outline: 'none' }}>
+        <PetitionsPaginationPrevious _focus={{ outline: 'none' }}>
           이전
-        </PostsPaginationPrevious>
-        <PostsPaginationPageGroup
+        </PetitionsPaginationPrevious>
+        <PetitionsPaginationPageGroup
           separator={
             <PaginationSeparator
               bg="#fff"
@@ -106,10 +106,10 @@ const PaginationButtons = (): JSX.Element => {
               }}
             />
           ))}
-        </PostsPaginationPageGroup>
-        <PostsPaginationNext _focus={{ outline: 'none' }}>
+        </PetitionsPaginationPageGroup>
+        <PetitionsPaginationNext _focus={{ outline: 'none' }}>
           다음
-        </PostsPaginationNext>
+        </PetitionsPaginationNext>
       </PaginationContainer>
     </Pagination>
   )

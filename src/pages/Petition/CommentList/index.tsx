@@ -8,13 +8,13 @@ import {
 import { getComments } from '../../../utils/api/comment/getComments'
 import { useEffect, useState } from 'react'
 
-const CommentList = ({ postId }: PostId): JSX.Element => {
+const CommentList = ({ petitionId }: PetitionId): JSX.Element => {
   const [response, setResponse] = useState<Array<CommentResponse>>([])
 
   useEffect(() => {
     const getAllComment = async () => {
       try {
-        const status = await getComments(postId)
+        const status = await getComments(petitionId)
         if (status[0] < 400) {
           setResponse(status[1])
         }

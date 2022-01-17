@@ -6,20 +6,20 @@ import PetitionContents from './PetitionContents'
 import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 
-const Post = (): JSX.Element => {
-  const { postId } = useParams()
-  const castedPostId = postId as string
+const Petition = (): JSX.Element => {
+  const { petitionId } = useParams()
+  const castedPetitionId = petitionId as string
   return (
     <Inner>
       <PetitionWrapper>
         <PetitionView>
-          <PetitionContents postId={castedPostId}></PetitionContents>
+          <PetitionContents petitionId={castedPetitionId}></PetitionContents>
           <Stack>
             <Text textAlign={'left'} fontWeight={'bold'} fontSize={'20px'}>
               의견보기
             </Text>
-            <CommentForm postId={castedPostId}></CommentForm>
-            <CommentList postId={castedPostId}></CommentList>
+            <CommentForm petitionId={castedPetitionId}></CommentForm>
+            <CommentList petitionId={castedPetitionId}></CommentList>
           </Stack>
         </PetitionView>
       </PetitionWrapper>
@@ -27,4 +27,4 @@ const Post = (): JSX.Element => {
   )
 }
 
-export default Post
+export default Petition
