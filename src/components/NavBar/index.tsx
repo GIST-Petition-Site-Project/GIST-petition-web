@@ -32,7 +32,7 @@ const NavBar = (): JSX.Element => {
           </li>
           <li className="item">
             <ItemName className="item__menu">
-              <a href="/posts">모든 청원</a>
+              <a href="/petitions">모든 청원</a>
             </ItemName>
           </li>
           <li className="item">

@@ -1,9 +1,9 @@
 import api from '../axiosConfigs'
 
 export const postCreateComment = async (
-  postId: string,
+  petitionId: string,
   payload: CommentInput,
 ) => {
-  const response = await api.post(`posts/${postId}/comments`, payload)
+  const response = await api.post(`petitions/${petitionId}/comments`, payload)
   return response.status
 }

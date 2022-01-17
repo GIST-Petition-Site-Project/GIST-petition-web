@@ -5,7 +5,7 @@ import { Stack } from '@chakra-ui/react'
 import PetitionList from './PetitionList'
 import PaginationButtons from './PaginationButtons'
 
-const Posts = (): JSX.Element => {
+const Petitions = (): JSX.Element => {
   return (
     <Inner>
       <PetitionBoard>
@@ -19,4 +19,4 @@ const Posts = (): JSX.Element => {
   )
 }
 
-export default Posts
+export default Petitions

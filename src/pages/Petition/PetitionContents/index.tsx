@@ -2,9 +2,9 @@ import { chakra, Divider, Flex, Stack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { FaFileSignature } from 'react-icons/fa'
 import {
-  getRetrievePost,
+  getPetitionById,
   getStateOfAgreement,
-  postAgreePost,
+  postAgreePetition,
 } from '../../../utils/api'
 import {
   PetitionProgress,
@@ -21,8 +21,8 @@ const CFaFileSignature = chakra(FaFileSignature)
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
 
-const PetitionContents = ({ postId }: PostId): JSX.Element => {
-  const [response, setResponse] = useState<PostResponse>({
+const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
+  const [response, setResponse] = useState<Petition>({
     agreements: 0,
     answered: true,
     categoryName: '',
@@ -37,7 +37,7 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
   const { onOpen, isOpen, onClose } = useDisclosure()
 
   const handleAgreement = async () => {
-    const status = await postAgreePost(postId)
+    const status = await postAgreePetition(petitionId)
     if (status === 401) {
       onOpen()
       console.log('로그인 해야함')
@@ -48,13 +48,13 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
   }
 
   useEffect(() => {
-    const getPostInformation = async (id: string) => {
-      const getPost = await getRetrievePost(id)
-      if (getPost[0] < 400) {
-        setResponse(getPost[1])
+    const getPetitionInformation = async (id: string) => {
+      const getPetition = await getPetitionById(id)
+      if (getPetition[0] < 400) {
+        setResponse(getPetition[1])
       }
     }
-    getPostInformation(postId)
+    getPetitionInformation(petitionId)
   }, [isConsented])
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const PetitionContents = ({ postId }: PostId): JSX.Element => {
         setIsConsented(getStateAgree[1])
       }
     }
-    checkAgreeByMe(postId)
+    checkAgreeByMe(petitionId)
   }, [])
 
   return (

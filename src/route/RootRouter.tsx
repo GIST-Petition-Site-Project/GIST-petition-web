@@ -2,8 +2,8 @@ import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import NotFound from '../pages/NotFound'
-import Post from '../pages/Post'
-import Posts from '../pages/Posts'
+import Petition from '../pages/Petition'
+import Petitions from '../pages/Petitions/index'
 import Register from '../pages/Register'
 import Write from '../pages/Write'
 import { AuthRoute, UnauthRoute } from './PrivateRouter'
@@ -22,9 +22,9 @@ const RootRouter = (): JSX.Element => {
         <Route path="/write" element={<AuthRoute />}>
           <Route index element={<Write />} />
         </Route>
-        <Route path="/posts" element={<Outlet />}>
-          <Route index element={<Posts />} />
-          <Route path=":postId" element={<Post />} />
+        <Route path="/petitions" element={<Outlet />}>
+          <Route index element={<Petitions />} />
+          <Route path=":petitionId" element={<Petition />} />
         </Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>

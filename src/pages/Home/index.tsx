@@ -9,19 +9,19 @@ import {
   DashBoard,
 } from './styles'
 import { useEffect, useState } from 'react'
-import { getPostCount } from '../../utils/api'
+import { getPetitionCount } from '../../utils/api'
 
 const Home = (): JSX.Element => {
-  const [postCount, setPostCount] = useState(0)
+  const [petitionCount, setPetitionCount] = useState(0)
 
-  const getPostCountFunction = async () => {
-    const status = await getPostCount()
+  const getPetitionCountFunction = async () => {
+    const status = await getPetitionCount()
     if (status[0] < 400) {
-      setPostCount(status[1])
+      setPetitionCount(status[1])
     }
   }
   useEffect(() => {
-    getPostCountFunction()
+    getPetitionCountFunction()
   }, [])
   return (
     <div>
@@ -48,7 +48,7 @@ const Home = (): JSX.Element => {
       <DashBoard>
         <Inner>
           지금까지
-          <br />총 <span style={{ color: '#D52425' }}>{postCount}</span>건의
+          <br />총 <span style={{ color: '#D52425' }}>{petitionCount}</span>건의
           청원과 <span style={{ color: '#D52425' }}>00</span>개의 답변이
           등록됐습니다
         </Inner>

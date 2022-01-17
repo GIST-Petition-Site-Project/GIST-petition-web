@@ -6,7 +6,7 @@ interface CommentResponse {
   content: string
   createdAt: string
   id: number
-  postId: number
+  petitionId: number
   updatedAt: string
   userId: number
 }

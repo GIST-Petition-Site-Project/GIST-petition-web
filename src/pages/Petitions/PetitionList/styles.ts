@@ -1,16 +1,16 @@
 import styled from '@emotion/styled'
 import { Select, Text } from '@chakra-ui/react'
 
-const PostsTitle = styled.div`
+const PetitionsTitle = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
 `
-const PostsText = styled(Text)`
+const PetitionsText = styled(Text)`
   font-size: 20px;
   font-weight: bold;
 `
-const PostsHead = styled.div`
+const PetitionsHead = styled.div`
   height: 50px;
   width: 100%;
   border-top: 2px solid #333;
@@ -19,35 +19,35 @@ const PostsHead = styled.div`
   display: flex;
   align-items: center;
 `
-const PostsHeadWrap = styled.div`
+const PetitionsHeadWrap = styled.div`
   position: relative;
   width: 100%;
 `
 
-const PostsCategory = styled.div`
+const PetitionsCategory = styled.div`
   position: absolute;
   top: 0;
   width: 150px;
 `
-const PostsSubject = styled.div`
+const PetitionsSubject = styled.div`
   margin-left: 220px;
   margin-right: 250px;
 `
-const PostsDate = styled.div`
+const PetitionsDate = styled.div`
   position: absolute;
   top: 0;
   right: 90px;
   width: 130px;
   text-align: center;
 `
-const PostsAgreement = styled.div`
+const PetitionsAgreement = styled.div`
   position: absolute;
   right: 0;
   top: 0;
   width: 90px;
   text-align: center;
 `
-const PostsSelect = styled(Select)`
+const PetitionsSelect = styled(Select)`
   width: 128px;
   height: 40px;
   border-radius: 0;
@@ -90,15 +90,15 @@ const PetitionAgreement = styled.div`
   font-weight: bold;
 `
 export {
-  PostsSelect,
-  PostsText,
-  PostsTitle,
-  PostsHead,
-  PostsHeadWrap,
-  PostsCategory,
-  PostsSubject,
-  PostsDate,
-  PostsAgreement,
+  PetitionsSelect,
+  PetitionsText,
+  PetitionsTitle,
+  PetitionsHead,
+  PetitionsHeadWrap,
+  PetitionsCategory,
+  PetitionsSubject,
+  PetitionsDate,
+  PetitionsAgreement,
   PetitionItem,
   PetitionCategory,
   PetitionSubject,

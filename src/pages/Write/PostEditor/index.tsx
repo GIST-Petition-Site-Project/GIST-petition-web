@@ -14,7 +14,7 @@ import {
   CategorySelect,
   DescriptionInputTextArea,
 } from './styles'
-import { postCreatePost } from '../../../utils/api'
+import { postCreatePetition } from '../../../utils/api'
 import { useNavigate } from 'react-router-dom'
 import { Category } from '../../../types/enums'
 
@@ -26,7 +26,7 @@ const PostEditor = () => {
     .fill(0)
     .map((_x, i) => i + 1)
 
-  const [postInput, setPostInput] = useState<PostsInput>({
+  const [petitionInput, setPetitionInput] = useState<PetitionsInput>({
     title: '',
     categoryId: 1,
     description: '',
@@ -40,21 +40,21 @@ const PostEditor = () => {
   ) => {
     const { value, name } = e.target
     if (name === 'categoryId') {
-      setPostInput({ ...postInput, [name]: Number(value) })
+      setPetitionInput({ ...petitionInput, [name]: Number(value) })
       return
     }
-    setPostInput({ ...postInput, [name]: value })
+    setPetitionInput({ ...petitionInput, [name]: value })
   }
 
   const navigate = useNavigate()
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (postInput.title.length > 10) {
+    if (petitionInput.title.length > 10) {
       try {
-        console.log(postInput)
-        const postsStatus = await postCreatePost(postInput)
-        if (postsStatus < 400) {
+        console.log(petitionInput)
+        const petitionsStatus = await postCreatePetition(petitionInput)
+        if (petitionsStatus < 400) {
           navigate('/')
         }
       } catch (error) {
@@ -66,7 +66,7 @@ const PostEditor = () => {
   return (
     <>
       <Flex gap="10px" justifyContent="center" flexDirection="column">
-        <form className="posts__form" onSubmit={handleSubmit}>
+        <form className="petitions__form" onSubmit={handleSubmit}>
           <Stack spacing={6}>
             <FormControl isRequired>
               <FormLabel>제목</FormLabel>
@@ -77,7 +77,7 @@ const PostEditor = () => {
                   name="title"
                   borderRadius="0"
                   focusBorderColor="none"
-                  value={postInput.title}
+                  value={petitionInput.title}
                 />
               </InputGroup>
             </FormControl>
@@ -88,7 +88,7 @@ const PostEditor = () => {
                 focusBorderColor="none"
                 onChange={handleChange}
                 name="categoryId"
-                value={postInput.categoryId}
+                value={petitionInput.categoryId}
               >
                 <option selected disabled>
                   카테고리를 선택해주세요.
@@ -107,7 +107,7 @@ const PostEditor = () => {
                 placeholder="내용을 작성해 주세요."
                 onChange={handleChange}
                 name="description"
-                value={postInput.description}
+                value={petitionInput.description}
                 focusBorderColor="none"
               />
             </FormControl>
