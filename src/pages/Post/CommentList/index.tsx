@@ -1,5 +1,10 @@
 import { Flex, Stack } from '@chakra-ui/react'
-import { CommentItem, CommentAnonymousName, CommentCreatedAt } from './styles'
+import {
+  CommentItem,
+  CommentAnonymousName,
+  CommentCreatedAt,
+  ContentWrap,
+} from './styles'
 import { getComments } from '../../../utils/api/comment/getComments'
 import { useEffect, useState } from 'react'
 
@@ -33,9 +38,9 @@ const CommentList = ({ postId }: PostId): JSX.Element => {
                   res.createdAt.slice(11, 16)}
               </CommentCreatedAt>
             </Flex>
-            <pre>
+            <ContentWrap>
               <div>{res.content}</div>
-            </pre>
+            </ContentWrap>
           </Stack>
         </CommentItem>
       ))}

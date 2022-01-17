@@ -38,6 +38,10 @@ const AgreementButton = styled(Button)`
   border: 2px solid #df3127;
   color: #df3127;
 `
+const ContentWrap = styled.div`
+  white-space: pre-line;
+`
+
 export {
   PetitionProgress,
   PetitionTitleWrap,
@@ -46,4 +50,5 @@ export {
   CurrentAgreements,
   PetitionDescription,
   AgreementButton,
+  ContentWrap,
 }
