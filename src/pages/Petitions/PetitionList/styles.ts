@@ -1,15 +1,5 @@
 import styled from '@emotion/styled'
-import { Select, Text } from '@chakra-ui/react'
 
-const PetitionsTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-`
-const PetitionsText = styled(Text)`
-  font-size: 20px;
-  font-weight: bold;
-`
 const PetitionsHead = styled.div`
   height: 50px;
   width: 100%;
@@ -47,24 +37,6 @@ const PetitionsAgreement = styled.div`
   width: 90px;
   text-align: center;
 `
-const PetitionsSelect = styled(Select)`
-  width: 128px;
-  height: 40px;
-  border-radius: 0;
-  border-color: #ccc;
-`
-const PetitionItem = styled.li`
-  width: 100%;
-  padding: 20px 0;
-  border-bottom: 1px solid #ddd;
-  :hover {
-    background-color: #f8f8f8;
-  }
-  height: 64px;
-  position: relative;
-  display: flex;
-  align-items: center;
-`
 
 const PetitionCategory = styled.div`
   position: absolute;
@@ -89,10 +61,21 @@ const PetitionAgreement = styled.div`
   color: #df3127;
   font-weight: bold;
 `
+
+const PetitionItem = styled.li`
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+  :hover {
+    background-color: #f8f8f8;
+  }
+  height: 64px;
+  position: relative;
+  display: flex;
+  align-items: center;
+`
+
 export {
-  PetitionsSelect,
-  PetitionsText,
-  PetitionsTitle,
   PetitionsHead,
   PetitionsHeadWrap,
   PetitionsCategory,

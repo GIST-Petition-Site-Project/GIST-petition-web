@@ -5,9 +5,9 @@ import {
   usePagination,
   PaginationSeparator,
 } from '@ajna/pagination'
+import qs from 'qs'
 import { useEffect, useState } from 'react'
-import { setPage } from '../../../redux/query/querySlice'
-import { useAppDispatch, useAppSelect } from '../../../redux/store.hooks'
+import { useNavigate } from 'react-router-dom'
 import { getPetitionsByQuery } from '../../../utils/api/petitions/getPetitionsByQuery'
 
 import {
@@ -17,37 +17,44 @@ import {
 } from './styles'
 
 const PaginationButtons = (): JSX.Element => {
-  const [totalPages, setTotalPages] = useState(0)
-
-  const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
-    pagesCount: totalPages,
-    limits: {
-      outer: 2,
-      inner: 2,
-    },
-    initialState: { currentPage: useAppSelect(select => select.query.page) },
+  const queryParams: any = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
   })
+  const [totalPages, setTotalPages] = useState(0)
   const getPaginationInf = async (query: QueryParams) => {
     const status = await getPetitionsByQuery(query)
     if (status[0] < 400) {
       setTotalPages(status[1].totalPages)
     }
   }
-  const query = useAppSelect(select => select.query)
-  useEffect(() => {
-    setCurrentPage(1)
-    dispatch(setPage(1))
-  }, [query.category])
+  const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
+    pagesCount: totalPages,
+    limits: {
+      outer: 2,
+      inner: 2,
+    },
+    initialState: {
+      currentPage: Number(queryParams?.page) || 1,
+    },
+  })
 
   useEffect(() => {
-    getPaginationInf(query)
-  }, [query])
+    getPaginationInf(queryParams)
+    setCurrentPage(Number(queryParams.page))
+  }, [location.search])
 
-  const dispatch = useAppDispatch()
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    dispatch(setPage(page))
+  const navigate = useNavigate()
+  const handlePageChange = (e: number) => {
+    const newSearchParams = {
+      ...queryParams,
+      page: e,
+    }
+    navigate({
+      pathname: '/petitions',
+      search: new URLSearchParams(newSearchParams).toString(),
+    })
   }
+
   return (
     <Pagination
       pagesCount={pagesCount}

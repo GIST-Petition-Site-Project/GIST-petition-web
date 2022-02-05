@@ -21,7 +21,7 @@ interface PetitionsInput {
 }
 
 interface QueryParams {
-  size: number
-  page: number
-  category: number
+  size?: number | string
+  page?: number | string
+  category?: number | string
 }

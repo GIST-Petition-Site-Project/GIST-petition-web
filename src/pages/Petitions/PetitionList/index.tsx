@@ -1,5 +1,6 @@
+import qs from 'qs'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { setCategory } from '../../../redux/query/querySlice'
 import { useAppDispatch, useAppSelect } from '../../../redux/store.hooks'
 import { Category } from '../../../types/enums'
@@ -15,59 +16,29 @@ import {
   PetitionsDate,
   PetitionsHead,
   PetitionsHeadWrap,
-  PetitionsSelect,
   PetitionsSubject,
-  PetitionsText,
-  PetitionsTitle,
 } from './styles'
 
 const PetitionList = (): JSX.Element => {
-  const numberOfCategory = Object.keys(Category).filter(el =>
-    isNaN(Number(el)),
-  ).length
-
-  const catergoryIdx = Array(numberOfCategory)
-    .fill(0)
-    .map((_x, i) => i)
+  const queryParams: any = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  })
 
   const queryPost = async (query: QueryParams) => {
     const status = await getPetitionsByQuery(query)
     if (status[0] < 400) {
-      console.log(status[1].content)
       setPetitionList(status[1].content)
     }
   }
 
-  const [selected, setSelected] = useState(
-    useAppSelect(select => select.query.category),
-  )
-  const [petitionList, setPetitionList] = useState<Array<Petition>>([]) // 수정해야함 api 변경
-  const dispatch = useAppDispatch()
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelected(Number(e.target.value))
-    dispatch(setCategory(Number(e.target.value)))
-  }
-
-  const query = useAppSelect(select => select.query)
+  const [petitionList, setPetitionList] = useState<Array<Petition>>([])
 
   useEffect(() => {
-    console.log(query)
-    queryPost(query)
-  }, [useAppSelect(select => select.query)])
+    queryPost(queryParams)
+  }, [location.search])
 
   return (
     <>
-      <PetitionsTitle>
-        <PetitionsText>모든 청원</PetitionsText>
-        <PetitionsSelect onChange={handleSelect} value={selected} w={'128px'}>
-          {catergoryIdx.map(item => (
-            <option value={item} key={item}>
-              {Category[item]}
-            </option>
-          ))}
-        </PetitionsSelect>
-      </PetitionsTitle>
-
       <PetitionsHead>
         <PetitionsHeadWrap>
           <PetitionsCategory>분류</PetitionsCategory>
