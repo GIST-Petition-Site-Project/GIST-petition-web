@@ -3,8 +3,6 @@ import styled from '@emotion/styled'
 const Footer_ = styled.div`
   height: 100px;
   background-color: #84838b;
-  display: block;
-  bottom: 0;
   width: 100%;
 `
 const Footer = (): JSX.Element => {
