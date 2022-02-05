@@ -8,6 +8,7 @@ import {
   List,
   Link,
   Divider,
+  Text,
 } from '@chakra-ui/react'
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
 import { Inner, StyledDiv3, CollapseInner, Precaution } from './styles'
@@ -42,9 +43,7 @@ const MainPrecaution = (): JSX.Element => {
             }}
             style={ButtonStyle}
           >
-            <Heading as="h2" fontSize="16px">
-              이런 청원은 삭제·숨김 처리될 수 있습니다
-            </Heading>
+            <Text>이런 청원은 삭제·숨김 처리될 수 있습니다</Text>
             <IoMdArrowDropdownCircle size="22px" />
           </Button>
           <Button
@@ -61,9 +60,7 @@ const MainPrecaution = (): JSX.Element => {
             }}
             style={ButtonStyle}
           >
-            <Heading as="h2" fontSize="16px">
-              이런 청원은 답변이 어려울 수 있습니다
-            </Heading>
+            <Text>이런 청원은 답변이 어려울 수 있습니다</Text>
             <IoMdArrowDropdownCircle size="22px" />
           </Button>
         </Inner>

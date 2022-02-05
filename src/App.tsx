@@ -2,7 +2,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import RootRouter from './route/RootRouter'
 import NavBar from './components/NavBar'
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
 import GlobalStyle from './style/Global'
 import { useDispatch } from 'react-redux'
 import { setLogin, setLogout } from './redux/auth/authSlice'
@@ -27,24 +27,13 @@ const App = (): JSX.Element => {
   isSessionValid()
   return (
     <ChakraProvider>
-      <div
-        className="App"
-        style={{
-          position: 'relative',
-          display: 'block',
-          margin: '0 auto',
-          background: `${theme.color.white}`,
-          minHeight: '1000px',
-        }}
-      >
-        <GlobalStyle />
+      <GlobalStyle />
+      <div style={{ minHeight: '100vh' }}>
         <ThemeProvider theme={theme}></ThemeProvider>
-        {/*css reset*/}
         <NavBar />
         {/* <Footer /> */}
         <RootRouter />
       </div>
-      {/* <Footer /> */}
     </ChakraProvider>
   )
 }
