@@ -14,7 +14,7 @@ const stackStyle: React.CSSProperties = {
 const LoginButton = styled.button`
   color: ${theme.color.white};
   background-color: ${theme.color.primaryRed};
-  border-radius: 0.25rem;
+  border-radius: 0.1rem;
   height: 2.25rem;
   font-weight: bold;
 `

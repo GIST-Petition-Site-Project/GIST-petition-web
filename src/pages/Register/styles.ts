@@ -15,7 +15,7 @@ const stackStyle: React.CSSProperties = {
 const RegisterButton = styled.button`
   color: ${theme.color.white};
   background-color: ${theme.color.tertiaryGray};
-  border-radius: 5px;
+  border-radius: 0.1rem;
   height: 2.25rem;
   font-weight: bold;
 `

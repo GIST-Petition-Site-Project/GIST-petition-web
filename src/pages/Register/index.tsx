@@ -126,6 +126,7 @@ const Register = (): JSX.Element => {
                 value={input.username}
                 onChange={handleChange}
                 disabled={whichUI.isCodeRequested}
+                borderRadius="0"
               ></Input>
             </InputGroup>
           </FormControl>
@@ -144,6 +145,7 @@ const Register = (): JSX.Element => {
                   onChange={handleChange}
                   disabled={whichUI.isVerificated}
                   style={{ textTransform: 'uppercase' }}
+                  borderRadius="0"
                 ></Input>
               </InputGroup>
             </FormControl>
@@ -161,6 +163,7 @@ const Register = (): JSX.Element => {
                   placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
                   value={input.password}
                   onChange={handleChange}
+                  borderRadius="0"
                 ></Input>
               </InputGroup>
             </FormControl>
@@ -178,6 +181,7 @@ const Register = (): JSX.Element => {
                   placeholder="비밀번호를 재입력하세요"
                   value={input.passwordConfirm}
                   onChange={handleChange}
+                  borderRadius="0"
                 ></Input>
               </InputGroup>
             </FormControl>
