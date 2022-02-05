@@ -82,7 +82,15 @@ const PetitionList = (): JSX.Element => {
           <PetitionItem key={petition.id}>
             <PetitionCategory>{petition.categoryName}</PetitionCategory>
             <PetitionSubject>
-              <Link to={`/petitions/${petition.id}`}>{petition.title}</Link>
+              <Link
+                to={`/petitions/${petition.id}`}
+                style={{
+                  display: 'inline-block',
+                  textAlign: 'left',
+                }}
+              >
+                {petition.title}
+              </Link>
             </PetitionSubject>
             <PetitionDate>{petition.createdAt.slice(0, 10)}</PetitionDate>
             <PetitionAgreement>{petition.agreements}</PetitionAgreement>
