@@ -82,6 +82,7 @@ const Login = (): JSX.Element => {
                   value={input.password}
                   onChange={handleChangeUser}
                   borderRadius="0"
+                  width={{ base: '100px', sm: '200px', md: '400px' }}
                 />
               </InputGroup>
             </FormControl>
