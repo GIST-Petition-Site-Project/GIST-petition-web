@@ -29,19 +29,7 @@ const Home = (): JSX.Element => {
         style={{
           backgroundImage: `url(${MainImg})`,
         }}
-      >
-        <Inner>
-          <SearchCurrentPetition>
-            <SearchCurrentPetition__Input placeholder="현재 진행중인 청원 검색" />
-            <Search2Icon
-              style={{ marginLeft: '-40px' }}
-              w={6}
-              h={6}
-              _hover={{ cursor: 'pointer' }}
-            />
-          </SearchCurrentPetition>
-        </Inner>
-      </MainBackgroundImage>
+      ></MainBackgroundImage>
 
       <MainPrecaution />
 
