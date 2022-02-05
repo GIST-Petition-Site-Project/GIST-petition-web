@@ -34,13 +34,13 @@ const PaginationButtons = (): JSX.Element => {
       inner: 2,
     },
     initialState: {
-      currentPage: Number(queryParams?.page) || 1,
+      currentPage: Number(queryParams?.page || 1),
     },
   })
 
   useEffect(() => {
     getPaginationInf(queryParams)
-    setCurrentPage(Number(queryParams.page))
+    setCurrentPage(Number(queryParams?.page || 1))
   }, [location.search])
 
   const navigate = useNavigate()
