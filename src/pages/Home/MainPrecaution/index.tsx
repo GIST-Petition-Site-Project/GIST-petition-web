@@ -25,7 +25,7 @@ const MainPrecaution = (): JSX.Element => {
   }
   return (
     <>
-      <Precaution style={{}}>
+      <Precaution>
         <Inner>
           <Button
             onClick={() => {

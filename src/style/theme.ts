@@ -6,24 +6,24 @@ const fontSize = {}
 const fontWeight = {}
 
 const color = {
-  primaryRed: '#DF3127',
-  secondaryRed: '#DD433B',
-  primaryGray: '#2F363C',
-  secondaryGray: '#384046',
-  tertiaryGray: '#5A5E5D',
-  quaternaryGray: '#616463',
-  ligthGray: '#ccc',
-  black: '#333333',
-  white: '#fff',
+  PRIMARY_RED: '#DF3127',
+  SECONDARY_RED: '#DD433B',
+  PRIMARY_GRAY: '#2F363C',
+  SECONDARY_GRAY: '#384046',
+  TERTIARY_GRAY: '#5A5E5D',
+  QUATERNARY_GRAY: '#616463',
+  LIGHT_GRAY: '#ccc',
+  BLACK: '#333333',
+  WHITE: '#fff',
 }
 
 const size = {
-  logoSize: '8rem',
-  paginationWidth: '5.75rem',
+  LOGO_SIZE: '8rem',
+  PAGINATION_WIDTH: '5.75rem',
 }
 
 const space = {
-  innerMaxWidth: '56.25rem',
+  INNER_MAXWIDTH: '56.25rem',
 }
 
 const breakpoints = createBreakpoints({
