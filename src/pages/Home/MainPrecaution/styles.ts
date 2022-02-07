@@ -23,10 +23,11 @@ const Inner = styled.div`
 
 const PrecautionText = styled(Text)`
   color: ${theme.color.BLACK};
-  font-size: 1.3rem;
+  font-size: 0.8rem;
 
   @media screen and (min-width: ${theme.breakpoints.md}) {
     color: ${theme.color.WHITE};
+    font-size: 1rem;
   }
 `
 
@@ -60,6 +61,20 @@ const PrecautionLeftBtn = styled(Button)`
   display: inline-flex;
   margin-bottom: 0.5em;
   color: ${theme.color.WHTIE};
+  transition: background-color 300ms ease-in;
+  :hover {
+    background-color: ${theme.color.LIGHT_GRAY};
+    outline: none;
+    box-shadow: none;
+  }
+  :focus {
+    outline: none;
+    box-shadow: none;
+  }
+  :active {
+    outline: none;
+    box-shadow: none;
+  }
   @media screen and (min-width: ${theme.breakpoints.md}) {
     background-color: ${theme.color.SECONDARY_RED};
     color: ${theme.color.WHTIE};
@@ -94,9 +109,18 @@ const PrecautionRightBtn = styled(Button)`
   height: ${theme.size.BUTTON_HEIGHT}
   display: inline-flex;
   margin-bottom: 0.5em;
-  outline: none;
+  transition: background-color 300ms ease-in;
+  :hover {
+    background-color: ${theme.color.LIGHT_GRAY};
+    box-shadow: none;
+  }
   :focus {
     outline: none;
+    box-shadow: none;
+  }
+  :active {
+    outline: none;
+    box-shadow: none;
   }
 
   @media screen and (min-width: ${theme.breakpoints.md}) {
@@ -181,12 +205,12 @@ const PrecautionLink = styled(Link)`
 `
 
 const PrecautionList = styled(List)`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   @media screen and (min-width: ${theme.breakpoints.sm}) {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
   @media screen and (min-width: ${theme.breakpoints.md}) {
-    font-size: 1.2rem;
+    font-size: 1rem;
   } ;
 `
 

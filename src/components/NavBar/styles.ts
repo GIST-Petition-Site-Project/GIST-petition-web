@@ -13,14 +13,14 @@ const Header = styled.header`
 const Inner = styled.div`
   position: relative;
   margin: 0 auto;
-  max-width: ${theme.space.innerMaxWidth};
+  max-width: ${theme.space.INNER_MAXWIDTH};
   height: 100%;
 `
 
 const Logo = styled.div``
 
 const Logo__Image = styled.img`
-  width: ${theme.size.logoSize};
+  width: ${theme.size.LOGO_SIZE};
   position: absolute;
   top: 0;
   bottom: 0;

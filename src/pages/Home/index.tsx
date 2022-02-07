@@ -8,6 +8,8 @@ import {
 } from './styles'
 import { useEffect, useState } from 'react'
 import { getPetitionCount } from '../../utils/api'
+import Footer from '../../components/Footer'
+import PetitionList from '../Petitions/PetitionList'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)
@@ -40,6 +42,8 @@ const Home = (): JSX.Element => {
         </Inner>
       </MainBackgroundImage>
       <MainPrecaution></MainPrecaution>
+      <PetitionList></PetitionList>
+      <Footer></Footer>
     </section>
   )
 }

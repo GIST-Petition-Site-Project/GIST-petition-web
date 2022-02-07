@@ -6,13 +6,13 @@ import { keyframes } from '@emotion/react'
 const MainBackgroundImage = styled.div`
   position: relative;
   background-image: url(${MainImg});
-  height: 60vh;
-  background-position: top;
+  height: 50vh;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   @media screen and (min-width:${theme.breakpoints.md}){
-    height:80vh;
+    height: 50vh;
   });
 `
 
@@ -35,20 +35,19 @@ const DashBoard = styled.div`
   display: flex;
   flex-direction:column;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: bold;
   color: ${theme.color.WHITE};
   letter-spacing: 0.1em;
   opacity: 100%;
+  @media screen and (max-width:${theme.breakpoints.md}){
+    position: static;
+    font-size:2rem;
+    flex-direction:flex-end;
+  })
   @media screen and (max-width:${theme.breakpoints.lg}){
     font-size:2.2rem;
   });
-  @media screen and (max-width:${theme.breakpoints.md}){
-    position: static;
-    font-size:1.8rem;
-    flex-direction:flex-end;
-  })
-
 `
 
 const firstRowIn = keyframes`
