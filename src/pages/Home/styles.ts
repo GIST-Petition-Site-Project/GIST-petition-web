@@ -6,7 +6,7 @@ import { keyframes } from '@emotion/react'
 const MainBackgroundImage = styled.div`
   position: relative;
   background-image: url(${MainImg});
-  height: 70vh;
+  height: 60vh;
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;

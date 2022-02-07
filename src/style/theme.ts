@@ -14,20 +14,22 @@ const color = {
   QUATERNARY_GRAY: '#616463',
   LIGHT_GRAY: '#ccc',
   BLACK: '#333333',
-  WHITE: '#fff',
+  WHITE: '#FFFFFF',
 }
 
 const size = {
   LOGO_SIZE: '8rem',
   PAGINATION_WIDTH: '5.75rem',
+  BUTTON_HEIGHT: '3rem',
 }
 
 const space = {
-  INNER_MAXWIDTH: '56.25rem',
+  INNER_MAXWIDTH: '60rem',
+  BUTTON_INNER_MAXWIDTH: '60rem',
 }
 
 const breakpoints = createBreakpoints({
-  sm: '320px',
+  sm: '650px',
   md: '768px',
   lg: '960px',
   xl: '1200px',
