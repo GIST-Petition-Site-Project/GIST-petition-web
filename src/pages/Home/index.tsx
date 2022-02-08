@@ -1,15 +1,15 @@
-import MainImg from '../../assets/img/gist_summer.jpg'
-import { Search2Icon } from '@chakra-ui/icons'
 import MainPrecaution from './MainPrecaution'
 import {
-  MainBackgroundImage,
   Inner,
-  SearchCurrentPetition,
-  SearchCurrentPetition__Input,
   DashBoard,
+  MainBackgroundImage,
+  SloganFirstRow,
+  SloganSecondRow,
 } from './styles'
 import { useEffect, useState } from 'react'
 import { getPetitionCount } from '../../utils/api'
+import Footer from '../../components/Footer'
+import PetitionList from '../Petitions/PetitionList'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)
@@ -24,24 +24,27 @@ const Home = (): JSX.Element => {
     getPetitionCountFunction()
   }, [])
   return (
-    <div>
-      <MainBackgroundImage
-        style={{
-          backgroundImage: `url(${MainImg})`,
-        }}
-      ></MainBackgroundImage>
-
-      <MainPrecaution />
-
-      <DashBoard>
+    <section>
+      <MainBackgroundImage>
         <Inner>
-          지금까지
-          <br />총 <span style={{ color: '#D52425' }}>{petitionCount}</span>건의
-          청원과 <span style={{ color: '#D52425' }}>00</span>개의 답변이
-          등록됐습니다
+          <DashBoard>
+            <SloganFirstRow>
+              <div>
+                지금까지 총{' '}
+                <span style={{ color: '#FF0000' }}>{petitionCount}</span> 개의
+                청원과
+              </div>
+            </SloganFirstRow>
+            <SloganSecondRow>
+              <span>0 개의 답변이 등록됐습니다</span>
+            </SloganSecondRow>
+          </DashBoard>
         </Inner>
-      </DashBoard>
-    </div>
+      </MainBackgroundImage>
+      <MainPrecaution></MainPrecaution>
+      <PetitionList></PetitionList>
+      <Footer></Footer>
+    </section>
   )
 }
 

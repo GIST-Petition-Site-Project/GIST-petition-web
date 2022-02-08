@@ -12,15 +12,15 @@ const stackStyle: React.CSSProperties = {
 }
 
 const LoginButton = styled.button`
-  color: ${theme.color.white};
-  background-color: ${theme.color.primaryRed};
+  color: ${theme.color.WHITE};
+  background-color: ${theme.color.PRIMARY_RED};
   border-radius: 0.1rem;
   height: 2.25rem;
   font-weight: bold;
 `
 
 const ErrorText = styled.p`
-  color: ${theme.color.primaryRed};
+  color: ${theme.color.PRIMARY_RED};
 `
 
 export { stackStyle, LoginButton, ErrorText }
