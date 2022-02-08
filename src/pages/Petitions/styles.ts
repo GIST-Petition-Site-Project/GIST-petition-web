@@ -4,7 +4,7 @@ import { Box, Select, Text } from '@chakra-ui/react'
 const Inner = styled.div`
   position: relative;
   margin: 0 auto;
-  max-width: ${theme.space.innerMaxWidth};
+  max-width: ${theme.space.INNER_MAXWIDTH};
   height: 100%;
   padding: 0 2em;
 `
