@@ -1,11 +1,12 @@
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
-import { Select, Text } from '@chakra-ui/react'
+import { Box, Select, Text } from '@chakra-ui/react'
 const Inner = styled.div`
   position: relative;
   margin: 0 auto;
   max-width: ${theme.space.innerMaxWidth};
   height: 100%;
+  padding: 0 2em;
 `
 
 const PetitionBoard = styled.div`
@@ -13,10 +14,11 @@ const PetitionBoard = styled.div`
   top: 9.375rem;
   text-align: center;
 `
-const PetitionsTitle = styled.div`
+const PetitionsTitle = styled(Box)`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #333;
 `
 
 const PetitionsSelect = styled(Select)`
@@ -25,6 +27,7 @@ const PetitionsSelect = styled(Select)`
   border-radius: 0;
   border-color: #ccc;
 `
+
 const PetitionsText = styled(Text)`
   font-size: 20px;
   font-weight: bold;
