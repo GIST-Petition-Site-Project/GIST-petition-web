@@ -30,7 +30,7 @@ const PaginationButtons = (): JSX.Element => {
   const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
     pagesCount: totalPages,
     limits: {
-      outer: 2,
+      outer: 1,
       inner: 2,
     },
     initialState: {
@@ -62,7 +62,10 @@ const PaginationButtons = (): JSX.Element => {
       onPageChange={handlePageChange}
     >
       <PaginationContainer mt="40px">
-        <PetitionsPaginationPrevious _focus={{ outline: 'none' }}>
+        <PetitionsPaginationPrevious
+          _focus={{ outline: 'none' }}
+          h={{ base: '30px', md: '40px' }}
+        >
           이전
         </PetitionsPaginationPrevious>
         <PetitionsPaginationPageGroup
@@ -73,6 +76,8 @@ const PaginationButtons = (): JSX.Element => {
               borderRadius="0"
               fontSize="sm"
               w="30px"
+              h={{ base: '30px', md: '40px' }}
+              m={{ base: '0 3px', md: '0 10px' }}
               jumpSize={10}
               _focus={{
                 outline: 'none',
@@ -82,13 +87,13 @@ const PaginationButtons = (): JSX.Element => {
                   // bg: '#2F363C',
                 }
               }
-              m="0 10px"
             />
           }
         >
           {pages.map((page: number) => (
             <PaginationPage
-              w={'40px'}
+              w={{ base: '30px', md: '40px' }}
+              h={{ base: '30px', md: '40px' }}
               bg="#fff"
               border="1px solid #ccc"
               borderRadius="0"
@@ -114,7 +119,10 @@ const PaginationButtons = (): JSX.Element => {
             />
           ))}
         </PetitionsPaginationPageGroup>
-        <PetitionsPaginationNext _focus={{ outline: 'none' }}>
+        <PetitionsPaginationNext
+          _focus={{ outline: 'none' }}
+          h={{ base: '30px', md: '40px' }}
+        >
           다음
         </PetitionsPaginationNext>
       </PaginationContainer>
