@@ -1,18 +1,48 @@
-export const size = {
-  largest: '75em', // 1200px
-  large: '56.25em', // 900px
-  medium: '37.5em', // 600px
-  small: '31.25em', // 500px
-  smallest: '25em', // 400px
+import { extendTheme } from '@chakra-ui/react'
+import { createBreakpoints } from '@chakra-ui/theme-tools'
+
+const fontSize = {}
+
+const fontWeight = {}
+
+const color = {
+  PRIMARY_RED: '#DF3127',
+  SECONDARY_RED: '#DD433B',
+  PRIMARY_GRAY: '#2F363C',
+  SECONDARY_GRAY: '#384046',
+  TERTIARY_GRAY: '#5A5E5D',
+  QUATERNARY_GRAY: '#616463',
+  LIGHT_GRAY: '#ccc',
+  BLACK: '#333333',
+  WHITE: '#FFFFFF',
 }
 
-const theme = {
-  mainColor: '#0000ff',
-  mq: {
-    laptop: `@media only screen and (min-width: ${size.largest})`,
-    tablet: `@media only screen and (min-width: ${size.largest})`,
-    mobile: `@media only screen and (min-width: ${size.largest})`,
-  },
+const size = {
+  LOGO_SIZE: '8rem',
+  PAGINATION_WIDTH: '5.75rem',
+  BUTTON_HEIGHT: '3rem',
 }
+
+const space = {
+  INNER_MAXWIDTH: '60rem',
+  BUTTON_INNER_MAXWIDTH: '60rem',
+}
+
+const breakpoints = createBreakpoints({
+  sm: '650px',
+  md: '768px',
+  lg: '960px',
+  xl: '1200px',
+  '2xl': '1536px',
+})
+
+const theme = extendTheme({
+  fontSize,
+  fontWeight,
+  color,
+  size,
+  space,
+  breakpoints,
+})
 
 export default theme

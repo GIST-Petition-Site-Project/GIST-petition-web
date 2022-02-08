@@ -1,7 +1,11 @@
 import { Global, css } from '@emotion/react'
 
 const style = css`
-  html,
+  html {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+      Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
+      'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  }
   body,
   div,
   span,
