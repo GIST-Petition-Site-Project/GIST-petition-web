@@ -24,9 +24,9 @@ import {
 const MainPrecaution = (): JSX.Element => {
   const [leftOpen, setLeftOpen] = useState(false)
   const [rightOpen, setRightOpen] = useState(false)
-  const petitionNavigate = useNavigate()
+  const navigate = useNavigate()
   const onPetitionBtn = () => {
-    petitionNavigate('/write')
+    navigate('/write')
   }
 
   return (
