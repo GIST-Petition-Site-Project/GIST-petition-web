@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
 
@@ -16,10 +17,10 @@ const PetitionWrapper = styled.div`
   top: 150px;
 `
 
-const PetitionView = styled.div`
+const PetitionView = styled(Box)`
   width: 100%;
   height: 100%;
-  padding: 50px 35px;
+  /* padding: 50px 35px; */
   text-align: center;
 `
 
