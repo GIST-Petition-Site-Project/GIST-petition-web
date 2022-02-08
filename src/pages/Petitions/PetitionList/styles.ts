@@ -1,15 +1,15 @@
+import { Box, ListItem } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
-const PetitionsHead = styled.div`
+const PetitionsHead = styled(Box)`
   height: 50px;
   width: 100%;
-  border-top: 2px solid #333;
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
-  display: flex;
+  /* display: flex; */
   align-items: center;
 `
-const PetitionsHeadWrap = styled.div`
+const PetitionsHeadWrap = styled(Box)`
   position: relative;
   width: 100%;
 `
@@ -38,41 +38,39 @@ const PetitionsAgreement = styled.div`
   text-align: center;
 `
 
-const PetitionCategory = styled.div`
+const PetitionCategory = styled(Box)`
   position: absolute;
-  text-indent: 10px;
+  color: #1197d4;
 `
-const PetitionSubject = styled.div`
-  position: absolute;
-  left: 220px;
+const PetitionSubject = styled(Box)`
+  text-align: left;
+  display: block;
+  word-break: break-all;
   :hover {
     text-decoration: underline;
   }
 `
-const PetitionDate = styled.div`
+const PetitionDate = styled(Box)`
   position: absolute;
-  right: 90px;
-  width: 130px;
+  color: #8a8a8a;
+  font-weight: 300;
 `
-const PetitionAgreement = styled.div`
-  width: 90px;
+
+const PetitionAgreement = styled(Box)`
   position: absolute;
   right: 0;
   color: #df3127;
   font-weight: bold;
 `
 
-const PetitionItem = styled.li`
-  width: 100%;
+const PetitionItem = styled(ListItem)`
+  position: relative;
   padding: 20px 0;
   border-bottom: 1px solid #ddd;
   :hover {
     background-color: #f8f8f8;
   }
-  height: 64px;
-  position: relative;
-  display: flex;
-  align-items: center;
+  display: block;
 `
 
 export {
