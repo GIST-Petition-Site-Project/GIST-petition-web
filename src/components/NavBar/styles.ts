@@ -72,6 +72,7 @@ const MobMenuButton = styled(Button)`
   position: absolute;
   right: 0;
   height: 100%;
+  transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
 `
 
 export { Header, Inner, Logo, Logo__Image, TopMenu, ItemName, MobMenuButton }
