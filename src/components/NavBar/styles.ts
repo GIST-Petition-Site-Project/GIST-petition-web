@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
+import { Button } from '@chakra-ui/react';
+
 
 const Header = styled.header`
   height: 3.75rem;
@@ -44,4 +46,11 @@ const ItemName = styled.div`
     border-bottom: 2px solid #d52425;
   }
 `
-export { Header, Inner, Logo, Logo__Image, Menu, ItemName }
+const MobMenuButton = styled(Button)`
+  border-radius: 0;
+  position: absolute;
+  right: 0;
+  height: 100%;
+`
+
+export { Header, Inner, Logo, Logo__Image, Menu, ItemName, MobMenuButton }

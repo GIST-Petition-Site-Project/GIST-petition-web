@@ -1,9 +1,19 @@
-import logo from '../../assets/img/logo_light.png'
-import { Header, Inner, Logo, Logo__Image, Menu, ItemName } from './styles'
+import logo from '../../assets/img/new_logo.svg'
+import { ReactComponent as MobMenu } from '../../assets/img/menu_icon.svg'
+import {
+  Header,
+  Inner,
+  Logo,
+  Logo__Image,
+  Menu,
+  ItemName,
+  MobMenuButton,
+} from './styles'
 import { getUsersMe, postLogout } from '../../utils/api'
 import { setLogin, setLogout } from '../../redux/auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { useAppSelect } from '../../redux/store.hooks'
+import { useState } from 'react'
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -16,6 +26,7 @@ const NavBar = (): JSX.Element => {
       console.log(error)
     }
   }
+  const [opened, setOpened] = useState(false)
   return (
     <Header>
       <Inner>
@@ -48,6 +59,19 @@ const NavBar = (): JSX.Element => {
             </ItemName>
           </li>
         </Menu>
+        <MobMenuButton
+          colorScheme={'black'}
+          onClick={() => {
+            setOpened(!opened)
+          }}
+          display={{ base: 'block', md: 'none' }}
+          open={opened}
+          _focus={{
+            outline: 'none',
+          }}
+        >
+          <MobMenu />
+        </MobMenuButton>
       </Inner>
     </Header>
   )
