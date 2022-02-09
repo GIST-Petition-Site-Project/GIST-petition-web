@@ -61,32 +61,34 @@ const PaginationButtons = (): JSX.Element => {
       currentPage={currentPage}
       onPageChange={handlePageChange}
     >
-      <PaginationContainer mt="40px">
+      <PaginationContainer
+        mt="40px"
+        flexWrap={{ base: 'wrap', md: 'nowrap' }}
+        justifyContent={{ base: 'space-between', md: 'center' }}
+      >
         <PetitionsPaginationPrevious
+          fontSize={{ base: '12px', md: 'sm' }}
           _focus={{ outline: 'none' }}
           h={{ base: '30px', md: '40px' }}
+          w={{ base: '4rem', md: '5.75rem' }}
         >
           이전
         </PetitionsPaginationPrevious>
         <PetitionsPaginationPageGroup
+          w={{ base: '', md: '100%' }}
           separator={
             <PaginationSeparator
               bg="#fff"
               border="1px solid #ccc"
               borderRadius="0"
               fontSize="sm"
-              w="30px"
+              w={{ base: '22.5px', md: '30px' }}
               h={{ base: '30px', md: '40px' }}
               m={{ base: '0 3px', md: '0 10px' }}
               jumpSize={10}
               _focus={{
                 outline: 'none',
               }}
-              _active={
-                {
-                  // bg: '#2F363C',
-                }
-              }
             />
           }
         >
@@ -97,7 +99,7 @@ const PaginationButtons = (): JSX.Element => {
               bg="#fff"
               border="1px solid #ccc"
               borderRadius="0"
-              fontSize="sm"
+              fontSize={{ base: '12px', md: 'sm' }}
               _hover={{
                 bg: '#2F363C',
                 color: '#fff',
@@ -120,8 +122,10 @@ const PaginationButtons = (): JSX.Element => {
           ))}
         </PetitionsPaginationPageGroup>
         <PetitionsPaginationNext
+          fontSize={{ base: '12px', md: 'sm' }}
           _focus={{ outline: 'none' }}
           h={{ base: '30px', md: '40px' }}
+          w={{ base: '4rem', md: '5.75rem' }}
         >
           다음
         </PetitionsPaginationNext>

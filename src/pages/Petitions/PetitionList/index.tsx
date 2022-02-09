@@ -56,7 +56,7 @@ const PetitionList = (): JSX.Element => {
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
-              fontSize={{ base: '14px' }}
+              fontSize={{ base: '14px', md: '16px' }}
             >
               {petition.categoryName}
             </PetitionCategory>

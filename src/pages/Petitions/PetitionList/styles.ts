@@ -60,7 +60,6 @@ const PetitionAgreement = styled(Box)`
   position: absolute;
   right: 0;
   color: #df3127;
-  font-weight: bold;
 `
 
 const PetitionItem = styled(ListItem)`
