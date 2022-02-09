@@ -5,7 +5,7 @@ import { IoMdArrowDropdownCircle } from 'react-icons/io'
 
 const Precaution = styled.div`
   background: ${theme.color.WHITE};
-  padding: 1em;
+  padding: 1em 2rem;
   display: flex;
   flex-direction: column;
   @media screen and (min-width: ${theme.breakpoints.md}) {
@@ -221,7 +221,7 @@ const MainPetitionBtn = styled(Button)`
   display: inline-flex;
   outline: none;
   font-size: 1rem;
-  width: 100%;
+  /* width: 60rem; */
   transition: all 300ms ease-in;
   :hover {
     background-color: ${theme.color.SECONDARY_RED};
