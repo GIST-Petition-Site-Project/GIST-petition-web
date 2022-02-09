@@ -1,5 +1,6 @@
 import MainPrecaution from './MainPrecaution'
 import {
+  InnerWrap,
   Inner,
   DashBoard,
   MainBackgroundImage,
@@ -26,23 +27,34 @@ const Home = (): JSX.Element => {
   return (
     <section>
       <MainBackgroundImage>
-        <Inner>
-          <DashBoard>
-            <SloganFirstRow>
-              <div>
+        <InnerWrap>
+          <Inner>
+            <DashBoard
+              textAlign={{ base: 'center', md: 'left' }}
+              bottom={{ base: '0', md: '3rem' }}
+              top={{ base: '0', md: 'unset' }}
+              left={{ base: '0', md: '2rem' }}
+              right={{ base: '0' }}
+              height={{ base: '88px' }}
+              width={{ base: 'auto' }}
+              fontSize={{ base: '1.5rem', md: '1.8rem', lg: '2rem' }}
+            >
+              <SloganFirstRow>
                 지금까지 총{' '}
                 <span style={{ color: '#FF0000' }}>{petitionCount}</span> 개의
                 청원과
-              </div>
-            </SloganFirstRow>
-            <SloganSecondRow>
-              <span>0 개의 답변이 등록됐습니다</span>
-            </SloganSecondRow>
-          </DashBoard>
-        </Inner>
+              </SloganFirstRow>
+              <SloganSecondRow>
+                <span>0 개의 답변이 등록됐습니다</span>
+              </SloganSecondRow>
+            </DashBoard>
+          </Inner>
+        </InnerWrap>
       </MainBackgroundImage>
       <MainPrecaution></MainPrecaution>
-      <PetitionList></PetitionList>
+      <Inner>
+        <PetitionList></PetitionList>
+      </Inner>
       <Footer></Footer>
     </section>
   )
