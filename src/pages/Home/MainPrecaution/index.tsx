@@ -64,7 +64,7 @@ const MainPrecaution = (): JSX.Element => {
       </PrecautionBtns>
       <PrecautionMessage>
         <Collapse in={leftOpen}>
-          <LeftBox>
+          <LeftBox marginBottom={'10px'}>
             <Inner>
               <StyledDiv3>
                 <CollapseInner>
@@ -98,7 +98,7 @@ const MainPrecaution = (): JSX.Element => {
           </LeftBox>
         </Collapse>
         <Collapse in={rightOpen}>
-          <RightBox>
+          <RightBox marginBottom={'10px'}>
             <Inner>
               <StyledDiv3>
                 <CollapseInner>

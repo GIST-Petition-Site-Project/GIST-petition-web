@@ -8,8 +8,6 @@ const Precaution = styled.div`
   padding: 1em;
   display: flex;
   flex-direction: column;
-  /* 반은 빨간색, 반은 회색으로 설정해줍니다. */
-  /* 이 방식이 제일 간단한 것 같아요! */
   @media screen and (min-width: ${theme.breakpoints.md}) {
     padding: 0;
     margin-top: 0;
@@ -218,12 +216,11 @@ const MainPetitionBtn = styled(Button)`
   background-color: ${theme.color.SECONDARY_RED};
   color: ${theme.color.WHITE};
   padding: 0.5em 0;
-  /* border: 2px solid ${theme.color.LIGHT_GRAY}; */
   border-radius: 0;
   height: ${theme.size.BUTTON_HEIGHT};
   display: inline-flex;
   outline: none;
-  font-size: 1.3rem;
+  font-size: 1rem;
   width: 100%;
   transition: all 300ms ease-in;
   :hover {
