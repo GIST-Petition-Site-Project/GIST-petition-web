@@ -38,7 +38,7 @@ const TopMenu = styled(List)`
   /* position: absolute;
   right: 0;
   bottom: 0; */
-  display: flex;
+  display: ${props => (props.open ? 'flex' : 'none')};
   background-color: rgba(47, 54, 60, 0.94);
   width: 100%;
   @media screen and (min-width: ${theme.breakpoints.md}) {
