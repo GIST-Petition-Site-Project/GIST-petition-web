@@ -12,7 +12,7 @@ const Petition = (): JSX.Element => {
   return (
     <Inner>
       <PetitionWrapper>
-        <PetitionView>
+        <PetitionView p={{ base: '30px 10px', md: '50px 30px' }}>
           <PetitionContents petitionId={castedPetitionId}></PetitionContents>
           <Stack>
             <Text textAlign={'left'} fontWeight={'bold'} fontSize={'20px'}>
