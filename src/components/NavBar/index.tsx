@@ -5,7 +5,7 @@ import {
   Inner,
   Logo,
   Logo__Image,
-  Menu,
+  TopMenu,
   ItemName,
   MobMenuButton,
 } from './styles'
@@ -14,6 +14,7 @@ import { setLogin, setLogout } from '../../redux/auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { useAppSelect } from '../../redux/store.hooks'
 import { useState } from 'react'
+import { ListItem } from '@chakra-ui/react'
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -29,27 +30,27 @@ const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState(false)
   return (
     <Header>
-      <Inner>
+      <Inner flexDirection={{ base: 'column', md: 'row' }}>
         <Logo>
           <a href="/">
             <Logo__Image alt="logo" src={logo} />
           </a>
         </Logo>
-        <Menu>
-          <li className="item">
+        <TopMenu open={opened} flexDirection={{ base: 'column', md: 'row' }}>
+          <ListItem className="item">
             <ItemName className="item__menu">
               <a href="/write">청원하기</a>
             </ItemName>
-          </li>
-          <li className="item">
+          </ListItem>
+          <ListItem className="item">
             <ItemName className="item__menu">
               <a href="/petitions">모든 청원</a>
             </ItemName>
-          </li>
-          <li className="item">
+          </ListItem>
+          <ListItem className="item">
             <ItemName className="item__menu">나의 청원</ItemName>
-          </li>
-          <li className="item">
+          </ListItem>
+          <ListItem className="item">
             <ItemName className="item__menu">
               {useAppSelect(select => select.auth.isAuthorized) ? (
                 <a onClick={handleLogout}>로그아웃</a>
@@ -57,8 +58,8 @@ const NavBar = (): JSX.Element => {
                 <a href="/login">로그인</a>
               )}
             </ItemName>
-          </li>
-        </Menu>
+          </ListItem>
+        </TopMenu>
         <MobMenuButton
           colorScheme={'black'}
           onClick={() => {
