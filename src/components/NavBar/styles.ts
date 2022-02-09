@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
 import { Box, Button, List } from '@chakra-ui/react'
+import { MenuItem } from '@chakra-ui/react'
 
 const Header = styled.header`
   height: 3.75rem;
@@ -74,5 +75,22 @@ const MobMenuButton = styled(Button)`
   height: 100%;
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
 `
-
-export { Header, Inner, Logo, Logo__Image, TopMenu, ItemName, MobMenuButton }
+const MenuContent = styled(MenuItem)`
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(47, 54, 60, 0.94);
+  }
+  &:focus {
+    outline: 'none';
+  }
+`
+export {
+  Header,
+  Inner,
+  Logo,
+  Logo__Image,
+  TopMenu,
+  ItemName,
+  MobMenuButton,
+  MenuContent,
+}
