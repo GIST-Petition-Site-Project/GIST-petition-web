@@ -12,9 +12,6 @@ const MainBackgroundImage = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    height: 50vh;
-  } ;
 `
 
 const InnerWrap = styled(Box)`
@@ -34,6 +31,8 @@ const DashBoard = styled(Box)`
   position: absolute;
   display: flex;
   margin: auto;
+  right: 0;
+  height: 88px;
   flex-direction: column;
   font-weight: bold;
   color: ${theme.color.WHITE};

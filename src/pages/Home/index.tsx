@@ -34,9 +34,6 @@ const Home = (): JSX.Element => {
               bottom={{ base: '0', md: '3rem' }}
               top={{ base: '0', md: 'unset' }}
               left={{ base: '0', md: '2rem' }}
-              right={{ base: '0' }}
-              height={{ base: '88px' }}
-              width={{ base: 'auto' }}
               fontSize={{ base: '1.5rem', md: '1.8rem', lg: '2rem' }}
             >
               <SloganFirstRow>
