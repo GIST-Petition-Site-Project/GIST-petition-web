@@ -25,3 +25,7 @@ interface QueryParams {
   page?: number | string
   category?: number | string
 }
+
+interface GetPetitions {
+  getPetitions: (query: QueryParams) => Promise<any[]>
+}

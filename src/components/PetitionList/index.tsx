@@ -2,7 +2,7 @@ import { Text, UnorderedList } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { getPetitionsByQuery } from '../../../utils/api'
+
 import {
   PetitionAgreement,
   PetitionCategory,
@@ -17,13 +17,13 @@ import {
   PetitionsSubject,
 } from './styles'
 
-const PetitionList = (): JSX.Element => {
+const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
 
   const queryPost = async (query: QueryParams) => {
-    const status = await getPetitionsByQuery(query)
+    const status = await getPetitions(query)
     if (status[0] < 400) {
       setPetitionList(status[1].content)
     }
