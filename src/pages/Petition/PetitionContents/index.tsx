@@ -35,7 +35,9 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
     userId: 0,
   })
   const [isConsented, setIsConsented] = useState<boolean>(false)
-  const [answerContent, setAnswerContent] = useState<AnswerContent | undefined>()
+  const [answerContent, setAnswerContent] = useState<
+    AnswerContent | undefined
+  >()
   const { onOpen, isOpen, onClose } = useDisclosure()
 
   const handleAgreement = async () => {
