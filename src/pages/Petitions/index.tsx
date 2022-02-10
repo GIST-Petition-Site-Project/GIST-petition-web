@@ -2,13 +2,14 @@
 
 import { Inner, PetitionBoard } from './styles'
 import { Stack } from '@chakra-ui/react'
-import PetitionList from './PetitionList'
+import PetitionList from '../../components/PetitionList'
 import PaginationButtons from './PaginationButtons'
 import qs from 'qs'
 import { ChangeEvent, useState } from 'react'
 import { PetitionsSelect, PetitionsText, PetitionsTitle } from './styles'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
+import { getPetitionsByQuery } from '../../utils/api'
 
 const Petitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
@@ -50,8 +51,7 @@ const Petitions = (): JSX.Element => {
             ))}
           </PetitionsSelect>
         </PetitionsTitle>
-        <PetitionList></PetitionList>
-        {/* Paigination */}
+        <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
         <Stack>
           <PaginationButtons></PaginationButtons>
         </Stack>

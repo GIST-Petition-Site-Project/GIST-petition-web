@@ -10,7 +10,8 @@ import {
 import { useEffect, useState } from 'react'
 import { getPetitionCount } from '../../utils/api'
 import Footer from '../../components/Footer'
-import PetitionList from '../Petitions/PetitionList'
+import PetitionList from '../../components/PetitionList'
+import { getPetitionsByQuery } from '../../utils/api'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)
@@ -50,7 +51,7 @@ const Home = (): JSX.Element => {
       </MainBackgroundImage>
       <MainPrecaution></MainPrecaution>
       <Inner>
-        <PetitionList></PetitionList>
+        <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
       </Inner>
       <Footer></Footer>
     </section>
