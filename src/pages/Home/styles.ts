@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import theme from '../../style/theme'
 import MainImg from '../../assets/img/gist_summer.jpg'
 import { keyframes } from '@emotion/react'
+import { Box } from '@chakra-ui/react'
 
 const MainBackgroundImage = styled.div`
   position: relative;
@@ -11,43 +12,32 @@ const MainBackgroundImage = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  @media screen and (min-width:${theme.breakpoints.md}){
-    height: 50vh;
-  });
 `
 
-const Inner = styled.div`
+const InnerWrap = styled(Box)`
+  backdrop-filter: blur(2px);
+  height: 100%;
+`
+const Inner = styled(Box)`
+  max-width: ${theme.space.INNER_MAXWIDTH};
   position: relative;
   margin: 0 auto;
   height: 100%;
-  width: 100%;
-  backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2em;
+  padding: 0 2rem;
+  text-align: center;
 `
 
-const DashBoard = styled.div`
+const DashBoard = styled(Box)`
   position: absolute;
-  bottom: 3rem;
-  left: 4rem;
   display: flex;
-  flex-direction:column;
-  text-align: center;
-  font-size: 2.3rem;
+  margin: auto;
+  right: 0;
+  height: 88px;
+  flex-direction: column;
   font-weight: bold;
   color: ${theme.color.WHITE};
+  line-height: 1.5em;
   letter-spacing: 0.1em;
-  opacity: 100%;
-  @media screen and (max-width:${theme.breakpoints.md}){
-    position: static;
-    font-size:2rem;
-    flex-direction:flex-end;
-  })
-  @media screen and (max-width:${theme.breakpoints.lg}){
-    font-size:2.2rem;
-  });
 `
 
 const firstRowIn = keyframes`
@@ -78,7 +68,6 @@ const secondRowIn = keyframes`
 `
 
 const SloganFirstRow = styled.span`
-  margin: 0.5em 0;
   animation: ${firstRowIn} linear 1000ms forwards;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 `
@@ -90,6 +79,7 @@ const SloganSecondRow = styled.span`
 
 export {
   MainBackgroundImage,
+  InnerWrap,
   Inner,
   DashBoard,
   SloganFirstRow,

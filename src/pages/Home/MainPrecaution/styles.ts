@@ -5,11 +5,9 @@ import { IoMdArrowDropdownCircle } from 'react-icons/io'
 
 const Precaution = styled.div`
   background: ${theme.color.WHITE};
-  padding: 1em;
+  padding: 1em 2rem;
   display: flex;
   flex-direction: column;
-  /* 반은 빨간색, 반은 회색으로 설정해줍니다. */
-  /* 이 방식이 제일 간단한 것 같아요! */
   @media screen and (min-width: ${theme.breakpoints.md}) {
     padding: 0;
     margin-top: 0;
@@ -57,7 +55,7 @@ const PrecautionLeftBtn = styled(Button)`
   padding: 0.5em 1em;
   border: 2px solid ${theme.color.LIGHT_GRAY};
   border-radius: 0;
-  height: ${theme.size.BUTTON_HEIGHT}
+  height: ${theme.size.BUTTON_HEIGHT};
   display: inline-flex;
   margin-bottom: 0.5em;
   color: ${theme.color.WHTIE};
@@ -106,7 +104,7 @@ const PrecautionRightBtn = styled(Button)`
   padding: 0.5em 1em;
   border: 2px solid ${theme.color.LIGHT_GRAY};
   border-radius: 0;
-  height: ${theme.size.BUTTON_HEIGHT}
+  height: ${theme.size.BUTTON_HEIGHT};
   display: inline-flex;
   margin-bottom: 0.5em;
   transition: background-color 300ms ease-in;
@@ -182,7 +180,7 @@ const StyledDiv3 = styled.div`
   padding: 1rem 0;
   margin-top: 0;
   color: ${theme.color.BLACK};
-  background-color: ${theme.SECONDARY_RED}
+  background-color: ${theme.SECONDARY_RED};
   /* shadow: md; */
   position: relative;
   @media screen and (min-width: ${theme.breakpoints.md}) {
@@ -217,28 +215,27 @@ const PrecautionList = styled(List)`
 const MainPetitionBtn = styled(Button)`
   background-color: ${theme.color.SECONDARY_RED};
   color: ${theme.color.WHITE};
-  padding:0.5em 0;
-  border: 2px solid ${theme.color.LIGHT_GRAY};
+  padding: 0.5em 0;
   border-radius: 0;
-  height: ${theme.size.BUTTON_HEIGHT}
+  height: ${theme.size.BUTTON_HEIGHT};
   display: inline-flex;
   outline: none;
-  font-size: 1.3rem;
-  width:100%;
+  font-size: 1rem;
+  /* width: 60rem; */
   transition: all 300ms ease-in;
   :hover {
     background-color: ${theme.color.SECONDARY_RED};
-    }
+  }
   :focus {
     outline: none;
     box-shadow: none;
-    }
+  }
   :active {
     outline: none;
     box-shadow: none;
   }
   @media screen and (min-width: ${theme.breakpoints.md}) {
-    display:none;
+    display: none;
   }
 `
 
