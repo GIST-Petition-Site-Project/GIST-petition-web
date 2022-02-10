@@ -17,7 +17,6 @@ const WriteStack = styled(Stack)`
 const Wrapper = styled(Box)`
   border: 1px solid #ccc;
   border-radius: 0;
-  letter-spacing: wide;
 `
 
 const StyledBoxInner = styled(Box)``

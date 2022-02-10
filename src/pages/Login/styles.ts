@@ -2,13 +2,11 @@ import styled from '@emotion/styled'
 import theme from '../../style/theme'
 
 const stackStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: '18.75rem',
-  left: '0',
-  right: '0',
-  height: '31.25rem',
-  width: '25rem',
+  height: '100vh',
+  width: '28rem',
   margin: 'auto',
+  justifyContent: 'center',
+  padding: '0 2rem',
 }
 
 const LoginButton = styled.button`
