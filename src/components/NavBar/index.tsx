@@ -1,9 +1,27 @@
-import logo from '../../assets/img/logo_light.png'
-import { Header, Inner, Logo, Logo__Image, Menu, ItemName } from './styles'
+import logo from '../../assets/img/new_logo.svg'
+import { ReactComponent as MobMenu } from '../../assets/img/menu_icon.svg'
+import {
+  Header,
+  Inner,
+  Logo,
+  Logo__Image,
+  TopMenu,
+  ItemName,
+  MobMenuButton,
+  MenuContent,
+} from './styles'
 import { getUsersMe, postLogout } from '../../utils/api'
 import { setLogin, setLogout } from '../../redux/auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { useAppSelect } from '../../redux/store.hooks'
+import { useState } from 'react'
+import {
+  ListItem,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from '@chakra-ui/react'
 
 const NavBar = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -16,38 +34,79 @@ const NavBar = (): JSX.Element => {
       console.log(error)
     }
   }
+  const [opened, setOpened] = useState(false)
+  function isLoggedin() {
+    return useAppSelect(select => select.auth.isAuthorized) ? (
+      <Menu>
+        <MenuButton
+          as={ItemName}
+          px={4}
+          py={2}
+          transition="all 0.2s"
+          border="0"
+          _hover={{ borderBottom: '2px solid #d52425' }}
+          _focus={{
+            outline: 'none',
+          }}
+        >
+          내 정보
+        </MenuButton>
+        <MenuList
+          bg={'rgba(47, 54, 60, 0.9)'}
+          borderRadius={'none'}
+          color={'white'}
+        >
+          <MenuContent>나의 청원</MenuContent>
+          <MenuContent>비밀번호 변경</MenuContent>
+          <MenuContent>
+            <a onClick={handleLogout}>로그아웃</a>
+          </MenuContent>
+        </MenuList>
+      </Menu>
+    ) : (
+      <ItemName className="item__menu">
+        <a href="/login">로그인</a>
+      </ItemName>
+    )
+  }
+
   return (
     <Header>
-      <Inner>
+      <Inner flexDirection={{ base: 'column', md: 'row' }}>
         <Logo>
           <a href="/">
             <Logo__Image alt="logo" src={logo} />
           </a>
         </Logo>
-        <Menu>
-          <li className="item">
+        <TopMenu open={opened} flexDirection={{ base: 'column', md: 'row' }}>
+          <ListItem className="item">
             <ItemName className="item__menu">
               <a href="/write">청원하기</a>
             </ItemName>
-          </li>
-          <li className="item">
+          </ListItem>
+          <ListItem className="item">
             <ItemName className="item__menu">
               <a href="/petitions">모든 청원</a>
             </ItemName>
-          </li>
-          <li className="item">
-            <ItemName className="item__menu">나의 청원</ItemName>
-          </li>
-          <li className="item">
-            <ItemName className="item__menu">
-              {useAppSelect(select => select.auth.isAuthorized) ? (
-                <a onClick={handleLogout}>로그아웃</a>
-              ) : (
-                <a href="/login">로그인</a>
-              )}
-            </ItemName>
-          </li>
-        </Menu>
+          </ListItem>
+          <ListItem className="item">
+            <ItemName className="item__menu">답변된 청원</ItemName>
+          </ListItem>
+          <ListItem className="item">{isLoggedin()}</ListItem>
+        </TopMenu>
+        <MobMenuButton
+          colorScheme={'black'}
+          onClick={() => {
+            setOpened(!opened)
+          }}
+          display={{ base: 'block', md: 'none' }}
+          open={opened}
+          _focus={{
+            outline: 'none',
+          }}
+        >
+          <MobMenu />
+        </MobMenuButton>
       </Inner>
     </Header>
   )
