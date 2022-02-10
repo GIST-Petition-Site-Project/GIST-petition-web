@@ -50,16 +50,15 @@ const PostEditor = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (petitionInput.title.length > 10) {
-      try {
-        console.log(petitionInput)
-        const petitionsStatus = await postCreatePetition(petitionInput)
-        if (petitionsStatus < 400) {
-          navigate('/')
-        }
-      } catch (error) {
-        console.log(error)
+    try {
+      console.log(petitionInput)
+      const response = await postCreatePetition(petitionInput)
+      if (response) {
+        const url = response?.headers?.location
+        navigate(url)
       }
+    } catch (error) {
+      console.log(error)
     }
   }
 
