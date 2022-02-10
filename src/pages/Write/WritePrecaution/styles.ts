@@ -1,7 +1,9 @@
 import { Box, Container } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
-const StylePrecaution = styled(Box)``
+const StylePrecaution = styled(Box)`
+  /* padding: 20px; */
+`
 const StyleStrong = styled.span`
   font-weight: bold;
 `

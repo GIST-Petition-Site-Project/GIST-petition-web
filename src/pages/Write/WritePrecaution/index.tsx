@@ -7,7 +7,7 @@ const WritePrecaution = (): JSX.Element => {
       <Heading fontSize="20px" pl={{ base: 0, sm: '18px' }}>
         GIST 청원 게시판 운영 원칙
       </Heading>
-      <StylePrecaution pl={{ base: 0, sm: '18px' }}>
+      <StylePrecaution p={{ base: '18px 0', sm: '18px' }}>
         <OrderedList spacing={6} fontSize={{ base: '14px', md: '16px' }}>
           <ListItem>
             <PrincipleContents>
