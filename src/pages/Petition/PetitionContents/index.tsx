@@ -119,7 +119,9 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
           <Divider color={'#ccc'}></Divider>
           <div>
             <ContentWrap>
-              <PetitionDescription>{answerContent.content}</PetitionDescription>
+              <PetitionDescription>
+                {answerContent?.content}
+              </PetitionDescription>
             </ContentWrap>
           </div>
         </Stack>
