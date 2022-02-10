@@ -5,6 +5,7 @@ import {
   getPetitionById,
   getStateOfAgreement,
   postAgreePetition,
+  getRetrieveAnswer,
 } from '../../../utils/api'
 import {
   PetitionProgress,
@@ -34,6 +35,7 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
     userId: 0,
   })
   const [isConsented, setIsConsented] = useState<boolean>(false)
+  const [answerContent, setAnswerContent] = useState<AnswerContent | undefined>()
   const { onOpen, isOpen, onClose } = useDisclosure()
 
   const handleAgreement = async () => {
@@ -65,6 +67,14 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
       }
     }
     checkAgreeByMe(petitionId)
+  }, [])
+
+  useEffect(() => {
+    const getAnswerContent = async (id: string) => {
+      const getAnswer = await getRetrieveAnswer(id)
+      setAnswerContent(getAnswer?.data)
+    }
+    getAnswerContent(petitionId)
   }, [])
 
   return (
@@ -99,19 +109,34 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
           </ContentWrap>
         </div>
       </Stack>
-      <div>
-        <AgreementButton
-          onClick={handleAgreement}
-          colorScheme={'none'}
-          _focus={{ outline: 'none' }}
-          disabled={isConsented}
-        >
-          <Flex>
-            <CFaFileSignature />
-            <Text>&nbsp;{!isConsented ? '동의하기' : '동의완료'}</Text>
-          </Flex>
-        </AgreementButton>
-      </div>
+      {response.answered ? (
+        <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
+          <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
+            답변
+          </Text>
+          <Divider color={'#ccc'}></Divider>
+          <div>
+            <ContentWrap>
+              <PetitionDescription>{answerContent.content}</PetitionDescription>
+            </ContentWrap>
+          </div>
+        </Stack>
+      ) : (
+        <div>
+          <AgreementButton
+            onClick={handleAgreement}
+            colorScheme={'none'}
+            _focus={{ outline: 'none' }}
+            disabled={isConsented}
+          >
+            <Flex>
+              <CFaFileSignature />
+              <Text>&nbsp;{!isConsented ? '동의하기' : '동의완료'}</Text>
+            </Flex>
+          </AgreementButton>
+        </div>
+      )}
+
       <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
     </>
   )
