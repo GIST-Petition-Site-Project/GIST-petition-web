@@ -4,11 +4,11 @@ import { StylePrecaution, StyleStrong, PrincipleContents } from './styles'
 const WritePrecaution = (): JSX.Element => {
   return (
     <>
-      <Heading as="h2" fontSize="20px">
+      <Heading fontSize="20px" pl={{ base: 0, sm: '18px' }}>
         GIST 청원 게시판 운영 원칙
       </Heading>
-      <StylePrecaution>
-        <OrderedList spacing={6} mb="30px">
+      <StylePrecaution p={{ base: '18px 0', sm: '18px' }}>
+        <OrderedList spacing={6} fontSize={{ base: '14px', md: '16px' }}>
           <ListItem>
             <PrincipleContents>
               타인의 권리를 침해하거나 명예를 훼손하는 내용은 제한합니다.

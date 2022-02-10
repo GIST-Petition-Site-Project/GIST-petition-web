@@ -1,19 +1,16 @@
-import { Container } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
-const StylePrecaution = styled.div`
-  margin: 30px;
-  padding: 20px;
+const StylePrecaution = styled(Box)`
+  /* padding: 20px; */
 `
 const StyleStrong = styled.span`
-  opacity: 1;
-  font-weight: 900;
+  font-weight: bold;
 `
 
 const PrincipleContents = styled(Container)`
-  margin: 0;
-  line-height: 160%;
-  max-width: 85ch;
+  line-height: 1.5rem;
+  max-width: 100%;
   text-align: justify;
 `
 

@@ -14,27 +14,23 @@ import {
 
 const Write = (): JSX.Element => {
   return (
-    <div>
-      <Inner>
-        <WriteStack spacing={6}>
-          <Heading as="h2" fontSize="20px">
-            청원하기
-          </Heading>
-          <Wrapper>
-            <StyledBoxInner>
-              <Stack m="50px 2px">
-                <WritePrecaution />
-                <GuideModal />
-              </Stack>
-              <Divider color="#ccc" />
-              <StyledPostEditor>
-                <PostEditor />
-              </StyledPostEditor>
-            </StyledBoxInner>
-          </Wrapper>
-        </WriteStack>
-      </Inner>
-    </div>
+    <Inner>
+      <WriteStack spacing={6}>
+        <Heading fontSize="20px">청원하기</Heading>
+        <Wrapper>
+          <StyledBoxInner m={{ base: '1rem', md: '2rem' }}>
+            <Stack m="50px 0">
+              <WritePrecaution />
+              <GuideModal />
+            </Stack>
+            <Divider color="#ccc" m="18px" boxSize={'border-box'} />
+            <StyledPostEditor m={{ base: '60px 0', sm: '60px 18px' }}>
+              <PostEditor />
+            </StyledPostEditor>
+          </StyledBoxInner>
+        </Wrapper>
+      </WriteStack>
+    </Inner>
   )
 }
 
