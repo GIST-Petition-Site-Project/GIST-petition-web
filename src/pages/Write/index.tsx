@@ -10,8 +10,6 @@ import {
   StyledPostEditor,
 } from './styles'
 
-// 청원글 작성
-
 const Write = (): JSX.Element => {
   return (
     <Inner>
