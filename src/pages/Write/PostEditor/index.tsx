@@ -126,7 +126,7 @@ const PostEditor = () => {
               name="description"
               value={petitionInput.description}
               focusBorderColor="none"
-              maxlength="10000"
+              maxLength="10000"
             />
           </FormControl>
 
