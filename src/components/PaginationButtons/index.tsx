@@ -8,21 +8,22 @@ import {
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getPetitionsByQuery } from '../../../utils/api/petitions/getPetitionsByQuery'
-
 import {
   PetitionsPaginationNext,
   PetitionsPaginationPageGroup,
   PetitionsPaginationPrevious,
 } from './styles'
 
-const PaginationButtons = (): JSX.Element => {
+const PaginationButtons = ({
+  getPetitions,
+  pathname,
+}: PaginationButton): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
   const [totalPages, setTotalPages] = useState(0)
   const getPaginationInf = async (query: QueryParams) => {
-    const status = await getPetitionsByQuery(query)
+    const status = await getPetitions(query)
     if (status[0] < 400) {
       setTotalPages(status[1].totalPages)
     }
@@ -50,7 +51,7 @@ const PaginationButtons = (): JSX.Element => {
       page: e,
     }
     navigate({
-      pathname: '/petitions',
+      pathname: pathname,
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }

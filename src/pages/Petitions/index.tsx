@@ -3,7 +3,7 @@
 import { Inner, PetitionBoard } from './styles'
 import { Stack } from '@chakra-ui/react'
 import PetitionList from '../../components/PetitionList'
-import PaginationButtons from './PaginationButtons'
+import PaginationButtons from '../../components/PaginationButtons'
 import qs from 'qs'
 import { ChangeEvent, useState } from 'react'
 import { PetitionsSelect, PetitionsText, PetitionsTitle } from './styles'
@@ -53,7 +53,10 @@ const Petitions = (): JSX.Element => {
         </PetitionsTitle>
         <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
         <Stack>
-          <PaginationButtons></PaginationButtons>
+          <PaginationButtons
+            getPetitions={getPetitionsByQuery}
+            pathname={'/petitions'}
+          />
         </Stack>
       </PetitionBoard>
     </Inner>
