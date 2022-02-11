@@ -89,7 +89,7 @@ const PostEditor = () => {
                 borderRadius="0"
                 focusBorderColor="none"
                 value={petitionInput.title}
-                maxlength="100"
+                maxLength="100"
               />
             </InputGroup>
           </FormControl>
