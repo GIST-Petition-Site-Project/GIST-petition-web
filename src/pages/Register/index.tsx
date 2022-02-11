@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useRef, useState } from 'react'
 import {
   postRegister,
   postConfirmVerificationCode,
@@ -23,6 +23,8 @@ import { useNavigate } from 'react-router-dom'
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
+
+  const emailRef = useRef<HTMLInputElement>(null)
 
   const [input, setInput] = useState<RegisterForm>({
     username: '',
@@ -58,12 +60,16 @@ const Register = (): JSX.Element => {
       return
     }
     setWhichUI({ ...whichUI, isLoading: true })
-
     const status = await postCreateVerificationCode({
       username: input.username,
     })
+    console.log(status)
     setErrorText(status[1])
-    if (status[0] < 400) {
+    if (status[1] === '이미 존재하는 회원입니다.') {
+      setInput({ ...input, username: '' })
+      emailRef.current && emailRef.current.focus()
+      setWhichUI({ ...whichUI, isLoading: false })
+    } else if (status[0] < 400) {
       setWhichUI({ ...whichUI, isLoading: false, isCodeRequested: true })
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
@@ -120,6 +126,7 @@ const Register = (): JSX.Element => {
                 {<CFaUserAlt color="gray.300" />}
               </InputLeftElement>
               <Input
+                ref={emailRef}
                 type="email"
                 name="username"
                 placeholder="지스트 메일을 입력하세요"
