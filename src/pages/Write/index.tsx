@@ -1,5 +1,5 @@
 import WritePrecaution from './WritePrecaution'
-import GuideModal from './PrecautionModal'
+import GuideModal from './GuideModal'
 import { Heading, Stack, Divider } from '@chakra-ui/react'
 import PostEditor from './PostEditor'
 import {
