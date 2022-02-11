@@ -20,7 +20,8 @@ const RegisterButton = styled.button`
   font-weight: bold;
 `
 const ErrorText = styled.p`
-  color: ${theme.color.primaryRed};
+  text-align: center;
+  color: ${theme.color.PRIMARY_RED};
 `
 
 export { stackStyle, RegisterButton, ErrorText }
