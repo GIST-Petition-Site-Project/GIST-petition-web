@@ -56,7 +56,9 @@ const NavBar = (): JSX.Element => {
           borderRadius={'none'}
           color={'white'}
         >
-          <MenuContent>나의 청원</MenuContent>
+          <MenuContent>
+            <a href="/mypetitions">나의 청원</a>
+          </MenuContent>
           <MenuContent>비밀번호 변경</MenuContent>
           <MenuContent>
             <a onClick={handleLogout}>로그아웃</a>
