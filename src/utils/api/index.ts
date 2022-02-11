@@ -24,3 +24,6 @@ export * from './user/getUsersMe'
 // verfication
 export * from './verification/postConfirmVerificationCode'
 export * from './verification/postCreateVerificationCode'
+
+// mypetitions
+export * from './mypetitions/getMyPetitionsByQuery'

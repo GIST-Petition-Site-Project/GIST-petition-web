@@ -1,10 +1,10 @@
 import PetitionList from '../../components/PetitionList'
-import { getPetitionsByQuery } from '../../utils/api'
+import { getMyPetitionsByQuery } from '../../utils/api'
 
 const MyPetitions = (): JSX.Element => {
   return (
     <>
-      <PetitionList getPetitions={getPetitionsByQuery} />
+      <PetitionList getPetitions={getMyPetitionsByQuery} />
     </>
   )
 }
