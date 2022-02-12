@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
 import { Box, Button, List } from '@chakra-ui/react'
-import { MenuItem } from '@chakra-ui/react'
 
 const Header = styled.header`
   height: 3.75rem;
@@ -25,16 +24,10 @@ const Inner = styled(Box)`
   }
 `
 
-const Logo = styled.div`
-  height: 100%;
-`
+const Logo = styled.div``
 
 const Logo__Image = styled.img`
-  display: flex;
   width: ${theme.size.LOGO_SIZE};
-  /* position: absolute;
-  top: 0;
-  bottom: 0; */
   margin: auto 0;
   height: 3.75rem;
 `
@@ -49,7 +42,12 @@ const TopMenu = styled(List)`
     display: flex;
     background-color: transparent;
     width: inherit;
-    height: auto;
+  }
+  li:nth-child(4) {
+    display: none;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      display: block;
+    }
   }
 `
 const ItemName = styled.div`
@@ -60,14 +58,25 @@ const ItemName = styled.div`
   color: white;
   border: 2px solid transparent;
   text-align: center;
-  &:hover {
-    cursor: pointer;
-    border-bottom: 2px solid #d52425;
-  }
+
   @media screen and (min-width: ${theme.breakpoints.md}) {
     margin: 0px 0px 5px 40px;
     font-size: 1.125rem;
     padding: 5px 0px 3px 0px;
+    &:hover {
+      cursor: pointer;
+      border-bottom: 2px solid #d52425;
+    }
+  }
+  a {
+    &:hover {
+      border-bottom: 2px solid #d52425;
+    }
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      &:hover {
+        border-bottom: none;
+      }
+    }
   }
 `
 

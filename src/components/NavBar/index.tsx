@@ -1,5 +1,5 @@
 import logo from '../../assets/img/new_logo.svg'
-import { ReactComponent as MobMenu } from '../../assets/img/menu_icon.svg'
+import { ReactComponent as MobMenuIcon } from '../../assets/img/menu_icon.svg'
 import {
   Header,
   Inner,
@@ -47,11 +47,8 @@ const NavBar = (): JSX.Element => {
           }}
           display={{ base: 'block', md: 'none' }}
           open={opened}
-          _focus={{
-            outline: 'none',
-          }}
         >
-          <MobMenu />
+          <MobMenuIcon />
         </MobMenuButton>
       </Inner>
     </Header>

@@ -2,13 +2,12 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import { setLogout } from '../../../redux/auth/authSlice'
 import { useAppSelect } from '../../../redux/store.hooks'
 import { postLogout } from '../../../utils/api'
-import { ItemName } from '../styles'
 import { MenuContent } from './styles'
+import { ItemName } from '../styles'
 import { useDispatch } from 'react-redux'
 
 const MyMenu = (): JSX.Element => {
   const dispatch = useDispatch()
-
   const handleLogout = async () => {
     try {
       const status = await postLogout()
@@ -21,17 +20,7 @@ const MyMenu = (): JSX.Element => {
 
   return useAppSelect(select => select.auth.isAuthorized) ? (
     <Menu>
-      <MenuButton
-        as={ItemName}
-        px={4}
-        py={2}
-        transition="all 0.2s"
-        border="0"
-        _hover={{ borderBottom: '2px solid #d52425' }}
-        _focus={{
-          outline: 'none',
-        }}
-      >
+      <MenuButton as={ItemName} px={4} py={2} transition="all 0.2s" border="0">
         내 정보
       </MenuButton>
       <MenuList
