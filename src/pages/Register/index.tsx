@@ -23,7 +23,7 @@ import { useNavigate } from 'react-router-dom'
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
-
+  const navigate = useNavigate()
   const emailRef = useRef<HTMLInputElement>(null)
   const verificationRef = useRef<HTMLInputElement>(null)
   const [input, setInput] = useState<RegisterForm>({
@@ -36,6 +36,7 @@ const Register = (): JSX.Element => {
   const [whichUI, setWhichUI] = useState<WhichUI>({
     isCodeRequested: false,
     isLoading: false,
+    isExpired: false,
     isVerificated: false,
   })
 
@@ -63,7 +64,6 @@ const Register = (): JSX.Element => {
     const status = await postCreateVerificationCode({
       username: input.username,
     })
-    console.log(status)
     setErrorText(status[1])
     if (status[1] === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
@@ -89,17 +89,37 @@ const Register = (): JSX.Element => {
       }
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
-        verificationRef.current && verificationRef.current.focus()
+        setWhichUI({ ...whichUI, isExpired: true })
         break
       }
     }
+
     setErrorText(status[1])
     if (status[0] < 400) {
       setWhichUI({ ...whichUI, isVerificated: true })
     }
   }
 
-  const navigate = useNavigate()
+  const handleResendCode = async () => {
+    setWhichUI({
+      ...whichUI,
+      isLoading: true,
+    })
+    setErrorText('')
+    const status = await postCreateVerificationCode({
+      username: input.username,
+    })
+    if (status[1] < 400) {
+      setWhichUI({
+        ...whichUI,
+        isExpired: false,
+        isLoading: false,
+        isCodeRequested: true,
+      })
+      setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
+    }
+  }
+
   const handleRegister = async () => {
     console.log('SUBMIT')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
@@ -150,7 +170,7 @@ const Register = (): JSX.Element => {
               ></Input>
             </InputGroup>
           </FormControl>
-          {whichUI.isCodeRequested && (
+          {whichUI.isCodeRequested && !whichUI.isExpired && (
             <FormControl isRequired>
               <Text mb="8px">인증 코드</Text>
               <InputGroup borderColor={`${theme.color.ligthGray}`}>
@@ -207,11 +227,19 @@ const Register = (): JSX.Element => {
               </InputGroup>
             </FormControl>
           )}
-          {!whichUI.isCodeRequested && !whichUI.isLoading && (
-            <RegisterButton onClick={handleCreateCode}>
-              인증 코드 전송
+          {!whichUI.isCodeRequested &&
+            !whichUI.isLoading &&
+            !whichUI.isExpired && (
+              <RegisterButton onClick={handleCreateCode}>
+                인증 코드 전송
+              </RegisterButton>
+            )}
+          {whichUI.isExpired && (
+            <RegisterButton onClick={handleResendCode}>
+              인증코드 재전송
             </RegisterButton>
           )}
+
           {whichUI.isLoading && (
             <Flex flexDirection="column" alignItems="center">
               <Spinner
@@ -227,9 +255,11 @@ const Register = (): JSX.Element => {
             </Flex>
           )}
 
-          {whichUI.isCodeRequested && !whichUI.isVerificated && (
-            <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
-          )}
+          {whichUI.isCodeRequested &&
+            !whichUI.isVerificated &&
+            !whichUI.isExpired && (
+              <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
+            )}
           {whichUI.isVerificated && (
             <RegisterButton onClick={handleRegister} className="submit__btn">
               회원가입

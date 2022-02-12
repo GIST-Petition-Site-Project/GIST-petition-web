@@ -25,6 +25,7 @@ interface Disclosure {
 interface WhichUI {
   isCodeRequested: boolean
   isLoading: boolean
+  isExpired: boolean
   isVerificated: boolean
 }
 // 회원 가입 UI 관련
