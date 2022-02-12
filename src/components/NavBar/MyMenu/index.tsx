@@ -1,4 +1,4 @@
-import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
+import { Box, Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import { setLogout } from '../../../redux/auth/authSlice'
 import { useAppSelect } from '../../../redux/store.hooks'
 import { postLogout } from '../../../utils/api'
@@ -19,24 +19,46 @@ const MyMenu = (): JSX.Element => {
   }
 
   return useAppSelect(select => select.auth.isAuthorized) ? (
-    <Menu>
-      <MenuButton as={ItemName} px={4} py={2} transition="all 0.2s" border="0">
-        내 정보
-      </MenuButton>
-      <MenuList
-        bg={'rgba(47, 54, 60, 0.9)'}
-        borderRadius={'none'}
-        color={'white'}
-      >
-        <MenuContent>
+    <>
+      <Box display={{ base: 'none', md: 'block' }}>
+        <Menu>
+          <MenuButton
+            as={ItemName}
+            px={4}
+            py={2}
+            transition="all 0.2s"
+            border="0"
+          >
+            내 정보
+          </MenuButton>
+          <MenuList
+            bg={'rgba(47, 54, 60, 0.9)'}
+            borderRadius={'none'}
+            color={'white'}
+          >
+            <MenuContent>
+              <a href="/mypetitions">나의 청원</a>
+            </MenuContent>
+            <MenuContent>비밀번호 변경</MenuContent>
+            <MenuContent>
+              <a onClick={handleLogout}>로그아웃</a>
+            </MenuContent>
+          </MenuList>
+        </Menu>
+      </Box>
+
+      <Box display={{ base: 'block', md: 'none' }}>
+        <ItemName className="item__menu">
           <a href="/mypetitions">나의 청원</a>
-        </MenuContent>
-        <MenuContent>비밀번호 변경</MenuContent>
-        <MenuContent>
+        </ItemName>
+        <ItemName className="item__menu">
+          <a href="#">회원 정보 관리</a>
+        </ItemName>
+        <ItemName className="item__menu">
           <a onClick={handleLogout}>로그아웃</a>
-        </MenuContent>
-      </MenuList>
-    </Menu>
+        </ItemName>
+      </Box>
+    </>
   ) : (
     <ItemName className="item__menu">
       <a href="/login">로그인</a>

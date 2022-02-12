@@ -43,12 +43,6 @@ const TopMenu = styled(List)`
     background-color: transparent;
     width: inherit;
   }
-  li:nth-child(4) {
-    display: none;
-    @media screen and (min-width: ${theme.breakpoints.md}) {
-      display: block;
-    }
-  }
 `
 const ItemName = styled.div`
   margin: 1rem;
