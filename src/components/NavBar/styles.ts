@@ -6,7 +6,7 @@ import { MenuItem } from '@chakra-ui/react'
 const Header = styled.header`
   height: 3.75rem;
   width: 100%;
-  position: fixed; /* 모바일 환경에선 sticky를 없애거나 헤더를 줄이기 */ /* fixed -> display: block 자동 적용 */
+  position: fixed;
   top: 0;
   z-index: 1000;
   background-color: rgba(47, 54, 60, 0.9);
@@ -20,6 +20,9 @@ const Inner = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    padding: 0 2rem;
+  }
 `
 
 const Logo = styled.div`
@@ -75,22 +78,5 @@ const MobMenuButton = styled(Button)`
   height: 100%;
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
 `
-const MenuContent = styled(MenuItem)`
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(47, 54, 60, 0.94);
-  }
-  &:focus {
-    outline: 'none';
-  }
-`
-export {
-  Header,
-  Inner,
-  Logo,
-  Logo__Image,
-  TopMenu,
-  ItemName,
-  MobMenuButton,
-  MenuContent,
-}
+
+export { Header, Inner, Logo, Logo__Image, TopMenu, ItemName, MobMenuButton }
