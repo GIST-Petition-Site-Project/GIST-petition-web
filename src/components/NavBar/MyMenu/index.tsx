@@ -2,7 +2,7 @@ import { Box, Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import { setLogout } from '../../../redux/auth/authSlice'
 import { useAppSelect } from '../../../redux/store.hooks'
 import { postLogout } from '../../../utils/api'
-import { MenuContent } from './styles'
+import { DesktopMenu, MobileMenu, MenuContent } from './styles'
 import { ItemName } from '../styles'
 import { useDispatch } from 'react-redux'
 
@@ -20,7 +20,7 @@ const MyMenu = (): JSX.Element => {
 
   return useAppSelect(select => select.auth.isAuthorized) ? (
     <>
-      <Box display={{ base: 'none', md: 'block' }}>
+      <DesktopMenu>
         <Menu>
           <MenuButton
             as={ItemName}
@@ -45,9 +45,9 @@ const MyMenu = (): JSX.Element => {
             </MenuContent>
           </MenuList>
         </Menu>
-      </Box>
+      </DesktopMenu>
 
-      <Box display={{ base: 'block', md: 'none' }}>
+      <MobileMenu>
         <ItemName className="item__menu">
           <a href="/mypetitions">나의 청원</a>
         </ItemName>
@@ -57,7 +57,7 @@ const MyMenu = (): JSX.Element => {
         <ItemName className="item__menu">
           <a onClick={handleLogout}>로그아웃</a>
         </ItemName>
-      </Box>
+      </MobileMenu>
     </>
   ) : (
     <ItemName className="item__menu">
