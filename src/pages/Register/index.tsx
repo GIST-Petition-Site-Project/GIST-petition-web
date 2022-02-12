@@ -25,7 +25,7 @@ const Register = (): JSX.Element => {
   const CFaLock = chakra(FaLock)
 
   const emailRef = useRef<HTMLInputElement>(null)
-
+  const verificationRef = useRef<HTMLInputElement>(null)
   const [input, setInput] = useState<RegisterForm>({
     username: '',
     password: '',
@@ -80,6 +80,19 @@ const Register = (): JSX.Element => {
       username: input.username,
       verificationCode: input.verificationCode,
     })
+
+    switch (status[1]) {
+      case '존재하지 않는 인증 정보입니다.': {
+        setInput({ ...input, verificationCode: '' })
+        verificationRef.current && verificationRef.current.focus()
+        break
+      }
+      case '만료된 인증 코드입니다.': {
+        setInput({ ...input, verificationCode: '' })
+        verificationRef.current && verificationRef.current.focus()
+        break
+      }
+    }
     setErrorText(status[1])
     if (status[0] < 400) {
       setWhichUI({ ...whichUI, isVerificated: true })
@@ -145,6 +158,7 @@ const Register = (): JSX.Element => {
                   {<CFaLock color="gray.300" />}
                 </InputLeftElement>
                 <Input
+                  ref={verificationRef}
                   type="text"
                   name="verificationCode"
                   placeholder="이메일로 온 인증 코드를 입력하세요"
