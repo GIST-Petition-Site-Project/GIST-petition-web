@@ -24,4 +24,16 @@ const ErrorText = styled.p`
   color: ${theme.color.PRIMARY_RED};
 `
 
-export { stackStyle, RegisterButton, ErrorText }
+const DeleteBtn = styled.button`
+  position: absolute;
+  top: 1em;
+  right: 0;
+  width: 10%;
+  color: ${theme.color.WHITE};
+  background-color: ${theme.color.TERTIARY_GRAY};
+  border-radius: 0.1rem;
+  height: 2.25rem;
+  font-weight: bold;
+`
+
+export { stackStyle, RegisterButton, ErrorText, DeleteBtn }

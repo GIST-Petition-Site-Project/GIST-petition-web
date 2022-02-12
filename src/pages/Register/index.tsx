@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { RegisterButton, stackStyle, ErrorText } from './styles'
+import { RegisterButton, stackStyle, ErrorText, DeleteBtn } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { postDelete } from '../../utils/api/user/postDelete'
 
@@ -156,7 +156,7 @@ const Register = (): JSX.Element => {
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
         <Stack spacing={4} style={stackStyle}>
-          <RegisterButton onClick={handleDelete}>삭제</RegisterButton>
+          <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
           <Text fontSize="4xl" fontWeight="bold">
             회원가입
           </Text>
