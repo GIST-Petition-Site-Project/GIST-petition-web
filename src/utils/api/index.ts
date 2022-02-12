@@ -6,14 +6,15 @@ export * from './comment/getComments'
 export * from './comment/postCreateComment'
 
 // petitions
-export * from './petitions/getPetitionById'
-export * from './petitions/getPetitionCount'
-export * from './petitions/postCreatePetition'
-export * from './petitions/getAgreementCount'
-export * from './petitions/getStateOfAgreement'
-export * from './petitions/postCreatePetition'
-export * from './petitions/postAgreePetition'
-export * from './petitions/getPetitionsByQuery'
+export * from './petition/getPetitionById'
+export * from './petition/getPetitionCount'
+export * from './petition/postCreatePetition'
+export * from './petition/getAgreementCount'
+export * from './petition/getStateOfAgreement'
+export * from './petition/postCreatePetition'
+export * from './petition/postAgreePetition'
+export * from './petition/getPetitionsByQuery'
+export * from './petition/getMyPetitionsByQuery'
 
 // user
 export * from './user/postLogin'

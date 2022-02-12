@@ -29,3 +29,8 @@ interface QueryParams {
 interface GetPetitions {
   getPetitions: (query: QueryParams) => Promise<any[]>
 }
+
+interface PaginationButton {
+  getPetitions: (query: QueryParams) => Promise<any[]>
+  pathname: string
+}
