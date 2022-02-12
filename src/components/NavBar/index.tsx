@@ -28,12 +28,13 @@ const NavBar = (): JSX.Element => {
   const handleLogout = async () => {
     try {
       const status = await postLogout()
-      console.log(status)
       dispatch(setLogout())
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
   }
+
   const [opened, setOpened] = useState(false)
   function isLoggedin() {
     return useAppSelect(select => select.auth.isAuthorized) ? (
