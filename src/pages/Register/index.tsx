@@ -19,6 +19,7 @@ import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { RegisterButton, stackStyle, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
+import { postDelete } from '../../utils/api/user/postDelete'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -133,8 +134,8 @@ const Register = (): JSX.Element => {
         verificationCode: input.verificationCode,
         password: input.password,
       })
+      console.log(status)
       if (status[0] < 400) {
-        navigate('/login')
       }
       setErrorText(status[1])
     } else {
@@ -145,10 +146,17 @@ const Register = (): JSX.Element => {
     e.preventDefault()
   }
 
+  const handleDelete = async () => {
+    console.log(input)
+    const status = await postDelete({ username: input.username })
+    console.log(status)
+  }
+
   return (
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
         <Stack spacing={4} style={stackStyle}>
+          <RegisterButton onClick={handleDelete}>삭제</RegisterButton>
           <Text fontSize="4xl" fontWeight="bold">
             회원가입
           </Text>
