@@ -1,4 +1,3 @@
-import { Button } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
 
@@ -23,7 +22,6 @@ const ErrorText = styled.p`
   text-align: center;
   color: ${theme.color.PRIMARY_RED};
 `
-
 const DeleteBtn = styled.button`
   position: absolute;
   top: 1em;

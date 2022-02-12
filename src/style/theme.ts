@@ -43,6 +43,19 @@ const theme = extendTheme({
   size,
   space,
   breakpoints,
+  components: {
+    Alert: {
+      variants: {
+        toast: {
+          container: {
+            color: `${color.WHITE}`,
+            position: 'absolute',
+            backgroundColor: `${color.PRIMARY_RED}`,
+          },
+        },
+      },
+    },
+  },
 })
 
 export default theme

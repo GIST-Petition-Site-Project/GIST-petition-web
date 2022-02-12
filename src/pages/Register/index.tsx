@@ -14,6 +14,7 @@ import {
   Input,
   Spinner,
   Flex,
+  useToast,
 } from '@chakra-ui/react'
 import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
@@ -32,6 +33,9 @@ const Register = (): JSX.Element => {
     password: '',
     verificationCode: '',
     passwordConfirm: '',
+  })
+  const toast = useToast({
+    variant: 'toast',
   })
 
   const [whichUI, setWhichUI] = useState<WhichUI>({
@@ -94,7 +98,6 @@ const Register = (): JSX.Element => {
         break
       }
     }
-
     setErrorText(status[1])
     if (status[0] < 400) {
       setWhichUI({ ...whichUI, isVerificated: true })
@@ -136,6 +139,13 @@ const Register = (): JSX.Element => {
       })
       console.log(status)
       if (status[0] < 400) {
+        toast({
+          status: 'success',
+          duration: 5000,
+          description: '회원가입이 완료되었습니다',
+          title: '계정 생성완료',
+        })
+        navigate('/login')
       }
       setErrorText(status[1])
     } else {

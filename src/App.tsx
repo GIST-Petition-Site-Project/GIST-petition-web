@@ -7,7 +7,6 @@ import GlobalStyle from './style/Global'
 import { useDispatch } from 'react-redux'
 import { setLogin, setLogout } from './redux/auth/authSlice'
 import { getUsersMe } from './utils/api'
-import { ThemeProvider } from '@emotion/react'
 import theme from './style/theme'
 
 const App = (): JSX.Element => {
@@ -26,10 +25,9 @@ const App = (): JSX.Element => {
   }
   isSessionValid()
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <GlobalStyle />
       <div style={{ minHeight: '100vh' }}>
-        <ThemeProvider theme={theme}></ThemeProvider>
         <NavBar />
         <Footer />
         <RootRouter />
