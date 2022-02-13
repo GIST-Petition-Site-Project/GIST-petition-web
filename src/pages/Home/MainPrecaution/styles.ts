@@ -158,6 +158,7 @@ const PrecautionIcon = styled(IoMdArrowDropdownCircle)`
 const PrecautionMessage = styled.div``
 const LeftBox = styled(Box)`
   padding: 1em 2em;
+
   background-color: ${theme.color.WHITE};
   display: block;
   border: 2px solid ${theme.color.LIGHT_GRAY};
@@ -187,6 +188,7 @@ const StyledDiv3 = styled.div`
   position: relative;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     color: ${theme.color.WHITE};
+    padding: 1rem 2rem;
   } ;
 `
 const CollapseInner = styled.div`
