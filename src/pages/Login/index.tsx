@@ -31,6 +31,21 @@ const Login = (): JSX.Element => {
   }
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const checkUpperCase = (e: any) => {
+    const text = String.fromCharCode(e.which)
+    if (
+      text.toUpperCase() === text &&
+      text.toLowerCase() !== text &&
+      !e.shiftKey
+    ) {
+      setResponseState(600)
+      setTimeout(() => {
+        setResponseState(0)
+      }, 1000)
+    }
+  }
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
@@ -46,64 +61,62 @@ const Login = (): JSX.Element => {
     }
   }
   return (
-    <>
-      <form className="login__form" onSubmit={handleSubmit}>
-        {/* <div className="login"> */}
-        <Stack spacing={4} style={stackStyle}>
-          <Text fontSize="4xl" fontWeight="bold">
-            로그인
-          </Text>
-          <FormControl isRequired>
-            <Text mb="8px">이메일</Text>
-            <InputGroup borderColor="#ccc">
-              <InputLeftElement pointerEvents="none">
-                {<CFaUserAlt color="gray.300" />}
-              </InputLeftElement>
-              <Input
-                type="email"
-                name="username"
-                placeholder="이메일을 입력하세요."
-                value={input.username}
-                onChange={handleChangeUser}
-                borderRadius="0"
-              />
-            </InputGroup>
-          </FormControl>
-          <FormControl>
-            <Text mb="8px">비밀번호</Text>
-            <InputGroup borderColor="#ccc">
-              <InputLeftElement pointerEvents="none">
-                {<CFaLock color="gray.300" />}
-              </InputLeftElement>
-              <Input
-                type="password"
-                name="password"
-                placeholder="비밀번호를 입력하세요."
-                value={input.password}
-                onChange={handleChangeUser}
-                borderRadius="0"
-              />
-            </InputGroup>
-          </FormControl>
-          <ErrorText>{checkLoginError(responseState)}</ErrorText>
-          <Text mb="4px" align="right" decoration="underline">
-            <a href="#">비밀번호를 잊으셨나요?</a>
-          </Text>
+    <form className="login__form" onSubmit={handleSubmit}>
+      <Stack spacing={4} style={stackStyle}>
+        <Text fontSize="4xl" fontWeight="bold">
+          로그인
+        </Text>
+        <FormControl isRequired>
+          <Text mb="8px">이메일</Text>
+          <InputGroup borderColor="#ccc">
+            <InputLeftElement pointerEvents="none">
+              {<CFaUserAlt color="gray.300" />}
+            </InputLeftElement>
+            <Input
+              type="email"
+              name="username"
+              placeholder="이메일을 입력하세요."
+              value={input.username}
+              onChange={handleChangeUser}
+              borderRadius="0"
+            />
+          </InputGroup>
+        </FormControl>
+        <FormControl>
+          <Text mb="8px">비밀번호</Text>
+          <InputGroup borderColor="#ccc">
+            <InputLeftElement pointerEvents="none">
+              {<CFaLock color="gray.300" />}
+            </InputLeftElement>
+            <Input
+              type="password"
+              name="password"
+              placeholder="비밀번호를 입력하세요."
+              value={input.password}
+              onChange={handleChangeUser}
+              borderRadius="0"
+              onKeyPress={checkUpperCase}
+              // style={{ imeMode: 'disabled' }}
+            />
+          </InputGroup>
+        </FormControl>
+        <ErrorText>{checkLoginError(responseState)}</ErrorText>
+        <Text mb="4px" align="right" decoration="underline">
+          <a href="#">비밀번호를 잊으셨나요?</a>
+        </Text>
 
-          <LoginButton type="submit" className="submit__btn">
-            로그인
-          </LoginButton>
+        <LoginButton type="submit" className="submit__btn">
+          로그인
+        </LoginButton>
 
-          <Text mb="4px" align="center">
-            계정이 없으신가요?{' '}
-            <a href="/register" style={{ textDecoration: 'underline' }}>
-              계정 만들기
-            </a>
-          </Text>
-        </Stack>
-        {/* </div> */}
-      </form>
-    </>
+        <Text mb="4px" align="center">
+          계정이 없으신가요?{' '}
+          <a href="/register" style={{ textDecoration: 'underline' }}>
+            계정 만들기
+          </a>
+        </Text>
+      </Stack>
+    </form>
   )
 }
 

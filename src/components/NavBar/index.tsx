@@ -1,5 +1,5 @@
 import logo from '../../assets/img/new_logo.svg'
-import { ReactComponent as MobMenu } from '../../assets/img/menu_icon.svg'
+import { ReactComponent as MobMenuIcon } from '../../assets/img/menu_icon.svg'
 import {
   Header,
   Inner,
@@ -8,72 +8,13 @@ import {
   TopMenu,
   ItemName,
   MobMenuButton,
-  MenuContent,
 } from './styles'
-import { getUsersMe, postLogout } from '../../utils/api'
-import { setLogin, setLogout } from '../../redux/auth/authSlice'
-import { useDispatch } from 'react-redux'
-import { useAppSelect } from '../../redux/store.hooks'
 import { useState } from 'react'
-import {
-  ListItem,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from '@chakra-ui/react'
+import { ListItem } from '@chakra-ui/react'
+import MyMenu from './MyMenu'
 
 const NavBar = (): JSX.Element => {
-  const dispatch = useDispatch()
-  const handleLogout = async () => {
-    try {
-      const status = await postLogout()
-      dispatch(setLogout())
-      window.location.reload()
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const [opened, setOpened] = useState(false)
-  function isLoggedin() {
-    return useAppSelect(select => select.auth.isAuthorized) ? (
-      <Menu>
-        <MenuButton
-          as={ItemName}
-          px={4}
-          py={2}
-          transition="all 0.2s"
-          border="0"
-          _hover={{ borderBottom: '2px solid #d52425' }}
-          _focus={{
-            outline: 'none',
-          }}
-        >
-          내 정보
-        </MenuButton>
-        <MenuList
-          bg={'rgba(47, 54, 60, 0.9)'}
-          borderRadius={'none'}
-          color={'white'}
-        >
-          <MenuContent _focus={{ background: 'none' }}>
-            <a href="/mypetitions">나의 청원</a>
-          </MenuContent>
-          <MenuContent _focus={{ background: 'none' }}>
-            비밀번호 변경
-          </MenuContent>
-          <MenuContent _focus={{ background: 'none' }}>
-            <a onClick={handleLogout}>로그아웃</a>
-          </MenuContent>
-        </MenuList>
-      </Menu>
-    ) : (
-      <ItemName className="item__menu">
-        <a href="/login">로그인</a>
-      </ItemName>
-    )
-  }
 
   return (
     <Header>
@@ -97,7 +38,7 @@ const NavBar = (): JSX.Element => {
           <ListItem className="item">
             <ItemName className="item__menu">답변된 청원</ItemName>
           </ListItem>
-          <ListItem className="item">{isLoggedin()}</ListItem>
+          <ListItem className="item">{MyMenu()}</ListItem>
         </TopMenu>
         <MobMenuButton
           colorScheme={'black'}
@@ -106,11 +47,8 @@ const NavBar = (): JSX.Element => {
           }}
           display={{ base: 'block', md: 'none' }}
           open={opened}
-          _focus={{
-            outline: 'none',
-          }}
         >
-          <MobMenu />
+          <MobMenuIcon />
         </MobMenuButton>
       </Inner>
     </Header>
