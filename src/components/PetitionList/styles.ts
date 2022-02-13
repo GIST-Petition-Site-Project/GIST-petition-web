@@ -1,4 +1,5 @@
-import { Box, ListItem } from '@chakra-ui/react'
+import { Box, ListItem, Tag } from '@chakra-ui/react'
+import theme from '../../style/theme'
 import styled from '@emotion/styled'
 
 const PetitionsHead = styled(Box)`
@@ -6,10 +7,7 @@ const PetitionsHead = styled(Box)`
   width: 100%;
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
-  /* display: flex; */
   align-items: center;
-  display: flex;
-  flex-direction: row;
 `
 const PetitionsHeadWrap = styled(Box)`
   position: relative;
@@ -33,7 +31,7 @@ const PetitionsCategory = styled.div`
 `
 const PetitionsSubject = styled.div`
   margin-left: 220px;
-  margin-right: 200px;
+  margin-right: 220px;
   display: flex;
 `
 const PetitionsDate = styled.div`
@@ -53,14 +51,22 @@ const PetitionsAgreement = styled.div`
 `
 const PetitionStatus = styled(Box)`
   position: absolute;
-  top: 1em;
+  height: 100%;
+  /* justify-content: center; */
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
+  bottom: 0%;
+  padding-left: 5px;
 `
 const PetitionCategory = styled(Box)`
   position: absolute;
   color: #1197d4;
   width: 120px;
   text-align: left;
-  margin: auto;
+  display: flex;
+  align-items: center;
+  bottom: 0%;
 `
 const PetitionSubject = styled(Box)`
   text-align: left;
@@ -91,7 +97,14 @@ const PetitionItem = styled(ListItem)`
   }
   display: block;
 `
-
+const PetitionStatusTag = styled(Tag)`
+  font-size: 12px;
+  background-color: ${theme.color.QUATERNARY_GRAY};
+  color: white;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 12px;
+  }
+`
 export {
   PetitionsHead,
   PetitionsHeadWrap,
@@ -106,4 +119,5 @@ export {
   PetitionSubject,
   PetitionDate,
   PetitionAgreement,
+  PetitionStatusTag,
 }

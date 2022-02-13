@@ -17,6 +17,7 @@ import {
   PetitionsSubject,
   PetitionsStatus,
   PetitionStatus,
+  PetitionStatusTag,
 } from './styles'
 
 const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
@@ -61,7 +62,9 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
         {petitionList.map(petition => (
           <PetitionItem key={petition.id}>
             <PetitionStatus>
-              <Tag>{!petition.answered ? '청원진행중' : '답변완료'}</Tag>
+              <PetitionStatusTag borderRadius={'none'}>
+                {!petition.answered ? '청원진행중' : '답변완료'}
+              </PetitionStatusTag>
             </PetitionStatus>
             <PetitionCategory
               position={{ md: 'absolute' }}
