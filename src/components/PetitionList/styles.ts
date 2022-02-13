@@ -50,20 +50,21 @@ const PetitionsAgreement = styled.div`
   text-align: center;
 `
 const PetitionStatus = styled(Box)`
-  position: absolute;
   height: 100%;
-  /* justify-content: center; */
-  /* text-align: center; */
   display: flex;
   align-items: center;
   bottom: 0%;
-  padding-left: 5px;
+  /* padding-left: 5px; */
+  padding-bottom: 15px;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 12px;
+    padding-bottom: 0;
+  }
 `
 const PetitionCategory = styled(Box)`
-  position: absolute;
   color: #1197d4;
   width: 120px;
-  text-align: left;
+  /* text-align: center; */
   display: flex;
   align-items: center;
   bottom: 0%;
@@ -90,7 +91,7 @@ const PetitionAgreement = styled(Box)`
 
 const PetitionItem = styled(ListItem)`
   position: relative;
-  padding: 20px 0;
+  padding: 15px 0;
   border-bottom: 1px solid #ddd;
   :hover {
     background-color: #f8f8f8;
@@ -98,11 +99,18 @@ const PetitionItem = styled(ListItem)`
   display: block;
 `
 const PetitionStatusTag = styled(Tag)`
-  font-size: 12px;
-  background-color: ${theme.color.QUATERNARY_GRAY};
+  font-size: 10px;
+  background-color: ${theme.color.SECONDARY_RED};
   color: white;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     font-size: 12px;
+  }
+`
+const Pwrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    display: block;
   }
 `
 export {
@@ -120,4 +128,5 @@ export {
   PetitionDate,
   PetitionAgreement,
   PetitionStatusTag,
+  Pwrapper,
 }

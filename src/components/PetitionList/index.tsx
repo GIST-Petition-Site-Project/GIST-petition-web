@@ -18,6 +18,7 @@ import {
   PetitionsStatus,
   PetitionStatus,
   PetitionStatusTag,
+  Pwrapper,
 } from './styles'
 
 const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
@@ -38,14 +39,6 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     queryPost(queryParams)
   }, [location.search])
 
-  const petitionStatus = (isAnswered: boolean) => {
-    if (isAnswered) {
-      return '답변완료'
-    } else {
-      return '청원진행중'
-    }
-  }
-
   return (
     <>
       <PetitionsHead display={{ base: 'none', md: 'flex' }}>
@@ -61,25 +54,29 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
       <UnorderedList ml={0}>
         {petitionList.map(petition => (
           <PetitionItem key={petition.id}>
-            <PetitionStatus>
-              <PetitionStatusTag borderRadius={'none'}>
-                {!petition.answered ? '청원진행중' : '답변완료'}
-              </PetitionStatusTag>
-            </PetitionStatus>
-            <PetitionCategory
-              position={{ md: 'absolute' }}
-              left={{ md: '100px' }}
-              bottom={{ md: '0' }}
-              top={{ md: '0' }}
-              h={{ md: '16px' }}
-              m={{ md: 'auto' }}
-              fontSize={{ base: '13px', md: '14px' }}
-            >
-              {petition.categoryName}
-            </PetitionCategory>
+            <Pwrapper>
+              <PetitionStatus position={{ md: 'absolute' }}>
+                <PetitionStatusTag borderRadius={'none'}>
+                  {!petition.answered ? '청원진행중' : '답변완료'}
+                </PetitionStatusTag>
+              </PetitionStatus>
+              <PetitionCategory
+                position={{ md: 'absolute' }}
+                left={{ md: '100px' }}
+                bottom={{ md: '0' }}
+                top={{ md: '0' }}
+                h={{ md: '16px' }}
+                m={{ base: '0', md: 'auto' }}
+                fontSize={{ base: '13px', md: '14px' }}
+                pl={{ base: '5px', md: '0' }}
+              >
+                {petition.categoryName}
+              </PetitionCategory>
+            </Pwrapper>
             <PetitionSubject
               pb={{ base: '10px', md: '0' }}
-              m={{ base: '25px 0 20px 0', md: '0 220px 0 250px' }}
+              pl={{ base: '5px', md: '0' }}
+              m={{ base: '5px 0 20px 0', md: '0 220px 0 250px' }}
             >
               <Link
                 to={`/petitions/${petition.id}`}
@@ -95,6 +92,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
+              pl={{ base: '5px', md: '0' }}
             >
               {petition.createdAt.slice(0, 10)}
             </PetitionDate>
@@ -104,6 +102,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
+              pr={{ base: '5px', md: '0' }}
             >
               {petition.agreements}
               <Text display={{ base: 'inline-block', md: 'none' }}>명</Text>
