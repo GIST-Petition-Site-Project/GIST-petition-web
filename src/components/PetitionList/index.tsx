@@ -57,7 +57,9 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
             <Pwrapper>
               <PetitionStatus position={{ md: 'absolute' }}>
                 <PetitionStatusTag borderRadius={'none'}>
-                  {!petition.answered ? '청원진행중' : '답변완료'}
+                  {!petition.answered ? '청원진행중' : '답변완료'}{' '}
+                  {/*petition.answered의 값이 적용이 잘 안 됨*/}
+                  {console.log(petition)}
                 </PetitionStatusTag>
               </PetitionStatus>
               <PetitionCategory
@@ -67,8 +69,8 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                 top={{ md: '0' }}
                 h={{ md: '16px' }}
                 m={{ base: '0', md: 'auto' }}
-                fontSize={{ base: '13px', md: '14px' }}
-                pl={{ base: '5px', md: '0' }}
+                fontSize={{ base: '13px', md: '15px' }}
+                pl={{ base: '5px', md: '0' }} /* 모바일에서 pl값 추가함 */
               >
                 {petition.categoryName}
               </PetitionCategory>

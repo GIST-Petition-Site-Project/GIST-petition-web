@@ -13,7 +13,6 @@ const PetitionsHeadWrap = styled(Box)`
   position: relative;
   width: 100%;
   display: flex;
-  /* justify-content: space-between; */
 `
 const PetitionsStatus = styled.div`
   /* position: absolute; */
@@ -31,7 +30,7 @@ const PetitionsCategory = styled.div`
 `
 const PetitionsSubject = styled.div`
   margin-left: 220px;
-  margin-right: 220px;
+  margin-right: 220px; // 제목 중앙에 배치 위한 코드
   display: flex;
 `
 const PetitionsDate = styled.div`
@@ -53,21 +52,26 @@ const PetitionStatus = styled(Box)`
   height: 100%;
   display: flex;
   align-items: center;
-  bottom: 0%;
-  /* padding-left: 5px; */
-  padding-bottom: 15px;
+  bottom: 0%; //52~55번째 줄 코드: tag 중앙에 배치하기 위한 코드
+  padding-bottom: 15px; //모바일에서 category 사이 space 적용
+  padding-left: 3px; // 모바일에서 category와의 배치가 어색해서 2px빼놓음
   @media screen and (min-width: ${theme.breakpoints.md}) {
     font-size: 12px;
     padding-bottom: 0;
+    padding-left: 5px;
   }
 `
 const PetitionCategory = styled(Box)`
   color: #1197d4;
-  width: 120px;
-  /* text-align: center; */
+  width: 130px;
   display: flex;
   align-items: center;
   bottom: 0%;
+`
+const Pwrapper = styled(Box)`
+  // 모바일에서 PetitionCategory와 PetitionStatus 배치 조정 위한 Tag
+  display: flex;
+  flex-direction: column;
 `
 const PetitionSubject = styled(Box)`
   text-align: left;
@@ -100,19 +104,13 @@ const PetitionItem = styled(ListItem)`
 `
 const PetitionStatusTag = styled(Tag)`
   font-size: 10px;
-  background-color: ${theme.color.SECONDARY_RED};
+  background-color: ${theme.color.SECONDARY_RED}; //나머지 색은 QUATERNARY_GRAY
   color: white;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     font-size: 12px;
   }
 `
-const Pwrapper = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    display: block;
-  }
-`
+
 export {
   PetitionsHead,
   PetitionsHeadWrap,
