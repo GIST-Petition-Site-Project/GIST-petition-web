@@ -44,8 +44,10 @@ const ButtonInner = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+  padding: 0;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     flex-direction: row;
+    padding: 0 2rem;
   }
 `
 
