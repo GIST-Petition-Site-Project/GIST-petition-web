@@ -1,4 +1,4 @@
-import { Text, UnorderedList } from '@chakra-ui/react'
+import { Text, UnorderedList, Tag } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
@@ -15,6 +15,8 @@ import {
   PetitionsHead,
   PetitionsHeadWrap,
   PetitionsSubject,
+  PetitionsStatus,
+  PetitionStatus,
 } from './styles'
 
 const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
@@ -35,10 +37,19 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     queryPost(queryParams)
   }, [location.search])
 
+  const petitionStatus = (isAnswered: boolean) => {
+    if (isAnswered) {
+      return '답변완료'
+    } else {
+      return '청원진행중'
+    }
+  }
+
   return (
     <>
       <PetitionsHead display={{ base: 'none', md: 'flex' }}>
         <PetitionsHeadWrap>
+          <PetitionsStatus>진행 상황</PetitionsStatus>
           <PetitionsCategory>분류</PetitionsCategory>
           <PetitionsSubject>제목</PetitionsSubject>
           <PetitionsDate>날짜</PetitionsDate>
@@ -49,14 +60,17 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
       <UnorderedList ml={0}>
         {petitionList.map(petition => (
           <PetitionItem key={petition.id}>
+            <PetitionStatus>
+              <Tag>{!petition.answered ? '청원진행중' : '답변완료'}</Tag>
+            </PetitionStatus>
             <PetitionCategory
               position={{ md: 'absolute' }}
-              left={{ md: '10px' }}
+              left={{ md: '100px' }}
               bottom={{ md: '0' }}
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
-              fontSize={{ base: '14px', md: '16px' }}
+              fontSize={{ base: '13px', md: '14px' }}
             >
               {petition.categoryName}
             </PetitionCategory>

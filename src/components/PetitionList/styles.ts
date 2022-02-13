@@ -8,26 +8,40 @@ const PetitionsHead = styled(Box)`
   padding: 10px 0;
   /* display: flex; */
   align-items: center;
+  display: flex;
+  flex-direction: row;
 `
 const PetitionsHeadWrap = styled(Box)`
   position: relative;
   width: 100%;
+  display: flex;
+  /* justify-content: space-between; */
+`
+const PetitionsStatus = styled.div`
+  /* position: absolute; */
+  display: flex;
+  /* top: 0; */
+  width: 100px;
+  padding-left: 10px;
 `
 
 const PetitionsCategory = styled.div`
-  position: absolute;
-  top: 0;
-  width: 150px;
+  /* position: absolute; */
+  display: flex;
+  /* top: 0; */
+  width: 100px;
 `
 const PetitionsSubject = styled.div`
   margin-left: 220px;
-  margin-right: 250px;
+  margin-right: 200px;
+  display: flex;
 `
 const PetitionsDate = styled.div`
   position: absolute;
+  display: flex;
   top: 0;
   right: 90px;
-  width: 130px;
+  width: 80px;
   text-align: center;
 `
 const PetitionsAgreement = styled.div`
@@ -37,10 +51,16 @@ const PetitionsAgreement = styled.div`
   width: 90px;
   text-align: center;
 `
-
+const PetitionStatus = styled(Box)`
+  position: absolute;
+  top: 1em;
+`
 const PetitionCategory = styled(Box)`
   position: absolute;
   color: #1197d4;
+  width: 120px;
+  text-align: left;
+  margin: auto;
 `
 const PetitionSubject = styled(Box)`
   text-align: left;
@@ -75,11 +95,13 @@ const PetitionItem = styled(ListItem)`
 export {
   PetitionsHead,
   PetitionsHeadWrap,
+  PetitionsStatus,
   PetitionsCategory,
   PetitionsSubject,
   PetitionsDate,
   PetitionsAgreement,
   PetitionItem,
+  PetitionStatus,
   PetitionCategory,
   PetitionSubject,
   PetitionDate,
