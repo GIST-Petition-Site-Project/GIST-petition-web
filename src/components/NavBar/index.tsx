@@ -57,11 +57,13 @@ const NavBar = (): JSX.Element => {
           borderRadius={'none'}
           color={'white'}
         >
-          <MenuContent>
+          <MenuContent _focus={{ background: 'none' }}>
             <a href="/mypetitions">나의 청원</a>
           </MenuContent>
-          <MenuContent>비밀번호 변경</MenuContent>
-          <MenuContent>
+          <MenuContent _focus={{ background: 'none' }}>
+            비밀번호 변경
+          </MenuContent>
+          <MenuContent _focus={{ background: 'none' }}>
             <a onClick={handleLogout}>로그아웃</a>
           </MenuContent>
         </MenuList>
