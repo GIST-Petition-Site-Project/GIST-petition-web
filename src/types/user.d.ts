@@ -27,5 +27,6 @@ interface WhichUI {
   isLoading: boolean
   isExpired: boolean
   isVerificated: boolean
+  isValid: boolean
 }
 // 회원 가입 UI 관련

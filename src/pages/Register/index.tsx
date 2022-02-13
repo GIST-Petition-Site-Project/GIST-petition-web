@@ -28,6 +28,7 @@ const Register = (): JSX.Element => {
   const navigate = useNavigate()
   const emailRef = useRef<HTMLInputElement>(null)
   const verificationRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
   const [input, setInput] = useState<RegisterForm>({
     username: '',
     password: '',
@@ -43,6 +44,7 @@ const Register = (): JSX.Element => {
     isLoading: false,
     isExpired: false,
     isVerificated: false,
+    isValid: false,
   })
 
   const [errorText, setErrorText] = useState('')
@@ -100,7 +102,7 @@ const Register = (): JSX.Element => {
     }
     setErrorText(status[1])
     if (status[0] < 400) {
-      setWhichUI({ ...whichUI, isVerificated: true })
+      setWhichUI({ ...whichUI, isVerificated: true, isValid: true })
     }
   }
 
@@ -125,7 +127,6 @@ const Register = (): JSX.Element => {
   }
 
   const handleRegister = async () => {
-    console.log('SUBMIT')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
       setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
@@ -137,29 +138,51 @@ const Register = (): JSX.Element => {
         verificationCode: input.verificationCode,
         password: input.password,
       })
-      console.log(status)
+      setErrorText(status[1])
+
       if (status[0] < 400) {
         toast({
           status: 'success',
-          duration: 5000,
+          duration: 3000,
           description: '회원가입이 완료되었습니다',
           title: '계정 생성완료',
+          isClosable: true,
         })
         navigate('/login')
+      } else {
+        setErrorText(status[1])
+        setWhichUI({ ...whichUI, isValid: false })
       }
-      setErrorText(status[1])
     } else {
-      setErrorText('비밀번호를 정확하게 입력해주세요')
+      passwordRef.current && passwordRef.current.focus()
+      setErrorText('비밀번호가 일치하지 않습니다')
     }
   }
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
   }
 
+  const handleReverify = () => {
+    setInput({
+      ...input,
+      verificationCode: '',
+      password: '',
+      passwordConfirm: '',
+    })
+    setErrorText('')
+    setWhichUI({ ...whichUI, isVerificated: false, isCodeRequested: false })
+  }
+
   const handleDelete = async () => {
-    console.log(input)
     const status = await postDelete({ username: input.username })
-    console.log(status)
+    if (status[0] < 400) {
+      toast({
+        status: 'success',
+        duration: 2000,
+        description: '계정 삭제완료',
+        isClosable: true,
+      })
+    }
   }
 
   return (
@@ -217,6 +240,7 @@ const Register = (): JSX.Element => {
                   {<CFaLock color="gray.300" />}
                 </InputLeftElement>
                 <Input
+                  ref={passwordRef}
                   type="password"
                   name="password"
                   placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
@@ -278,7 +302,12 @@ const Register = (): JSX.Element => {
             !whichUI.isExpired && (
               <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
             )}
-          {whichUI.isVerificated && (
+          {!whichUI.isExpired && whichUI.isVerificated && !whichUI.isValid && (
+            <RegisterButton onClick={handleReverify}>
+              다시 인증하기
+            </RegisterButton>
+          )}
+          {whichUI.isVerificated && whichUI.isValid && (
             <RegisterButton onClick={handleRegister} className="submit__btn">
               회원가입
             </RegisterButton>
