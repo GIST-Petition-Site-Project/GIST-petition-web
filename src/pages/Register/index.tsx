@@ -235,7 +235,12 @@ const Register = (): JSX.Element => {
           <Text fontSize="4xl" fontWeight="bold">
             회원가입
           </Text>
-          <TermsOfUse onAgree={handleAgree} agreeInfo={agreeInfo}></TermsOfUse>
+          {!whichUI.isAgreed && (
+            <TermsOfUse
+              onAgree={handleAgree}
+              agreeInfo={agreeInfo}
+            ></TermsOfUse>
+          )}
 
           {whichUI.isAgreed && (
             <FormControl isRequired>
