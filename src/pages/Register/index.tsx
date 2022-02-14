@@ -95,7 +95,13 @@ const Register = (): JSX.Element => {
     setInput({ ...input, [name]: value })
   }
 
-  const handleAgreeBtn = () => {}
+  const handleAgreeBtn = (e: React.MouseEvent<HTMLElement>) => {
+    if (agreeInfo.private === true && agreeInfo.service === true) {
+      setWhichUI({ ...whichUI, isAgreed: true })
+      return
+    }
+    setErrorText('모든 약관에 동의해주세요')
+  }
 
   const handleCreateCode = async () => {
     const emailRegex = /@(gm.)?gist.ac.kr$/
@@ -311,7 +317,7 @@ const Register = (): JSX.Element => {
             </FormControl>
           )}
           {!whichUI.isAgreed && (
-            <RegisterButton onClick={handleCreateCode}>다음단계</RegisterButton>
+            <RegisterButton onClick={handleAgreeBtn}>다음단계</RegisterButton>
           )}
           {whichUI.isAgreed &&
             !whichUI.isCodeRequested &&

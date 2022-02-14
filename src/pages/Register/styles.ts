@@ -18,6 +18,7 @@ const RegisterButton = styled.button`
   height: 2.25rem;
   font-weight: bold;
 `
+
 const ErrorText = styled.p`
   text-align: center;
   color: ${theme.color.PRIMARY_RED};

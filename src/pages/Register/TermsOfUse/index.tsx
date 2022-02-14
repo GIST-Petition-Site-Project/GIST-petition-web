@@ -23,8 +23,13 @@ const TermsOfUse = ({ onAgree, agreeInfo }): JSX.Element => {
   const [secondOpen, setSecondOpen] = useState(false)
   const handleClick = (e: any) => {
     const target = e.target
-    const value = target.dataset.value
-    onAgree(value)
+    console.log(target.parentNode.parentNode.parentNode)
+    const value =
+      target.dataset.value ||
+      target.parentNode.dataset.value ||
+      target.parentNode.parentNode.dataset.value ||
+      target.parentNode.parentNode.parentNode.dataset.value
+    value && onAgree(value)
   }
   return (
     <section>
