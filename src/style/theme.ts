@@ -50,6 +50,7 @@ const theme = extendTheme({
           container: {
             color: `${color.WHITE}`,
             position: 'absolute',
+            top: '100px',
             backgroundColor: `${color.PRIMARY_RED}`,
           },
         },

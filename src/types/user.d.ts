@@ -23,10 +23,20 @@ interface Disclosure {
 
 // 회원 가입 UI 관련
 interface WhichUI {
+  isAgreed: boolean
   isCodeRequested: boolean
   isLoading: boolean
   isExpired: boolean
   isVerificated: boolean
   isValid: boolean
+}
+
+interface RegisterAgree {
+  service: boolean
+  private: boolean
+}
+
+interface AgreeAttribute {
+  isClicked: boolean
 }
 // 회원 가입 UI 관련

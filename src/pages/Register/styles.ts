@@ -3,7 +3,7 @@ import theme from '../../style/theme'
 
 const stackStyle: React.CSSProperties = {
   position: 'absolute',
-  top: '18.75rem',
+  top: '10rem',
   left: '0',
   right: '0',
   height: '31.25rem',

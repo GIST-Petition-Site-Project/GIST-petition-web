@@ -21,6 +21,7 @@ import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { RegisterButton, stackStyle, ErrorText, DeleteBtn } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { postDelete } from '../../utils/api/user/postDelete'
+import TermsOfUse from './TermsOfUse'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -40,14 +41,47 @@ const Register = (): JSX.Element => {
   })
 
   const [whichUI, setWhichUI] = useState<WhichUI>({
+    isAgreed: false,
     isCodeRequested: false,
     isLoading: false,
     isExpired: false,
     isVerificated: false,
     isValid: false,
   })
+  const [agreeInfo, setAgreeInfo] = useState<RegisterAgree>({
+    service: false,
+    private: false,
+  })
 
   const [errorText, setErrorText] = useState('')
+
+  const handleAgree = (value: string) => {
+    switch (value) {
+      case 'total':
+        if (agreeInfo.private && agreeInfo.service) {
+          setAgreeInfo({ ...agreeInfo, service: false, private: false })
+          return
+        }
+        setAgreeInfo({ ...agreeInfo, service: true, private: true })
+        return
+      case 'service':
+        if (agreeInfo.service) {
+          setAgreeInfo({ ...agreeInfo, service: false })
+          return
+        }
+        setAgreeInfo({ ...agreeInfo, service: true })
+        return
+      case 'private':
+        if (agreeInfo.private) {
+          setAgreeInfo({ ...agreeInfo, private: false })
+          return
+        }
+        setAgreeInfo({ ...agreeInfo, private: true })
+        return
+      default:
+        throw Error('Clicked Wrong Btn')
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -60,6 +94,8 @@ const Register = (): JSX.Element => {
     }
     setInput({ ...input, [name]: value })
   }
+
+  const handleAgreeBtn = () => {}
 
   const handleCreateCode = async () => {
     const emailRegex = /@(gm.)?gist.ac.kr$/
@@ -193,24 +229,29 @@ const Register = (): JSX.Element => {
           <Text fontSize="4xl" fontWeight="bold">
             회원가입
           </Text>
-          <FormControl isRequired>
-            <Text mb="8px">이메일</Text>
-            <InputGroup borderColor={`${theme.color.ligthGray}`}>
-              <InputLeftElement>
-                {<CFaUserAlt color="gray.300" />}
-              </InputLeftElement>
-              <Input
-                ref={emailRef}
-                type="email"
-                name="username"
-                placeholder="지스트 메일을 입력하세요"
-                value={input.username}
-                onChange={handleChange}
-                disabled={whichUI.isCodeRequested}
-                borderRadius="0"
-              ></Input>
-            </InputGroup>
-          </FormControl>
+          <TermsOfUse onAgree={handleAgree} agreeInfo={agreeInfo}></TermsOfUse>
+
+          {whichUI.isAgreed && (
+            <FormControl isRequired>
+              <Text mb="8px">이메일</Text>
+              <InputGroup borderColor={`${theme.color.ligthGray}`}>
+                <InputLeftElement>
+                  {<CFaUserAlt color="gray.300" />}
+                </InputLeftElement>
+                <Input
+                  ref={emailRef}
+                  type="email"
+                  name="username"
+                  placeholder="지스트 메일을 입력하세요"
+                  value={input.username}
+                  onChange={handleChange}
+                  disabled={whichUI.isCodeRequested}
+                  borderRadius="0"
+                ></Input>
+              </InputGroup>
+            </FormControl>
+          )}
+
           {whichUI.isCodeRequested && !whichUI.isExpired && (
             <FormControl isRequired>
               <Text mb="8px">인증 코드</Text>
@@ -269,7 +310,11 @@ const Register = (): JSX.Element => {
               </InputGroup>
             </FormControl>
           )}
-          {!whichUI.isCodeRequested &&
+          {!whichUI.isAgreed && (
+            <RegisterButton onClick={handleCreateCode}>다음단계</RegisterButton>
+          )}
+          {whichUI.isAgreed &&
+            !whichUI.isCodeRequested &&
             !whichUI.isLoading &&
             !whichUI.isExpired && (
               <RegisterButton onClick={handleCreateCode}>
