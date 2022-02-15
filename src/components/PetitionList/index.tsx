@@ -26,6 +26,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     const status = await getPetitions(query)
     if (status[0] < 400) {
       setPetitionList(status[1].content)
+      console.log(status[1].content)
     }
   }
 

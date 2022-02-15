@@ -17,10 +17,14 @@ import {
   AgreementButton,
   ContentWrap,
 } from './styles'
+import AgreementList from './../AgreementList'
+import { useParams } from 'react-router-dom'
+
 const CFaFileSignature = chakra(FaFileSignature)
 
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
+import AgreementForm from './../AgreementForm'
 
 const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
   const [response, setResponse] = useState<Petition>({
@@ -34,22 +38,10 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
     updatedAt: '',
     userId: 0,
   })
-  const [isConsented, setIsConsented] = useState<boolean>(false)
   const [answerContent, setAnswerContent] = useState<
     AnswerContent | undefined
   >()
   const { onOpen, isOpen, onClose } = useDisclosure()
-
-  const handleAgreement = async () => {
-    const status = await postAgreePetition(petitionId)
-    if (status === 401) {
-      onOpen()
-      console.log('로그인 해야함')
-    }
-    if (status < 400) {
-      setIsConsented(true)
-    }
-  }
 
   useEffect(() => {
     const getPetitionInformation = async (id: string) => {
@@ -59,16 +51,6 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
       }
     }
     getPetitionInformation(petitionId)
-  }, [isConsented])
-
-  useEffect(() => {
-    const checkAgreeByMe = async (id: string) => {
-      const getStateAgree = await getStateOfAgreement(id)
-      if (getStateAgree[0] < 400) {
-        setIsConsented(getStateAgree[1])
-      }
-    }
-    checkAgreeByMe(petitionId)
   }, [])
 
   useEffect(() => {
@@ -78,7 +60,7 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
     }
     getAnswerContent(petitionId)
   }, [])
-
+  const castedPetitionId = petitionId as string
   return (
     <>
       <Stack spacing={6} color={'#333'}>
@@ -127,17 +109,19 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
         </Stack>
       ) : (
         <div>
-          <AgreementButton
-            onClick={handleAgreement}
-            colorScheme={'none'}
-            _focus={{ outline: 'none' }}
-            disabled={isConsented}
-          >
-            <Flex>
-              <CFaFileSignature />
-              <Text>&nbsp;{!isConsented ? '동의하기' : '동의완료'}</Text>
-            </Flex>
-          </AgreementButton>
+          <Stack>
+            <Text
+              textAlign={'left'}
+              fontWeight={'bold'}
+              fontSize={'20px'}
+              p={'0.5em 0'}
+            >
+              청원동의{' '}
+              <span style={{ color: '#FF0000' }}>{response.agreements} </span>명
+            </Text>
+            <AgreementForm petitionId={castedPetitionId}></AgreementForm>
+            <AgreementList petitionId={castedPetitionId}></AgreementList>
+          </Stack>
         </div>
       )}
 

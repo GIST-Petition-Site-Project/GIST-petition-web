@@ -34,3 +34,12 @@ interface PaginationButton {
   getPetitions: (query: QueryParams) => Promise<any[]>
   pathname: string
 }
+
+interface AgreePetition {
+  description: string
+}
+
+interface GetAgreements {
+  description: string
+  id: number
+}

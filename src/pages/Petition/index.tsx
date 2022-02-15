@@ -3,8 +3,6 @@ import { useParams } from 'react-router'
 import { Inner, PetitionWrapper, PetitionView } from './styles'
 import { Stack, Text } from '@chakra-ui/react'
 import PetitionContents from './PetitionContents'
-import CommentForm from './CommentForm'
-import CommentList from './CommentList'
 
 const Petition = (): JSX.Element => {
   const { petitionId } = useParams()
@@ -14,13 +12,6 @@ const Petition = (): JSX.Element => {
       <PetitionWrapper>
         <PetitionView p={{ base: '30px 10px', md: '50px 30px' }}>
           <PetitionContents petitionId={castedPetitionId}></PetitionContents>
-          <Stack>
-            <Text textAlign={'left'} fontWeight={'bold'} fontSize={'20px'}>
-              의견보기
-            </Text>
-            <CommentForm petitionId={castedPetitionId}></CommentForm>
-            <CommentList petitionId={castedPetitionId}></CommentList>
-          </Stack>
         </PetitionView>
       </PetitionWrapper>
     </Inner>
