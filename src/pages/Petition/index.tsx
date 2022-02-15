@@ -3,8 +3,6 @@ import { useParams } from 'react-router'
 import { Inner, PetitionWrapper, PetitionView } from './styles'
 import { Stack, Text } from '@chakra-ui/react'
 import PetitionContents from './PetitionContents'
-import CommentForm from './CommentForm'
-import CommentList from './CommentList'
 
 const Petition = (): JSX.Element => {
   const { petitionId } = useParams()

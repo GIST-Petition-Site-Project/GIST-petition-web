@@ -1,11 +1,11 @@
 import { Flex, FormControl, useDisclosure } from '@chakra-ui/react'
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react'
 import { getStateOfAgreement, postAgreePetition } from '../../../utils/api'
-import { CommentTextArea, CommentWriteButton } from './styles'
+import { AgreementTextArea, AgreementWriteButton } from './styles'
 import { useNavigate } from 'react-router-dom'
 import NeedLoginModal from '../../../components/NeedLoginModal'
 
-const CommentForm = ({ petitionId }: PetitionId): JSX.Element => {
+const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const [input, setInput] = useState<AgreePetition>({
     description: '청원에 동의합니다.',
   })
@@ -50,22 +50,21 @@ const CommentForm = ({ petitionId }: PetitionId): JSX.Element => {
       <form onSubmit={handleSubmit}>
         <FormControl>
           <Flex h="60px">
-            <CommentTextArea
-              placeholder="청원에 동의합니다."
+            <AgreementTextArea
               rows={1}
               _focus={{ outline: 'none' }}
               onChange={handleChange}
             >
               청원에 동의합니다.
-            </CommentTextArea>
-            <CommentWriteButton
+            </AgreementTextArea>
+            <AgreementWriteButton
               _focus={{ outline: 'none' }}
               disabled={isConsented}
               type="submit"
               colorScheme={'none'}
             >
               {!isConsented ? '동의하기' : '동의완료'}
-            </CommentWriteButton>
+            </AgreementWriteButton>
           </Flex>
         </FormControl>
       </form>
@@ -74,4 +73,4 @@ const CommentForm = ({ petitionId }: PetitionId): JSX.Element => {
   )
 }
 
-export default CommentForm
+export default AgreementForm

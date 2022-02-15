@@ -1,15 +1,14 @@
 import { Flex, Stack } from '@chakra-ui/react'
 import {
-  CommentItem,
-  CommentAnonymousName,
-  CommentCreatedAt,
+  AgreementItem,
+  AgreementAnonymousName,
+  AgreementCreatedAt,
   ContentWrap,
 } from './styles'
-import { getComments } from '../../../utils/api/comment/getComments'
 import { useEffect, useState } from 'react'
-import { getAgreements } from './../../../utils/api/petition/getAgreements'
+import { getAgreements } from '../../../utils/api/petition/getAgreements'
 
-const CommentList = ({ petitionId }: PetitionId): JSX.Element => {
+const AgreementList = ({ petitionId }: PetitionId): JSX.Element => {
   const [response, setResponse] = useState<Array<GetAgreements>>([])
 
   useEffect(() => {
@@ -29,17 +28,19 @@ const CommentList = ({ petitionId }: PetitionId): JSX.Element => {
 
   return (
     <ul>
-      {response.map(res => (
-        <CommentItem key={res.id}>
+      {response.map((res, index) => (
+        <AgreementItem key={res.id}>
           <Stack>
-            <CommentAnonymousName>익명{res.id}</CommentAnonymousName>
+            <AgreementAnonymousName>
+              익명{response.length - index}
+            </AgreementAnonymousName>
             <ContentWrap>
               <div>{res.description}</div>
             </ContentWrap>
           </Stack>
-        </CommentItem>
+        </AgreementItem>
       ))}
     </ul>
   )
 }
-export default CommentList
+export default AgreementList

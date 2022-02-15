@@ -17,14 +17,14 @@ import {
   AgreementButton,
   ContentWrap,
 } from './styles'
-import CommentList from '../CommentList'
+import AgreementList from './../AgreementList'
 import { useParams } from 'react-router-dom'
 
 const CFaFileSignature = chakra(FaFileSignature)
 
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
-import CommentForm from './../CommentForm/index'
+import AgreementForm from './../AgreementForm'
 
 const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
   const [response, setResponse] = useState<Petition>({
@@ -38,7 +38,6 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
     updatedAt: '',
     userId: 0,
   })
-  const [isConsented, setIsConsented] = useState<boolean>(false)
   const [answerContent, setAnswerContent] = useState<
     AnswerContent | undefined
   >()
@@ -52,16 +51,6 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
       }
     }
     getPetitionInformation(petitionId)
-  }, [isConsented])
-
-  useEffect(() => {
-    const checkAgreeByMe = async (id: string) => {
-      const getStateAgree = await getStateOfAgreement(id)
-      if (getStateAgree[0] < 400) {
-        setIsConsented(getStateAgree[1])
-      }
-    }
-    checkAgreeByMe(petitionId)
   }, [])
 
   useEffect(() => {
@@ -121,12 +110,17 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
       ) : (
         <div>
           <Stack>
-            <Text textAlign={'left'} fontWeight={'bold'} fontSize={'20px'}>
+            <Text
+              textAlign={'left'}
+              fontWeight={'bold'}
+              fontSize={'20px'}
+              p={'0.5em 0'}
+            >
               청원동의{' '}
               <span style={{ color: '#FF0000' }}>{response.agreements} </span>명
             </Text>
-            <CommentForm petitionId={castedPetitionId}></CommentForm>
-            <CommentList petitionId={castedPetitionId}></CommentList>
+            <AgreementForm petitionId={castedPetitionId}></AgreementForm>
+            <AgreementList petitionId={castedPetitionId}></AgreementList>
           </Stack>
         </div>
       )}

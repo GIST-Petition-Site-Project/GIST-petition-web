@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Button, Textarea } from '@chakra-ui/react'
 
-const CommentTextArea = styled(Textarea)`
+const AgreementTextArea = styled(Textarea)`
   border-radius: 0;
   border-color: #ccc;
   font-size: 0.875rem;
@@ -12,7 +12,7 @@ const CommentTextArea = styled(Textarea)`
   }
 `
 
-const CommentWriteButton = styled(Button)`
+const AgreementWriteButton = styled(Button)`
   height: 100%;
   border-radius: 0;
   background-color: #131618;
@@ -22,4 +22,4 @@ const CommentWriteButton = styled(Button)`
   }
 `
 
-export { CommentTextArea, CommentWriteButton }
+export { AgreementTextArea, AgreementWriteButton }
