@@ -19,13 +19,12 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const status = await postAgreePetition(petitionId, input)
-      if (status === 401) {
+      const response = await postAgreePetition(petitionId, input)
+      if (response?.status === 401) {
         onOpen()
         console.log('로그인 해야함')
       }
-      if (status < 400) {
-        console.log(status)
+      if (response?.status < 400) {
         navigate(0)
         setIsConsented(true)
       }
@@ -35,10 +34,8 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   }
   useEffect(() => {
     const checkAgreeByMe = async (id: string) => {
-      const getStateAgree = await getStateOfAgreement(id)
-      if (getStateAgree[0] < 400) {
-        setIsConsented(getStateAgree[1])
-      }
+      const response = await getStateOfAgreement(id)
+      setIsConsented(response?.data)
     }
     checkAgreeByMe(petitionId)
   }, [])

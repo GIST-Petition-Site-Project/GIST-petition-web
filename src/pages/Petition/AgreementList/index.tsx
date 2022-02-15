@@ -14,11 +14,8 @@ const AgreementList = ({ petitionId }: PetitionId): JSX.Element => {
   useEffect(() => {
     const getAllAgreements = async () => {
       try {
-        const status = await getAgreements(petitionId)
-        if (status[0] < 400) {
-          setResponse(status[1].content)
-          console.log(status[1].content)
-        }
+        const response = await getAgreements(petitionId)
+        setResponse(response?.data?.content)
       } catch (error) {
         console.log(error)
       }
