@@ -17,10 +17,14 @@ import {
   AgreementButton,
   ContentWrap,
 } from './styles'
+import CommentList from '../CommentList'
+import { useParams } from 'react-router-dom'
+
 const CFaFileSignature = chakra(FaFileSignature)
 
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
+import CommentForm from './../CommentForm/index'
 
 const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
   const [response, setResponse] = useState<Petition>({
@@ -39,17 +43,6 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
     AnswerContent | undefined
   >()
   const { onOpen, isOpen, onClose } = useDisclosure()
-
-  const handleAgreement = async () => {
-    const status = await postAgreePetition(petitionId)
-    if (status === 401) {
-      onOpen()
-      console.log('로그인 해야함')
-    }
-    if (status < 400) {
-      setIsConsented(true)
-    }
-  }
 
   useEffect(() => {
     const getPetitionInformation = async (id: string) => {
@@ -78,7 +71,7 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
     }
     getAnswerContent(petitionId)
   }, [])
-
+  const castedPetitionId = petitionId as string
   return (
     <>
       <Stack spacing={6} color={'#333'}>
@@ -127,17 +120,14 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
         </Stack>
       ) : (
         <div>
-          <AgreementButton
-            onClick={handleAgreement}
-            colorScheme={'none'}
-            _focus={{ outline: 'none' }}
-            disabled={isConsented}
-          >
-            <Flex>
-              <CFaFileSignature />
-              <Text>&nbsp;{!isConsented ? '동의하기' : '동의완료'}</Text>
-            </Flex>
-          </AgreementButton>
+          <Stack>
+            <Text textAlign={'left'} fontWeight={'bold'} fontSize={'20px'}>
+              청원동의{' '}
+              <span style={{ color: '#FF0000' }}>{response.agreements} </span>명
+            </Text>
+            <CommentForm petitionId={castedPetitionId}></CommentForm>
+            <CommentList petitionId={castedPetitionId}></CommentList>
+          </Stack>
         </div>
       )}
 

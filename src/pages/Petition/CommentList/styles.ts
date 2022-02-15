@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 const CommentItem = styled.li`
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  padding: 1em 0;
+  padding: 1em 0.2em;
   margin-top: -1px;
   text-align: left;
 `

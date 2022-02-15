@@ -7,22 +7,24 @@ import {
 } from './styles'
 import { getComments } from '../../../utils/api/comment/getComments'
 import { useEffect, useState } from 'react'
+import { getAgreements } from './../../../utils/api/petition/getAgreements'
 
 const CommentList = ({ petitionId }: PetitionId): JSX.Element => {
-  const [response, setResponse] = useState<Array<CommentResponse>>([])
+  const [response, setResponse] = useState<Array<GetAgreements>>([])
 
   useEffect(() => {
-    const getAllComment = async () => {
+    const getAllAgreements = async () => {
       try {
-        const status = await getComments(petitionId)
+        const status = await getAgreements(petitionId)
         if (status[0] < 400) {
-          setResponse(status[1])
+          setResponse(status[1].content)
+          console.log(status[1].content)
         }
       } catch (error) {
         console.log(error)
       }
     }
-    getAllComment()
+    getAllAgreements()
   }, [])
 
   return (
@@ -30,16 +32,9 @@ const CommentList = ({ petitionId }: PetitionId): JSX.Element => {
       {response.map(res => (
         <CommentItem key={res.id}>
           <Stack>
-            <Flex alignItems={'center'}>
-              <CommentAnonymousName>{res.userId}&nbsp;</CommentAnonymousName>
-              <CommentCreatedAt>
-                {res.createdAt.slice(5, 10) +
-                  '  ' +
-                  res.createdAt.slice(11, 16)}
-              </CommentCreatedAt>
-            </Flex>
+            <CommentAnonymousName>익명{res.id}</CommentAnonymousName>
             <ContentWrap>
-              <div>{res.content}</div>
+              <div>{res.description}</div>
             </ContentWrap>
           </Stack>
         </CommentItem>

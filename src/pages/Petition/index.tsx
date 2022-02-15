@@ -14,13 +14,6 @@ const Petition = (): JSX.Element => {
       <PetitionWrapper>
         <PetitionView p={{ base: '30px 10px', md: '50px 30px' }}>
           <PetitionContents petitionId={castedPetitionId}></PetitionContents>
-          <Stack>
-            <Text textAlign={'left'} fontWeight={'bold'} fontSize={'20px'}>
-              의견보기
-            </Text>
-            <CommentForm petitionId={castedPetitionId}></CommentForm>
-            <CommentList petitionId={castedPetitionId}></CommentList>
-          </Stack>
         </PetitionView>
       </PetitionWrapper>
     </Inner>
