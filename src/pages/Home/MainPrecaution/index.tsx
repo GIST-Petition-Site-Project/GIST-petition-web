@@ -40,7 +40,6 @@ const MainPrecaution = (): JSX.Element => {
               }
               setLeftOpen(leftOpen => !leftOpen)
             }}
-            // 왼쪽 패딩 역시 900px에 맞추기 위해 0으로 설정했습니다.
           >
             <PrecautionText>
               이런 청원은 삭제·숨김 처리될 수 있습니다
