@@ -1,4 +1,3 @@
-import PetitionList from '../../components/PetitionList'
 import { Inner, PetitionBoard } from './styles'
 import { Stack } from '@chakra-ui/react'
 import qs from 'qs'
@@ -8,6 +7,7 @@ import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
 import PaginationButtons from '../../components/PaginationButtons'
 import { getMyPetitionsByQuery } from '../../utils/api'
+import MyPetitionList from './MyPetitionList'
 
 const MyPetitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
@@ -43,7 +43,7 @@ const MyPetitions = (): JSX.Element => {
           <PetitionsTitle>
             <PetitionsText>나의 청원</PetitionsText>
           </PetitionsTitle>
-          <PetitionList getPetitions={getMyPetitionsByQuery} />
+          <MyPetitionList getPetitions={getMyPetitionsByQuery} />
           <Stack>
             <PaginationButtons
               getPetitions={getMyPetitionsByQuery}
