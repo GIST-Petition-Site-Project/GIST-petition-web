@@ -18,7 +18,12 @@ import {
   TermsOfUseTotalBox,
 } from './styles'
 
-const TermsOfUse = ({ onAgree, agreeInfo }): JSX.Element => {
+interface ITermsOfUse {
+  onAgree: (value: string) => void
+  agreeInfo: RegisterAgree
+}
+
+const TermsOfUse = ({ onAgree, agreeInfo }: ITermsOfUse): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
   const [secondOpen, setSecondOpen] = useState(false)
   const handleClick = (e: any) => {
