@@ -23,8 +23,8 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   })
 
   const queryPost = async (query: QueryParams) => {
-    const status = await getPetitions(query)
-    setPetitionList(status?.data?.content)
+    const response = await getPetitions(query)
+    setPetitionList(response?.data?.content)
   }
 
   const [petitionList, setPetitionList] = useState<Array<Petition>>([])
