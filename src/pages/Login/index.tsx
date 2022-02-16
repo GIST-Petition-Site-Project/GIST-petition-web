@@ -75,6 +75,7 @@ const Login = (): JSX.Element => {
             <Input
               type="email"
               name="username"
+              id="username"
               placeholder="이메일을 입력하세요."
               value={input.username}
               onChange={handleChangeUser}
@@ -91,12 +92,12 @@ const Login = (): JSX.Element => {
             <Input
               type="password"
               name="password"
+              id="password"
               placeholder="비밀번호를 입력하세요."
               value={input.password}
               onChange={handleChangeUser}
               borderRadius="0"
               onKeyPress={checkUpperCase}
-              // style={{ imeMode: 'disabled' }}
             />
           </InputGroup>
         </FormControl>
