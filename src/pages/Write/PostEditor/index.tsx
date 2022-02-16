@@ -49,7 +49,6 @@ const PostEditor = () => {
       ...petitionInput,
       [name]: value.replace(/ +/g, ' '),
     })
-    console.log(petitionInput.description.length)
   }
 
   const navigate = useNavigate()
