@@ -12,20 +12,20 @@ import { useEffect } from 'react'
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch()
+  const isSessionValid = async () => {
+    try {
+      const status = await getUsersMe()
+      if (status < 400) {
+        dispatch(setLogin())
+      } else {
+        dispatch(setLogout())
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    const isSessionValid = async () => {
-      try {
-        const status = await getUsersMe()
-        if (status < 400) {
-          dispatch(setLogin())
-        } else {
-          dispatch(setLogout())
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
     isSessionValid()
   }, [])
 
