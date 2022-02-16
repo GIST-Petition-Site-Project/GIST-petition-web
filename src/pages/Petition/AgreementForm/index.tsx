@@ -20,11 +20,11 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
     e.preventDefault()
     try {
       const response = await postAgreePetition(petitionId, input)
-      if (response?.status === 401) {
+      if (response.status === 401) {
         onOpen()
         console.log('로그인 해야함')
       }
-      if (response?.status < 400) {
+      if (response.status < 400) {
         navigate(0)
         setIsConsented(true)
       }

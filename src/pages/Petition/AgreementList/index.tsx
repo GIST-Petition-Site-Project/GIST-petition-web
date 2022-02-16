@@ -6,7 +6,7 @@ import {
   ContentWrap,
 } from './styles'
 import { useEffect, useState } from 'react'
-import { getAgreements } from '../../../utils/api/petition/getAgreements'
+import { getAgreements } from '../../../utils/api'
 
 const AgreementList = ({ petitionId }: PetitionId): JSX.Element => {
   const [response, setResponse] = useState<Array<GetAgreements>>([])

@@ -37,7 +37,19 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
   useEffect(() => {
     const getPetitionInformation = async (id: string) => {
       const response = await getPetitionById(id)
-      setResponse(response?.data)
+      setResponse(
+        response?.data || {
+          agreements: 0,
+          answered: false,
+          categoryName: '',
+          createdAt: '',
+          description: '',
+          id: 0,
+          title: '',
+          updatedAt: '',
+          userId: 0,
+        },
+      )
     }
     getPetitionInformation(petitionId)
   }, [])
