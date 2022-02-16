@@ -7,7 +7,6 @@ import {
   Input,
   FormControl,
   FormLabel,
-  Text,
 } from '@chakra-ui/react'
 import {
   SubmitButton,

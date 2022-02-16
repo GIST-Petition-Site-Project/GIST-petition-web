@@ -51,9 +51,8 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
               rows={1}
               _focus={{ outline: 'none' }}
               onChange={handleChange}
-            >
-              청원에 동의합니다.
-            </AgreementTextArea>
+              value="청원에 동의합니다."
+            />
             <AgreementWriteButton
               _focus={{ outline: 'none' }}
               disabled={isConsented}
