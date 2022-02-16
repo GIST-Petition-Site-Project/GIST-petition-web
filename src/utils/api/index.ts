@@ -1,10 +1,6 @@
 // answer
 export * from './answer/getRetrieveAnswer'
 
-// comment
-export * from './comment/getComments'
-export * from './comment/postCreateComment'
-
 // petitions
 export * from './petition/getPetitionById'
 export * from './petition/getPetitionCount'

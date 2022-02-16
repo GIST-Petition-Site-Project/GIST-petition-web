@@ -17,68 +17,45 @@ import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
 import AgreementForm from './../AgreementForm'
 
-const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
-  const [response, setResponse] = useState<Petition>({
-    agreements: 0,
-    answered: true,
-    categoryName: '',
-    createdAt: '',
-    description: '',
-    id: 0,
-    title: '',
-    updatedAt: '',
-    userId: 0,
-  })
+interface IProps {
+  petitionURL: string
+  petitionId: string
+}
+
+const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
+  const [response, setResponse] = useState<Petition | undefined>()
   const [answerContent, setAnswerContent] = useState<
     AnswerContent | undefined
   >()
   const { onOpen, isOpen, onClose } = useDisclosure()
 
   useEffect(() => {
-    const getPetitionInformation = async (id: string) => {
-      const response = await getPetitionById(id)
-      setResponse(
-        response?.data || {
-          agreements: 0,
-          answered: false,
-          categoryName: '',
-          createdAt: '',
-          description: '',
-          id: 0,
-          title: '',
-          updatedAt: '',
-          userId: 0,
-        },
-      )
-    }
-    getPetitionInformation(petitionId)
-  }, [])
-
-  useEffect(() => {
-    const getAnswerContent = async (id: string) => {
-      const getAnswer = await getRetrieveAnswer(id)
+    const getPetitionInformation = async (petitionURL: string) => {
+      const response = await getPetitionById(petitionURL)
+      setResponse(response?.data)
+      const getAnswer = await getRetrieveAnswer(petitionId)
       setAnswerContent(getAnswer?.data)
     }
-    getAnswerContent(petitionId)
-  }, [])
-  const castedPetitionId = petitionId as string
+    getPetitionInformation(petitionURL)
+  }, [petitionId])
+
   return (
     <>
       <Stack spacing={6} color={'#333'}>
         <PetitionProgress>
           <Text fontWeight={'bold'} display={'inline-block'}>
-            {!response.answered ? '청원진행중' : '답변완료'}&nbsp;
+            {!response?.answered ? '청원진행중' : '답변완료'}&nbsp;
           </Text>
-          <Text display={'inline'}>({response.createdAt.slice(0, 10)}~)</Text>
+          <Text display={'inline'}>({response?.createdAt.slice(0, 10)}~)</Text>
         </PetitionProgress>
         <PetitionTitleWrap>
           <PetitionTitle ml={'20px'} mr={'20px'}>
-            {response.title}
+            {response?.title}
           </PetitionTitle>
         </PetitionTitleWrap>
         <CurrentAgreementsText>
           <Text>
-            총 <CurrentAgreements>{response.agreements}</CurrentAgreements>
+            총 <CurrentAgreements>{response?.agreements}</CurrentAgreements>
             명이 동의했습니다.
           </Text>
         </CurrentAgreementsText>
@@ -90,11 +67,11 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
         <Divider color={'#ccc'}></Divider>
         <div>
           <ContentWrap>
-            <PetitionDescription>{response.description}</PetitionDescription>
+            <PetitionDescription>{response?.description}</PetitionDescription>
           </ContentWrap>
         </div>
       </Stack>
-      {response.answered ? (
+      {response?.answered ? (
         <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
           <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
             답변
@@ -118,10 +95,11 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
               p={'0.5em 0'}
             >
               청원동의{' '}
-              <span style={{ color: '#FF0000' }}>{response.agreements} </span>명
+              <span style={{ color: '#FF0000' }}>{response?.agreements} </span>
+              명
             </Text>
-            <AgreementForm petitionId={castedPetitionId}></AgreementForm>
-            <AgreementList petitionId={castedPetitionId}></AgreementList>
+            <AgreementForm petitionId={petitionId}></AgreementForm>
+            <AgreementList petitionId={petitionId}></AgreementList>
           </Stack>
         </div>
       )}
