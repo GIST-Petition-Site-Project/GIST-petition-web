@@ -11,7 +11,8 @@ const Inner = styled.div`
 
 const PetitionBoard = styled.div`
   position: relative;
-  top: 9.375rem;
+  /* top: 9.375rem; */
+  margin-top: 9.375rem;
   text-align: center;
 `
 const PetitionsTitle = styled(Box)`
