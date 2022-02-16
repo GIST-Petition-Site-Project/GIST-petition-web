@@ -27,11 +27,11 @@ interface QueryParams {
 }
 
 interface GetPetitions {
-  getPetitions: (query: QueryParams) => Promise<any[]>
+  getPetitions: (query: QueryParams) => Promise<AxiosResponse<any, any>>
 }
 
 interface PaginationButton {
-  getPetitions: (query: QueryParams) => Promise<any[]>
+  getPetitions: (query: QueryParams) => Promise<AxiosResponse<any, any>>
   pathname: string
 }
 

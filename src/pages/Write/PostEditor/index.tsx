@@ -58,10 +58,8 @@ const PostEditor = () => {
     e.preventDefault()
     try {
       const response = await postCreatePetition(petitionInput)
-      if (response) {
-        const url = response?.headers?.location
-        navigate(url)
-      }
+      const url = response?.headers?.location || '/petitions'
+      navigate(url)
     } catch (error) {
       console.log(error)
       if (petitionInput.title === ' ' || petitionInput.description === ' ') {

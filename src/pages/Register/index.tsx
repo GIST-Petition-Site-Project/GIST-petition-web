@@ -216,8 +216,8 @@ const Register = (): JSX.Element => {
   }
 
   const handleDelete = async () => {
-    const status = await postDelete({ username: input.username })
-    if (status[0] < 400) {
+    const response = await postDelete({ username: input.username })
+    if (response?.status < 400) {
       toast({
         status: 'success',
         duration: 2000,

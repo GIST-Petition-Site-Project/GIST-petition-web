@@ -17,10 +17,8 @@ const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)
 
   const getPetitionCountFunction = async () => {
-    const status = await getPetitionCount()
-    if (status[0] < 400) {
-      setPetitionCount(status[1])
-    }
+    const response = await getPetitionCount()
+    setPetitionCount(response?.data || 0)
   }
   useEffect(() => {
     getPetitionCountFunction()

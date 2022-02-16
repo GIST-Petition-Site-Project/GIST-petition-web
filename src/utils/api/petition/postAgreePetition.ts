@@ -5,12 +5,5 @@ export const postAgreePetition = async (
   payload: AgreePetition,
 ) => {
   const response = await api.post(`petitions/${petitionId}/agreements`, payload)
-  return response.status
+  return response
 }
-// export const postCreateComment = async (
-//   petitionId: string,
-//   payload: CommentInput,
-// ) => {
-//   const response = await api.post(`petitions/${petitionId}/comments`, payload)
-//   return response.status
-// }

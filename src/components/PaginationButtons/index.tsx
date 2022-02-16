@@ -24,10 +24,8 @@ const PaginationButtons = ({
   })
   const [totalPages, setTotalPages] = useState(0)
   const getPaginationInf = async (query: QueryParams) => {
-    const status = await getPetitions(query)
-    if (status[0] < 400) {
-      setTotalPages(status[1].totalPages)
-    }
+    const response = await getPetitions(query)
+    setTotalPages(response?.data?.totalPages)
   }
   const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
     pagesCount: totalPages,

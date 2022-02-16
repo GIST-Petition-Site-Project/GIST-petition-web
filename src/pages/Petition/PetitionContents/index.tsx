@@ -1,12 +1,6 @@
-import { chakra, Divider, Flex, Stack, Text } from '@chakra-ui/react'
+import { Divider, Stack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { FaFileSignature } from 'react-icons/fa'
-import {
-  getPetitionById,
-  getStateOfAgreement,
-  postAgreePetition,
-  getRetrieveAnswer,
-} from '../../../utils/api'
+import { getPetitionById, getRetrieveAnswer } from '../../../utils/api'
 import {
   PetitionProgress,
   PetitionTitleWrap,
@@ -14,13 +8,10 @@ import {
   CurrentAgreementsText,
   CurrentAgreements,
   PetitionDescription,
-  AgreementButton,
   ContentWrap,
 } from './styles'
 import AgreementList from './../AgreementList'
 import { useParams } from 'react-router-dom'
-
-const CFaFileSignature = chakra(FaFileSignature)
 
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
@@ -45,10 +36,20 @@ const PetitionContents = ({ petitionId }: PetitionId): JSX.Element => {
 
   useEffect(() => {
     const getPetitionInformation = async (id: string) => {
-      const getPetition = await getPetitionById(id)
-      if (getPetition[0] < 400) {
-        setResponse(getPetition[1])
-      }
+      const response = await getPetitionById(id)
+      setResponse(
+        response?.data || {
+          agreements: 0,
+          answered: false,
+          categoryName: '',
+          createdAt: '',
+          description: '',
+          id: 0,
+          title: '',
+          updatedAt: '',
+          userId: 0,
+        },
+      )
     }
     getPetitionInformation(petitionId)
   }, [])

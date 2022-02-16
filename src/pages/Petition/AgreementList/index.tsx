@@ -6,7 +6,7 @@ import {
   ContentWrap,
 } from './styles'
 import { useEffect, useState } from 'react'
-import { getAgreements } from '../../../utils/api/petition/getAgreements'
+import { getAgreements } from '../../../utils/api'
 
 const AgreementList = ({ petitionId }: PetitionId): JSX.Element => {
   const [response, setResponse] = useState<Array<GetAgreements>>([])
@@ -14,11 +14,8 @@ const AgreementList = ({ petitionId }: PetitionId): JSX.Element => {
   useEffect(() => {
     const getAllAgreements = async () => {
       try {
-        const status = await getAgreements(petitionId)
-        if (status[0] < 400) {
-          setResponse(status[1].content)
-          console.log(status[1].content)
-        }
+        const response = await getAgreements(petitionId)
+        setResponse(response?.data?.content)
       } catch (error) {
         console.log(error)
       }
