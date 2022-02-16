@@ -9,7 +9,6 @@ import {
 } from './styles'
 import { useEffect, useState } from 'react'
 import { getPetitionCount } from '../../utils/api'
-import Footer from '../../components/Footer'
 import PetitionList from '../../components/PetitionList'
 import { getPetitionsByQuery } from '../../utils/api'
 
@@ -51,7 +50,6 @@ const Home = (): JSX.Element => {
       <Inner>
         <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
       </Inner>
-      <Footer></Footer>
     </section>
   )
 }
