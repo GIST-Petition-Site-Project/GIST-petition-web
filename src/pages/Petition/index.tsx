@@ -4,8 +4,6 @@ import { Inner, PetitionWrapper, PetitionView } from './styles'
 import PetitionContents from './PetitionContents'
 import { getPetitionById } from '../../utils/api'
 import { useEffect, useState } from 'react'
-import AgreementForm from './AgreementForm'
-import AgreementList from './AgreementList'
 
 const Petition = (): JSX.Element => {
   const { id } = useParams()
