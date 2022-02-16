@@ -2,23 +2,27 @@ import styled from '@emotion/styled'
 import theme from '../../style/theme'
 
 const NotFoundSection = styled.section`
+  position: fixed;
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  margin-top: 10rem;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
+  z-index: 200000;
   padding: 0 2rem;
 
   @media screen and (min-width: ${theme.breakpoints.md}) {
     flex-direction: row;
-    justify-content: center;
   }
 
   .message {
-    padding: 4rem 0 0 0;
-
+    padding: 2rem 0 0 0;
     font-weight: 500;
     @media screen and (min-width: ${theme.breakpoints.md}) {
-      padding: 4rem 0 0 2rem;
+      padding: 1rem 0 0 2rem;
     }
     h1 {
       font-size: 2rem;

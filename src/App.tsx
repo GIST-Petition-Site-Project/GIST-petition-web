@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setLogin, setLogout } from './redux/auth/authSlice'
 import { getUsersMe } from './utils/api'
 import theme from './style/theme'
+import NavBar from './components/NavBar'
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ const App = (): JSX.Element => {
     <ChakraProvider theme={theme}>
       <GlobalStyle />
       <RootRouter />
+      <NavBar />
     </ChakraProvider>
   )
 }
