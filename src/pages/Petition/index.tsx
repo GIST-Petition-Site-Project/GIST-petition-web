@@ -5,6 +5,8 @@ import PetitionContents from './PetitionContents'
 
 const Petition = (): JSX.Element => {
   const { petitionId } = useParams()
+  console.log(location.pathname)
+  console.log(petitionId)
   const castedPetitionId = petitionId as string
   return (
     <Inner>
