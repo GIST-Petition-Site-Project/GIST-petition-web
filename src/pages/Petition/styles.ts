@@ -14,7 +14,7 @@ const PetitionWrapper = styled.div`
   display: flex;
   border: 1px solid #ccc;
   position: relative;
-  top: 150px;
+  margin: 150px 0;
 `
 
 const PetitionView = styled(Box)`

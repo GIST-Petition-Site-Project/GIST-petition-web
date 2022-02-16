@@ -33,7 +33,9 @@ const App = (): JSX.Element => {
     <ChakraProvider theme={theme}>
       <GlobalStyle />
       <NavBar />
-      <RootRouter />
+      <div style={{ minHeight: '100vh' }}>
+        <RootRouter />
+      </div>
       <Footer />
     </ChakraProvider>
   )

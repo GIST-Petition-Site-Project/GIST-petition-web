@@ -12,7 +12,7 @@ const Inner = styled.div`
 
 const WriteStack = styled(Stack)`
   position: relative;
-  top: 9.375rem;
+  margin: 9.375rem 0;
 `
 const Wrapper = styled(Box)`
   border: 1px solid #ccc;
