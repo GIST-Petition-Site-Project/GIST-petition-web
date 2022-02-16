@@ -1,7 +1,7 @@
 import { Text, UnorderedList, Tag } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import {
   PetitionAgreement,
