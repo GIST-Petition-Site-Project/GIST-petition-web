@@ -1,13 +1,25 @@
 import styled from '@emotion/styled'
+import theme from '../../style/theme'
 
 const NotFoundSection = styled.section`
   display: flex;
-  justify-content: center;
   margin-top: 10rem;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    flex-direction: row;
+    justify-content: center;
+  }
 
   .message {
-    padding: 4rem 0 0 2rem;
+    padding: 4rem 0 0 0;
+
     font-weight: 500;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      padding: 4rem 0 0 2rem;
+    }
     h1 {
       font-size: 2rem;
       font-weight: bold;
@@ -20,50 +32,56 @@ const NotFoundSection = styled.section`
     a {
       font-size: 1.4rem;
     }
-    .previous-btn {
+
+    .err-btn {
       display: inline-block;
-      width: 100px;
-      height: 36px;
+      width: 100%;
+      height: 48px;
       text-align: center;
 
-      color: #df3127;
-      border: 2px solid #df3127;
       font-size: 1rem;
       user-select: none;
       position: relative;
 
-      margin-right: 10px;
+      border: 2px solid #df3127;
+
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        width: 100px;
+        height: 36px;
+      }
+    }
+
+    .previous-btn {
+      color: #df3127;
+      margin-bottom: 10px;
+
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        margin-right: 10px;
+        margin-bottom: 0;
+      }
+    }
+
+    .main-btn {
+      color: white;
+      background-color: #df3127;
+    }
+
+    .err-btn::before {
+      position: absolute;
+      line-height: 42px;
+      left: 1px;
+      top: 1px;
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        line-height: 32px;
+      }
     }
     .previous-btn::before {
       content: '이전 페이지';
-      position: absolute;
-      line-height: 32px;
-      left: 1px;
-      top: 1px;
-      width: calc(100% - 2px);
-      height: calc(100% - 2px);
-    }
-    .main-btn {
-      display: inline-block;
-      width: 100px;
-      height: 36px;
-      text-align: center;
-
-      color: white;
-      border: 2px solid #df3127;
-      background-color: #df3127;
-      font-size: 1rem;
-      user-select: none;
-      position: relative;
     }
     .main-btn::before {
       content: '메인 페이지';
-      position: absolute;
-      line-height: 32px;
-      left: 1px;
-      top: 1px;
-      width: calc(100% - 2px);
-      height: calc(100% - 2px);
     }
   }
 `
