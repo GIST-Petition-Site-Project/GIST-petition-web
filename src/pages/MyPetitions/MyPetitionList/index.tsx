@@ -57,7 +57,6 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                 <PetitionStatusTag borderRadius={'none'}>
                   {!petition.answered ? '청원진행중' : '답변완료'}{' '}
                   {/*petition.answered의 값이 적용이 잘 안 됨*/}
-                  {console.log(petition)}
                 </PetitionStatusTag>
               </PetitionStatus>
               <PetitionCategory
