@@ -9,9 +9,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const [input, setInput] = useState<AgreePetition>({
     description: '청원에 동의합니다.',
   })
-  const [isConsented, setIsConsented] = useState<boolean>(false)
-  // Register와 Login 페이지와 이름을 통일 시키기 위해
-  // onContentChange 에서 handleChange로 이름을 변경합니다.
+  const [isConsented, setIsConsented] = useState(false)
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ description: e.target.value })
   }
@@ -20,11 +18,10 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
     e.preventDefault()
     try {
       const response = await postAgreePetition(petitionId, input)
-      if (response.status === 401) {
+      if (response?.status === 401) {
         onOpen()
         console.log('로그인 해야함')
-      }
-      if (response.status < 400) {
+      } else if (response?.status || 500 < 401) {
         navigate(0)
         setIsConsented(true)
       }
@@ -32,16 +29,22 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
       console.log(error)
     }
   }
-  useEffect(() => {
-    const checkAgreeByMe = async (id: string) => {
+
+  const checkAgreeByMe = async (id: string) => {
+    try {
       const response = await getStateOfAgreement(id)
       setIsConsented(response?.data)
+    } catch (error) {
+      console.log(error)
     }
+  }
+
+  useEffect(() => {
     checkAgreeByMe(petitionId)
-  }, [])
+  }, [petitionId])
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  postAgreePetition
+  // postAgreePetition
   return (
     <>
       <form onSubmit={handleSubmit}>
