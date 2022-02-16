@@ -99,9 +99,7 @@ const PostEditor = () => {
               name="categoryId"
               value={petitionInput.categoryId}
             >
-              <option selected disabled>
-                카테고리를 선택해주세요.
-              </option>
+              <option disabled>카테고리를 선택해주세요.</option>
               {catergoryIdx.map(idx => (
                 <option value={idx} key={idx}>
                   {Category[idx]}
