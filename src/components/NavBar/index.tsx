@@ -16,30 +16,43 @@ import { Link } from 'react-router-dom'
 
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState(false)
+  const closeMenu = () => {
+    if (opened) {
+      setOpened(!opened)
+    }
+  }
 
   return (
     <Header>
       <Inner flexDirection={{ base: 'column', md: 'row' }}>
         <Logo>
-          <Link to="/">
+          <Link to="/" onClick={closeMenu}>
             <Logo__Image alt="logo" src={logo} />
           </Link>
         </Logo>
         <TopMenu open={opened} flexDirection={{ base: 'column', md: 'row' }}>
           <ListItem className="item">
             <ItemName className="item__menu">
-              <Link to="/write">청원하기</Link>
+              <Link to="/write" onClick={closeMenu}>
+                청원하기
+              </Link>
             </ItemName>
           </ListItem>
           <ListItem className="item">
             <ItemName className="item__menu">
-              <Link to="/petitions">모든 청원</Link>
+              <Link to="/petitions" onClick={closeMenu}>
+                모든 청원
+              </Link>
             </ItemName>
           </ListItem>
           <ListItem className="item">
-            <ItemName className="item__menu">답변된 청원</ItemName>
+            <ItemName className="item__menu" onClick={closeMenu}>
+              답변된 청원
+            </ItemName>
           </ListItem>
-          <ListItem className="item">{MyMenu()}</ListItem>
+          <ListItem className="item">
+            <MyMenu closeMenu={closeMenu} />
+          </ListItem>
         </TopMenu>
         <MobMenuButton
           colorScheme={'black'}

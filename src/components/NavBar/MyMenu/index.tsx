@@ -6,8 +6,13 @@ import { DesktopMenu, MobileMenu } from './styles'
 import { ItemName } from '../styles'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { MouseEvent } from 'react'
 
-const MyMenu = (): JSX.Element => {
+interface CloseMenu {
+  closeMenu: (event: MouseEvent) => void
+}
+
+const MyMenu = (closeMenu: CloseMenu): JSX.Element => {
   const dispatch = useDispatch()
   const handleLogout = async () => {
     try {
@@ -38,7 +43,9 @@ const MyMenu = (): JSX.Element => {
             color={'white'}
           >
             <MenuItem>
-              <Link to="/mypetitions">나의 청원</Link>
+              <Link to="/mypetitions" onClick={closeMenu}>
+                나의 청원
+              </Link>
             </MenuItem>
             <MenuItem>
               <Link to="#">회원 정보 관리</Link>
