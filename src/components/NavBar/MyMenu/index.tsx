@@ -1,10 +1,11 @@
-import { Box, Menu, MenuButton, MenuList } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { setLogout } from '../../../redux/auth/authSlice'
 import { useAppSelect } from '../../../redux/store.hooks'
 import { postLogout } from '../../../utils/api'
-import { DesktopMenu, MobileMenu, MenuContent } from './styles'
+import { DesktopMenu, MobileMenu } from './styles'
 import { ItemName } from '../styles'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const MyMenu = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -36,25 +37,27 @@ const MyMenu = (): JSX.Element => {
             borderRadius={'none'}
             color={'white'}
           >
-            <MenuContent>
-              <a href="/mypetitions">나의 청원</a>
-            </MenuContent>
-            <MenuContent>비밀번호 변경</MenuContent>
-            <MenuContent>
+            <MenuItem>
+              <Link to="/mypetitions">나의 청원</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="#">회원 정보 관리</Link>
+            </MenuItem>
+            <MenuItem>
               <a onClick={handleLogout}>로그아웃</a>
-            </MenuContent>
+            </MenuItem>
           </MenuList>
         </Menu>
       </DesktopMenu>
 
       <MobileMenu>
-        <ItemName className="item__menu">
-          <a href="/mypetitions">나의 청원</a>
+        <ItemName>
+          <Link to="/mypetitions">나의 청원</Link>
         </ItemName>
-        <ItemName className="item__menu">
-          <a href="#">회원 정보 관리</a>
+        <ItemName>
+          <Link to="#">회원 정보 관리</Link>
         </ItemName>
-        <ItemName className="item__menu">
+        <ItemName>
           <a onClick={handleLogout}>로그아웃</a>
         </ItemName>
       </MobileMenu>

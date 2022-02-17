@@ -8,10 +8,12 @@ import Register from '../pages/Register'
 import Write from '../pages/Write'
 import MyPetitions from '../pages/MyPetitions'
 import { AuthRoute, UnauthRoute } from './PrivateRouter'
+import NavBar from '../components/NavBar'
 
 const RootRouter = (): JSX.Element => {
   return (
     <BrowserRouter>
+      <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UnauthRoute />}>

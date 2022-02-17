@@ -9,6 +9,7 @@ import {
   StyledBoxInner,
   StyledPostEditor,
 } from './styles'
+import { useEffect } from 'react'
 
 const Write = (): JSX.Element => {
   return (

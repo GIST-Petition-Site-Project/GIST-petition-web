@@ -12,6 +12,7 @@ import {
 import { useState } from 'react'
 import { ListItem } from '@chakra-ui/react'
 import MyMenu from './MyMenu'
+import { Link } from 'react-router-dom'
 
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState(false)
@@ -20,19 +21,19 @@ const NavBar = (): JSX.Element => {
     <Header>
       <Inner flexDirection={{ base: 'column', md: 'row' }}>
         <Logo>
-          <a href="/">
+          <Link to="/">
             <Logo__Image alt="logo" src={logo} />
-          </a>
+          </Link>
         </Logo>
         <TopMenu open={opened} flexDirection={{ base: 'column', md: 'row' }}>
           <ListItem className="item">
             <ItemName className="item__menu">
-              <a href="/write">청원하기</a>
+              <Link to="/write">청원하기</Link>
             </ItemName>
           </ListItem>
           <ListItem className="item">
             <ItemName className="item__menu">
-              <a href="/petitions">모든 청원</a>
+              <Link to="/petitions">모든 청원</Link>
             </ItemName>
           </ListItem>
           <ListItem className="item">
