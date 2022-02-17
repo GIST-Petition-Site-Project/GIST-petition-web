@@ -20,7 +20,7 @@ const CurrentAgreementsText = styled.div`
   font-size: 1.25em;
 `
 
-const CurrentAgreements = styled(Text)`
+const CurrentAgreements = styled.span`
   display: inline;
   color: #df3127;
   font-weight: bold;

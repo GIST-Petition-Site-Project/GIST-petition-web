@@ -1,9 +1,9 @@
 import logo from '../../assets/img/footer_logo.png'
-import { Container, Inner, Logo, Text } from './styles'
+import { FooterContainer, Inner, Logo, Text } from './styles'
 
 const Footer = (): JSX.Element => {
   return (
-    <Container>
+    <FooterContainer>
       <Inner>
         <Logo alt="Logo" src={logo}></Logo>
         <Text>
@@ -16,7 +16,7 @@ const Footer = (): JSX.Element => {
           </span>
         </Text>
       </Inner>
-    </Container>
+    </FooterContainer>
   )
 }
 

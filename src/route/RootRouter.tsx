@@ -3,7 +3,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import NotFound from '../pages/NotFound'
 import Petition from '../pages/Petition'
-import Petitions from '../pages/Petitions/index'
+import Petitions from '../pages/Petitions'
 import Register from '../pages/Register'
 import Write from '../pages/Write'
 import MyPetitions from '../pages/MyPetitions'
@@ -27,6 +27,9 @@ const RootRouter = (): JSX.Element => {
         <Route path="/petitions" element={<Outlet />}>
           <Route index element={<Petitions />} />
           <Route path=":petitionId" element={<Petition />} />
+        </Route>
+        <Route path="/petitions/temp" element={<Outlet />}>
+          <Route path=":id" element={<Petition />} />
         </Route>
         <Route path="/mypetitions" element={<AuthRoute />}>
           <Route index element={<MyPetitions />} />

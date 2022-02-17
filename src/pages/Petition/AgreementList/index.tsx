@@ -8,20 +8,23 @@ import {
 import { useEffect, useState } from 'react'
 import { getAgreements } from '../../../utils/api'
 
-const AgreementList = ({ petitionId }: PetitionId): JSX.Element => {
-  const [response, setResponse] = useState<Array<GetAgreements>>([])
+interface IProps {
+  petitionId: string
+}
 
-  useEffect(() => {
-    const getAllAgreements = async () => {
-      try {
-        const response = await getAgreements(petitionId)
-        setResponse(response?.data?.content)
-      } catch (error) {
-        console.log(error)
-      }
+const AgreementList = ({ petitionId }: IProps): JSX.Element => {
+  const [response, setResponse] = useState<Array<GetAgreements>>([])
+  const getAllAgreements = async () => {
+    try {
+      const response = await getAgreements(petitionId)
+      setResponse(response?.data?.content || [])
+    } catch (error) {
+      console.log(error)
     }
+  }
+  useEffect(() => {
     getAllAgreements()
-  }, [])
+  }, [petitionId])
 
   return (
     <ul>
