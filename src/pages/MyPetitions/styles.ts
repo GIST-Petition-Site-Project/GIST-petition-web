@@ -31,6 +31,8 @@ const PetitionsSelect = styled(Select)`
 const PetitionsText = styled(Text)`
   font-size: 20px;
   font-weight: bold;
+  height: 40px;
+  margin-bottom: 1px;
 `
 
 export { Inner, PetitionBoard, PetitionsTitle, PetitionsSelect, PetitionsText }
