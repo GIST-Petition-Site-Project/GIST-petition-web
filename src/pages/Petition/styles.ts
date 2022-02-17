@@ -107,13 +107,13 @@ const SharingPetition = styled.div`
           align-items: center;
         }
       }
-      li:nth-child(1) {
+      li:nth-of-type(1) {
         a {
           color: #3b1e1e;
           background-color: #f9e000;
         }
       }
-      li:nth-child(2) {
+      li:nth-of-type(2) {
         a {
           color: #ffffff;
           background-color: #4267b2;

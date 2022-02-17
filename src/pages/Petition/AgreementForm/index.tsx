@@ -67,8 +67,8 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
             <AgreementTextArea
               rows={1}
               _focus={{ outline: 'none' }}
+              placeholder="청원에 동의합니다."
               onChange={handleChange}
-              defaultValue="청원에 동의합니다."
               value={input.description}
               maxLength={100}
             />
