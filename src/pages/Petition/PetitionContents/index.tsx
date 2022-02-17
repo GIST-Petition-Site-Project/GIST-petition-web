@@ -11,7 +11,6 @@ import {
   ContentWrap,
 } from './styles'
 import AgreementList from './../AgreementList'
-import { useParams } from 'react-router-dom'
 
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
@@ -27,7 +26,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
   const [answerContent, setAnswerContent] = useState<
     AnswerContent | undefined
   >()
-  const { onOpen, isOpen, onClose } = useDisclosure()
+  const { isOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     const getPetitionInformation = async (petitionURL: string) => {

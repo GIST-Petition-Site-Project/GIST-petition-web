@@ -37,6 +37,8 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     queryPost(queryParams)
   }, [location.search])
 
+  console.log(petitionList)
+
   return (
     <>
       <PetitionsHead display={{ base: 'none', md: 'flex' }}>

@@ -7,22 +7,20 @@ import MyPetitionList from './MyPetitionList'
 
 const MyPetitions = (): JSX.Element => {
   return (
-    <>
-      <Inner>
-        <PetitionBoard>
-          <PetitionsTitle>
-            <PetitionsText>나의 청원</PetitionsText>
-          </PetitionsTitle>
-          <MyPetitionList getPetitions={getMyPetitionsByQuery} />
-          <Stack>
-            <PaginationButtons
-              getPetitions={getMyPetitionsByQuery}
-              pathname={'/mypetitions'}
-            />
-          </Stack>
-        </PetitionBoard>
-      </Inner>
-    </>
+    <Inner>
+      <PetitionBoard>
+        <PetitionsTitle>
+          <PetitionsText>나의 청원</PetitionsText>
+        </PetitionsTitle>
+        <MyPetitionList getPetitions={getMyPetitionsByQuery} />
+        <Stack>
+          <PaginationButtons
+            getPetitions={getMyPetitionsByQuery}
+            pathname={'/mypetitions'}
+          />
+        </Stack>
+      </PetitionBoard>
+    </Inner>
   )
 }
 

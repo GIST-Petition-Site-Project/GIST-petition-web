@@ -43,3 +43,6 @@ interface GetAgreements {
   description: string
   id: number
 }
+interface Window {
+  Kakao: any
+}
