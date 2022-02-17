@@ -64,7 +64,9 @@ const SharingPetition = styled.div`
         height: 100%;
         background-color: #131618;
         color: white;
-        i {
+        svg {
+          margin: auto;
+
           color: #fff;
           font-size: 24px;
           @media screen and (min-width: ${theme.breakpoints.sm}) {

@@ -5,6 +5,7 @@ import PetitionContents from './PetitionContents'
 import { getPetitionById } from '../../utils/api'
 import { useEffect, useState } from 'react'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
+import { IoMdAlbums } from 'react-icons/io'
 
 const Petition = (): JSX.Element => {
   const { id } = useParams()
@@ -77,7 +78,7 @@ const Petition = (): JSX.Element => {
           </div>
           <div className="copy-btn">
             <button onClick={clip}>
-              <i className="xi-stack-paper"></i>
+              <IoMdAlbums />
             </button>
           </div>
         </div>
@@ -97,7 +98,6 @@ const Petition = (): JSX.Element => {
                 title="카카오톡 새창열림"
               >
                 <RiKakaoTalkFill />
-                {/* <i className="xi-kakaotalk"></i> */}
               </a>
             </li>
             <li className="facebook">
