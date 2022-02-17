@@ -1,12 +1,5 @@
 import { CheckIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Checkbox,
-  Divider,
-  Flex,
-  IconButton,
-  Radio,
-} from '@chakra-ui/react'
+import { Box, Divider } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import {
   TermsOfUseCollapse,
@@ -27,10 +20,7 @@ const TermsOfUse = ({ onAgree, agreeInfo }: TermsOfUse): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
   const [secondOpen, setSecondOpen] = useState(false)
   const handleClick = (e: any) => {
-    const target = e.target
-    const currentTarget = e.currentTarget
-    console.log(target)
-    console.log(currentTarget)
+    const target = e.currentTarget
     const value = target.dataset.value
     value && onAgree(value)
   }
