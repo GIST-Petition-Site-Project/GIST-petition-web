@@ -27,10 +27,13 @@ const SharingPetition = styled.div`
   .share-url {
     height: 3rem;
     .url-box {
-      width: 89%;
+      width: 82%;
       height: 100%;
       border: 1px solid #ccc;
       float: left;
+
+      overflow: hidden;
+      word-break: break-all;
 
       div:last-child {
       }
@@ -38,6 +41,10 @@ const SharingPetition = styled.div`
         width: 10rem;
         background-color: #ccc;
         float: left;
+        display: none;
+        @media screen and (min-width: ${theme.breakpoints.md}) {
+          display: block;
+        }
       }
       div {
         line-height: 2.8rem;
@@ -47,7 +54,8 @@ const SharingPetition = styled.div`
     }
 
     .copy-btn {
-      width: 10%;
+      min-width: 16%;
+
       height: 100%;
       margin-left: 5px;
       float: right;
@@ -56,6 +64,21 @@ const SharingPetition = styled.div`
         height: 100%;
         background-color: #131618;
         color: white;
+        i {
+          color: #fff;
+          font-size: 24px;
+          @media screen and (min-width: ${theme.breakpoints.sm}) {
+            display: none;
+          }
+        }
+      }
+      button::before {
+        font-family: xeicon;
+        content: '';
+        color: white;
+        @media screen and (min-width: ${theme.breakpoints.sm}) {
+          content: 'URL 복사';
+        }
       }
     }
   }
@@ -77,11 +100,11 @@ const SharingPetition = styled.div`
         a {
           width: 45px;
           height: 45px;
-          display: block;
           border-radius: 100px;
-          text-align: center;
-          line-height: 3rem;
           font-size: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
       li:nth-child(1) {

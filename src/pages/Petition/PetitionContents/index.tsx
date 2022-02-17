@@ -11,7 +11,6 @@ import {
   ContentWrap,
 } from './styles'
 import AgreementList from './../AgreementList'
-
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '../../../components/NeedLoginModal'
 import AgreementForm from './../AgreementForm'

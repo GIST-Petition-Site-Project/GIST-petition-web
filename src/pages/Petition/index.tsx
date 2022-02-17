@@ -4,6 +4,7 @@ import { Inner, PetitionWrapper, PetitionView, SharingPetition } from './styles'
 import PetitionContents from './PetitionContents'
 import { getPetitionById } from '../../utils/api'
 import { useEffect, useState } from 'react'
+import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 
 const Petition = (): JSX.Element => {
   const { id } = useParams()
@@ -75,7 +76,9 @@ const Petition = (): JSX.Element => {
             </div>
           </div>
           <div className="copy-btn">
-            <button onClick={clip}>URL 복사</button>
+            <button onClick={clip}>
+              <i className="xi-stack-paper"></i>
+            </button>
           </div>
         </div>
         <div className="share-btns">
@@ -93,7 +96,8 @@ const Petition = (): JSX.Element => {
                 target="_self"
                 title="카카오톡 새창열림"
               >
-                <i className="xi-kakaotalk"></i>
+                <RiKakaoTalkFill />
+                {/* <i className="xi-kakaotalk"></i> */}
               </a>
             </li>
             <li className="facebook">
@@ -107,7 +111,7 @@ const Petition = (): JSX.Element => {
                 target="_self"
                 title="페이스북 새창열림"
               >
-                <i className="xi-facebook"></i>
+                <RiFacebookFill />
               </a>
             </li>
           </ul>
