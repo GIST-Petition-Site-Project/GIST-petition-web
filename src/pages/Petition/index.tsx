@@ -81,20 +81,6 @@ const Petition = (): JSX.Element => {
         <div className="share-btns">
           <div>공유하기</div>
           <ul className="sns">
-            <li className="facebook">
-              <a
-                href="#n"
-                onClick={() => {
-                  fn_sendFB('facebook')
-                  return false
-                }}
-                className="facebook"
-                target="_self"
-                title="페이스북 새창열림"
-              >
-                <span className="skip">페이스북</span>
-              </a>
-            </li>
             <li className="kakaotalk">
               <a
                 href="#n"
@@ -107,7 +93,21 @@ const Petition = (): JSX.Element => {
                 target="_self"
                 title="카카오톡 새창열림"
               >
-                <span className="skip">카카오톡</span>
+                <i className="xi-kakaotalk"></i>
+              </a>
+            </li>
+            <li className="facebook">
+              <a
+                href="#n"
+                onClick={() => {
+                  fn_sendFB('facebook')
+                  return false
+                }}
+                className="facebook"
+                target="_self"
+                title="페이스북 새창열림"
+              >
+                <i className="xi-facebook"></i>
               </a>
             </li>
           </ul>

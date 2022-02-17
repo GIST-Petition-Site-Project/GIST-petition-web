@@ -59,6 +59,45 @@ const SharingPetition = styled.div`
       }
     }
   }
+  .share-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    > div {
+      font-weight: 600;
+    }
+
+    .sns {
+      display: flex;
+      width: 7rem;
+      justify-content: space-around;
+      margin-top: 1rem;
+      li {
+        a {
+          width: 45px;
+          height: 45px;
+          display: block;
+          border-radius: 100px;
+          text-align: center;
+          line-height: 3rem;
+          font-size: 30px;
+        }
+      }
+      li:nth-child(1) {
+        a {
+          color: #3b1e1e;
+          background-color: #f9e000;
+        }
+      }
+      li:nth-child(2) {
+        a {
+          color: #ffffff;
+          background-color: #4267b2;
+        }
+      }
+    }
+  }
 `
 
 export { Inner, PetitionWrapper, PetitionView, SharingPetition }
