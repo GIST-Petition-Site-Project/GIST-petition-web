@@ -18,22 +18,20 @@ import {
   TermsOfUseTotalBox,
 } from './styles'
 
-interface ITermsOfUse {
+interface TermsOfUse {
   onAgree: (value: string) => void
   agreeInfo: RegisterAgree
 }
 
-const TermsOfUse = ({ onAgree, agreeInfo }: ITermsOfUse): JSX.Element => {
+const TermsOfUse = ({ onAgree, agreeInfo }: TermsOfUse): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
   const [secondOpen, setSecondOpen] = useState(false)
   const handleClick = (e: any) => {
     const target = e.target
-    console.log(target.parentNode.parentNode.parentNode)
-    const value =
-      target.dataset.value ||
-      target.parentNode.dataset.value ||
-      target.parentNode.parentNode.dataset.value ||
-      target.parentNode.parentNode.parentNode.dataset.value
+    const currentTarget = e.currentTarget
+    console.log(target)
+    console.log(currentTarget)
+    const value = target.dataset.value
     value && onAgree(value)
   }
   return (
@@ -46,7 +44,9 @@ const TermsOfUse = ({ onAgree, agreeInfo }: ITermsOfUse): JSX.Element => {
             size="sm"
             icon={<CheckIcon />}
             data-value="total"
-            isclicked={agreeInfo.private && agreeInfo.service}
+            isclicked={
+              agreeInfo.private && agreeInfo.service ? 'true' : 'false'
+            }
           />
           <TermsOfUseTotalBox ml={2}>전체 약관 동의</TermsOfUseTotalBox>
         </TermsOfUseCheckFlex>
@@ -60,7 +60,7 @@ const TermsOfUse = ({ onAgree, agreeInfo }: ITermsOfUse): JSX.Element => {
             icon={<CheckIcon />}
             onClick={handleClick}
             data-value="service"
-            isclicked={agreeInfo.service}
+            isclicked={agreeInfo.service ? 'true' : 'false'}
           />
           <Box ml={2}>서비스 이용약관 동의</Box>
         </TermsOfUseCheckFlex>
@@ -90,7 +90,7 @@ const TermsOfUse = ({ onAgree, agreeInfo }: ITermsOfUse): JSX.Element => {
             icon={<CheckIcon />}
             onClick={handleClick}
             data-value="private"
-            isclicked={agreeInfo.private}
+            isclicked={agreeInfo.private ? 'true' : 'false'}
           />
           <Box ml={2}>개인정보수집 및 이용동의</Box>
         </TermsOfUseCheckFlex>
