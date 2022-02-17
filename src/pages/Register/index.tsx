@@ -110,27 +110,30 @@ const Register = (): JSX.Element => {
       return
     }
     setWhichUI({ ...whichUI, isLoading: true })
-    const status = await postCreateVerificationCode({
+    const response = await postCreateVerificationCode({
       username: input.username,
     })
-    setErrorText(status[1])
-    if (status[1] === '이미 존재하는 회원입니다.') {
+    const status = response.status
+    const message = response.data.message
+    setErrorText(message)
+    if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
       emailRef.current && emailRef.current.focus()
       setWhichUI({ ...whichUI, isLoading: false })
-    } else if (status[0] < 400) {
+    } else if (status < 400) {
       setWhichUI({ ...whichUI, isLoading: false, isCodeRequested: true })
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
   const handleConfirmCode = async () => {
-    const status = await postConfirmVerificationCode({
+    const response = await postConfirmVerificationCode({
       username: input.username,
       verificationCode: input.verificationCode,
     })
-
-    switch (status[1]) {
+    const status = response.status
+    const message = response.data.message
+    switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
         setInput({ ...input, verificationCode: '' })
         verificationRef.current && verificationRef.current.focus()
@@ -142,8 +145,8 @@ const Register = (): JSX.Element => {
         break
       }
     }
-    setErrorText(status[1])
-    if (status[0] < 400) {
+    setErrorText(message)
+    if (status < 400) {
       setWhichUI({ ...whichUI, isVerificated: true, isValid: true })
     }
   }
@@ -154,10 +157,11 @@ const Register = (): JSX.Element => {
       isLoading: true,
     })
     setErrorText('')
-    const status = await postCreateVerificationCode({
+    const response = await postCreateVerificationCode({
       username: input.username,
     })
-    if (status[1] < 400) {
+    const status = response.status
+    if (status < 400) {
       setWhichUI({
         ...whichUI,
         isExpired: false,
@@ -175,14 +179,16 @@ const Register = (): JSX.Element => {
       return
     }
     if (input.password === input.passwordConfirm) {
-      const status = await postRegister({
+      const response = await postRegister({
         username: input.username,
         verificationCode: input.verificationCode,
         password: input.password,
       })
-      setErrorText(status[1])
+      const status = response.status
+      const message = response.data.message
+      setErrorText(message)
 
-      if (status[0] < 400) {
+      if (status < 400) {
         toast({
           status: 'success',
           duration: 3000,
@@ -192,7 +198,7 @@ const Register = (): JSX.Element => {
         })
         navigate('/login')
       } else {
-        setErrorText(status[1])
+        setErrorText(message)
         setWhichUI({ ...whichUI, isValid: false })
       }
     } else {

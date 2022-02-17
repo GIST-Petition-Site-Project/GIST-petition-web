@@ -5,5 +5,5 @@ export const postConfirmVerificationCode = async (payload: {
   verificationCode: string
 }) => {
   const response = await api.post('sign-up/confirm', payload)
-  return [response.status, response.data.message || '']
+  return response
 }
