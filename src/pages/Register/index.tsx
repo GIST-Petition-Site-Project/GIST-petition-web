@@ -20,7 +20,7 @@ import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { RegisterButton, stackStyle, ErrorText, DeleteBtn } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { postDelete } from '../../utils/api/user/postDelete'
+import { postDelete } from '../../utils/api/user/userDelete'
 import TermsOfUse from './TermsOfUse'
 
 const Register = (): JSX.Element => {
