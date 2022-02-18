@@ -7,6 +7,7 @@ import Petitions from '../pages/Petitions'
 import Register from '../pages/Register'
 import Write from '../pages/Write'
 import MyPetitions from '../pages/MyPetitions'
+import AnsweredPetitions from '../pages/AnsweredPetitions'
 import { AuthRoute, UnauthRoute } from './PrivateRouter'
 
 const RootRouter = (): JSX.Element => {
@@ -32,6 +33,9 @@ const RootRouter = (): JSX.Element => {
         </Route>
         <Route path="/mypetitions" element={<AuthRoute />}>
           <Route index element={<MyPetitions />} />
+        </Route>
+        <Route path="/answer" element={<Outlet />}>
+          <Route index element={<AnsweredPetitions />} />
         </Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>

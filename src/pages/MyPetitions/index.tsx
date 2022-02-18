@@ -6,6 +6,7 @@ import { getMyPetitionsByQuery } from '../../utils/api'
 import MyPetitionList from './MyPetitionList'
 
 const MyPetitions = (): JSX.Element => {
+
   return (
     <Inner>
       <PetitionBoard>
