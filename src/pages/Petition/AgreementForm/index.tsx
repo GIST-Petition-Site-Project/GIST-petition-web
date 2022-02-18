@@ -10,9 +10,11 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
     description: '청원에 동의합니다.',
   })
   const [isConsented, setIsConsented] = useState(false)
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setInput({ description: e.target.value })
+    setInput({ description: e.target.value.replace(/ +/g, ' ') })
   }
+
   const navigate = useNavigate()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -46,15 +48,29 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
 
   // postAgreePetition
   return (
-    <>
+    <div style={{ position: 'relative' }}>
+      <span
+        style={{
+          display: 'inline-block',
+          position: 'absolute',
+          right: '0',
+          top: '-1.5rem',
+          color: '#8a8a8a',
+          fontWeight: '300',
+        }}
+      >
+        {input.description.length}/100
+      </span>
       <form onSubmit={handleSubmit}>
         <FormControl>
           <Flex h="60px">
             <AgreementTextArea
               rows={1}
               _focus={{ outline: 'none' }}
+              placeholder="청원에 동의합니다."
               onChange={handleChange}
-              value="청원에 동의합니다."
+              value={input.description}
+              maxLength={100}
             />
             <AgreementWriteButton
               _focus={{ outline: 'none' }}
@@ -68,7 +84,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
         </FormControl>
       </form>
       <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
-    </>
+    </div>
   )
 }
 
