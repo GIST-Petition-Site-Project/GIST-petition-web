@@ -41,8 +41,9 @@ const PaginationButtons = ({
   useEffect(() => {
     getPaginationInf(queryParams)
     setCurrentPage(Number(queryParams?.page || 1))
+    console.log('aa')
   }, [location.search])
-
+  console.log(location.search)
   const navigate = useNavigate()
   const handlePageChange = (e: number) => {
     const newSearchParams = {

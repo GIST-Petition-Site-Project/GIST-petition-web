@@ -31,6 +31,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
 
   useEffect(() => {
     queryPost(queryParams)
+    console.log('A')
   }, [location.search])
 
   return (

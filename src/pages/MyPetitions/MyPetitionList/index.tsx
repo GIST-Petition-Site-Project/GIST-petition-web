@@ -28,6 +28,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
 
   const queryPost = async (query: QueryParams) => {
     const response = await getPetitions(query)
+    console.log('f')
     setPetitionList(response?.data?.content || [])
   }
 
@@ -36,8 +37,6 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   useEffect(() => {
     queryPost(queryParams)
   }, [location.search])
-
-  console.log(petitionList)
 
   return (
     <>
