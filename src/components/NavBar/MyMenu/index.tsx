@@ -43,9 +43,7 @@ const MyMenu = (closeMenu: CloseMenu): JSX.Element => {
             color={'white'}
           >
             <MenuItem>
-              <Link to="/mypetitions" onClick={closeMenu}>
-                나의 청원
-              </Link>
+              <Link to="/mypetitions">나의 청원</Link>
             </MenuItem>
             <MenuItem>
               <Link to="#">회원 정보 관리</Link>
