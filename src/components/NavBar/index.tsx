@@ -36,7 +36,9 @@ const NavBar = (): JSX.Element => {
             </ItemName>
           </ListItem>
           <ListItem className="item">
-            <ItemName className="item__menu">답변된 청원</ItemName>
+            <ItemName className="item__menu">
+              <a href="/answered">답변된 청원</a>
+            </ItemName>
           </ListItem>
           <ListItem className="item">{MyMenu()}</ListItem>
         </TopMenu>
