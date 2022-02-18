@@ -4,7 +4,6 @@ import { PetitionsText, PetitionsTitle } from './styles'
 import PaginationButtons from '../../components/PaginationButtons'
 import { getMyPetitionsByQuery } from '../../utils/api'
 import MyPetitionList from './MyPetitionList'
-
 import qs from 'qs'
 import { ChangeEvent, useState } from 'react'
 import { Category } from '../../types/enums'
@@ -37,7 +36,6 @@ const MyPetitions = (): JSX.Element => {
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }
-
   return (
     <Inner>
       <PetitionBoard>

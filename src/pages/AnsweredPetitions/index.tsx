@@ -4,12 +4,10 @@ import { PetitionsText, PetitionsTitle } from './styles'
 import PaginationButtons from '../../components/PaginationButtons'
 import PetitionList from '../../components/PetitionList'
 import { getAnweredPetitionsByQuery } from '../../utils/api/petition/getAnsweredPetitionsByQuery'
-
 import qs from 'qs'
 import { ChangeEvent, useState } from 'react'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
-import { getPetitionsByQuery } from '../../utils/api'
 
 const AnsweredPetitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
@@ -34,11 +32,10 @@ const AnsweredPetitions = (): JSX.Element => {
       category: Number(e.target.value),
     }
     navigate({
-      pathname: '/mypetitions',
+      pathname: '/answer',
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }
-
   return (
     <>
       <Inner>
