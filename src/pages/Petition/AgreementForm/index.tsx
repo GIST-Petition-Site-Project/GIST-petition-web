@@ -20,8 +20,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
       const response = await postAgreePetition(petitionId, input)
       if (response?.status === 401) {
         onOpen()
-        console.log('로그인 해야함')
-      } else if (response?.status || 500 < 401) {
+      } else if (response.status < 400) {
         navigate(0)
         setIsConsented(true)
       }
@@ -33,7 +32,9 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const checkAgreeByMe = async (id: string) => {
     try {
       const response = await getStateOfAgreement(id)
-      setIsConsented(response?.data)
+      if (response.status < 400) {
+        setIsConsented(true)
+      }
     } catch (error) {
       console.log(error)
     }
