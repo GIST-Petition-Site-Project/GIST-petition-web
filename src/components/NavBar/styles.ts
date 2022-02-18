@@ -32,16 +32,20 @@ const Logo__Image = styled.img`
   height: 3.75rem;
 `
 const TopMenu = styled(List)`
-  /* position: absolute;
-  right: 0;
-  bottom: 0; */
-  display: ${props => (props.open ? 'flex' : 'none')};
-  background-color: rgba(47, 54, 60, 0.94);
-  width: 100%;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    display: flex;
-    background-color: transparent;
-    width: inherit;
+  > div {
+    display: ${props => (props.open ? 'flex' : 'none')};
+    background-color: rgba(47, 54, 60, 0.94);
+    width: 100vw;
+    flex-direction: column;
+    height: 100vh;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      flex-direction: row;
+      display: flex;
+      height: unset;
+      width: unset;
+      background-color: transparent;
+      width: inherit;
+    }
   }
 `
 const ItemName = styled.div`

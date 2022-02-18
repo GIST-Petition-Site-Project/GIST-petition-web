@@ -69,7 +69,7 @@ const MyMenu = (closeMenu: CloseMenu): JSX.Element => {
     </>
   ) : (
     <ItemName className="item__menu">
-      <a href="/login">로그인</a>
+      <Link to="/login">로그인</Link>
     </ItemName>
   )
 }

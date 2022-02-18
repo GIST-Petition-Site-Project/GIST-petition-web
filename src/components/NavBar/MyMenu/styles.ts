@@ -23,7 +23,7 @@ const MobileMenu = styled.div`
   @media screen and (min-width: ${theme.breakpoints.md}) {
     display: none;
   }
-  height: 100vh;
+  /* height: 100vh; */
 `
 
 export { DesktopMenu, MobileMenu }
