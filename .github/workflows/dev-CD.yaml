@@ -13,7 +13,7 @@ jobs: # Job 설정
 
       - name: Check Node v # Node v 확인
         run: node -v
-      - name: Generate Environment Variables File for Production
+      - name: Add GH Secrets into .env file
         run: echo "REACT_APP_KAKAO_JAVASCRIPT_KEY=$KAKAO_JAVASCRIPT_KEY" >> .env
         env:
           KAKAO_JAVASCRIPT_KEY: ${{ secrets.KAKAO_JAVASCRIPT_KEY }}
