@@ -1,7 +1,7 @@
 import { Text, UnorderedList, Tag } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import {
   PetitionAgreement,
@@ -37,6 +37,8 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     queryPost(queryParams)
   }, [location.search])
 
+  console.log(petitionList)
+
   return (
     <>
       <PetitionsHead display={{ base: 'none', md: 'flex' }}>
@@ -57,7 +59,6 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                 <PetitionStatusTag borderRadius={'none'}>
                   {!petition.answered ? '청원진행중' : '답변완료'}{' '}
                   {/*petition.answered의 값이 적용이 잘 안 됨*/}
-                  {console.log(petition)}
                 </PetitionStatusTag>
               </PetitionStatus>
               <PetitionCategory

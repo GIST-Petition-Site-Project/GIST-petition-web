@@ -1,30 +1,26 @@
 import { Inner, PetitionBoard } from './styles'
 import { Stack } from '@chakra-ui/react'
 import { PetitionsText, PetitionsTitle } from './styles'
-import { useNavigate } from 'react-router-dom'
 import PaginationButtons from '../../components/PaginationButtons'
 import { getMyPetitionsByQuery } from '../../utils/api'
 import MyPetitionList from './MyPetitionList'
 
 const MyPetitions = (): JSX.Element => {
-  const navigate = useNavigate()
   return (
-    <>
-      <Inner>
-        <PetitionBoard>
-          <PetitionsTitle>
-            <PetitionsText>나의 청원</PetitionsText>
-          </PetitionsTitle>
-          <MyPetitionList getPetitions={getMyPetitionsByQuery} />
-          <Stack>
-            <PaginationButtons
-              getPetitions={getMyPetitionsByQuery}
-              pathname={'/mypetitions'}
-            />
-          </Stack>
-        </PetitionBoard>
-      </Inner>
-    </>
+    <Inner>
+      <PetitionBoard>
+        <PetitionsTitle>
+          <PetitionsText>나의 청원</PetitionsText>
+        </PetitionsTitle>
+        <MyPetitionList getPetitions={getMyPetitionsByQuery} />
+        <Stack>
+          <PaginationButtons
+            getPetitions={getMyPetitionsByQuery}
+            pathname={'/mypetitions'}
+          />
+        </Stack>
+      </PetitionBoard>
+    </Inner>
   )
 }
 
