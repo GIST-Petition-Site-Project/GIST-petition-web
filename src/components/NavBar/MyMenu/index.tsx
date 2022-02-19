@@ -58,12 +58,14 @@ const MyMenu = (): JSX.Element => {
           <Link to="#">회원 정보 관리</Link>
         </ItemName>
         <ItemName>
-          <a onClick={handleLogout}>로그아웃</a>
+          <Link to="#" onClick={handleLogout}>
+            로그아웃
+          </Link>
         </ItemName>
       </MobileMenu>
     </>
   ) : (
-    <ItemName className="item__menu">
+    <ItemName>
       <Link to="/login">로그인</Link>
     </ItemName>
   )
