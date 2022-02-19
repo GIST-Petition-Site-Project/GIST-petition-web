@@ -10,7 +10,8 @@ import {
   PetitionsSelect,
   PetitionsText,
   PetitionsTitle,
-  SelectWrapper,
+  TabtitleWrapper,
+  TabtitleText,
   PetitionsTab,
   PetitionsTabs,
   PetitionsTabList,
@@ -57,18 +58,16 @@ const Petitions = (): JSX.Element => {
           <PetitionsTabList>
             <PetitionsTab>진행중인 청원</PetitionsTab>
             <PetitionsTab>추천순 청원</PetitionsTab>
-            <PetitionsTab borderRight="2px solid #333">
-              만료된 청원
-            </PetitionsTab>
+            <PetitionsTab>만료된 청원</PetitionsTab>
           </PetitionsTabList>
           <TabPanels>
             <TabPanel>
-              <SelectWrapper>
-                <PetitionsText>진행중인 청원</PetitionsText>
+              <TabtitleWrapper>
+                <TabtitleText>진행중인 청원</TabtitleText>
                 <PetitionsSelect
                   onChange={handleSelect}
                   value={selected}
-                  w={'128px'}
+                  w={{ base: '90px', md: '128px' }}
                 >
                   {catergoryIdx.map(item => (
                     <option value={item} key={item}>
@@ -76,25 +75,25 @@ const Petitions = (): JSX.Element => {
                     </option>
                   ))}
                 </PetitionsSelect>
-              </SelectWrapper>
+              </TabtitleWrapper>
               <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
             </TabPanel>
             <TabPanel>
-              <SelectWrapper>
-                <PetitionsText h="40px" mb="1px">
+              <TabtitleWrapper>
+                <TabtitleText h={{ base: '20px', md: '40px' }} mb="1px">
                   추천순 청원
-                </PetitionsText>
-              </SelectWrapper>
+                </TabtitleText>
+              </TabtitleWrapper>
               <PetitionList
                 getPetitions={getBestPetitionsByQuery}
               ></PetitionList>
             </TabPanel>
             <TabPanel>
-              <SelectWrapper>
-                <PetitionsText h="40px" mb="1px">
+              <TabtitleWrapper>
+                <TabtitleText h={{ base: '20px', md: '40px' }} mb="1px">
                   만료된 청원
-                </PetitionsText>
-              </SelectWrapper>
+                </TabtitleText>
+              </TabtitleWrapper>
               <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
             </TabPanel>
           </TabPanels>

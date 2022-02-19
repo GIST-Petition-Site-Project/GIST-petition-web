@@ -22,37 +22,54 @@ const PetitionsTitle = styled(Box)`
 `
 
 const PetitionsSelect = styled(Select)`
-  width: 100%;
   height: 40px;
   border-radius: 0;
   border-color: #ccc;
-  top: 0;
-  right: 0;
+  font-size: 0.95rem;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 1rem;
+  }
 `
 
 const PetitionsText = styled(Text)`
   font-size: 20px;
   font-weight: bold;
 `
+const TabtitleText = styled(Text)`
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 20px;
+    margin-top: 0px;
+  }
+`
 
-const SelectWrapper = styled.div`
+const TabtitleWrapper = styled.div`
   border-bottom: 2px solid #333;
   padding-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  text-align: center;
 `
+
 const PetitionsTab = styled(Tab)`
-  border-top: 2px solid #333;
-  border-left: 2px solid #333;
+  font-size: 15px;
   font-weight: bold;
   :focus {
     outline: none;
     box-shadow: none;
   }
+  padding: 7px;
+  border-color: #ccc;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    padding: 8px 16px;
+  }
 `
 const PetitionsTabs = styled(Tabs)``
 const PetitionsTabList = styled(TabList)`
   border-bottom: 0px;
+  font-size: 12px;
 `
 
 export {
@@ -61,7 +78,8 @@ export {
   PetitionsTitle,
   PetitionsSelect,
   PetitionsText,
-  SelectWrapper,
+  TabtitleWrapper,
+  TabtitleText,
   PetitionsTab,
   PetitionsTabs,
   PetitionsTabList,
