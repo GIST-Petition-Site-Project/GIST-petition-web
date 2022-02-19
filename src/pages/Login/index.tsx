@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setLogin } from '../../redux/auth/authSlice'
@@ -6,28 +6,36 @@ import {
   Button,
   chakra,
   FormControl,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Stack,
-  Text,
 } from '@chakra-ui/react'
 import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
   const [input, setInput] = useState<User>({ username: '', password: '' })
-  const [responseState, setResponseState] = useState(0)
+  const [responseState, setResponseState] = useState<number>(0)
 
-  const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setInput({ ...input, [name]: value })
-  }
+  const [viewPassword, setViewPassword] = useState<boolean>(false)
+  const handleShowClick = () => setViewPassword(!viewPassword)
+
+  // const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target
+  //   setInput({ ...input, [name]: value })
+  // }
+
+  const email = useRef<HTMLInputElement>(null)
+  const pwd = useRef<HTMLInputElement>(null)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -73,12 +81,13 @@ const Login = (): JSX.Element => {
                 {<CFaUserAlt color="gray.300" />}
               </InputLeftElement>
               <Input
+                ref={email}
                 type="email"
                 name="username"
                 id="username"
                 placeholder="이메일을 입력하세요."
-                value={input.username}
-                onChange={handleChangeUser}
+                // value={input.username}
+                // onChange={handleChangeUser}
               />
             </InputGroup>
           </FormControl>
@@ -89,14 +98,23 @@ const Login = (): JSX.Element => {
                 {<CFaLock color="gray.300" />}
               </InputLeftElement>
               <Input
-                type="password"
+                ref={pwd}
+                type={viewPassword ? 'text' : 'password'}
                 name="password"
                 id="password"
                 placeholder="비밀번호를 입력하세요."
-                value={input.password}
-                onChange={handleChangeUser}
+                // value={input.password}
+                // onChange={handleChangeUser}
                 onKeyPress={checkUpperCase}
               />
+              <InputRightElement width="4.5rem">
+                <IconButton
+                  aria-label="view password"
+                  variant="password"
+                  icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  onClick={handleShowClick}
+                ></IconButton>
+              </InputRightElement>
             </InputGroup>
           </FormControl>
           <span className="err_msg">{checkLoginError(responseState)}</span>
@@ -104,7 +122,16 @@ const Login = (): JSX.Element => {
             <Link to="#">비밀번호를 잊으셨나요?</Link>
           </span>
 
-          <Button type="submit" className="login_btn">
+          <Button
+            type="submit"
+            className="login_btn"
+            onClick={() => {
+              setInput({
+                username: email.current!.value,
+                password: pwd.current!.value,
+              })
+            }}
+          >
             로그인
           </Button>
 
