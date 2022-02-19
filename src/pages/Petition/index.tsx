@@ -41,7 +41,6 @@ const Petition = (): JSX.Element => {
         encodeURIComponent(thisUrl)
       window.open(url, '', 'width=486, height=286')
     } else if (sns == 'kakaotalk') {
-      console.log(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
       window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
       window.Kakao.Link.createDefaultButton({
         container: '#btnKakao',
