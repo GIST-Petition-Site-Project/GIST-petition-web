@@ -15,7 +15,7 @@ import MyMenu from './MyMenu'
 import { Link } from 'react-router-dom'
 
 const NavBar = (): JSX.Element => {
-  const [opened, setOpened] = useState(false)
+  const [opened, setOpened] = useState<boolean>(false)
   const closeMenu = () => {
     if (opened) {
       setOpened(!opened)
@@ -34,25 +34,21 @@ const NavBar = (): JSX.Element => {
           <div onClick={closeMenu}>
             <ListItem className="item">
               <ItemName className="item__menu">
-                <Link to="/write" onClick={closeMenu}>
-                  청원하기
-                </Link>
+                <Link to="/write">청원하기</Link>
               </ItemName>
             </ListItem>
             <ListItem className="item">
               <ItemName className="item__menu">
-                <Link to="/petitions" onClick={closeMenu}>
-                  모든 청원
-                </Link>
+                <Link to="/petitions">모든 청원</Link>
               </ItemName>
             </ListItem>
             <ListItem className="item">
-              <ItemName className="item__menu" onClick={closeMenu}>
+              <ItemName className="item__menu">
                 <Link to="/answer">답변된 청원</Link>
               </ItemName>
             </ListItem>
             <ListItem className="item">
-              <MyMenu closeMenu={closeMenu} />
+              <MyMenu />
             </ListItem>
           </div>
         </TopMenu>

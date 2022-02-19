@@ -6,13 +6,8 @@ import { DesktopMenu, MobileMenu } from './styles'
 import { ItemName } from '../styles'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { MouseEvent } from 'react'
 
-interface CloseMenu {
-  closeMenu: (event: MouseEvent) => void
-}
-
-const MyMenu = (closeMenu: CloseMenu): JSX.Element => {
+const MyMenu = (): JSX.Element => {
   const dispatch = useDispatch()
   const handleLogout = async () => {
     try {
