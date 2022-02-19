@@ -28,7 +28,6 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
 
   const queryPost = async (query: QueryParams) => {
     const response = await getPetitions(query)
-    console.log('f')
     setPetitionList(response?.data?.content || [])
   }
 

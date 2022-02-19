@@ -31,7 +31,7 @@ const NavBar = (): JSX.Element => {
           </Link>
         </Logo>
         <TopMenu open={opened}>
-          <div>
+          <div onClick={closeMenu}>
             <ListItem className="item">
               <ItemName className="item__menu">
                 <Link to="/write" onClick={closeMenu}>

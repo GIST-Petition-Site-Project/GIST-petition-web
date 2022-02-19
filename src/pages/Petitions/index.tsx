@@ -1,5 +1,3 @@
-// 청원 글 목록
-
 import { Inner, PetitionBoard } from './styles'
 import { Stack } from '@chakra-ui/react'
 import PetitionList from '../../components/PetitionList'
