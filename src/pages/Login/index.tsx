@@ -1,8 +1,9 @@
-import React, { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { FormEvent, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setLogin } from '../../redux/auth/authSlice'
 import {
+  Button,
   chakra,
   FormControl,
   Input,
@@ -11,13 +12,12 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { stackStyle, LoginButton, ErrorText } from './styles'
+import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
 
 const Login = (): JSX.Element => {
-  // chakra icon
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
@@ -28,6 +28,7 @@ const Login = (): JSX.Element => {
     const { name, value } = e.target
     setInput({ ...input, [name]: value })
   }
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -59,64 +60,60 @@ const Login = (): JSX.Element => {
       console.log(error)
     }
   }
+
   return (
-    <form className="login__form" onSubmit={handleSubmit}>
-      <Stack spacing={4} style={stackStyle}>
-        <Text fontSize="4xl" fontWeight="bold">
-          로그인
-        </Text>
-        <FormControl isRequired>
-          <Text mb="8px">이메일</Text>
-          <InputGroup borderColor="#ccc">
-            <InputLeftElement pointerEvents="none">
-              {<CFaUserAlt color="gray.300" />}
-            </InputLeftElement>
-            <Input
-              type="email"
-              name="username"
-              id="username"
-              placeholder="이메일을 입력하세요."
-              value={input.username}
-              onChange={handleChangeUser}
-              borderRadius="0"
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <Text mb="8px">비밀번호</Text>
-          <InputGroup borderColor="#ccc">
-            <InputLeftElement pointerEvents="none">
-              {<CFaLock color="gray.300" />}
-            </InputLeftElement>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="비밀번호를 입력하세요."
-              value={input.password}
-              onChange={handleChangeUser}
-              borderRadius="0"
-              onKeyPress={checkUpperCase}
-            />
-          </InputGroup>
-        </FormControl>
-        <ErrorText>{checkLoginError(responseState)}</ErrorText>
-        <Text mb="4px" align="right" decoration="underline">
-          <a href="#">비밀번호를 잊으셨나요?</a>
-        </Text>
+    <Container>
+      <form className="login_form" onSubmit={handleSubmit}>
+        <Stack spacing={4}>
+          <span>로그인</span>
+          <FormControl isRequired>
+            <span>이메일</span>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                {<CFaUserAlt color="gray.300" />}
+              </InputLeftElement>
+              <Input
+                type="email"
+                name="username"
+                id="username"
+                placeholder="이메일을 입력하세요."
+                value={input.username}
+                onChange={handleChangeUser}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <span>비밀번호</span>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                {<CFaLock color="gray.300" />}
+              </InputLeftElement>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="비밀번호를 입력하세요."
+                value={input.password}
+                onChange={handleChangeUser}
+                onKeyPress={checkUpperCase}
+              />
+            </InputGroup>
+          </FormControl>
+          <span className="err_msg">{checkLoginError(responseState)}</span>
+          <span className="forgot_pwd account_link">
+            <Link to="#">비밀번호를 잊으셨나요?</Link>
+          </span>
 
-        <LoginButton type="submit" className="submit__btn">
-          로그인
-        </LoginButton>
+          <Button type="submit" className="login_btn">
+            로그인
+          </Button>
 
-        <Text mb="4px" align="center">
-          계정이 없으신가요?{' '}
-          <a href="/register" style={{ textDecoration: 'underline' }}>
-            계정 만들기
-          </a>
-        </Text>
-      </Stack>
-    </form>
+          <span className="create_acount account_link">
+            계정이 없으신가요? <Link to="/register">계정 만들기</Link>
+          </span>
+        </Stack>
+      </form>
+    </Container>
   )
 }
 
