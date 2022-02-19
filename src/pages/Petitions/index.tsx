@@ -17,7 +17,7 @@ import {
 } from './styles'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
-import { getPetitionsByQuery } from '../../utils/api'
+import { getPetitionsByQuery, getBestPetitionsByQuery } from '../../utils/api'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 const Petitions = (): JSX.Element => {
@@ -85,7 +85,9 @@ const Petitions = (): JSX.Element => {
                   추천순 청원
                 </PetitionsText>
               </SelectWrapper>
-              <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+              <PetitionList
+                getPetitions={getBestPetitionsByQuery}
+              ></PetitionList>
             </TabPanel>
             <TabPanel>
               <SelectWrapper>
