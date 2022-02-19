@@ -3,9 +3,12 @@ import styled from '@emotion/styled'
 import { Box } from '@chakra-ui/react'
 
 const Container = styled.div`
-  .inner > .chakra-stack {
-    position: relative;
-    margin: 9.375rem 0;
+  .inner {
+    padding: 0 0.5rem;
+    > .chakra-stack {
+      position: relative;
+      margin: 9.375rem 0;
+    }
   }
 `
 const WriteWrapper = styled(Box)`
