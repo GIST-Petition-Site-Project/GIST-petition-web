@@ -1,30 +1,21 @@
-import { Select, Stack } from '@chakra-ui/react'
+import { ChangeEvent, useState } from 'react'
+import {
+  Select,
+  Stack,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from '@chakra-ui/react'
 import PetitionList from '../../components/PetitionList'
 import PaginationButtons from '../../components/PaginationButtons'
 import qs from 'qs'
-import { ChangeEvent, useState } from 'react'
-<<<<<<< HEAD
-import {
-  PetitionsSelect,
-  PetitionsText,
-  PetitionsTitle,
-  TabtitleWrapper,
-  TabtitleText,
-  PetitionsTab,
-  PetitionsTabs,
-  PetitionsTabList,
-} from './styles'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
 import { getPetitionsByQuery, getBestPetitionsByQuery } from '../../utils/api'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-=======
 import { Container, PetitionBoard } from './styles'
-import { Category } from '../../types/enums'
-import { useNavigate } from 'react-router-dom'
-import { getPetitionsByQuery } from '../../utils/api'
 import Inner from '../../components/Inner'
->>>>>>> design/footer
 
 const Petitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
@@ -54,80 +45,45 @@ const Petitions = (): JSX.Element => {
     })
   }
   return (
-<<<<<<< HEAD
-    <Inner>
-      <PetitionBoard>
-        <PetitionsTitle>
-          <PetitionsText>모든 청원</PetitionsText>
-        </PetitionsTitle>
-        <PetitionsTabs isFitted>
-          <PetitionsTabList>
-            <PetitionsTab>진행중인 청원</PetitionsTab>
-            <PetitionsTab>추천순 청원</PetitionsTab>
-            <PetitionsTab>만료된 청원</PetitionsTab>
-          </PetitionsTabList>
-          <TabPanels>
-            <TabPanel>
-              <TabtitleWrapper>
-                <TabtitleText>진행중인 청원</TabtitleText>
-                <PetitionsSelect
-                  onChange={handleSelect}
-                  value={selected}
-                  w={{ base: '90px', md: '128px' }}
-                >
-                  {catergoryIdx.map(item => (
-                    <option value={item} key={item}>
-                      {Category[item]}
-                    </option>
-                  ))}
-                </PetitionsSelect>
-              </TabtitleWrapper>
-              <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
-            </TabPanel>
-            <TabPanel>
-              <TabtitleWrapper>
-                <TabtitleText h={{ base: '20px', md: '30px' }} mb="1px">
-                  추천순 청원
-                </TabtitleText>
-              </TabtitleWrapper>
-              <PetitionList
-                getPetitions={getBestPetitionsByQuery}
-              ></PetitionList>
-            </TabPanel>
-            <TabPanel>
-              <TabtitleWrapper>
-                <TabtitleText h={{ base: '20px', md: '30px' }} mb="1px">
-                  만료된 청원
-                </TabtitleText>
-              </TabtitleWrapper>
-              <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
-            </TabPanel>
-          </TabPanels>
-        </PetitionsTabs>
-
-        <Stack>
-          <PaginationButtons
-            getPetitions={getPetitionsByQuery}
-            pathname={'/petitions'}
-          />
-        </Stack>
-      </PetitionBoard>
-    </Inner>
-=======
     <Container>
       <Inner>
         <PetitionBoard>
-          <div className="petition_type">
-            <span>모든 청원</span>
-            <Select onChange={handleSelect} value={selected} w={'128px'}>
-              {catergoryIdx.map(item => (
-                <option value={item} key={item}>
-                  {Category[item]}
-                </option>
-              ))}
-            </Select>
-          </div>
-          <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+          <Tabs isFitted>
+            <TabList>
+              <Tab>진행중인 청원</Tab>
+              <Tab>만료된 청원</Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <div className="petition_type">
+                  <span>모든 청원</span>
+                  <div>
+                    <Select>
+                      <option value="최신">최신순</option>
+                      <option value="추천">추천순</option>
+                    </Select>
+                    <Select onChange={handleSelect} value={selected}>
+                      {catergoryIdx.map(item => (
+                        <option value={item} key={item}>
+                          {Category[item]}
+                        </option>
+                      ))}
+                    </Select>
+                  </div>
+                </div>
+                <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+              </TabPanel>
+
+              <TabPanel>
+                <div className="petition_type">
+                  <span>모든 청원</span>
+                </div>
+                <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+
           <Stack>
             <PaginationButtons
               getPetitions={getPetitionsByQuery}
@@ -137,7 +93,6 @@ const Petitions = (): JSX.Element => {
         </PetitionBoard>
       </Inner>
     </Container>
->>>>>>> design/footer
   )
 }
 
