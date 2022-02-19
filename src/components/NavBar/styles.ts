@@ -61,10 +61,6 @@ const ItemName = styled.div`
     margin: 0px 0px 5px 40px;
     font-size: 1.125rem;
     padding: 5px 0px 3px 0px;
-    &:hover {
-      cursor: pointer;
-      border-bottom: 2px solid #d52425;
-    }
   }
   a {
     display: inline-block;
@@ -72,11 +68,6 @@ const ItemName = styled.div`
     &:hover {
       text-decoration: underline #d52425;
       text-underline-position: under;
-    }
-    @media screen and (min-width: ${theme.breakpoints.md}) {
-      &:hover {
-        text-decoration: none;
-      }
     }
   }
 `
