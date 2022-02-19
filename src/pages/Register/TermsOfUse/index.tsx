@@ -1,6 +1,9 @@
 import { CheckIcon } from '@chakra-ui/icons'
 import { Box, Divider } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAgree } from '../../../redux/register/registerSlice'
+import { RootState } from '../../../redux/store'
 import {
   TermsOfUseCollapse,
   TermsOfUseCheckIcon,
@@ -11,18 +14,36 @@ import {
   TermsOfUseTotalBox,
 } from './styles'
 
-interface TermsOfUse {
-  onAgree: (value: string) => void
-  agreeInfo: RegisterAgree
-}
-
-const TermsOfUse = ({ onAgree, agreeInfo }: TermsOfUse): JSX.Element => {
+const TermsOfUse = (): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
   const [secondOpen, setSecondOpen] = useState(false)
+  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
+  const dispatch = useDispatch()
+
+  const handleAgree = (value: string) => {
+    switch (value) {
+      case 'total':
+        if (agreeInfo.private && agreeInfo.service) {
+          dispatch(setAgree('Total'))
+          return
+        }
+        dispatch(setAgree('Total'))
+        return
+      case 'service':
+        dispatch(setAgree('Service'))
+        return
+      case 'private':
+        dispatch(setAgree('Private'))
+        return
+      default:
+        throw Error('Clicked Wrong Btn')
+    }
+  }
+
   const handleClick = (e: any) => {
     const target = e.currentTarget
     const value = target.dataset.value
-    value && onAgree(value)
+    value && handleAgree(value)
   }
   return (
     <section>
