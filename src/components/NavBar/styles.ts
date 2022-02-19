@@ -56,7 +56,7 @@ const ItemName = styled.div`
   color: white;
   border: 2px solid transparent;
   text-align: center;
-
+  cursor: pointer;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     margin: 0px 0px 5px 40px;
     font-size: 1.125rem;
