@@ -46,6 +46,15 @@ const TopMenu = styled(List)`
       background-color: transparent;
       width: inherit;
     }
+    .chakra-divider {
+      width: 90%;
+      margin: 0 auto;
+      border-color: #fff;
+      opacity: 0.15;
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        display: none;
+      }
+    }
   }
 `
 const ItemName = styled.div`
