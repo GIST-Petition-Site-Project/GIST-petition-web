@@ -9,10 +9,12 @@ import Write from '../pages/Write'
 import MyPetitions from '../pages/MyPetitions'
 import AnsweredPetitions from '../pages/AnsweredPetitions'
 import { AuthRoute, UnauthRoute } from './PrivateRouter'
+import NavBar from '../components/NavBar'
 
 const RootRouter = (): JSX.Element => {
   return (
     <BrowserRouter>
+      <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UnauthRoute />}>

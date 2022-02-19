@@ -24,24 +24,28 @@ const Inner = styled(Box)`
   }
 `
 
-const Logo = styled.div``
-
-const Logo__Image = styled.img`
-  width: ${theme.size.LOGO_SIZE};
-  margin: auto 0;
-  height: 3.75rem;
+const Logo = styled.div`
+  img {
+    width: ${theme.size.LOGO_SIZE};
+    margin: auto 0;
+    height: 3.75rem;
+  }
 `
 const TopMenu = styled(List)`
-  /* position: absolute;
-  right: 0;
-  bottom: 0; */
-  display: ${props => (props.open ? 'flex' : 'none')};
-  background-color: rgba(47, 54, 60, 0.94);
-  width: 100%;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    display: flex;
-    background-color: transparent;
-    width: inherit;
+  > div {
+    display: ${props => (props.open ? 'flex' : 'none')};
+    background-color: rgba(47, 54, 60, 0.94);
+    width: 100vw;
+    flex-direction: column;
+    height: 100vh;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      flex-direction: row;
+      display: flex;
+      height: unset;
+      width: unset;
+      background-color: transparent;
+      width: inherit;
+    }
   }
 `
 const ItemName = styled.div`
@@ -57,19 +61,13 @@ const ItemName = styled.div`
     margin: 0px 0px 5px 40px;
     font-size: 1.125rem;
     padding: 5px 0px 3px 0px;
-    &:hover {
-      cursor: pointer;
-      border-bottom: 2px solid #d52425;
-    }
   }
   a {
+    display: inline-block;
+    width: 100%;
     &:hover {
-      border-bottom: 2px solid #d52425;
-    }
-    @media screen and (min-width: ${theme.breakpoints.md}) {
-      &:hover {
-        border-bottom: none;
-      }
+      text-decoration: underline #d52425;
+      text-underline-position: under;
     }
   }
 `
@@ -82,4 +80,4 @@ const MobMenuButton = styled(Button)`
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
 `
 
-export { Header, Inner, Logo, Logo__Image, TopMenu, ItemName, MobMenuButton }
+export { Header, Inner, Logo, TopMenu, ItemName, MobMenuButton }
