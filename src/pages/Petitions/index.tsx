@@ -1,11 +1,9 @@
-// 청원 글 목록
-
-import { Inner, PetitionBoard } from './styles'
-import { Stack } from '@chakra-ui/react'
+import { Select, Stack } from '@chakra-ui/react'
 import PetitionList from '../../components/PetitionList'
 import PaginationButtons from '../../components/PaginationButtons'
 import qs from 'qs'
 import { ChangeEvent, useState } from 'react'
+<<<<<<< HEAD
 import {
   PetitionsSelect,
   PetitionsText,
@@ -20,6 +18,13 @@ import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
 import { getPetitionsByQuery, getBestPetitionsByQuery } from '../../utils/api'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+=======
+import { Container, PetitionBoard } from './styles'
+import { Category } from '../../types/enums'
+import { useNavigate } from 'react-router-dom'
+import { getPetitionsByQuery } from '../../utils/api'
+import Inner from '../../components/Inner'
+>>>>>>> design/footer
 
 const Petitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
@@ -49,6 +54,7 @@ const Petitions = (): JSX.Element => {
     })
   }
   return (
+<<<<<<< HEAD
     <Inner>
       <PetitionBoard>
         <PetitionsTitle>
@@ -107,6 +113,31 @@ const Petitions = (): JSX.Element => {
         </Stack>
       </PetitionBoard>
     </Inner>
+=======
+    <Container>
+      <Inner>
+        <PetitionBoard>
+          <div className="petition_type">
+            <span>모든 청원</span>
+            <Select onChange={handleSelect} value={selected} w={'128px'}>
+              {catergoryIdx.map(item => (
+                <option value={item} key={item}>
+                  {Category[item]}
+                </option>
+              ))}
+            </Select>
+          </div>
+          <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+          <Stack>
+            <PaginationButtons
+              getPetitions={getPetitionsByQuery}
+              pathname={'/petitions'}
+            />
+          </Stack>
+        </PetitionBoard>
+      </Inner>
+    </Container>
+>>>>>>> design/footer
   )
 }
 

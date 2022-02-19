@@ -1,4 +1,4 @@
-import { Text, UnorderedList, Tag } from '@chakra-ui/react'
+import { Text, UnorderedList } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
@@ -36,8 +36,6 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   useEffect(() => {
     queryPost(queryParams)
   }, [location.search])
-
-  console.log(petitionList)
 
   return (
     <>

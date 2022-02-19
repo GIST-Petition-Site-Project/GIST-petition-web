@@ -1,17 +1,11 @@
 import styled from '@emotion/styled'
+
 import theme from '../../style/theme'
 import { Box, Select, Text, Tab, Tabs, TabList } from '@chakra-ui/react'
-const Inner = styled.div`
-  position: relative;
-  margin: 0 auto;
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  height: 100%;
-  padding: 0 2em;
-`
+const Container = styled.div``
 
 const PetitionBoard = styled.div`
   position: relative;
-  /* top: 9.375rem; */
   margin-top: 9.375rem;
   text-align: center;
 `
@@ -34,6 +28,22 @@ const PetitionsSelect = styled(Select)`
 const PetitionsText = styled(Text)`
   font-size: 20px;
   font-weight: bold;
+  .petition_type {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #333;
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+  .chakra-select {
+    width: 128px;
+    height: 40px;
+    border-radius: 0;
+    border-color: #ccc;
+  }
 `
 const TabtitleText = styled(Text)`
   font-size: 16px;
@@ -74,7 +84,6 @@ const PetitionsTabList = styled(TabList)`
 `
 
 export {
-  Inner,
   PetitionBoard,
   PetitionsTitle,
   PetitionsSelect,
@@ -85,3 +94,4 @@ export {
   PetitionsTabs,
   PetitionsTabList,
 }
+export { Container }
