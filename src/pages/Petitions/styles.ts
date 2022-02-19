@@ -41,7 +41,7 @@ const TabtitleText = styled(Text)`
   margin-top: 10px;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     font-size: 20px;
-    margin-top: 0px;
+    /* margin-top: 0px; */
   }
 `
 
@@ -64,6 +64,7 @@ const PetitionsTab = styled(Tab)`
   border-color: #ccc;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     padding: 8px 16px;
+    font-size: 18px;
   }
 `
 const PetitionsTabs = styled(Tabs)``

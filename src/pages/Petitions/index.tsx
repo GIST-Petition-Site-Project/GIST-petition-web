@@ -80,7 +80,7 @@ const Petitions = (): JSX.Element => {
             </TabPanel>
             <TabPanel>
               <TabtitleWrapper>
-                <TabtitleText h={{ base: '20px', md: '40px' }} mb="1px">
+                <TabtitleText h={{ base: '20px', md: '30px' }} mb="1px">
                   추천순 청원
                 </TabtitleText>
               </TabtitleWrapper>
@@ -90,7 +90,7 @@ const Petitions = (): JSX.Element => {
             </TabPanel>
             <TabPanel>
               <TabtitleWrapper>
-                <TabtitleText h={{ base: '20px', md: '40px' }} mb="1px">
+                <TabtitleText h={{ base: '20px', md: '30px' }} mb="1px">
                   만료된 청원
                 </TabtitleText>
               </TabtitleWrapper>
