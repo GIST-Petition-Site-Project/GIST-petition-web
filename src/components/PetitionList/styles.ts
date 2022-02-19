@@ -2,6 +2,8 @@ import { Box, ListItem } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 
 const PetitionsHead = styled(Box)`
+  text-align: center;
+
   height: 50px;
   width: 100%;
   border-bottom: 1px solid #ddd;

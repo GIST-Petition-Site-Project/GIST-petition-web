@@ -1,4 +1,4 @@
-import { Inner, PetitionBoard } from './styles'
+import { PetitionBoard } from './styles'
 import { Stack } from '@chakra-ui/react'
 import { PetitionsText, PetitionsTitle } from './styles'
 import PaginationButtons from '../../components/PaginationButtons'
@@ -8,6 +8,7 @@ import qs from 'qs'
 import { ChangeEvent, useState } from 'react'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
+import Inner from '../../components/Inner'
 
 const MyPetitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {

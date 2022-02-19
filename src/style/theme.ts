@@ -25,6 +25,7 @@ const size = {
 
 const space = {
   INNER_MAXWIDTH: '60rem',
+  INNER_PADDING: '2rem',
   BUTTON_INNER_MAXWIDTH: '60rem',
 }
 

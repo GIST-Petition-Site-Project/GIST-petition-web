@@ -1,11 +1,12 @@
 // 청원 Id로 해당 글, 글 좋아요, 댓글 조회
 import { useParams } from 'react-router'
-import { Inner, PetitionWrapper, PetitionView, SharingPetition } from './styles'
+import { Container, PetitionWrapper, SharingPetition } from './styles'
 import PetitionContents from './PetitionContents'
 import { getPetitionById } from '../../utils/api'
 import { useEffect, useState } from 'react'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
+import Inner from '../../components/Inner'
 
 const Petition = (): JSX.Element => {
   const { id } = useParams()
@@ -60,66 +61,66 @@ const Petition = (): JSX.Element => {
   }
 
   return (
-    <Inner>
-      <PetitionWrapper>
-        <PetitionView p={{ base: '30px 10px', md: '50px 30px' }}>
+    <Container>
+      <Inner>
+        <PetitionWrapper>
           <PetitionContents
             petitionURL={petitionURL}
             petitionId={petitionId}
           ></PetitionContents>
-        </PetitionView>
-      </PetitionWrapper>
-      <SharingPetition>
-        <div className="share-url">
-          <div className="url-box">
-            <div>URL</div>
-            <div className="url">
-              https://dev.gist-petition.com/
-              {petitionURL}
+        </PetitionWrapper>
+        <SharingPetition>
+          <div className="share-url">
+            <div className="url-box">
+              <div>URL</div>
+              <div className="url">
+                https://dev.gist-petition.com/
+                {petitionURL}
+              </div>
+            </div>
+            <div className="copy-btn">
+              <button onClick={clip}>
+                <IoMdAlbums />
+              </button>
             </div>
           </div>
-          <div className="copy-btn">
-            <button onClick={clip}>
-              <IoMdAlbums />
-            </button>
+          <div className="share-btns">
+            <div>공유하기</div>
+            <ul className="sns">
+              <li className="kakaotalk">
+                <a
+                  href="#n"
+                  id="btnKakao"
+                  onClick={() => {
+                    fn_sendFB('kakaotalk')
+                    return false
+                  }}
+                  className="kakaotalk"
+                  target="_self"
+                  title="카카오톡 새창열림"
+                >
+                  <RiKakaoTalkFill />
+                </a>
+              </li>
+              <li className="facebook">
+                <a
+                  href="#n"
+                  onClick={() => {
+                    fn_sendFB('facebook')
+                    return false
+                  }}
+                  className="facebook"
+                  target="_self"
+                  title="페이스북 새창열림"
+                >
+                  <RiFacebookFill />
+                </a>
+              </li>
+            </ul>
           </div>
-        </div>
-        <div className="share-btns">
-          <div>공유하기</div>
-          <ul className="sns">
-            <li className="kakaotalk">
-              <a
-                href="#n"
-                id="btnKakao"
-                onClick={() => {
-                  fn_sendFB('kakaotalk')
-                  return false
-                }}
-                className="kakaotalk"
-                target="_self"
-                title="카카오톡 새창열림"
-              >
-                <RiKakaoTalkFill />
-              </a>
-            </li>
-            <li className="facebook">
-              <a
-                href="#n"
-                onClick={() => {
-                  fn_sendFB('facebook')
-                  return false
-                }}
-                className="facebook"
-                target="_self"
-                title="페이스북 새창열림"
-              >
-                <RiFacebookFill />
-              </a>
-            </li>
-          </ul>
-        </div>
-      </SharingPetition>
-    </Inner>
+        </SharingPetition>
+      </Inner>
+    </Container>
   )
 }
 

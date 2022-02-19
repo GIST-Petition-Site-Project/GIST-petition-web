@@ -1,10 +1,11 @@
 import logo from '../../assets/img/new_logo.svg'
 import { ReactComponent as MobMenuIcon } from '../../assets/img/menu_icon.svg'
-import { Header, Inner, Logo, TopMenu, ItemName, MobMenuButton } from './styles'
+import { Header, Logo, TopMenu, ItemName, MobMenuButton } from './styles'
 import { useState } from 'react'
-import { Divider, List, ListItem } from '@chakra-ui/react'
+import { Divider, ListItem } from '@chakra-ui/react'
 import MyMenu from './MyMenu'
 import { Link } from 'react-router-dom'
+import Inner from '../Inner'
 
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState<boolean>(false)
@@ -16,7 +17,7 @@ const NavBar = (): JSX.Element => {
 
   return (
     <Header>
-      <Inner flexDirection={{ base: 'column', md: 'row' }}>
+      <Inner>
         <Logo>
           <Link to="/" onClick={closeMenu}>
             <img alt="logo" src={logo} />

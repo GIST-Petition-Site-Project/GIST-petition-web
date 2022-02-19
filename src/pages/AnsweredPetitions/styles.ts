@@ -1,13 +1,5 @@
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
 import { Box, Select, Text } from '@chakra-ui/react'
-const Inner = styled.div`
-  position: relative;
-  margin: 0 auto;
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  height: 100%;
-  padding: 0 2em;
-`
 
 const PetitionBoard = styled.div`
   position: relative;
@@ -35,4 +27,4 @@ const PetitionsText = styled(Text)`
   margin-bottom: 1px;
 `
 
-export { Inner, PetitionBoard, PetitionsTitle, PetitionsSelect, PetitionsText }
+export { PetitionBoard, PetitionsTitle, PetitionsSelect, PetitionsText }
