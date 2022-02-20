@@ -212,8 +212,8 @@ const Register = (): JSX.Element => {
           <Title>회원가입</Title>
           {!whichUI.isAgreed && (
             <TermsOfUse
-              onAgree={handleAgree}
-              agreeInfo={agreeInfo}
+            // onAgree={handleAgree}
+            // agreeInfo={agreeInfo}
             ></TermsOfUse>
           )}
 
