@@ -8,6 +8,7 @@ import Register from '../pages/Register'
 import Write from '../pages/Write'
 import MyPetitions from '../pages/MyPetitions'
 import { AuthRoute, UnauthRoute } from './PrivateRouter'
+import FindingPassword from '../pages/FindingPassword'
 
 const RootRouter = (): JSX.Element => {
   return (
@@ -33,6 +34,7 @@ const RootRouter = (): JSX.Element => {
         <Route path="/mypetitions" element={<AuthRoute />}>
           <Route index element={<MyPetitions />} />
         </Route>
+        <Route path="/findPassword" element={<FindingPassword />}></Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
