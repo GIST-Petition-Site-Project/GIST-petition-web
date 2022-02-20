@@ -7,12 +7,14 @@ import NeedLoginModal from '../../../components/NeedLoginModal'
 
 const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const [input, setInput] = useState<AgreePetition>({
-    description: '청원에 동의합니다.',
+    description: '동의합니다.',
   })
-  const [isConsented, setIsConsented] = useState(false)
+  const [isConsented, setIsConsented] = useState(true)
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setInput({ description: e.target.value })
+    setInput({ description: e.target.value.replace(/ +/g, ' ') })
   }
+
   const navigate = useNavigate()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -20,8 +22,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
       const response = await postAgreePetition(petitionId, input)
       if (response?.status === 401) {
         onOpen()
-        console.log('로그인 해야함')
-      } else if (response?.status || 500 < 401) {
+      } else if (response.status < 400) {
         navigate(0)
         setIsConsented(true)
       }
@@ -33,7 +34,9 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const checkAgreeByMe = async (id: string) => {
     try {
       const response = await getStateOfAgreement(id)
-      setIsConsented(response?.data)
+      if (response.status < 400) {
+        setIsConsented(response.data)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -42,19 +45,34 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   useEffect(() => {
     checkAgreeByMe(petitionId)
   }, [petitionId])
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   // postAgreePetition
   return (
-    <>
+    <div style={{ position: 'relative' }}>
+      <span
+        style={{
+          display: 'inline-block',
+          position: 'absolute',
+          right: '0',
+          top: '-1.5rem',
+          color: '#8a8a8a',
+          fontWeight: '300',
+        }}
+      >
+        {input.description.length}/100
+      </span>
       <form onSubmit={handleSubmit}>
         <FormControl>
           <Flex h="60px">
             <AgreementTextArea
               rows={1}
               _focus={{ outline: 'none' }}
+              placeholder="청원에 동의합니다."
               onChange={handleChange}
-              value="청원에 동의합니다."
+              value={input.description}
+              maxLength={100}
             />
             <AgreementWriteButton
               _focus={{ outline: 'none' }}
@@ -68,7 +86,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
         </FormControl>
       </form>
       <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
-    </>
+    </div>
   )
 }
 

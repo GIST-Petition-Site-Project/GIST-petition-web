@@ -1,7 +1,7 @@
-import { Text, UnorderedList, Tag } from '@chakra-ui/react'
+import { Text, UnorderedList } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import {
   PetitionAgreement,
@@ -57,7 +57,6 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                 <PetitionStatusTag borderRadius={'none'}>
                   {!petition.answered ? '청원진행중' : '답변완료'}{' '}
                   {/*petition.answered의 값이 적용이 잘 안 됨*/}
-                  {console.log(petition)}
                 </PetitionStatusTag>
               </PetitionStatus>
               <PetitionCategory
@@ -79,7 +78,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               m={{ base: '5px 0 20px 0', md: '0 220px 0 250px' }}
             >
               <Link
-                to={`/petitions/${petition.id}`}
+                to={`/petitions/temp/${petition.tempUrl}`}
                 style={{ display: 'inline-block', width: '100%' }}
               >
                 {petition.title}

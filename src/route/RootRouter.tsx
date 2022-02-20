@@ -7,12 +7,15 @@ import Petitions from '../pages/Petitions'
 import Register from '../pages/Register'
 import Write from '../pages/Write'
 import MyPetitions from '../pages/MyPetitions'
+import AnsweredPetitions from '../pages/AnsweredPetitions'
 import { AuthRoute, UnauthRoute } from './PrivateRouter'
 import FindingPassword from '../pages/FindingPassword'
+import NavBar from '../components/NavBar'
 
 const RootRouter = (): JSX.Element => {
   return (
     <BrowserRouter>
+      <NavBar></NavBar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UnauthRoute />}>
@@ -35,6 +38,9 @@ const RootRouter = (): JSX.Element => {
           <Route index element={<MyPetitions />} />
         </Route>
         <Route path="/findpassword" element={<FindingPassword />}></Route>
+        <Route path="/answer" element={<Outlet />}>
+          <Route index element={<AnsweredPetitions />} />
+        </Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

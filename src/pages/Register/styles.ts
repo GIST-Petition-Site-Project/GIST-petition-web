@@ -1,15 +1,30 @@
+import { Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
 
-const stackStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: '10rem',
-  left: '0',
-  right: '0',
-  height: '31.25rem',
-  width: '25rem',
-  margin: 'auto',
-}
+const RegisterStack = styled(Stack)`
+  position: absolute;
+  top: 10rem;
+  left: 0;
+  right: 0;
+  width: 70%;
+  max-width: 30em;
+  margin: auto;
+`
+
+const Title = styled(Text)`
+  font-size: 2.2rem;
+  font-weight: bold;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 2.3rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 2.4rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 2.5rem;
+  }
+`
 
 const RegisterButton = styled.button`
   color: ${theme.color.WHITE};
@@ -19,7 +34,13 @@ const RegisterButton = styled.button`
   font-weight: bold;
 `
 
+const RegisterText = styled(Text)`
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+`
+
 const ErrorText = styled.p`
+  margin-top: 2em;
   text-align: center;
   color: ${theme.color.PRIMARY_RED};
 `
@@ -35,4 +56,11 @@ const DeleteBtn = styled.button`
   font-weight: bold;
 `
 
-export { stackStyle, RegisterButton, ErrorText, DeleteBtn }
+export {
+  RegisterStack,
+  Title,
+  RegisterText,
+  RegisterButton,
+  ErrorText,
+  DeleteBtn,
+}

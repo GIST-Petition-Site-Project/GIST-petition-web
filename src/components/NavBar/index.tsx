@@ -1,44 +1,50 @@
 import logo from '../../assets/img/new_logo.svg'
 import { ReactComponent as MobMenuIcon } from '../../assets/img/menu_icon.svg'
-import {
-  Header,
-  Inner,
-  Logo,
-  Logo__Image,
-  TopMenu,
-  ItemName,
-  MobMenuButton,
-} from './styles'
+import { Header, Logo, TopMenu, ItemName, MobMenuButton } from './styles'
 import { useState } from 'react'
-import { ListItem } from '@chakra-ui/react'
+import { Divider, ListItem } from '@chakra-ui/react'
 import MyMenu from './MyMenu'
+import { Link } from 'react-router-dom'
+import Inner from '../Inner'
 
 const NavBar = (): JSX.Element => {
-  const [opened, setOpened] = useState(false)
+  const [opened, setOpened] = useState<boolean>(false)
+  const closeMenu = () => {
+    if (opened) {
+      setOpened(!opened)
+    }
+  }
 
   return (
     <Header>
-      <Inner flexDirection={{ base: 'column', md: 'row' }}>
+      <Inner>
         <Logo>
-          <a href="/">
-            <Logo__Image alt="logo" src={logo} />
-          </a>
+          <Link to="/" onClick={closeMenu}>
+            <img alt="logo" src={logo} />
+          </Link>
         </Logo>
-        <TopMenu open={opened} flexDirection={{ base: 'column', md: 'row' }}>
-          <ListItem className="item">
-            <ItemName className="item__menu">
-              <a href="/write">청원하기</a>
-            </ItemName>
-          </ListItem>
-          <ListItem className="item">
-            <ItemName className="item__menu">
-              <a href="/petitions">모든 청원</a>
-            </ItemName>
-          </ListItem>
-          <ListItem className="item">
-            <ItemName className="item__menu">답변된 청원</ItemName>
-          </ListItem>
-          <ListItem className="item">{MyMenu()}</ListItem>
+        <TopMenu open={opened}>
+          <div onClick={closeMenu}>
+            <ListItem>
+              <ItemName>
+                <Link to="/write">청원하기</Link>
+              </ItemName>
+            </ListItem>
+            <ListItem>
+              <ItemName>
+                <Link to="/petitions">모든 청원</Link>
+              </ItemName>
+            </ListItem>
+            <ListItem>
+              <ItemName>
+                <Link to="/answer">답변된 청원</Link>
+              </ItemName>
+            </ListItem>
+            <Divider></Divider>
+            <ListItem>
+              <MyMenu />
+            </ListItem>
+          </div>
         </TopMenu>
         <MobMenuButton
           colorScheme={'black'}

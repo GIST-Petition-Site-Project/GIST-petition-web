@@ -3,7 +3,7 @@ import { Box, Select, Text } from '@chakra-ui/react'
 
 const PetitionBoard = styled.div`
   position: relative;
-  top: 9.375rem;
+  margin-top: 9.375rem;
   text-align: center;
 `
 const PetitionsTitle = styled(Box)`
