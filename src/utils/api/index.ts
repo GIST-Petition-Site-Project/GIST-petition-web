@@ -12,6 +12,7 @@ export * from './petition/postCreatePetition'
 export * from './petition/postAgreePetition'
 export * from './petition/getPetitionsByQuery'
 export * from './petition/getMyPetitionsByQuery'
+export * from './petition/getBestPetitionsByQuery'
 
 // user
 export * from './user/postLogin'
