@@ -1,16 +1,17 @@
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
+
 const Container = styled.div``
 
 const PetitionBoard = styled.div`
   position: relative;
   margin-top: 9.375rem;
-
   .petition_type {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 1rem;
+
     span {
       font-size: 20px;
       font-weight: bold;
@@ -53,5 +54,4 @@ const PetitionBoard = styled.div`
   }
 `
 
-export { PetitionBoard }
-export { Container }
+export { PetitionBoard, Container }

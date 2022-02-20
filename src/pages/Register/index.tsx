@@ -18,10 +18,20 @@ import {
 } from '@chakra-ui/react'
 import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { RegisterButton, stackStyle, ErrorText, DeleteBtn } from './styles'
+import {
+  RegisterStack,
+  RegisterText,
+  RegisterButton,
+  ErrorText,
+  DeleteBtn,
+  Title,
+} from './styles'
 import { useNavigate } from 'react-router-dom'
-import { postDelete } from '../../utils/api/user/postDelete'
+import { postDelete } from '../../utils/api/user/userDelete'
 import TermsOfUse from './TermsOfUse'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
+import { setWhichInfo } from '../../redux/register/registerSlice'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -39,49 +49,10 @@ const Register = (): JSX.Element => {
   const toast = useToast({
     variant: 'toast',
   })
-
-  const [whichUI, setWhichUI] = useState<WhichUI>({
-    isAgreed: false,
-    isCodeRequested: false,
-    isLoading: false,
-    isExpired: false,
-    isVerificated: false,
-    isValid: false,
-  })
-  const [agreeInfo, setAgreeInfo] = useState<RegisterAgree>({
-    service: false,
-    private: false,
-  })
-
+  const dispatch = useDispatch()
+  const whichUI = useSelector((state: RootState) => state.register.whichUI)
+  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   const [errorText, setErrorText] = useState('')
-
-  const handleAgree = (value: string) => {
-    switch (value) {
-      case 'total':
-        if (agreeInfo.private && agreeInfo.service) {
-          setAgreeInfo({ ...agreeInfo, service: false, private: false })
-          return
-        }
-        setAgreeInfo({ ...agreeInfo, service: true, private: true })
-        return
-      case 'service':
-        if (agreeInfo.service) {
-          setAgreeInfo({ ...agreeInfo, service: false })
-          return
-        }
-        setAgreeInfo({ ...agreeInfo, service: true })
-        return
-      case 'private':
-        if (agreeInfo.private) {
-          setAgreeInfo({ ...agreeInfo, private: false })
-          return
-        }
-        setAgreeInfo({ ...agreeInfo, private: true })
-        return
-      default:
-        throw Error('Clicked Wrong Btn')
-    }
-  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -95,9 +66,9 @@ const Register = (): JSX.Element => {
     setInput({ ...input, [name]: value })
   }
 
-  const handleAgreeBtn = (e: React.MouseEvent<HTMLElement>) => {
+  const handleAgreeBtn = () => {
     if (agreeInfo.private === true && agreeInfo.service === true) {
-      setWhichUI({ ...whichUI, isAgreed: true })
+      dispatch(setWhichInfo('Agreed'))
       return
     }
     setErrorText('모든 약관에 동의해주세요')
@@ -109,28 +80,37 @@ const Register = (): JSX.Element => {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
-    setWhichUI({ ...whichUI, isLoading: true })
-    const status = await postCreateVerificationCode({
+    dispatch(setWhichInfo('Loading'))
+    const response = await postCreateVerificationCode({
       username: input.username,
     })
-    setErrorText(status[1])
-    if (status[1] === '이미 존재하는 회원입니다.') {
+    const status = response?.status
+    const message = response?.data.message
+    setErrorText(message)
+    if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
       emailRef.current && emailRef.current.focus()
-      setWhichUI({ ...whichUI, isLoading: false })
-    } else if (status[0] < 400) {
-      setWhichUI({ ...whichUI, isLoading: false, isCodeRequested: true })
+      dispatch(setWhichInfo('Loading'))
+    } else if (status < 400) {
+      dispatch(setWhichInfo('Loading'))
+      dispatch(setWhichInfo('CodeRequested'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
   const handleConfirmCode = async () => {
-    const status = await postConfirmVerificationCode({
+    const response = await postConfirmVerificationCode({
       username: input.username,
       verificationCode: input.verificationCode,
     })
-
-    switch (status[1]) {
+    const status = response?.status
+    const message = response?.data.message
+    if (status < 400) {
+      dispatch(setWhichInfo('Verificated'))
+      dispatch(setWhichInfo('Valid'))
+      return
+    }
+    switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
         setInput({ ...input, verificationCode: '' })
         verificationRef.current && verificationRef.current.focus()
@@ -138,51 +118,48 @@ const Register = (): JSX.Element => {
       }
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
-        setWhichUI({ ...whichUI, isExpired: true })
+        dispatch(setWhichInfo('Expired'))
         break
       }
+      case undefined: {
+        throw Error('API 호출에 실패했습니다')
+      }
     }
-    setErrorText(status[1])
-    if (status[0] < 400) {
-      setWhichUI({ ...whichUI, isVerificated: true, isValid: true })
-    }
+    setErrorText(message)
   }
 
   const handleResendCode = async () => {
-    setWhichUI({
-      ...whichUI,
-      isLoading: true,
-    })
+    dispatch(setWhichInfo('Loading'))
     setErrorText('')
-    const status = await postCreateVerificationCode({
+    const response = await postCreateVerificationCode({
       username: input.username,
     })
-    if (status[1] < 400) {
-      setWhichUI({
-        ...whichUI,
-        isExpired: false,
-        isLoading: false,
-        isCodeRequested: true,
-      })
+    const status = response.status
+    if (status < 400) {
+      dispatch(setWhichInfo('Expired'))
+      dispatch(setWhichInfo('Loading'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
   const handleRegister = async () => {
+    setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
       setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
       return
     }
     if (input.password === input.passwordConfirm) {
-      const status = await postRegister({
+      const response = await postRegister({
         username: input.username,
         verificationCode: input.verificationCode,
         password: input.password,
       })
-      setErrorText(status[1])
+      const status = response.status
+      const message = response.data.message
+      setErrorText(message)
 
-      if (status[0] < 400) {
+      if (status < 400) {
         toast({
           status: 'success',
           duration: 3000,
@@ -192,8 +169,7 @@ const Register = (): JSX.Element => {
         })
         navigate('/login')
       } else {
-        setErrorText(status[1])
-        setWhichUI({ ...whichUI, isValid: false })
+        dispatch(setWhichInfo('Valid'))
       }
     } else {
       passwordRef.current && passwordRef.current.focus()
@@ -212,7 +188,8 @@ const Register = (): JSX.Element => {
       passwordConfirm: '',
     })
     setErrorText('')
-    setWhichUI({ ...whichUI, isVerificated: false, isCodeRequested: false })
+    dispatch(setWhichInfo('Verificated'))
+    dispatch(setWhichInfo('CodeRequested'))
   }
 
   const handleDelete = async () => {
@@ -230,11 +207,9 @@ const Register = (): JSX.Element => {
   return (
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
-        <Stack spacing={4} style={stackStyle}>
+        <RegisterStack>
           <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
-          <Text fontSize="4xl" fontWeight="bold">
-            회원가입
-          </Text>
+          <Title>회원가입</Title>
           {!whichUI.isAgreed && (
             <TermsOfUse
               onAgree={handleAgree}
@@ -244,7 +219,7 @@ const Register = (): JSX.Element => {
 
           {whichUI.isAgreed && (
             <FormControl isRequired>
-              <Text mb="8px">이메일</Text>
+              <RegisterText>이메일</RegisterText>
               <InputGroup borderColor={`${theme.color.ligthGray}`}>
                 <InputLeftElement>
                   {<CFaUserAlt color="gray.300" />}
@@ -369,13 +344,13 @@ const Register = (): JSX.Element => {
             </RegisterButton>
           )}
           <ErrorText>{errorText}</ErrorText>
-          <Text mb="4px" align="center">
+          <Text mt="1em" align="center">
             이미 가입하셨나요?{' '}
             <a href="/login" style={{ textDecoration: 'underline' }}>
               로그인
             </a>
           </Text>
-        </Stack>
+        </RegisterStack>
       </form>
     </section>
   )

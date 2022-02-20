@@ -8,6 +8,7 @@ interface Petition {
   title: string
   updatedAt: string
   userId: number
+  tempUrl: string
 }
 
 interface PetitionId {
