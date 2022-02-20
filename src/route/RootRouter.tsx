@@ -34,7 +34,7 @@ const RootRouter = (): JSX.Element => {
         <Route path="/mypetitions" element={<AuthRoute />}>
           <Route index element={<MyPetitions />} />
         </Route>
-        <Route path="/findPassword" element={<FindingPassword />}></Route>
+        <Route path="/findpassword" element={<FindingPassword />}></Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

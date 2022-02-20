@@ -22,3 +22,8 @@ export * from './user/getUsersMe'
 // verfication
 export * from './verification/postConfirmVerificationCode'
 export * from './verification/postCreateVerificationCode'
+
+// findPassword
+export * from './findPassword/postConfirmVerificationCodeForPassword'
+export * from './findPassword/postCreateVerificationCodeForPassword'
+export * from './findPassword/putResetPassword'

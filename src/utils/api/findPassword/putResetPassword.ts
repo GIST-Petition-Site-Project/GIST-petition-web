@@ -5,6 +5,6 @@ export const putResetPassword = async (payload: {
   username: string
   verificationCode: string
 }) => {
-  const response = await api.put('users/reset-password')
+  const response = await api.put('users/reset-password', payload)
   return response
 }

@@ -1,5 +1,4 @@
 import React, { FormEvent, useRef, useState } from 'react'
-import {} from '../../utils/api'
 import {
   chakra,
   FormControl,
@@ -18,10 +17,10 @@ import { RegisterButton, stackStyle, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { setWhichInfo } from '../../redux/register/registerSlice'
 import { postConfirmVerificationCodeForPassword } from '../../utils/api/findPassword/postConfirmVerificationCodeForPassword'
 import { postCreateVerificationCodeForPassword } from '../../utils/api/findPassword/postCreateVerificationCodeForPassword'
 import { putResetPassword } from '../../utils/api/findPassword/putResetPassword'
+import { setFindPasswordWhichInfo } from '../../redux/findPassword/findPasswordSlice'
 
 const FindingPassword = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -36,18 +35,11 @@ const FindingPassword = (): JSX.Element => {
     verificationCode: '',
     passwordConfirm: '',
   })
-  const [whichUI, setWhichUI] = useState<FindPasswordWhichUI>({
-    isLoading: false,
-    isCodeRequested: false,
-    isExpired: false,
-    isVerificated: false,
-    isValid: false,
-  })
-
+  const whichUI = useSelector((state: RootState) => state.findPassword)
+  const dispatch = useDispatch()
   const toast = useToast({
     variant: 'toast',
   })
-  const dispatch = useDispatch()
   const [errorText, setErrorText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,20 +60,20 @@ const FindingPassword = (): JSX.Element => {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
-    dispatch(setWhichInfo('Loading'))
+    dispatch(setFindPasswordWhichInfo('Loading'))
     const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
     const status = response?.status
     const message = response?.data.message
     setErrorText(message)
-    if (message === '이미 존재하는 회원입니다.') {
+    if (status > 400) {
       setInput({ ...input, username: '' })
       emailRef.current && emailRef.current.focus()
-      dispatch(setWhichInfo('Loading'))
+      dispatch(setFindPasswordWhichInfo('Loading'))
     } else if (status < 400) {
-      dispatch(setWhichInfo('Loading'))
-      dispatch(setWhichInfo('CodeRequested'))
+      dispatch(setFindPasswordWhichInfo('Loading'))
+      dispatch(setFindPasswordWhichInfo('CodeRequested'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -95,8 +87,8 @@ const FindingPassword = (): JSX.Element => {
     const status = response?.status
     const message = response?.data.message
     if (status < 400) {
-      dispatch(setWhichInfo('Verificated'))
-      dispatch(setWhichInfo('Valid'))
+      dispatch(setFindPasswordWhichInfo('Verificated'))
+      dispatch(setFindPasswordWhichInfo('Valid'))
       return
     }
     switch (message) {
@@ -107,7 +99,7 @@ const FindingPassword = (): JSX.Element => {
       }
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
-        dispatch(setWhichInfo('Expired'))
+        dispatch(setFindPasswordWhichInfo('Expired'))
         break
       }
       case undefined: {
@@ -118,20 +110,20 @@ const FindingPassword = (): JSX.Element => {
   }
 
   const handleResendCode = async () => {
-    dispatch(setWhichInfo('Loading'))
+    dispatch(setFindPasswordWhichInfo('Loading'))
     setErrorText('')
     const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
     const status = response.status
     if (status < 400) {
-      dispatch(setWhichInfo('Expired'))
-      dispatch(setWhichInfo('Loading'))
+      dispatch(setFindPasswordWhichInfo('Expired'))
+      dispatch(setFindPasswordWhichInfo('Loading'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
-  const handleRegister = async () => {
+  const handleReset = async () => {
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
@@ -140,10 +132,11 @@ const FindingPassword = (): JSX.Element => {
     }
     if (input.password === input.passwordConfirm) {
       const response = await putResetPassword({
-        username: input.username,
         password: input.password,
+        username: input.username,
         verificationCode: input.verificationCode,
       })
+      console.log(response)
       const status = response.status
       const message = response.data.message
       setErrorText(message)
@@ -158,7 +151,7 @@ const FindingPassword = (): JSX.Element => {
         })
         navigate('/login')
       } else {
-        dispatch(setWhichInfo('Valid'))
+        dispatch(setFindPasswordWhichInfo('Valid'))
       }
     } else {
       passwordRef.current && passwordRef.current.focus()
@@ -177,8 +170,8 @@ const FindingPassword = (): JSX.Element => {
       passwordConfirm: '',
     })
     setErrorText('')
-    dispatch(setWhichInfo('Verificated'))
-    dispatch(setWhichInfo('CodeRequested'))
+    dispatch(setFindPasswordWhichInfo('Verificated'))
+    dispatch(setFindPasswordWhichInfo('CodeRequested'))
   }
 
   return (
@@ -304,17 +297,11 @@ const FindingPassword = (): JSX.Element => {
             </RegisterButton>
           )}
           {whichUI.isVerificated && whichUI.isValid && (
-            <RegisterButton onClick={handleRegister} className="submit__btn">
-              회원가입
+            <RegisterButton onClick={handleReset} className="submit__btn">
+              비밀번호 재설정
             </RegisterButton>
           )}
           <ErrorText>{errorText}</ErrorText>
-          <Text mb="4px" align="center">
-            이미 가입하셨나요?{' '}
-            <a href="/login" style={{ textDecoration: 'underline' }}>
-              로그인
-            </a>
-          </Text>
         </Stack>
       </form>
     </section>
