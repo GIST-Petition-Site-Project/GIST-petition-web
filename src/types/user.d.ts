@@ -40,3 +40,12 @@ interface AgreeAttribute {
   isClicked: boolean
 }
 // 회원 가입 UI 관련
+
+interface FindPasswordWhichUI {
+  isCodeRequested: boolean
+  isLoading: boolean
+  isExpired: boolean
+  isVerificated: boolean
+  isValid: boolean
+}
+// 비밀번호찾기 UI 관련

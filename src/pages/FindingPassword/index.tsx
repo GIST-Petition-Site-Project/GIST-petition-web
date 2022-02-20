@@ -1,10 +1,5 @@
 import React, { FormEvent, useRef, useState } from 'react'
 import {
-  postRegister,
-  postConfirmVerificationCode,
-  postCreateVerificationCode,
-} from '../../utils/api'
-import {
   chakra,
   FormControl,
   InputGroup,
@@ -18,22 +13,16 @@ import {
 } from '@chakra-ui/react'
 import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import {
-  RegisterStack,
-  RegisterText,
-  RegisterButton,
-  ErrorText,
-  DeleteBtn,
-  Title,
-} from './styles'
+import { RegisterButton, stackStyle, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { postDelete } from '../../utils/api/user/userDelete'
-import TermsOfUse from './TermsOfUse'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { setWhichInfo } from '../../redux/register/registerSlice'
+import { postConfirmVerificationCodeForPassword } from '../../utils/api/findPassword/postConfirmVerificationCodeForPassword'
+import { postCreateVerificationCodeForPassword } from '../../utils/api/findPassword/postCreateVerificationCodeForPassword'
+import { putResetPassword } from '../../utils/api/findPassword/putResetPassword'
+import { setFindPasswordWhichInfo } from '../../redux/findPassword/findPasswordSlice'
 
-const Register = (): JSX.Element => {
+const FindingPassword = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
   const navigate = useNavigate()
@@ -46,12 +35,11 @@ const Register = (): JSX.Element => {
     verificationCode: '',
     passwordConfirm: '',
   })
+  const whichUI = useSelector((state: RootState) => state.findPassword)
+  const dispatch = useDispatch()
   const toast = useToast({
     variant: 'toast',
   })
-  const dispatch = useDispatch()
-  const whichUI = useSelector((state: RootState) => state.register.whichUI)
-  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   const [errorText, setErrorText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,48 +54,41 @@ const Register = (): JSX.Element => {
     setInput({ ...input, [name]: value })
   }
 
-  const handleAgreeBtn = () => {
-    if (agreeInfo.private === true && agreeInfo.service === true) {
-      dispatch(setWhichInfo('Agreed'))
-      return
-    }
-    setErrorText('모든 약관에 동의해주세요')
-  }
-
   const handleCreateCode = async () => {
     const emailRegex = /@(gm.)?gist.ac.kr$/
     if (!emailRegex.test(input.username)) {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
-    dispatch(setWhichInfo('Loading'))
-    const response = await postCreateVerificationCode({
+    dispatch(setFindPasswordWhichInfo('Loading'))
+    const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
     const status = response?.status
     const message = response?.data.message
     setErrorText(message)
-    if (message === '이미 존재하는 회원입니다.') {
+    if (status > 400) {
       setInput({ ...input, username: '' })
       emailRef.current && emailRef.current.focus()
-      dispatch(setWhichInfo('Loading'))
+      dispatch(setFindPasswordWhichInfo('Loading'))
     } else if (status < 400) {
-      dispatch(setWhichInfo('Loading'))
-      dispatch(setWhichInfo('CodeRequested'))
+      dispatch(setFindPasswordWhichInfo('Loading'))
+      dispatch(setFindPasswordWhichInfo('CodeRequested'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
   const handleConfirmCode = async () => {
-    const response = await postConfirmVerificationCode({
+    const response = await postConfirmVerificationCodeForPassword({
       username: input.username,
       verificationCode: input.verificationCode,
     })
+    console.log(response)
     const status = response?.status
     const message = response?.data.message
     if (status < 400) {
-      dispatch(setWhichInfo('Verificated'))
-      dispatch(setWhichInfo('Valid'))
+      dispatch(setFindPasswordWhichInfo('Verificated'))
+      dispatch(setFindPasswordWhichInfo('Valid'))
       return
     }
     switch (message) {
@@ -118,7 +99,7 @@ const Register = (): JSX.Element => {
       }
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
-        dispatch(setWhichInfo('Expired'))
+        dispatch(setFindPasswordWhichInfo('Expired'))
         break
       }
       case undefined: {
@@ -129,20 +110,20 @@ const Register = (): JSX.Element => {
   }
 
   const handleResendCode = async () => {
-    dispatch(setWhichInfo('Loading'))
+    dispatch(setFindPasswordWhichInfo('Loading'))
     setErrorText('')
-    const response = await postCreateVerificationCode({
+    const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
     const status = response.status
     if (status < 400) {
-      dispatch(setWhichInfo('Expired'))
-      dispatch(setWhichInfo('Loading'))
+      dispatch(setFindPasswordWhichInfo('Expired'))
+      dispatch(setFindPasswordWhichInfo('Loading'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
-  const handleRegister = async () => {
+  const handleReset = async () => {
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
@@ -150,10 +131,10 @@ const Register = (): JSX.Element => {
       return
     }
     if (input.password === input.passwordConfirm) {
-      const response = await postRegister({
+      const response = await putResetPassword({
+        password: input.password,
         username: input.username,
         verificationCode: input.verificationCode,
-        password: input.password,
       })
       const status = response.status
       const message = response.data.message
@@ -163,13 +144,13 @@ const Register = (): JSX.Element => {
         toast({
           status: 'success',
           duration: 3000,
-          description: '회원가입이 완료되었습니다',
-          title: '계정 생성완료',
+          description: '비밀번호 재설정',
+          title: '비밀번호가 재설정되었습니다',
           isClosable: true,
         })
         navigate('/login')
       } else {
-        dispatch(setWhichInfo('Valid'))
+        dispatch(setFindPasswordWhichInfo('Valid'))
       }
     } else {
       passwordRef.current && passwordRef.current.focus()
@@ -188,49 +169,35 @@ const Register = (): JSX.Element => {
       passwordConfirm: '',
     })
     setErrorText('')
-    dispatch(setWhichInfo('Verificated'))
-    dispatch(setWhichInfo('CodeRequested'))
-  }
-
-  const handleDelete = async () => {
-    const response = await postDelete({ username: input.username })
-    if (response?.status < 400) {
-      toast({
-        status: 'success',
-        duration: 2000,
-        description: '계정 삭제완료',
-        isClosable: true,
-      })
-    }
+    dispatch(setFindPasswordWhichInfo('Verificated'))
+    dispatch(setFindPasswordWhichInfo('CodeRequested'))
   }
 
   return (
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
-        <RegisterStack>
-          <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
-          <Title>회원가입</Title>
-          {!whichUI.isAgreed && <TermsOfUse></TermsOfUse>}
-          {whichUI.isAgreed && (
-            <FormControl isRequired>
-              <RegisterText>이메일</RegisterText>
-              <InputGroup borderColor={`${theme.color.ligthGray}`}>
-                <InputLeftElement>
-                  {<CFaUserAlt color="gray.300" />}
-                </InputLeftElement>
-                <Input
-                  ref={emailRef}
-                  type="email"
-                  name="username"
-                  placeholder="지스트 메일을 입력하세요"
-                  value={input.username}
-                  onChange={handleChange}
-                  disabled={whichUI.isCodeRequested}
-                  borderRadius="0"
-                ></Input>
-              </InputGroup>
-            </FormControl>
-          )}
+        <Stack spacing={4} style={stackStyle}>
+          <Text fontSize="4xl" fontWeight="bold">
+            비밀번호 찾기
+          </Text>
+          <FormControl isRequired>
+            <Text mb="8px">이메일</Text>
+            <InputGroup borderColor={`${theme.color.ligthGray}`}>
+              <InputLeftElement>
+                {<CFaUserAlt color="gray.300" />}
+              </InputLeftElement>
+              <Input
+                ref={emailRef}
+                type="email"
+                name="username"
+                placeholder="지스트 메일을 입력하세요"
+                value={input.username}
+                onChange={handleChange}
+                disabled={whichUI.isCodeRequested}
+                borderRadius="0"
+              ></Input>
+            </InputGroup>
+          </FormControl>
 
           {whichUI.isCodeRequested && !whichUI.isExpired && (
             <FormControl isRequired>
@@ -290,11 +257,7 @@ const Register = (): JSX.Element => {
               </InputGroup>
             </FormControl>
           )}
-          {!whichUI.isAgreed && (
-            <RegisterButton onClick={handleAgreeBtn}>다음단계</RegisterButton>
-          )}
-          {whichUI.isAgreed &&
-            !whichUI.isCodeRequested &&
+          {!whichUI.isCodeRequested &&
             !whichUI.isLoading &&
             !whichUI.isExpired && (
               <RegisterButton onClick={handleCreateCode}>
@@ -333,21 +296,15 @@ const Register = (): JSX.Element => {
             </RegisterButton>
           )}
           {whichUI.isVerificated && whichUI.isValid && (
-            <RegisterButton onClick={handleRegister} className="submit__btn">
-              회원가입
+            <RegisterButton onClick={handleReset} className="submit__btn">
+              비밀번호 재설정
             </RegisterButton>
           )}
           <ErrorText>{errorText}</ErrorText>
-          <Text mt="1em" align="center">
-            이미 가입하셨나요?{' '}
-            <a href="/login" style={{ textDecoration: 'underline' }}>
-              로그인
-            </a>
-          </Text>
-        </RegisterStack>
+        </Stack>
       </form>
     </section>
   )
 }
 
-export default Register
+export default FindingPassword
