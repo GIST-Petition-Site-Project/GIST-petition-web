@@ -8,6 +8,7 @@ const Container = styled.div`
     margin: auto;
     justify-content: center;
     padding: 0 2rem;
+
     > span:nth-of-type(1) {
       font-size: 2rem;
       font-weight: bold;
