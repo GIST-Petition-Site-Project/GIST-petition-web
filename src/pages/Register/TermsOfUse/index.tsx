@@ -12,6 +12,7 @@ import {
   TermsOfUseBtn,
   TermsOfUseCheckFlex,
   TermsOfUseTotalBox,
+  TermsOfUseBox,
 } from './styles'
 
 const TermsOfUse = (): JSX.Element => {
@@ -46,34 +47,32 @@ const TermsOfUse = (): JSX.Element => {
     value && handleAgree(value)
   }
   return (
-    <section>
+    <TermsOfUseBox>
       <List>
         <TermsOfUseCheckFlex as="label">
           <TermsOfUseCheckIcon
             onClick={handleClick}
             aria-label="Call Segun"
-            size="sm"
             icon={<CheckIcon />}
             data-value="total"
             isclicked={
               agreeInfo.private && agreeInfo.service ? 'true' : 'false'
             }
           />
-          <TermsOfUseTotalBox ml={2}>전체 약관 동의</TermsOfUseTotalBox>
+          <TermsOfUseTotalBox>전체 약관 동의</TermsOfUseTotalBox>
         </TermsOfUseCheckFlex>
       </List>
-      <Divider orientation="horizontal" borderBottomWidth="2.5px" mb={4} />
+      <Divider orientation="horizontal" borderBottomWidth="2.5px" />
       <List>
         <TermsOfUseCheckFlex as="label">
           <TermsOfUseCheckIcon
             aria-label="Call Segun"
-            size="sm"
             icon={<CheckIcon />}
             onClick={handleClick}
             data-value="service"
             isclicked={agreeInfo.service ? 'true' : 'false'}
           />
-          <Box ml={2}>서비스 이용약관 동의</Box>
+          <TermsOfUseBox>서비스 이용약관 동의</TermsOfUseBox>
         </TermsOfUseCheckFlex>
         <TermsOfUseBtn
           onClick={() => {
@@ -97,13 +96,12 @@ const TermsOfUse = (): JSX.Element => {
         <TermsOfUseCheckFlex as="label">
           <TermsOfUseCheckIcon
             aria-label="Call Segun"
-            size="sm"
             icon={<CheckIcon />}
             onClick={handleClick}
             data-value="private"
             isclicked={agreeInfo.private ? 'true' : 'false'}
           />
-          <Box ml={2}>개인정보수집 및 이용동의</Box>
+          <TermsOfUseBox>개인정보수집 및 이용동의</TermsOfUseBox>
         </TermsOfUseCheckFlex>
         <TermsOfUseBtn
           onClick={() => {
@@ -116,14 +114,13 @@ const TermsOfUse = (): JSX.Element => {
           <TermsOfUseIcon></TermsOfUseIcon>
         </TermsOfUseBtn>
       </List>
-      <Divider orientation="horizontal" />
       <TermsOfUseCollapse in={secondOpen}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos
         at, quia officiis nesciunt quod blanditiis aperiam repellendus
         praesentium numquam ullam maxime, vel consequuntur est dolore tempore
         excepturi rerum ipsa perspiciatis?
       </TermsOfUseCollapse>
-    </section>
+    </TermsOfUseBox>
   )
 }
 
