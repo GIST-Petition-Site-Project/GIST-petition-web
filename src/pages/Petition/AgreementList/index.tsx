@@ -1,10 +1,5 @@
-import { Flex, Stack } from '@chakra-ui/react'
-import {
-  AgreementItem,
-  AgreementAnonymousName,
-  AgreementCreatedAt,
-  ContentWrap,
-} from './styles'
+import { Stack } from '@chakra-ui/react'
+import { AgreementItem, AgreementAnonymousName, ContentWrap } from './styles'
 import { useEffect, useState } from 'react'
 import { getAgreements } from '../../../utils/api'
 

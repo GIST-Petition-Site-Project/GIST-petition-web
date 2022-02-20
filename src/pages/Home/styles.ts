@@ -18,14 +18,6 @@ const InnerWrap = styled(Box)`
   backdrop-filter: blur(2px);
   height: 100%;
 `
-const Inner = styled(Box)`
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  position: relative;
-  margin: 0 auto;
-  height: 100%;
-  padding: 0 2rem;
-  text-align: center;
-`
 
 const DashBoard = styled(Box)`
   position: absolute;
@@ -80,7 +72,6 @@ const SloganSecondRow = styled.span`
 export {
   MainBackgroundImage,
   InnerWrap,
-  Inner,
   DashBoard,
   SloganFirstRow,
   SloganSecondRow,

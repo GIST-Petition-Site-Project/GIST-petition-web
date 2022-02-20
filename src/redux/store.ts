@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  getDefaultMiddleware,
-} from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
   persistStore,
   persistReducer,
@@ -15,16 +11,22 @@ import {
 } from 'reduxjs-toolkit-persist'
 import storage from 'reduxjs-toolkit-persist/lib/storage'
 import authReducer from './auth/authSlice'
+import registerSlice from './register/registerSlice'
+import findPasswordSlice from './findPassword/findPasswordSlice'
+
 // import queryReducer from './query/querySlice'
 
 const reducers = combineReducers({
   auth: authReducer,
+  register: registerSlice,
+  findPassword: findPasswordSlice,
   // query: queryReducer,
 })
 
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['register', 'findPassword'],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

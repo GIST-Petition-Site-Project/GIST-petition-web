@@ -7,9 +7,9 @@ import NeedLoginModal from '../../../components/NeedLoginModal'
 
 const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const [input, setInput] = useState<AgreePetition>({
-    description: '청원에 동의합니다.',
+    description: '동의합니다.',
   })
-  const [isConsented, setIsConsented] = useState(false)
+  const [isConsented, setIsConsented] = useState(true)
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ description: e.target.value.replace(/ +/g, ' ') })
@@ -35,7 +35,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
     try {
       const response = await getStateOfAgreement(id)
       if (response.status < 400) {
-        setIsConsented(true)
+        setIsConsented(response.data)
       }
     } catch (error) {
       console.log(error)
@@ -45,6 +45,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   useEffect(() => {
     checkAgreeByMe(petitionId)
   }, [petitionId])
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   // postAgreePetition

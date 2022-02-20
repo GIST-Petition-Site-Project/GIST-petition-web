@@ -78,7 +78,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               m={{ base: '5px 0 20px 0', md: '0 220px 0 250px' }}
             >
               <Link
-                to={`/petitions/${petition.id}`}
+                to={`/petitions/temp/${petition.tempUrl}`}
                 style={{ display: 'inline-block', width: '100%' }}
               >
                 {petition.title}

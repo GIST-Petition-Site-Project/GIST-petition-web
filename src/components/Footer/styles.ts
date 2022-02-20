@@ -1,30 +1,34 @@
 import styled from '@emotion/styled'
-
 import theme from '../../style/theme'
 
 const FooterContainer = styled.footer`
   height: 4rem;
   background-color: ${theme.color.WHITE};
   width: 100%;
+  .inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    margin-right: 1em;
+    height: 1.5rem;
+    width: auto;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      height: 2rem;
+    }
+  }
 `
 
-const Inner = styled.div`
-  height: 100%;
-  margin: 0 auto;
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const Logo = styled.img`
-  margin-right: 1em;
-  height: 1.5rem;
-  width: auto;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    height: 2rem;
-  } ;
-`
+// const Inner = styled.div`
+//   height: 100%;
+//   margin: 0 auto;
+//   max-width: ${theme.space.INNER_MAXWIDTH};
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 0 2rem;
+// `
 
 const Text = styled.p`
   font-size: 0.6rem;
@@ -35,4 +39,4 @@ const Text = styled.p`
   } ;
 `
 
-export { FooterContainer, Inner, Logo, Text }
+export { FooterContainer, Text }

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import theme from '../../style/theme'
-import { Box, Button, List } from '@chakra-ui/react'
+import { Button, List } from '@chakra-ui/react'
 
 const Header = styled.header`
   height: 3.75rem;
@@ -10,17 +10,17 @@ const Header = styled.header`
   z-index: 1000;
   background-color: rgba(47, 54, 60, 0.9);
   //#384046, rgba로 opacity를 먹여야 children 요소가 투명해지지 않습니다.
-`
-const Inner = styled(Box)`
-  position: relative;
-  margin: 0 auto;
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    padding: 0 2rem;
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-direction: column;
+    padding: 0;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      padding: 0 ${theme.space.INNER_PADDING};
+      flex-direction: row;
+    }
   }
 `
 
@@ -89,4 +89,4 @@ const MobMenuButton = styled(Button)`
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
 `
 
-export { Header, Inner, Logo, TopMenu, ItemName, MobMenuButton }
+export { Header, Logo, TopMenu, ItemName, MobMenuButton }

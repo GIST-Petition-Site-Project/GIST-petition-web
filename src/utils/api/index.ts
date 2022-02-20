@@ -12,6 +12,7 @@ export * from './petition/postCreatePetition'
 export * from './petition/postAgreePetition'
 export * from './petition/getPetitionsByQuery'
 export * from './petition/getMyPetitionsByQuery'
+export * from './petition/getBestPetitionsByQuery'
 
 // user
 export * from './user/postLogin'
@@ -22,3 +23,8 @@ export * from './user/getUsersMe'
 // verfication
 export * from './verification/postConfirmVerificationCode'
 export * from './verification/postCreateVerificationCode'
+
+// findPassword
+export * from './findPassword/postConfirmVerificationCodeForPassword'
+export * from './findPassword/postCreateVerificationCodeForPassword'
+export * from './findPassword/putResetPassword'

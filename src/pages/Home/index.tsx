@@ -1,7 +1,6 @@
 import MainPrecaution from './MainPrecaution'
 import {
   InnerWrap,
-  Inner,
   DashBoard,
   MainBackgroundImage,
   SloganFirstRow,
@@ -11,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { getPetitionCount } from '../../utils/api'
 import PetitionList from '../../components/PetitionList'
 import { getPetitionsByQuery } from '../../utils/api'
+import Inner from '../../components/Inner'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)
