@@ -136,7 +136,6 @@ const FindingPassword = (): JSX.Element => {
         username: input.username,
         verificationCode: input.verificationCode,
       })
-      console.log(response)
       const status = response.status
       const message = response.data.message
       setErrorText(message)
