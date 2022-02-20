@@ -27,6 +27,10 @@ const TermsOfUse = (): JSX.Element => {
         if (agreeInfo.private && agreeInfo.service) {
           dispatch(setAgree('Total'))
           return
+        } else if (agreeInfo.private || agreeInfo.service) {
+          !agreeInfo.service && dispatch(setAgree('Service'))
+          !agreeInfo.private && dispatch(setAgree('Private'))
+          return
         }
         dispatch(setAgree('Total'))
         return

@@ -210,13 +210,7 @@ const Register = (): JSX.Element => {
         <RegisterStack>
           <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
           <Title>회원가입</Title>
-          {!whichUI.isAgreed && (
-            <TermsOfUse
-            // onAgree={handleAgree}
-            // agreeInfo={agreeInfo}
-            ></TermsOfUse>
-          )}
-
+          {!whichUI.isAgreed && <TermsOfUse></TermsOfUse>}
           {whichUI.isAgreed && (
             <FormControl isRequired>
               <RegisterText>이메일</RegisterText>
