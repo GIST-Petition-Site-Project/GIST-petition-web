@@ -18,7 +18,14 @@ import {
 } from '@chakra-ui/react'
 import theme from '../../style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { RegisterButton, stackStyle, ErrorText, DeleteBtn } from './styles'
+import {
+  RegisterStack,
+  RegisterText,
+  RegisterButton,
+  ErrorText,
+  DeleteBtn,
+  Title,
+} from './styles'
 import { useNavigate } from 'react-router-dom'
 import { postDelete } from '../../utils/api/user/postDelete'
 import TermsOfUse from './TermsOfUse'
@@ -230,11 +237,9 @@ const Register = (): JSX.Element => {
   return (
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
-        <Stack spacing={4} style={stackStyle}>
+        <RegisterStack>
           <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
-          <Text fontSize="4xl" fontWeight="bold">
-            회원가입
-          </Text>
+          <Title>회원가입</Title>
           {!whichUI.isAgreed && (
             <TermsOfUse
               onAgree={handleAgree}
@@ -244,7 +249,7 @@ const Register = (): JSX.Element => {
 
           {whichUI.isAgreed && (
             <FormControl isRequired>
-              <Text mb="8px">이메일</Text>
+              <RegisterText>이메일</RegisterText>
               <InputGroup borderColor={`${theme.color.ligthGray}`}>
                 <InputLeftElement>
                   {<CFaUserAlt color="gray.300" />}
@@ -369,13 +374,13 @@ const Register = (): JSX.Element => {
             </RegisterButton>
           )}
           <ErrorText>{errorText}</ErrorText>
-          <Text mb="4px" align="center">
+          <Text mt="1em" align="center">
             이미 가입하셨나요?{' '}
             <a href="/login" style={{ textDecoration: 'underline' }}>
               로그인
             </a>
           </Text>
-        </Stack>
+        </RegisterStack>
       </form>
     </section>
   )
