@@ -1,14 +1,5 @@
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
-import {
-  Collapse,
-  Radio,
-  Button,
-  chakra,
-  Box,
-  Checkbox,
-  IconButton,
-  Flex,
-} from '@chakra-ui/react'
+import { Collapse, Button, Box, IconButton, Flex } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import theme from '../../../style/theme'
 
@@ -42,7 +33,7 @@ const TermsOfUseCheckIcon = styled(IconButton)`
     background-color: transparent;
   }
   ${props =>
-    props.isclicked &&
+    props.isclicked === 'true' &&
     `
     box-shadow: none;
     color: ${theme.color.WHITE};
@@ -61,8 +52,7 @@ const TermsOfUseCheckIcon = styled(IconButton)`
       box-shadow: none;
     color: ${theme.color.WHITE};
     background-color: ${theme.color.SECONDARY_RED};
-    }
-  `}
+    `}
 `
 
 const TermsOfUseTotalBox = styled(Box)`
