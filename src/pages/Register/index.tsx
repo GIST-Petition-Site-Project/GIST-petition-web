@@ -122,7 +122,7 @@ const Register = (): JSX.Element => {
   }
 
   const handleResendCode = async () => {
- dispatch(setWhichInfo('Loading'))
+    dispatch(setWhichInfo('Loading'))
     setErrorText('')
     const response = await postCreateVerificationCode({
       username: input.username,
