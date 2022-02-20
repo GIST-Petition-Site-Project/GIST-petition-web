@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setLogin } from '../../redux/auth/authSlice'
@@ -107,8 +107,9 @@ const Login = (): JSX.Element => {
                 // onChange={handleChangeUser}
                 onKeyPress={checkUpperCase}
               />
-              <InputRightElement width="4.5rem">
+              <InputRightElement>
                 <IconButton
+                  color="gray.300"
                   aria-label="view password"
                   variant="password"
                   icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
