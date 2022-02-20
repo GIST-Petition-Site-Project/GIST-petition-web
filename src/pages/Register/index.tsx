@@ -61,7 +61,6 @@ const Register = (): JSX.Element => {
 
   const handleAgreeBtn = () => {
     if (agreeInfo.private === true && agreeInfo.service === true) {
-      // dispatch({ type: 'register/setIsAgreed', payload: true })
       dispatch(setWhichInfo('Agreed'))
       return
     }
@@ -74,7 +73,6 @@ const Register = (): JSX.Element => {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
-    // dispatch({ type: 'register/setIsLoading', payload: true })
     dispatch(setWhichInfo('Loading'))
     const response = await postCreateVerificationCode({
       username: input.username,
@@ -98,7 +96,6 @@ const Register = (): JSX.Element => {
       username: input.username,
       verificationCode: input.verificationCode,
     })
-    console.log(response)
     const status = response?.status
     const message = response?.data.message
     if (status < 400) {
@@ -125,7 +122,7 @@ const Register = (): JSX.Element => {
   }
 
   const handleResendCode = async () => {
-    dispatch({ type: 'register/setIsLoading', payload: true })
+ dispatch(setWhichInfo('Loading'))
     setErrorText('')
     const response = await postCreateVerificationCode({
       username: input.username,
