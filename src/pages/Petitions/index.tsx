@@ -48,6 +48,23 @@ const Petitions = (): JSX.Element => {
     <Container>
       <Inner>
         <PetitionBoard>
+          <div className="petition_type">
+            <span>모든 청원</span>
+            <div>
+              <Select>
+                <option value="최신">최신순</option>
+                <option value="추천">추천순</option>
+              </Select>
+              <Select onChange={handleSelect} value={selected}>
+                {catergoryIdx.map(item => (
+                  <option value={item} key={item}>
+                    {Category[item]}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          </div>
+
           <Tabs isFitted>
             <TabList>
               <Tab>진행중인 청원</Tab>
@@ -56,40 +73,26 @@ const Petitions = (): JSX.Element => {
 
             <TabPanels>
               <TabPanel>
-                <div className="petition_type">
-                  <span>모든 청원</span>
-                  <div>
-                    <Select>
-                      <option value="최신">최신순</option>
-                      <option value="추천">추천순</option>
-                    </Select>
-                    <Select onChange={handleSelect} value={selected}>
-                      {catergoryIdx.map(item => (
-                        <option value={item} key={item}>
-                          {Category[item]}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                </div>
                 <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+                <Stack>
+                  <PaginationButtons
+                    getPetitions={getPetitionsByQuery}
+                    pathname={'/petitions'}
+                  />
+                </Stack>
               </TabPanel>
 
               <TabPanel>
-                <div className="petition_type">
-                  <span>모든 청원</span>
-                </div>
                 <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+                <Stack>
+                  <PaginationButtons
+                    getPetitions={getPetitionsByQuery}
+                    pathname={'/petitions'}
+                  />
+                </Stack>
               </TabPanel>
             </TabPanels>
           </Tabs>
-
-          <Stack>
-            <PaginationButtons
-              getPetitions={getPetitionsByQuery}
-              pathname={'/petitions'}
-            />
-          </Stack>
         </PetitionBoard>
       </Inner>
     </Container>

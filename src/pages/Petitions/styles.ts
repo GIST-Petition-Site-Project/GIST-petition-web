@@ -6,6 +6,26 @@ const PetitionBoard = styled.div`
   position: relative;
   margin-top: 9.375rem;
 
+  .petition_type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .chakra-select__wrapper {
+      display: inline-block;
+      width: 128px;
+      .chakra-select {
+        width: 128px;
+        height: 40px;
+        border-radius: 0;
+        border-color: #ccc;
+      }
+    }
+  }
   .chakra-tabs {
     .chakra-tabs__tablist {
       border-color: #ccc;
@@ -22,32 +42,14 @@ const PetitionBoard = styled.div`
         }
       }
     }
+    .chakra-tabs__tab-panel {
+      padding-top: 0;
+    }
   }
 
   .chakra-tabs__tab-panel {
     padding: 1rem 0;
     text-align: center;
-    .petition_type {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1rem;
-      border-bottom: 2px solid #333;
-      span {
-        font-size: 20px;
-        font-weight: bold;
-      }
-      .chakra-select__wrapper {
-        display: inline-block;
-        width: 128px;
-        .chakra-select {
-          width: 128px;
-          height: 40px;
-          border-radius: 0;
-          border-color: #ccc;
-        }
-      }
-    }
   }
 `
 
