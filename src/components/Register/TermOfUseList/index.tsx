@@ -1,17 +1,16 @@
 import { CheckIcon } from '@chakra-ui/icons'
+import { Button, Divider, useDisclosure } from '@chakra-ui/react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../../redux/store'
+import { RootState } from '../../../redux/store'
 import {
-  AccordionBtn,
   List,
-  TermsOfUseBox,
   TermsOfUseCheckFlex,
   TermsOfUseCheckIcon,
-  TermsOfUseIcon,
   TermsOfUseTotalBox,
 } from './styles'
 
-const TermOfUseList = ({ onClick, whichBox, onAccordion }: TermOfUseList) => {
+const TermOfUseList = ({ onClick }: TermOfUseList) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   return (
     <List>
@@ -23,19 +22,9 @@ const TermOfUseList = ({ onClick, whichBox, onAccordion }: TermOfUseList) => {
           data-value="total"
           isclicked={agreeInfo.private && agreeInfo.service ? 'true' : 'false'}
         />
-        {whichBox === 'total' ? (
-          <TermsOfUseTotalBox>전체 약관 동의</TermsOfUseTotalBox>
-        ) : whichBox === 'private' ? (
-          <TermsOfUseBox>개인정보수집 및 이용동의</TermsOfUseBox>
-        ) : (
-          <TermsOfUseBox>서비스 이용약관 동의</TermsOfUseBox>
-        )}
+        <TermsOfUseTotalBox>전체 약관 동의</TermsOfUseTotalBox>
       </TermsOfUseCheckFlex>
-      {onAccordion && (
-        <AccordionBtn onClick={onAccordion}>
-          <TermsOfUseIcon></TermsOfUseIcon>
-        </AccordionBtn>
-      )}
+      <Divider orientation="horizontal" borderBottomWidth="2.5px" />
     </List>
   )
 }

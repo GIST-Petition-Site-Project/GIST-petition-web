@@ -1,15 +1,15 @@
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
-import { Box, IconButton, Flex, Button } from '@chakra-ui/react'
+import { Box, IconButton, Flex, Button, Collapse } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import theme from '../../../../style/theme'
+import theme from '../../../style/theme'
 
 const List = styled.li`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 1em 0;
+  flex-direction: column;
 `
 const TermsOfUseCheckFlex = styled(Flex)`
+  padding: 0.5em 1em;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -117,32 +117,11 @@ const TermsOfUseIcon = styled(IoMdArrowDropdownCircle)`
     font-size: 1.7rem;
   }
 `
-
-const AccordionBtn = styled(Button)`
-  text-align: center;
-  font-size: 1.5rem;
-  background-color: transparent;
-  padding: 0;
-  :hover {
-    background-color: transparent;
-  }
-  :focus {
-    background-color: transparent;
-    box-shadow: none;
-    outline: none;
-  }
-  :active {
-    background-color: transparent;
-    outline: none;
-  }
-`
-
 export {
   TermsOfUseCheckIcon,
   List,
   TermsOfUseCheckFlex,
   TermsOfUseTotalBox,
   TermsOfUseBox,
-  AccordionBtn,
   TermsOfUseIcon,
 }

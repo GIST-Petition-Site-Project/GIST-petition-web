@@ -42,8 +42,6 @@ interface AgreeAttribute {
 
 interface TermOfUseList {
   onClick: any
-  whichBox: string
-  onAccordion: any
 }
 
 // 회원 가입 UI 관련
