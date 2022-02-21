@@ -128,8 +128,8 @@ const Login = (): JSX.Element => {
             className="login_btn"
             onClick={() => {
               setInput({
-                username: email.current!.value,
-                password: pwd.current!.value,
+                username: email.current && email.current.value,
+                password: pwd.current && pwd.current.value,
               })
             }}
           >

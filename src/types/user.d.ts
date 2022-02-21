@@ -1,6 +1,6 @@
 interface User {
-  username: string
-  password: string
+  username: string | null
+  password: string | null
 }
 
 interface Register extends User {
