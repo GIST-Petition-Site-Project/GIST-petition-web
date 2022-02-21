@@ -19,16 +19,11 @@ import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
-interface User {
-  username: string | null
-  password: string | null
-}
-
 const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const [input, setInput] = useState<User>({ username: '', password: '' })
+  const [input, setInput] = useState<User>({ userEmail: '', userPwd: '' })
   const [responseState, setResponseState] = useState<number>(0)
 
   const [viewPassword, setViewPassword] = useState<boolean>(false)
@@ -88,10 +83,10 @@ const Login = (): JSX.Element => {
               <Input
                 ref={email}
                 type="email"
-                name="username"
-                id="username"
+                name="userEmail"
+                id="userEmail"
                 placeholder="이메일을 입력하세요."
-                // value={input.username}
+                // value={input.userEmail}
                 // onChange={handleChangeUser}
               />
             </InputGroup>
@@ -133,8 +128,8 @@ const Login = (): JSX.Element => {
             className="login_btn"
             onClick={() => {
               setInput({
-                username: email.current && email.current.value,
-                password: pwd.current && pwd.current.value,
+                userEmail: email.current && email.current.value,
+                userPwd: pwd.current && pwd.current.value,
               })
             }}
           >

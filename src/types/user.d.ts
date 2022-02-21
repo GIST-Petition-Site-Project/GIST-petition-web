@@ -1,3 +1,7 @@
+interface User {
+  userEmail: string | null
+  userPwd: string | null
+}
 interface Register {
   username: string
   password: string
