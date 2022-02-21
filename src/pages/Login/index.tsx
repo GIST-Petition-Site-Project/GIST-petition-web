@@ -19,6 +19,11 @@ import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
+interface User {
+  username: string | null
+  password: string | null
+}
+
 const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)

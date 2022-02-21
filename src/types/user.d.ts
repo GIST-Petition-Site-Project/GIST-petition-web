@@ -1,9 +1,6 @@
-interface User {
-  username: string | null
-  password: string | null
-}
-
-interface Register extends User {
+interface Register {
+  username: string
+  password: string
   verificationCode: string
 }
 
