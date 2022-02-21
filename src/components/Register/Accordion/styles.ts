@@ -95,9 +95,6 @@ const AccordionBtn = styled(AccordionButton)`
   @media screen and (min-width: ${theme.breakpoints.lg}) {
     font-size: 1.3rem;
   }
-  @media screen and (min-width: ${theme.breakpoints.lg}) {
-    font-size: 1.2rem;
-  }
 `
 
 export { TermsOfUseCheckIcon, Item, BtnContainer, AccordionBtn }

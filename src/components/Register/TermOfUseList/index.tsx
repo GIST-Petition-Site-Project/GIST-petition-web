@@ -1,6 +1,5 @@
 import { CheckIcon } from '@chakra-ui/icons'
-import { Button, Divider, useDisclosure } from '@chakra-ui/react'
-import { useState } from 'react'
+import { Divider } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import {

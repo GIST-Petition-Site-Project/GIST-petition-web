@@ -25,9 +25,7 @@ const TermsOfUseAccordion = ({ onClick }: TermOfUseList) => {
             aria-label="Call Segun"
             icon={<CheckIcon />}
             data-value="service"
-            isclicked={
-              agreeInfo.private && agreeInfo.service ? 'true' : 'false'
-            }
+            isclicked={agreeInfo.service ? 'true' : 'false'}
           />
           <AccordionBtn>
             <Box flex="1" textAlign="left">
@@ -51,9 +49,7 @@ const TermsOfUseAccordion = ({ onClick }: TermOfUseList) => {
             aria-label="Call Segun"
             icon={<CheckIcon />}
             data-value="private"
-            isclicked={
-              agreeInfo.private && agreeInfo.service ? 'true' : 'false'
-            }
+            isclicked={agreeInfo.private ? 'true' : 'false'}
           />
           <AccordionBtn>
             <Box flex="1" textAlign="left">

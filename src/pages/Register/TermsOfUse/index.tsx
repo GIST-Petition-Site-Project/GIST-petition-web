@@ -11,7 +11,6 @@ const TermsOfUse = memo((): JSX.Element => {
   const dispatch = useDispatch()
 
   const handleAgree = (value: string) => {
-    console.log(value)
     switch (value) {
       case 'total':
         if (agreeInfo.private && agreeInfo.service) {
@@ -38,7 +37,6 @@ const TermsOfUse = memo((): JSX.Element => {
   const handleClick = (e: any) => {
     const target = e.currentTarget
     const value = target.dataset.value
-    console.log(value)
     value && handleAgree(value)
   }
   return (
