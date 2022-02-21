@@ -53,30 +53,22 @@ const TermsOfUse = memo((): JSX.Element => {
   }
   return (
     <TermsOfUseBox>
-      <TermOfUseList onClick={handleClick} whichBox="total"></TermOfUseList>
+      <TermOfUseList
+        onClick={handleClick}
+        whichBox="total"
+        onAccordion=""
+      ></TermOfUseList>
       <Divider orientation="horizontal" borderBottomWidth="2.5px" />
-      <List>
-        <TermsOfUseCheckFlex as="label">
-          <TermsOfUseCheckIcon
-            aria-label="Call Segun"
-            icon={<CheckIcon />}
-            onClick={handleClick}
-            data-value="service"
-            isclicked={agreeInfo.service ? 'true' : 'false'}
-          />
-          <TermsOfUseBox>서비스 이용약관 동의</TermsOfUseBox>
-        </TermsOfUseCheckFlex>
-        <TermsOfUseBtn
-          onClick={() => {
-            if (secondOpen === true) {
-              setSecondOpen(!secondOpen)
-            }
-            setFirstOpen(!firstOpen)
-          }}
-        >
-          <TermsOfUseIcon></TermsOfUseIcon>
-        </TermsOfUseBtn>
-      </List>
+      <TermOfUseList
+        onClick={handleClick}
+        whichBox="service"
+        onAccordion={() => {
+          if (secondOpen === true) {
+            setSecondOpen(!secondOpen)
+          }
+          setFirstOpen(!firstOpen)
+        }}
+      ></TermOfUseList>
       <Divider orientation="horizontal" />
       <TermsOfUseCollapse in={firstOpen}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos
@@ -84,7 +76,17 @@ const TermsOfUse = memo((): JSX.Element => {
         praesentium numquam ullam maxime, vel consequuntur est dolore tempore
         excepturi rerum ipsa perspiciatis?
       </TermsOfUseCollapse>
-      <List>
+      <TermOfUseList
+        onClick={handleClick}
+        whichBox="private"
+        onAccordion={() => {
+          if (firstOpen === true) {
+            setSecondOpen(!firstOpen)
+          }
+          setSecondOpen(!secondOpen)
+        }}
+      ></TermOfUseList>
+      {/* <List>
         <TermsOfUseCheckFlex as="label">
           <TermsOfUseCheckIcon
             aria-label="Call Segun"
@@ -105,7 +107,7 @@ const TermsOfUse = memo((): JSX.Element => {
         >
           <TermsOfUseIcon></TermsOfUseIcon>
         </TermsOfUseBtn>
-      </List>
+      </List> */}
       <TermsOfUseCollapse in={secondOpen}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos
         at, quia officiis nesciunt quod blanditiis aperiam repellendus

@@ -9,13 +9,9 @@ import {
   TermsOfUseCheckIcon,
   TermsOfUseTotalBox,
 } from './styles'
+import { AccordionBtn } from './TermsOfUseBtn/styles'
 
-interface TermOfUseList {
-  onClick: any
-  whichBox: string
-}
-
-const TermOfUseList = ({ onClick, whichBox }: TermOfUseList) => {
+const TermOfUseList = ({ onClick, whichBox, onAccordion }: TermOfUseList) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   return (
     <List>
@@ -35,6 +31,7 @@ const TermOfUseList = ({ onClick, whichBox }: TermOfUseList) => {
           <TermsOfUseBox>서비스 이용약관 동의</TermsOfUseBox>
         )}
       </TermsOfUseCheckFlex>
+      {onAccordion && <AccordionBtn onAccordion={onAccordion}></AccordionBtn>}
     </List>
   )
 }
