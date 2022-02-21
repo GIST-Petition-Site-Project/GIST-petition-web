@@ -5,11 +5,11 @@ import theme from '../../../style/theme'
 
 const List = styled.li`
   display: flex;
-  padding: 1em 0;
+  padding-top: 1em;
   flex-direction: column;
 `
 const TermsOfUseCheckFlex = styled(Flex)`
-  padding: 0.5em 1em;
+  padding: 1em 1em;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -61,11 +61,6 @@ const TermsOfUseCheckIcon = styled(IconButton)`
     font-size: 1rem;
     width: 1.8rem;
     height: 1.8rem;
-  }
-  @media screen and (min-width: ${theme.breakpoints.lg}) {
-    font-size: 1.1rem;
-    width: 1.9rem;
-    height: 1.9rem;
   }
   @media screen and (min-width: ${theme.breakpoints.lg}) {
     font-size: 1.2rem;

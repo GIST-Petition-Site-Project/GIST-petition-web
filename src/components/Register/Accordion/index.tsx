@@ -12,8 +12,7 @@ import {
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
-import { TermsOfUseCheckIcon } from '../TermOfUseList/styles'
-import { AccordionBtn, BtnContainer, Item } from './styles'
+import { AccordionBtn, BtnContainer, Item, TermsOfUseCheckIcon } from './styles'
 
 const TermsOfUseAccordion = ({ onClick }: TermOfUseList) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
