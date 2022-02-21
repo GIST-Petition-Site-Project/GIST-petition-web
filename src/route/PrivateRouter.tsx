@@ -7,9 +7,10 @@ const AuthRoute = () => {
   return auth ? <Outlet /> : <Navigate to="/login" />
 }
 
-const UnauthRoute = () => {
-  const auth = useAppSelect(select => select.auth.isAuthorized)
-  return !auth ? <Outlet /> : <Navigate to="/" />
-}
+// const UnauthRoute = () => {
+//   const auth = useAppSelect(select => select.auth.isAuthorized)
+//   // return !auth ? <Outlet /> : <Navigate to="/" />
+// }
 
-export { AuthRoute, UnauthRoute }
+// export { AuthRoute, UnauthRoute }
+export { AuthRoute }
