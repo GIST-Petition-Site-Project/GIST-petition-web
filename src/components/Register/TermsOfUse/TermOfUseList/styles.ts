@@ -1,11 +1,7 @@
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
-import { Collapse, Button, Box, IconButton, Flex } from '@chakra-ui/react'
+import { Box, IconButton, Flex, Button } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import theme from '../../../../style/theme'
-
-const TermOfUseBox = styled.div`
-  margin-top: 2rem;
-`
 
 const List = styled.li`
   display: flex;
@@ -93,6 +89,20 @@ const TermsOfUseTotalBox = styled(Box)`
   }
 `
 
+const TermsOfUseBox = styled(Box)`
+  margin-left: 0.9em;
+  font-size: 1rem;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 1.2rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.3rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.2rem;
+  }
+`
+
 const TermsOfUseIcon = styled(IoMdArrowDropdownCircle)`
   color: ${theme.color.QUATERNARY_GRAY};
   font-size: 1.3rem;
@@ -108,7 +118,7 @@ const TermsOfUseIcon = styled(IoMdArrowDropdownCircle)`
   }
 `
 
-const TermsOfUseBtn = styled(Button)`
+const AccordionBtn = styled(Button)`
   text-align: center;
   font-size: 1.5rem;
   background-color: transparent;
@@ -127,32 +137,12 @@ const TermsOfUseBtn = styled(Button)`
   }
 `
 
-const TermsOfUseBox = styled(Box)`
-  margin-left: 0.9em;
-  font-size: 1rem;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    font-size: 1.2rem;
-  }
-  @media screen and (min-width: ${theme.breakpoints.lg}) {
-    font-size: 1.3rem;
-  }
-  @media screen and (min-width: ${theme.breakpoints.lg}) {
-    font-size: 1.2rem;
-  }
-`
-
-const TermsOfUseCollapse = styled(Collapse)`
-  padding: 2em 1em;
-`
-
 export {
-  TermOfUseBox,
-  TermsOfUseCollapse,
   TermsOfUseCheckIcon,
-  TermsOfUseIcon,
   List,
   TermsOfUseCheckFlex,
-  TermsOfUseBtn,
   TermsOfUseTotalBox,
   TermsOfUseBox,
+  AccordionBtn,
+  TermsOfUseIcon,
 }

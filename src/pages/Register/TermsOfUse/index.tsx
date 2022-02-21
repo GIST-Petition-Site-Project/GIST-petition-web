@@ -1,20 +1,10 @@
-import { CheckIcon } from '@chakra-ui/icons'
 import { Divider } from '@chakra-ui/react'
 import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TermOfUseList from '../../../components/Register/TermsOfUse/TermOfUseList'
 import { setAgree } from '../../../redux/register/registerSlice'
 import { RootState } from '../../../redux/store'
-import {
-  TermsOfUseCollapse,
-  TermsOfUseCheckIcon,
-  TermsOfUseIcon,
-  List,
-  TermsOfUseBtn,
-  TermsOfUseCheckFlex,
-  TermsOfUseTotalBox,
-  TermsOfUseBox,
-} from './styles'
+import { TermsOfUseCollapse, TermsOfUseBox } from './styles'
 
 const TermsOfUse = memo((): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
@@ -86,28 +76,6 @@ const TermsOfUse = memo((): JSX.Element => {
           setSecondOpen(!secondOpen)
         }}
       ></TermOfUseList>
-      {/* <List>
-        <TermsOfUseCheckFlex as="label">
-          <TermsOfUseCheckIcon
-            aria-label="Call Segun"
-            icon={<CheckIcon />}
-            onClick={handleClick}
-            data-value="private"
-            isclicked={agreeInfo.private ? 'true' : 'false'}
-          />
-          <TermsOfUseBox>개인정보수집 및 이용동의</TermsOfUseBox>
-        </TermsOfUseCheckFlex>
-        <TermsOfUseBtn
-          onClick={() => {
-            if (firstOpen === true) {
-              setSecondOpen(!firstOpen)
-            }
-            setSecondOpen(!secondOpen)
-          }}
-        >
-          <TermsOfUseIcon></TermsOfUseIcon>
-        </TermsOfUseBtn>
-      </List> */}
       <TermsOfUseCollapse in={secondOpen}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos
         at, quia officiis nesciunt quod blanditiis aperiam repellendus

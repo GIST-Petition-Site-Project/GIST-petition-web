@@ -1,15 +1,15 @@
 import { CheckIcon } from '@chakra-ui/icons'
-import { List } from '@chakra-ui/react'
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../redux/store'
 import {
+  AccordionBtn,
+  List,
   TermsOfUseBox,
   TermsOfUseCheckFlex,
   TermsOfUseCheckIcon,
+  TermsOfUseIcon,
   TermsOfUseTotalBox,
 } from './styles'
-import { AccordionBtn } from './TermsOfUseBtn/styles'
 
 const TermOfUseList = ({ onClick, whichBox, onAccordion }: TermOfUseList) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
@@ -31,7 +31,11 @@ const TermOfUseList = ({ onClick, whichBox, onAccordion }: TermOfUseList) => {
           <TermsOfUseBox>서비스 이용약관 동의</TermsOfUseBox>
         )}
       </TermsOfUseCheckFlex>
-      {onAccordion && <AccordionBtn onAccordion={onAccordion}></AccordionBtn>}
+      {onAccordion && (
+        <AccordionBtn onClick={onAccordion}>
+          <TermsOfUseIcon></TermsOfUseIcon>
+        </AccordionBtn>
+      )}
     </List>
   )
 }
