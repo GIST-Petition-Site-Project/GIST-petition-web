@@ -21,8 +21,8 @@ const PetitionsCategory = styled.div`
   width: 150px;
 `
 const PetitionsSubject = styled.div`
-  margin-left: 220px;
-  margin-right: 250px;
+  margin-left: 200px;
+  margin-right: 220px;
 `
 const PetitionsDate = styled.div`
   position: absolute;
