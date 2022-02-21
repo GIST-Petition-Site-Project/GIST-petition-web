@@ -1,7 +1,15 @@
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
-import { Collapse, Button, Box, IconButton, Flex } from '@chakra-ui/react'
+import {
+  Collapse,
+  Radio,
+  Button,
+  Box,
+  Checkbox,
+  IconButton,
+  Flex,
+} from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import theme from '../../../style/theme'
+import theme from '../../../../style/theme'
 
 const TermOfUseBox = styled.div`
   margin-top: 2rem;

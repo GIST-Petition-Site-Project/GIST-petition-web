@@ -1,7 +1,8 @@
 import { CheckIcon } from '@chakra-ui/icons'
-import { Box, Divider } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Divider } from '@chakra-ui/react'
+import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import TermOfUseList from '../../../components/Register/TermsOfUse/TermOfUseList'
 import { setAgree } from '../../../redux/register/registerSlice'
 import { RootState } from '../../../redux/store'
 import {
@@ -15,7 +16,7 @@ import {
   TermsOfUseBox,
 } from './styles'
 
-const TermsOfUse = (): JSX.Element => {
+const TermsOfUse = memo((): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
   const [secondOpen, setSecondOpen] = useState(false)
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
@@ -52,20 +53,7 @@ const TermsOfUse = (): JSX.Element => {
   }
   return (
     <TermsOfUseBox>
-      <List>
-        <TermsOfUseCheckFlex as="label">
-          <TermsOfUseCheckIcon
-            onClick={handleClick}
-            aria-label="Call Segun"
-            icon={<CheckIcon />}
-            data-value="total"
-            isclicked={
-              agreeInfo.private && agreeInfo.service ? 'true' : 'false'
-            }
-          />
-          <TermsOfUseTotalBox>전체 약관 동의</TermsOfUseTotalBox>
-        </TermsOfUseCheckFlex>
-      </List>
+      <TermOfUseList onClick={handleClick} whichBox="total"></TermOfUseList>
       <Divider orientation="horizontal" borderBottomWidth="2.5px" />
       <List>
         <TermsOfUseCheckFlex as="label">
@@ -126,6 +114,6 @@ const TermsOfUse = (): JSX.Element => {
       </TermsOfUseCollapse>
     </TermsOfUseBox>
   )
-}
+})
 
 export default TermsOfUse
