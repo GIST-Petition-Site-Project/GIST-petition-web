@@ -33,26 +33,36 @@ const Logo = styled.div`
 `
 const TopMenu = styled(List)`
   > div {
-    display: ${props => (props.open ? 'flex' : 'none')};
+    display: flex;
     background-color: rgba(47, 54, 60, 0.94);
     width: 100vw;
     flex-direction: column;
     height: 100vh;
+    height: ${props => (props.open ? '100vh' : '0')};
+    transition: height 0.3s;
     @media screen and (min-width: ${theme.breakpoints.md}) {
       flex-direction: row;
       display: flex;
-      height: unset;
-      width: unset;
+      height: auto;
       background-color: transparent;
       width: inherit;
+      opacity: 1;
     }
     .chakra-divider {
       width: 90%;
       margin: 0 auto;
       border-color: #fff;
-      opacity: 0.15;
+      transition: opacity 0.3s;
+      opacity: ${props => (props.open ? '0.15' : '0')};
       @media screen and (min-width: ${theme.breakpoints.md}) {
         display: none;
+      }
+    }
+    .css-0 {
+      transition: opacity 0.3s;
+      opacity: ${props => (props.open ? '1' : '0')};
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        opacity: 1;
       }
     }
   }
