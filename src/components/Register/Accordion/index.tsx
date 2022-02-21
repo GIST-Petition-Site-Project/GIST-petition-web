@@ -1,20 +1,17 @@
 import { CheckIcon } from '@chakra-ui/icons'
 import {
   Accordion,
-  AccordionButton,
   AccordionIcon,
-  AccordionItem,
   AccordionPanel,
   Box,
   Divider,
-  Flex,
 } from '@chakra-ui/react'
-import React from 'react'
+import { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import { AccordionBtn, BtnContainer, Item, TermsOfUseCheckIcon } from './styles'
 
-const TermsOfUseAccordion = ({ onClick }: TermOfUseList) => {
+const TermsOfUseAccordion = memo(({ onClick }: TermOfUseList) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   return (
     <Accordion allowToggle>
@@ -67,6 +64,6 @@ const TermsOfUseAccordion = ({ onClick }: TermOfUseList) => {
       </Item>
     </Accordion>
   )
-}
+})
 
 export default TermsOfUseAccordion

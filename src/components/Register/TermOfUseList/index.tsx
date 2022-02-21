@@ -1,5 +1,6 @@
 import { CheckIcon } from '@chakra-ui/icons'
 import { Divider } from '@chakra-ui/react'
+import { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import {
@@ -9,7 +10,7 @@ import {
   TermsOfUseTotalBox,
 } from './styles'
 
-const TermOfUseList = ({ onClick }: TermOfUseList) => {
+const TermOfUseList = memo(({ onClick }: TermOfUseList) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   return (
     <List>
@@ -26,6 +27,6 @@ const TermOfUseList = ({ onClick }: TermOfUseList) => {
       <Divider orientation="horizontal" borderBottomWidth="2.5px" />
     </List>
   )
-}
+})
 
 export default TermOfUseList

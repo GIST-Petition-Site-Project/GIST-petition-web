@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TermsOfUseAccordion from '../../../components/Register/Accordion'
 import TermOfUseList from '../../../components/Register/TermOfUseList'
@@ -34,11 +34,12 @@ const TermsOfUse = memo((): JSX.Element => {
     }
   }
 
-  const handleClick = (e: any) => {
+  const handleClick = useCallback((e: any) => {
     const target = e.currentTarget
     const value = target.dataset.value
     value && handleAgree(value)
-  }
+  }, [])
+
   return (
     <TermsOfUseBox>
       <TermOfUseList onClick={handleClick}></TermOfUseList>
