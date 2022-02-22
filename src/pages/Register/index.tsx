@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from 'react'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import {
   postRegister,
   postConfirmVerificationCode,
@@ -32,6 +32,7 @@ import TermsOfUse from './TermsOfUse'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { setWhichInfo } from '../../redux/register/registerSlice'
+import { useAppSelect } from '../../redux/store.hooks'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -203,6 +204,12 @@ const Register = (): JSX.Element => {
       })
     }
   }
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  useEffect(() => {
+    if (auth) {
+      window.history.back()
+    }
+  }, [useAppSelect(select => select.auth.isAuthorized)])
 
   return (
     <section className="register">

@@ -1,35 +1,39 @@
-import React, { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { FormEvent, useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { setLogin } from '../../redux/auth/authSlice'
 import {
+  Button,
   chakra,
   FormControl,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Stack,
-  Text,
 } from '@chakra-ui/react'
-import { stackStyle, LoginButton, ErrorText } from './styles'
+import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
+import { useAppDispatch, useAppSelect } from '../../redux/store.hooks'
+import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
 const Login = (): JSX.Element => {
-  // chakra icon
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const [input, setInput] = useState<User>({ username: '', password: '' })
-  const [responseState, setResponseState] = useState(0)
+  const [input, setInput] = useState<User>({ userEmail: '', userPwd: '' })
+  const [responseState, setResponseState] = useState<number>(0)
 
-  const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setInput({ ...input, [name]: value })
-  }
+  const [viewPassword, setViewPassword] = useState<boolean>(false)
+  const handleShowClick = () => setViewPassword(!viewPassword)
+
+  const email = useRef<HTMLInputElement>(null)
+  const pwd = useRef<HTMLInputElement>(null)
+
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const checkUpperCase = (e: any) => {
     const text = String.fromCharCode(e.which)
@@ -52,71 +56,93 @@ const Login = (): JSX.Element => {
       setResponseState(loginStatus)
 
       if (loginStatus < 400) {
-        navigate(-1)
+        // navigate(-1)
         dispatch(setLogin())
       }
     } catch (error) {
       console.log(error)
     }
   }
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  useEffect(() => {
+    if (auth) {
+      window.history.back()
+    }
+  }, [useAppSelect(select => select.auth.isAuthorized)])
+
   return (
-    <form className="login__form" onSubmit={handleSubmit}>
-      <Stack spacing={4} style={stackStyle}>
-        <Text fontSize="4xl" fontWeight="bold">
-          로그인
-        </Text>
-        <FormControl isRequired>
-          <Text mb="8px">이메일</Text>
-          <InputGroup borderColor="#ccc">
-            <InputLeftElement pointerEvents="none">
-              {<CFaUserAlt color="gray.300" />}
-            </InputLeftElement>
-            <Input
-              type="email"
-              name="username"
-              id="username"
-              placeholder="이메일을 입력하세요."
-              value={input.username}
-              onChange={handleChangeUser}
-              borderRadius="0"
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <Text mb="8px">비밀번호</Text>
-          <InputGroup borderColor="#ccc">
-            <InputLeftElement pointerEvents="none">
-              {<CFaLock color="gray.300" />}
-            </InputLeftElement>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="비밀번호를 입력하세요."
-              value={input.password}
-              onChange={handleChangeUser}
-              borderRadius="0"
-              onKeyPress={checkUpperCase}
-            />
-          </InputGroup>
-        </FormControl>
-        <ErrorText>{checkLoginError(responseState)}</ErrorText>
-        <Text mb="4px" align="right" decoration="underline">
-          <a href="#">비밀번호를 잊으셨나요?</a>
-        </Text>
+    <Container>
+      <form className="login_form" onSubmit={handleSubmit}>
+        <Stack spacing={4}>
+          <span>로그인</span>
+          <FormControl isRequired>
+            <span>이메일</span>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                {<CFaUserAlt color="gray.300" />}
+              </InputLeftElement>
+              <Input
+                ref={email}
+                type="email"
+                name="userEmail"
+                id="userEmail"
+                placeholder="이메일을 입력하세요."
+                // value={input.userEmail}
+                // onChange={handleChangeUser}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <span>비밀번호</span>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                {<CFaLock color="gray.300" />}
+              </InputLeftElement>
+              <Input
+                ref={pwd}
+                type={viewPassword ? 'text' : 'password'}
+                name="password"
+                id="password"
+                placeholder="비밀번호를 입력하세요."
+                // value={input.password}
+                // onChange={handleChangeUser}
+                onKeyPress={checkUpperCase}
+              />
+              <InputRightElement>
+                <IconButton
+                  color="gray.300"
+                  aria-label="view password"
+                  variant="password"
+                  icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  onClick={handleShowClick}
+                ></IconButton>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
+          <span className="err_msg">{checkLoginError(responseState)}</span>
+          <span className="forgot_pwd account_link">
+            <Link to="#">비밀번호를 잊으셨나요?</Link>
+          </span>
 
-        <LoginButton type="submit" className="submit__btn">
-          로그인
-        </LoginButton>
+          <Button
+            type="submit"
+            className="login_btn"
+            onClick={() => {
+              setInput({
+                userEmail: email.current && email.current.value,
+                userPwd: pwd.current && pwd.current.value,
+              })
+            }}
+          >
+            로그인
+          </Button>
 
-        <Text mb="4px" align="center">
-          계정이 없으신가요?{' '}
-          <a href="/register" style={{ textDecoration: 'underline' }}>
-            계정 만들기
-          </a>
-        </Text>
-      </Stack>
-    </form>
+          <span className="create_acount account_link">
+            계정이 없으신가요? <Link to="/register">계정 만들기</Link>
+          </span>
+        </Stack>
+      </form>
+    </Container>
   )
 }
 
