@@ -32,6 +32,7 @@ import TermsOfUse from './TermsOfUse'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { setWhichInfo } from '../../redux/register/registerSlice'
+import LoadingSpinner from '../../components/Register/Spinner'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -307,20 +308,7 @@ const Register = (): JSX.Element => {
             </RegisterButton>
           )}
 
-          {whichUI.isLoading && (
-            <Flex flexDirection="column" alignItems="center">
-              <Spinner
-                m="auto"
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="gray.200"
-                color="#df3127"
-                size="xl"
-                mb="10px"
-              />
-              잠시만 기다려주세요...
-            </Flex>
-          )}
+          {whichUI.isLoading && <LoadingSpinner></LoadingSpinner>}
 
           {whichUI.isCodeRequested &&
             !whichUI.isVerificated &&
