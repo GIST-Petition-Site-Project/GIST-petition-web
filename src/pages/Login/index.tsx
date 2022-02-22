@@ -63,7 +63,6 @@ const Login = (): JSX.Element => {
       console.log(error)
     }
   }
-  
   const auth = useAppSelect(select => select.auth.isAuthorized)
   useEffect(() => {
     if (auth) {
