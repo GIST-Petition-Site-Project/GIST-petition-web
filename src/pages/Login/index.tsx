@@ -1,6 +1,5 @@
-import React, { FormEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { FormEvent, useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { setLogin } from '../../redux/auth/authSlice'
 import {
   Button,
@@ -17,7 +16,8 @@ import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
-import { useAppSelect } from '../../redux/store.hooks'
+import { useAppDispatch, useAppSelect } from '../../redux/store.hooks'
+import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
 const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -33,7 +33,7 @@ const Login = (): JSX.Element => {
   const pwd = useRef<HTMLInputElement>(null)
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const checkUpperCase = (e: any) => {
     const text = String.fromCharCode(e.which)
