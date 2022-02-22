@@ -32,7 +32,7 @@ import TermsOfUse from './TermsOfUse'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { setWhichInfo } from '../../redux/register/registerSlice'
-import LoadingSpinner from '../../components/Register/Spinner'
+import LoadingSpinner from '../../components/LoadingSpinner'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
