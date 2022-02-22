@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import {
   Select,
   Stack,
@@ -34,10 +34,29 @@ const Petitions = (): JSX.Element => {
     .fill(0)
     .map((_x, i) => i)
 
-  const [selected, setSelected] = useState(queryParams?.category || 0)
+  const [sortSelected, setSortSelected] = useState(queryParams?.sort || 0)
+
+  const [categorySelected, setCategorySelected] = useState(
+    queryParams?.category || 0,
+  )
   const navigate = useNavigate()
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelected(Number(e.target.value))
+  const handleSortSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSortSelected(e.target.value)
+    console.log(e.target.value)
+    const newSearchParams = {
+      ...queryParams,
+      page: 1,
+      sort: e.target.value,
+    }
+    console.log(newSearchParams)
+    navigate({
+      pathname: '/petitions',
+      search: new URLSearchParams(newSearchParams).toString(),
+    })
+  }
+
+  const handleCategorySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setCategorySelected(Number(e.target.value))
     const newSearchParams = {
       ...queryParams,
       page: 1,
@@ -48,6 +67,7 @@ const Petitions = (): JSX.Element => {
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }
+
   return (
     <Container>
       <Inner>
@@ -55,11 +75,11 @@ const Petitions = (): JSX.Element => {
           <div className="petition_type">
             <span>모든 청원</span>
             <div>
-              <Select>
-                <option value="최신">최신순</option>
-                <option value="추천">추천순</option>
+              <Select onChange={handleSortSelect} value={sortSelected}>
+                <option value={''}>최신순</option>
+                <option value={'agreeCount,desc'}>추천순</option>
               </Select>
-              <Select onChange={handleSelect} value={selected}>
+              <Select onChange={handleCategorySelect} value={categorySelected}>
                 {catergoryIdx.map(item => (
                   <option value={item} key={item}>
                     {Category[item]}
