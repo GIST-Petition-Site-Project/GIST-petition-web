@@ -34,6 +34,7 @@ const Logo = styled.div`
 const TopMenu = styled(List)`
   > div {
     display: flex;
+    overflow: hidden;
     background-color: rgba(47, 54, 60, 0.94);
     width: 100vw;
     flex-direction: column;
@@ -43,10 +44,9 @@ const TopMenu = styled(List)`
     @media screen and (min-width: ${theme.breakpoints.md}) {
       flex-direction: row;
       display: flex;
-      height: auto;
+      height: unset;
       background-color: transparent;
       width: inherit;
-      opacity: 1;
     }
     .chakra-divider {
       width: 90%;
@@ -56,13 +56,6 @@ const TopMenu = styled(List)`
       opacity: ${props => (props.open ? '0.15' : '0')};
       @media screen and (min-width: ${theme.breakpoints.md}) {
         display: none;
-      }
-    }
-    .css-0 {
-      transition: opacity 0.3s;
-      opacity: ${props => (props.open ? '1' : '0')};
-      @media screen and (min-width: ${theme.breakpoints.md}) {
-        opacity: 1;
       }
     }
   }
