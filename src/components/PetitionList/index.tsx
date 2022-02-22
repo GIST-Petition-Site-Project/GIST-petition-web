@@ -76,6 +76,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
+              textAlign={'center'}
             >
               {petition.createdAt.slice(0, 10)}
             </PetitionDate>
@@ -85,6 +86,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
+              textAlign={'center'}
             >
               {petition.agreements}
               <Text display={{ base: 'inline-block', md: 'none' }}>명</Text>

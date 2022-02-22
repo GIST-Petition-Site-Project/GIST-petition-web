@@ -5,11 +5,15 @@ import {
   MainBackgroundImage,
   SloganFirstRow,
   SloganSecondRow,
+  PetitionsWrapper,
 } from './styles'
 import { useEffect, useState } from 'react'
 import { getPetitionCount } from '../../utils/api'
 import PetitionList from '../../components/PetitionList'
-import { getPetitionsByQuery } from '../../utils/api'
+import {
+  getHomeAnsweredPetitionsByQuery,
+  getBestPetitionsByQuery,
+} from '../../utils/api'
 import Inner from '../../components/Inner'
 
 const Home = (): JSX.Element => {
@@ -19,9 +23,11 @@ const Home = (): JSX.Element => {
     const response = await getPetitionCount()
     setPetitionCount(response?.data || 0)
   }
+  console.log('ddd')
   useEffect(() => {
     getPetitionCountFunction()
   }, [])
+
   return (
     <section>
       <MainBackgroundImage>
@@ -48,7 +54,18 @@ const Home = (): JSX.Element => {
       </MainBackgroundImage>
       <MainPrecaution></MainPrecaution>
       <Inner>
-        <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+        <PetitionsWrapper>
+          <div className="petitions_title">
+            <span>추천순 TOP 5</span>
+          </div>
+          <PetitionList getPetitions={getBestPetitionsByQuery}></PetitionList>
+          <div className="petitions_title">
+            <span>최근 답변된 청원</span>
+          </div>
+          <PetitionList
+            getPetitions={getHomeAnsweredPetitionsByQuery}
+          ></PetitionList>
+        </PetitionsWrapper>
       </Inner>
     </section>
   )

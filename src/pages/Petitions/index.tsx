@@ -32,6 +32,7 @@ const Petitions = (): JSX.Element => {
 
   const [selected, setSelected] = useState(queryParams?.category || 0)
   const navigate = useNavigate()
+
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelected(Number(e.target.value))
     const newSearchParams = {
@@ -44,6 +45,7 @@ const Petitions = (): JSX.Element => {
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }
+
   return (
     <Container>
       <Inner>

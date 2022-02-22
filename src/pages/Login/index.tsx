@@ -1,6 +1,6 @@
-import { FormEvent, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import React, { FormEvent, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { setLogin } from '../../redux/auth/authSlice'
 import {
   Button,
@@ -17,7 +17,7 @@ import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { useAppSelect } from '../../redux/store.hooks'
 
 const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -28,11 +28,6 @@ const Login = (): JSX.Element => {
 
   const [viewPassword, setViewPassword] = useState<boolean>(false)
   const handleShowClick = () => setViewPassword(!viewPassword)
-
-  // const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target
-  //   setInput({ ...input, [name]: value })
-  // }
 
   const email = useRef<HTMLInputElement>(null)
   const pwd = useRef<HTMLInputElement>(null)
@@ -61,13 +56,20 @@ const Login = (): JSX.Element => {
       setResponseState(loginStatus)
 
       if (loginStatus < 400) {
-        navigate(-1)
+        // navigate(-1)
         dispatch(setLogin())
       }
     } catch (error) {
       console.log(error)
     }
   }
+  
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  useEffect(() => {
+    if (auth) {
+      window.history.back()
+    }
+  }, [useAppSelect(select => select.auth.isAuthorized)])
 
   return (
     <Container>
