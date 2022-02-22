@@ -23,9 +23,11 @@ const Home = (): JSX.Element => {
     const response = await getPetitionCount()
     setPetitionCount(response?.data || 0)
   }
+  console.log('ddd')
   useEffect(() => {
     getPetitionCountFunction()
   }, [])
+
   return (
     <section>
       <MainBackgroundImage>

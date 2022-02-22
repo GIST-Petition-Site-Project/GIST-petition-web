@@ -1,6 +1,6 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setLogin } from '../../redux/auth/authSlice'
 import {
   chakra,
@@ -15,6 +15,7 @@ import { stackStyle, LoginButton, ErrorText } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { checkLoginError } from '../../utils/checkUser'
 import { postLogin } from '../../utils/api'
+import { useAppSelect } from '../../redux/store.hooks'
 
 const Login = (): JSX.Element => {
   // chakra icon
@@ -52,13 +53,20 @@ const Login = (): JSX.Element => {
       setResponseState(loginStatus)
 
       if (loginStatus < 400) {
-        navigate(-1)
+        // navigate(-1)
         dispatch(setLogin())
       }
     } catch (error) {
       console.log(error)
     }
   }
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  useEffect(() => {
+    if (auth) {
+      window.history.back()
+    }
+  }, [useAppSelect(select => select.auth.isAuthorized)])
+
   return (
     <form className="login__form" onSubmit={handleSubmit}>
       <Stack spacing={4} style={stackStyle}>
