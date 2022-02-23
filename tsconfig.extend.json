@@ -8,7 +8,6 @@
       "@style/*": ["src/style/*"],
       "@components/*": ["src/components/*"],
       "@api/*": ["src/utils/api/*"],
-      "@utils/*": ["src/utils/*"],
       "@redux/*": ["src/redux/*"]
     }
   }

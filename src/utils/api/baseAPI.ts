@@ -14,5 +14,3 @@ const config: AxiosRequestConfig = {
 const api = axios.create(config)
 
 export default api
-
-export { config, API_URL }
