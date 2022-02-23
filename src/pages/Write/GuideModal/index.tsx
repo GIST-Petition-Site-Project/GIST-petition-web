@@ -24,7 +24,7 @@ const GuideModal = (): JSX.Element => {
       </ViewWriteMethodButton>
       <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
         <ModalOverlay />
-        <ModalContent borderRadius={0} m={'auto 2rem'}>
+        <ModalContent borderRadius={0} m={'3.75rem 2rem'}>
           <ModalHeader m="15px"> GIST 청원, 이렇게 등록하세요</ModalHeader>
           <ModalBody m="0 15px" textAlign={'justify'}>
             <List p="0 12px">
