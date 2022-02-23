@@ -39,11 +39,11 @@
     "yarn": "^1.22.17"
   },
   "scripts": {
-    "start": "HTTPS=true react-scripts start",
-    "start-win": "cross-env HTTPS=true react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "HTTPS=true craco start",
+    "start-win": "cross-env HTTPS=true craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +66,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "craco-alias": "^3.0.1",
     "cross-env": "^7.0.3",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^8.3.0",
