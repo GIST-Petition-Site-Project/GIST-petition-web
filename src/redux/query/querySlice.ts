@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState: QueryParams = {
   size: 10,
   page: 1,
-  category: 0,
+  categoryId: 0,
 }
 
 export const querySlice = createSlice({
@@ -17,7 +17,7 @@ export const querySlice = createSlice({
       state.page = action.payload
     },
     setCategory: (state, action: PayloadAction<number>) => {
-      state.category = action.payload
+      state.categoryId = action.payload
     },
   },
 })

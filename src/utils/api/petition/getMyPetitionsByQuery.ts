@@ -1,11 +1,10 @@
 import api from '../axiosConfigs'
+import qs from 'qs'
 
 export const getMyPetitionsByQuery = async (query: QueryParams) => {
-  const size = Number(query?.size) || 10
-  const page = Number(query?.page) || 1
-  const category = Number(query?.category) || 0
-  const response = await api.get(
-    `petitions/me?size=${size}&page=${page - 1}&categoryId=${category}`,
-  )
+  const querystring = {
+    ...query,
+  }
+  const response = await api.get(`petitions/me?${qs.stringify(querystring)}`)
   return response
 }

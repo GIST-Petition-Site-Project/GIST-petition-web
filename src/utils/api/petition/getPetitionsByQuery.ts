@@ -6,8 +6,6 @@ export const getPetitionsByQuery = async (query: QueryParams) => {
     ...query,
     page,
   }
-  console.log(query)
-  console.log(qs.stringify(query))
 
   const response = await api.get(`petitions?${qs.stringify(querystring)}`)
   return response

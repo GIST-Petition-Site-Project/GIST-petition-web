@@ -15,7 +15,6 @@ import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
 import {
   getPetitionsByQuery,
-  getBestPetitionsByQuery,
   getExpiredPetitionsByQuery,
 } from '../../utils/api'
 import { Container, PetitionBoard } from './styles'
@@ -34,7 +33,7 @@ const Petitions = (): JSX.Element => {
     .fill(0)
     .map((_x, i) => i)
 
-  const [sortSelected, setSortSelected] = useState(queryParams?.sort || 0)
+  const [sortSelected, setSortSelected] = useState(queryParams?.sort)
 
   const [categorySelected, setCategorySelected] = useState(
     queryParams?.category || 0,
@@ -42,13 +41,11 @@ const Petitions = (): JSX.Element => {
   const navigate = useNavigate()
   const handleSortSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setSortSelected(e.target.value)
-    console.log(e.target.value)
     const newSearchParams = {
       ...queryParams,
       page: 1,
       sort: e.target.value,
     }
-    console.log(newSearchParams)
     navigate({
       pathname: '/petitions',
       search: new URLSearchParams(newSearchParams).toString(),
@@ -57,10 +54,11 @@ const Petitions = (): JSX.Element => {
 
   const handleCategorySelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategorySelected(Number(e.target.value))
+    console.log(queryParams)
     const newSearchParams = {
       ...queryParams,
       page: 1,
-      category: Number(e.target.value),
+      categoryId: Number(e.target.value),
     }
     navigate({
       pathname: '/petitions',
