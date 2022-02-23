@@ -1,7 +1,13 @@
 interface User {
-  userEmail: string | null
-  userPwd: string | null
+  username: string
+  password: string
 }
+
+// interface loginUser extends Omit<User, 'username' | 'password'> {
+//   username: string | null
+//   password: string | null
+// }
+
 interface Register {
   username: string
   password: string
