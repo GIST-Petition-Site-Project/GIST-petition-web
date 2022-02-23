@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
+import theme from '@style/theme'
 
 const stackStyle: React.CSSProperties = {
   position: 'absolute',

@@ -3,7 +3,14 @@ interface User {
   password: string
 }
 
-interface Register extends User {
+// interface loginUser extends Omit<User, 'username' | 'password'> {
+//   username: string | null
+//   password: string | null
+// }
+
+interface Register {
+  username: string
+  password: string
   verificationCode: string
 }
 

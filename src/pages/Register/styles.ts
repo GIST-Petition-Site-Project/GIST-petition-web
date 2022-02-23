@@ -1,6 +1,6 @@
 import { Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
+import theme from '@style/theme'
 
 const RegisterStack = styled(Stack)`
   position: absolute;

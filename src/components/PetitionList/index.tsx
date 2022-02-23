@@ -2,6 +2,7 @@ import { Text, UnorderedList } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { getDay } from '@utils/time'
 
 import {
   PetitionAgreement,
@@ -60,7 +61,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
             </PetitionCategory>
             <PetitionSubject
               pb={{ base: '10px', md: '0' }}
-              m={{ base: '25px 0 20px 0', md: '0 220px 0 250px' }}
+              m={{ base: '25px 0 20px 0', md: '0 220px 0 200px' }}
             >
               <Link
                 to={`/petitions/${petition.id}`}
@@ -76,8 +77,9 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
+              textAlign={'center'}
             >
-              {petition.createdAt.slice(0, 10)}
+              {getDay(petition.createdAt)}
             </PetitionDate>
             <PetitionAgreement
               w={{ md: '90px' }}
@@ -85,6 +87,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               top={{ md: '0' }}
               h={{ md: '16px' }}
               m={{ md: 'auto' }}
+              textAlign={'center'}
             >
               {petition.agreements}
               <Text display={{ base: 'inline-block', md: 'none' }}>명</Text>

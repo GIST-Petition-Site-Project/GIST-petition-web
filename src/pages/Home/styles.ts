@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
-import MainImg from '../../assets/img/gist_summer.jpg'
+import theme from '@style/theme'
+import MainImg from '@assets/img/gist_summer.jpg'
 import { keyframes } from '@emotion/react'
 import { Box } from '@chakra-ui/react'
 
@@ -68,6 +68,20 @@ const SloganSecondRow = styled.span`
   animation: ${secondRowIn} linear 2000ms forwards;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 `
+const PetitionsWrapper = styled.div`
+  padding-bottom: 60px;
+  .petitions_title {
+    display: flex;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #333;
+    > span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+`
 
 export {
   MainBackgroundImage,
@@ -75,4 +89,5 @@ export {
   DashBoard,
   SloganFirstRow,
   SloganSecondRow,
+  PetitionsWrapper,
 }

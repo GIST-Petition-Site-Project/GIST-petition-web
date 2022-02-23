@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import theme from '../../../style/theme'
+import theme from '@style/theme'
 import { Button, Box, Link, Text, List } from '@chakra-ui/react'
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
 

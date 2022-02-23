@@ -1,3 +1,4 @@
+
 import { memo, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TermsOfUseAccordion from '../../../components/Register/Accordion'
@@ -9,6 +10,7 @@ import { TermsOfUseBox } from './styles'
 const TermsOfUse = memo((): JSX.Element => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   const dispatch = useDispatch()
+
 
   const handleAgree = (value: string) => {
     switch (value) {
