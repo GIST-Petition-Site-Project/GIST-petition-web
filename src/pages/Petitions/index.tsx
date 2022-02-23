@@ -72,7 +72,7 @@ const Petitions = (): JSX.Element => {
         <PetitionBoard>
           <div className="petition_type">
             <span>모든 청원</span>
-            <div>
+            <div className="selects">
               <Select onChange={handleSortSelect} value={sortSelected}>
                 <option value={''}>최신순</option>
                 <option value={'agreeCount,desc'}>추천순</option>
