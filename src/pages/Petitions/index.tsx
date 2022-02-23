@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import {
   Select,
   Stack,
@@ -13,7 +13,10 @@ import PaginationButtons from '../../components/PaginationButtons'
 import qs from 'qs'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
-import { getPetitionsByQuery, getBestPetitionsByQuery } from '../../utils/api'
+import {
+  getPetitionsByQuery,
+  getExpiredPetitionsByQuery,
+} from '../../utils/api'
 import { Container, PetitionBoard } from './styles'
 import Inner from '../../components/Inner'
 
@@ -30,15 +33,32 @@ const Petitions = (): JSX.Element => {
     .fill(0)
     .map((_x, i) => i)
 
-  const [selected, setSelected] = useState(queryParams?.category || 0)
-  const navigate = useNavigate()
+  const [sortSelected, setSortSelected] = useState(queryParams?.sort)
 
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelected(Number(e.target.value))
+  const [categorySelected, setCategorySelected] = useState(
+    queryParams?.category || 0,
+  )
+  const navigate = useNavigate()
+  const handleSortSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSortSelected(e.target.value)
     const newSearchParams = {
       ...queryParams,
       page: 1,
-      category: Number(e.target.value),
+      sort: e.target.value,
+    }
+    navigate({
+      pathname: '/petitions',
+      search: new URLSearchParams(newSearchParams).toString(),
+    })
+  }
+
+  const handleCategorySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setCategorySelected(Number(e.target.value))
+    console.log(queryParams)
+    const newSearchParams = {
+      ...queryParams,
+      page: 1,
+      categoryId: Number(e.target.value),
     }
     navigate({
       pathname: '/petitions',
@@ -53,11 +73,11 @@ const Petitions = (): JSX.Element => {
           <div className="petition_type">
             <span>모든 청원</span>
             <div>
-              <Select>
-                <option value="최신">최신순</option>
-                <option value="추천">추천순</option>
+              <Select onChange={handleSortSelect} value={sortSelected}>
+                <option value={''}>최신순</option>
+                <option value={'agreeCount,desc'}>추천순</option>
               </Select>
-              <Select onChange={handleSelect} value={selected}>
+              <Select onChange={handleCategorySelect} value={categorySelected}>
                 {catergoryIdx.map(item => (
                   <option value={item} key={item}>
                     {Category[item]}
@@ -67,7 +87,7 @@ const Petitions = (): JSX.Element => {
             </div>
           </div>
 
-          <Tabs isFitted>
+          <Tabs isFitted colorScheme={'red'}>
             <TabList>
               <Tab>진행중인 청원</Tab>
               <Tab>만료된 청원</Tab>
@@ -85,10 +105,12 @@ const Petitions = (): JSX.Element => {
               </TabPanel>
 
               <TabPanel>
-                <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
+                <PetitionList
+                  getPetitions={getExpiredPetitionsByQuery}
+                ></PetitionList>
                 <Stack>
                   <PaginationButtons
-                    getPetitions={getPetitionsByQuery}
+                    getPetitions={getExpiredPetitionsByQuery}
                     pathname={'/petitions'}
                   />
                 </Stack>

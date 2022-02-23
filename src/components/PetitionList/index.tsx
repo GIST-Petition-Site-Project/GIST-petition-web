@@ -60,7 +60,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
             </PetitionCategory>
             <PetitionSubject
               pb={{ base: '10px', md: '0' }}
-              m={{ base: '25px 0 20px 0', md: '0 220px 0 250px' }}
+              m={{ base: '25px 0 20px 0', md: '0 220px 0 200px' }}
             >
               <Link
                 to={`/petitions/${petition.id}`}

@@ -31,6 +31,8 @@ const PetitionBoard = styled.div`
     .chakra-tabs__tablist {
       border-color: #ccc;
       font-size: 12px;
+      color: #8e8e8e;
+
       .chakra-tabs__tab {
         font-size: 1rem;
         font-weight: bold;
@@ -38,19 +40,19 @@ const PetitionBoard = styled.div`
           outline: none;
           box-shadow: none;
         }
+        :active {
+          background: unset;
+        }
+
         @media screen and (min-width: ${theme.breakpoints.md}) {
           font-size: 1.1rem;
         }
       }
     }
     .chakra-tabs__tab-panel {
-      padding-top: 0;
+      padding: 0 0 1rem 0;
+      text-align: center;
     }
-  }
-
-  .chakra-tabs__tab-panel {
-    padding: 1rem 0;
-    text-align: center;
   }
 `
 
