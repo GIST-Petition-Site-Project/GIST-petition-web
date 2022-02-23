@@ -16,14 +16,20 @@ const PetitionBoard = styled.div`
       font-size: 20px;
       font-weight: bold;
     }
-    .chakra-select__wrapper {
-      display: inline-block;
-      width: 128px;
-      .chakra-select {
-        width: 128px;
-        height: 40px;
-        border-radius: 0;
-        border-color: #ccc;
+    .selects {
+      width: 268px;
+      display: flex;
+      justify-content: space-between;
+
+      .chakra-select__wrapper {
+        display: inline-block;
+        max-width: 128px;
+        .chakra-select {
+          width: 100%;
+          height: 32px;
+          border-radius: 0;
+          border-color: #ccc;
+        }
       }
     }
   }
