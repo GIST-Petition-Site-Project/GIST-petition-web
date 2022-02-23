@@ -14,6 +14,7 @@ import AgreementList from '../AgreementList'
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '@components/NeedLoginModal'
 import AgreementForm from '../AgreementForm'
+import { getDay } from '@utils/time'
 
 interface IProps {
   petitionURL: string
@@ -52,7 +53,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
                 {!response?.answered ? '청원진행중' : '답변완료'}&nbsp;
               </Text>
               <Text display={'inline'}>
-                ({response?.createdAt.slice(0, 10)}~)
+                ({getDay(response?.createdAt || 0)}~)
               </Text>
             </PetitionProgress>
             <PetitionTitleWrap>

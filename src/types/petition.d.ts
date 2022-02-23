@@ -2,11 +2,11 @@ interface Petition {
   agreements: number
   answered: boolean
   categoryName: string
-  createdAt: string
+  createdAt: number
   description: string
   id: number
   title: string
-  updatedAt: string
+  updatedAt: number
   userId: number
   tempUrl: string
   message: string
