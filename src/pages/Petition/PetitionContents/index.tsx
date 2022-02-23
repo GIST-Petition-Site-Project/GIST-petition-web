@@ -26,7 +26,6 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
     AnswerContent | undefined
   >()
   const { isOpen, onClose } = useDisclosure()
-
   useEffect(() => {
     const getPetitionInformation = async (petitionURL: string) => {
       const response = await getPetitionById(petitionURL)
@@ -39,70 +38,86 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
 
   return (
     <>
-      <Stack spacing={6} color={'#333'}>
-        <PetitionProgress>
-          <Text fontWeight={'bold'} display={'inline-block'}>
-            {!response?.answered ? '청원진행중' : '답변완료'}&nbsp;
-          </Text>
-          <Text display={'inline'}>({response?.createdAt.slice(0, 10)}~)</Text>
-        </PetitionProgress>
+      {response?.message !== undefined ? (
         <PetitionTitleWrap>
           <PetitionTitle ml={'20px'} mr={'20px'}>
-            {response?.title}
+            {response?.message}
           </PetitionTitle>
         </PetitionTitleWrap>
-        <CurrentAgreementsText>
-          <Text>
-            총 <CurrentAgreements>{response?.agreements}</CurrentAgreements>
-            명이 동의했습니다.
-          </Text>
-        </CurrentAgreementsText>
-      </Stack>
-      <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
-        <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
-          청원내용
-        </Text>
-        <Divider color={'#ccc'}></Divider>
-        <div>
-          <ContentWrap>
-            <PetitionDescription>{response?.description}</PetitionDescription>
-          </ContentWrap>
-        </div>
-      </Stack>
-      {response?.answered ? (
-        <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
-          <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
-            답변
-          </Text>
-          <Divider color={'#ccc'}></Divider>
-          <div>
-            <ContentWrap>
-              <PetitionDescription>
-                {answerContent?.content}
-              </PetitionDescription>
-            </ContentWrap>
-          </div>
-        </Stack>
       ) : (
-        <div>
-          <Stack>
-            <Text
-              textAlign={'left'}
-              fontWeight={'bold'}
-              fontSize={'20px'}
-              p={'0.5em 0'}
-            >
-              청원동의{' '}
-              <span style={{ color: '#FF0000' }}>{response?.agreements} </span>
-              명
-            </Text>
-            <AgreementForm petitionId={petitionId}></AgreementForm>
-            <AgreementList petitionId={petitionId}></AgreementList>
+        <>
+          <Stack spacing={6} color={'#333'}>
+            <PetitionProgress>
+              <Text fontWeight={'bold'} display={'inline-block'}>
+                {!response?.answered ? '청원진행중' : '답변완료'}&nbsp;
+              </Text>
+              <Text display={'inline'}>
+                ({response?.createdAt.slice(0, 10)}~)
+              </Text>
+            </PetitionProgress>
+            <PetitionTitleWrap>
+              <PetitionTitle ml={'20px'} mr={'20px'}>
+                {response?.title}
+              </PetitionTitle>
+            </PetitionTitleWrap>
+            <CurrentAgreementsText>
+              <Text>
+                총 <CurrentAgreements>{response?.agreements}</CurrentAgreements>
+                명이 동의했습니다.
+              </Text>
+            </CurrentAgreementsText>
           </Stack>
-        </div>
-      )}
+          <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
+            <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
+              청원내용
+            </Text>
+            <Divider color={'#ccc'}></Divider>
+            <div>
+              <ContentWrap>
+                <PetitionDescription>
+                  {response?.description}
+                </PetitionDescription>
+              </ContentWrap>
+            </div>
+          </Stack>
+          {response?.answered ? (
+            <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
+              <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
+                답변
+              </Text>
+              <Divider color={'#ccc'}></Divider>
+              <div>
+                <ContentWrap>
+                  <PetitionDescription>
+                    {answerContent?.content}
+                  </PetitionDescription>
+                </ContentWrap>
+              </div>
+            </Stack>
+          ) : (
+            <div>
+              <Stack>
+                <Text
+                  textAlign={'left'}
+                  fontWeight={'bold'}
+                  fontSize={'20px'}
+                  p={'0.5em 0'}
+                >
+                  청원동의{' '}
+                  <span style={{ color: '#FF0000' }}>
+                    {response?.agreements}{' '}
+                  </span>
+                  명
+                </Text>
+                <AgreementForm petitionId={petitionId}></AgreementForm>
+                <AgreementList petitionId={petitionId}></AgreementList>
+              </Stack>
+            </div>
+          )}
 
-      <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
+          <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
+        </>
+      )}
     </>
   )
 }
