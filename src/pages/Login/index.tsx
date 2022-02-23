@@ -23,7 +23,7 @@ const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const [input, setInput] = useState<User>({ userEmail: '', userPwd: '' })
+  const [input, setInput] = useState<User>({ username: '', password: '' })
   const [responseState, setResponseState] = useState<number>(0)
 
   const [viewPassword, setViewPassword] = useState<boolean>(false)
@@ -84,8 +84,8 @@ const Login = (): JSX.Element => {
               <Input
                 ref={email}
                 type="email"
-                name="userEmail"
-                id="userEmail"
+                name="username"
+                id="uesrname"
                 placeholder="이메일을 입력하세요."
                 // value={input.userEmail}
                 // onChange={handleChangeUser}
@@ -129,8 +129,8 @@ const Login = (): JSX.Element => {
             className="login_btn"
             onClick={() => {
               setInput({
-                userEmail: email.current && email.current.value,
-                userPwd: pwd.current && pwd.current.value,
+                username: email.current ? email.current.value : '',
+                password: pwd.current ? pwd.current.value : '',
               })
             }}
           >
