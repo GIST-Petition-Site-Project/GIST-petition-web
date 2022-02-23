@@ -1,5 +1,5 @@
 import { NotFoundSection } from './styles'
-import notFound from '../../assets/img/not_found.gif'
+import notFound from '@assets/img/not_found.gif'
 import { useNavigate } from 'react-router-dom'
 
 const NotFound = (): JSX.Element => {

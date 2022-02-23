@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { setLogin } from '../../redux/auth/authSlice'
+import { setLogin } from '@redux/auth/authSlice'
 import {
   Button,
   chakra,
@@ -14,14 +14,19 @@ import {
 } from '@chakra-ui/react'
 import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { checkLoginError } from '../../utils/checkUser'
-import { postLogin } from '../../utils/api'
+import { postLogin } from '@api/userAPI'
 import { useAppDispatch, useAppSelect } from '../../redux/store.hooks'
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
 const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
+
+  const checkLoginError = (status: number): string => {
+    if (status < 400) return ''
+    else if (status == 600) return 'CapsLock이 켜져 있습니다.'
+    return '이메일 혹은 비밀번호를 확인해주세요'
+  }
 
   const [input, setInput] = useState<User>({ username: '', password: '' })
   const [responseState, setResponseState] = useState<number>(0)

@@ -1,9 +1,7 @@
 import { CheckIcon } from '@chakra-ui/icons'
-import { Box, Divider } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setAgree } from '../../../redux/register/registerSlice'
-import { RootState } from '../../../redux/store'
+import { Divider } from '@chakra-ui/react'
+import { useState } from 'react'
+import { setAgree } from '@redux/register/registerSlice'
 import {
   TermsOfUseCollapse,
   TermsOfUseCheckIcon,
@@ -14,12 +12,13 @@ import {
   TermsOfUseTotalBox,
   TermsOfUseBox,
 } from './styles'
+import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 
 const TermsOfUse = (): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
   const [secondOpen, setSecondOpen] = useState(false)
-  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
-  const dispatch = useDispatch()
+  const agreeInfo = useAppSelect(state => state.register.agreeInfo)
+  const dispatch = useAppDispatch()
 
   const handleAgree = (value: string) => {
     switch (value) {

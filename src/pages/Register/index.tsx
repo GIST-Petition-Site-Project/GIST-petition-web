@@ -1,9 +1,9 @@
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import {
-  postRegister,
   postConfirmVerificationCode,
   postCreateVerificationCode,
-} from '../../utils/api'
+} from '@api/verificationAPI'
+import { postDelete, postRegister } from '@api/userAPI'
 import {
   chakra,
   FormControl,
@@ -16,7 +16,7 @@ import {
   Flex,
   useToast,
 } from '@chakra-ui/react'
-import theme from '../../style/theme'
+import theme from '@style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import {
   RegisterStack,
@@ -27,12 +27,10 @@ import {
   Title,
 } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { postDelete } from '../../utils/api/user/userDelete'
+
 import TermsOfUse from './TermsOfUse'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
-import { setWhichInfo } from '../../redux/register/registerSlice'
-import { useAppSelect } from '../../redux/store.hooks'
+import { setWhichInfo } from '@redux/register/registerSlice'
+import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 
 const Register = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -50,9 +48,9 @@ const Register = (): JSX.Element => {
   const toast = useToast({
     variant: 'toast',
   })
-  const dispatch = useDispatch()
-  const whichUI = useSelector((state: RootState) => state.register.whichUI)
-  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
+  const dispatch = useAppDispatch()
+  const whichUI = useAppSelect(state => state.register.whichUI)
+  const agreeInfo = useAppSelect(state => state.register.agreeInfo)
   const [errorText, setErrorText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
