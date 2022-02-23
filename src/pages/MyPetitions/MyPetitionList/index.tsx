@@ -2,6 +2,7 @@ import { Text, UnorderedList } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { getDay } from '@utils/time'
 
 import {
   PetitionAgreement,
@@ -93,7 +94,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
               m={{ md: 'auto' }}
               pl={{ base: '5px', md: '0' }}
             >
-              {petition.createdAt.slice(0, 10)}
+              {getDay(petition.createdAt)}
             </PetitionDate>
             <PetitionAgreement
               w={{ md: '90px' }}
