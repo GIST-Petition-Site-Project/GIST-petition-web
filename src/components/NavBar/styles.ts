@@ -3,6 +3,8 @@ import theme from '@style/theme'
 import { Button, List } from '@chakra-ui/react'
 
 const Header = styled.header`
+  backdrop-filter: blur(1.5px);
+
   height: 3.75rem;
   width: 100%;
   position: fixed;
