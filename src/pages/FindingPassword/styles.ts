@@ -1,16 +1,36 @@
 import styled from '@emotion/styled'
 import theme from '@style/theme'
 
-const stackStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: '10rem',
-  left: '0',
-  right: '0',
-  height: '31.25rem',
-  width: '25rem',
-  margin: 'auto',
-}
+const Container = styled.section`
+  .register_form > .chakra-stack {
+    height: 100vh;
+    max-width: 28rem;
+    margin: auto;
+    justify-content: center;
+    padding: 0 2rem;
 
+    > span:nth-of-type(1) {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .chakra-form-control {
+      > span {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+      }
+      .chakra-input__group {
+        border-color: #ccc;
+        .chakra-input {
+          border-radius: 0;
+        }
+      }
+    }
+    .err_msg {
+      text-align: center;
+      color: ${theme.color.PRIMARY_RED};
+    }
+  }
+`
 const RegisterButton = styled.button`
   color: ${theme.color.WHITE};
   background-color: ${theme.color.TERTIARY_GRAY};
@@ -19,10 +39,6 @@ const RegisterButton = styled.button`
   font-weight: bold;
 `
 
-const ErrorText = styled.p`
-  text-align: center;
-  color: ${theme.color.PRIMARY_RED};
-`
 const DeleteBtn = styled.button`
   position: absolute;
   top: 1em;
@@ -35,4 +51,4 @@ const DeleteBtn = styled.button`
   font-weight: bold;
 `
 
-export { stackStyle, RegisterButton, ErrorText, DeleteBtn }
+export { Container, RegisterButton, DeleteBtn }
