@@ -1,11 +1,10 @@
-import { PetitionBoard } from './styles'
+import { PetitionBoard, PetitionsText, PetitionsTitle } from './styles'
 import { Stack } from '@chakra-ui/react'
-import { PetitionsText, PetitionsTitle } from './styles'
-import PaginationButtons from '../../components/PaginationButtons'
-import { getMyPetitionsByQuery } from '../../utils/api'
+import PaginationButtons from '@components/PaginationButtons'
+import { getMyPetitionsByQuery } from '@api/petitionAPI'
 import MyPetitionList from './MyPetitionList'
 import { useNavigate } from 'react-router-dom'
-import Inner from '../../components/Inner'
+import Inner from '@components/Inner'
 
 const MyPetitions = (): JSX.Element => {
   const navigate = useNavigate()

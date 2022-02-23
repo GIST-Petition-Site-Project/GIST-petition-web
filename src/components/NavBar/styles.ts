@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
+import theme from '@style/theme'
 import { Button, List } from '@chakra-ui/react'
 
 const Header = styled.header`

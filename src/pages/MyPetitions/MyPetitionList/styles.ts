@@ -1,5 +1,5 @@
 import { Box, ListItem, Tag } from '@chakra-ui/react'
-import theme from '../../../style/theme'
+import theme from '@style/theme'
 import styled from '@emotion/styled'
 
 const PetitionsHead = styled(Box)`

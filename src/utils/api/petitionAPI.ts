@@ -96,3 +96,12 @@ export const getRetrieveAnswer = async (petitionId: string) => {
   const response = await api.get(`petitions/${petitionId}/answer`)
   return response
 }
+
+export const getAnsweredPetitionsByQuery = async (query: QueryParams) => {
+  const size = Number(query?.size) || 10
+  const page = Number(query?.page) || 1
+  const response = await api.get(
+    `petitions/answered?size=${size}&page=${page - 1}`,
+  )
+  return response
+}

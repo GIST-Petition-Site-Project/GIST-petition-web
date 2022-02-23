@@ -9,7 +9,7 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import theme from '../../../style/theme'
+import theme from '@style/theme'
 
 const TermOfUseBox = styled.div`
   margin-top: 2rem;

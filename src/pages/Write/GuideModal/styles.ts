@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 const ViewWriteMethodButton = styled(Button)`
   background-color: #2f363c;
   color: white;
-  color-scheme: #2f363c;
   border-radius: 2px;
 `
 

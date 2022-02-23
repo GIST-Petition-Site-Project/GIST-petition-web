@@ -8,13 +8,13 @@ import {
   PetitionsWrapper,
 } from './styles'
 import { useEffect, useState } from 'react'
-import { getPetitionCount } from '../../utils/api'
-import PetitionList from '../../components/PetitionList'
+import PetitionList from '@components/PetitionList'
 import {
   getHomeAnsweredPetitionsByQuery,
   getBestPetitionsByQuery,
-} from '../../utils/api'
-import Inner from '../../components/Inner'
+  getPetitionCount,
+} from '@api/petitionAPI'
+import Inner from '@components/Inner'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)

@@ -1,6 +1,6 @@
 import { Divider, Stack, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { getPetitionById, getRetrieveAnswer } from '../../../utils/api'
+import { getPetitionById, getRetrieveAnswer } from '@api/petitionAPI'
 import {
   PetitionProgress,
   PetitionTitleWrap,
@@ -10,10 +10,10 @@ import {
   PetitionDescription,
   ContentWrap,
 } from './styles'
-import AgreementList from './../AgreementList'
+import AgreementList from '../AgreementList'
 import { useDisclosure } from '@chakra-ui/react'
-import NeedLoginModal from '../../../components/NeedLoginModal'
-import AgreementForm from './../AgreementForm'
+import NeedLoginModal from '@components/NeedLoginModal'
+import AgreementForm from '../AgreementForm'
 
 interface IProps {
   petitionURL: string

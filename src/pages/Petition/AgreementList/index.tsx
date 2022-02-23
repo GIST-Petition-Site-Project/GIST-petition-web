@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/react'
 import { AgreementItem, AgreementAnonymousName, ContentWrap } from './styles'
 import { useEffect, useState } from 'react'
-import { getAgreements } from '../../../utils/api'
+import { getAgreements } from '@api/petitionAPI'
 
 interface IProps {
   petitionId: string

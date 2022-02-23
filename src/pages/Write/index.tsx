@@ -3,7 +3,7 @@ import GuideModal from './GuideModal'
 import PostEditor from './PostEditor'
 import { Heading, Stack, Divider, Box } from '@chakra-ui/react'
 import { Container, WriteContainer } from './styles'
-import Inner from '../../components/Inner'
+import Inner from '@components/Inner'
 
 const Write = (): JSX.Element => {
   return (
