@@ -21,10 +21,13 @@ const WritePrecaution = (): JSX.Element => {
               <StyleStrong>삭제나 숨김</StyleStrong> 처리될 수 있습니다.
             </PrincipleContents>
           </ListItem>
+
           <ListItem>
             <PrincipleContents>
-              청원글 게시 후 50명의 동의를 받은 청원에 대해&sbquo; GIST대학 내
-              관련 부서에 청원을 보내 답변을 받아 게시합니다.
+              청원글 게시 후 30일 동안 5명의 사전동의를 받은 청원에 한해
+              국민청원 게시판에 공개됩니다. 청원이 공개된 날로부터 30일 동안
+              50명의 동의를 받은 청원에 대해&sbquo; GIST대학 내 관련 부서에
+              청원을 보내 답변을 받아 게시합니다.
             </PrincipleContents>
           </ListItem>
           <ListItem>
