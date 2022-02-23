@@ -10,22 +10,23 @@ import {
 import { useEffect, useState } from 'react'
 import PetitionList from '@components/PetitionList'
 import {
-  getHomeAnsweredPetitionsByQuery,
-  getBestPetitionsByQuery,
+  getAnsweredByQuery,
   getPetitionCount,
+  getPetitionsByQuery,
 } from '@api/petitionAPI'
 import Inner from '@components/Inner'
+import { stringify } from 'querystring'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)
 
-  const getPetitionCountFunction = async () => {
+  const fetch = async () => {
     const response = await getPetitionCount()
     setPetitionCount(response?.data || 0)
   }
-  console.log('ddd')
+
   useEffect(() => {
-    getPetitionCountFunction()
+    fetch()
   }, [])
 
   return (
@@ -58,12 +59,19 @@ const Home = (): JSX.Element => {
           <div className="petitions_title">
             <span>추천순 TOP 5</span>
           </div>
-          <PetitionList getPetitions={getBestPetitionsByQuery}></PetitionList>
+          <PetitionList
+            getPetitions={() =>
+              getPetitionsByQuery({
+                size: 5,
+                sort: 'agreeCount,desc',
+              })
+            }
+          ></PetitionList>
           <div className="petitions_title">
             <span>최근 답변된 청원</span>
           </div>
           <PetitionList
-            getPetitions={getHomeAnsweredPetitionsByQuery}
+            getPetitions={() => getAnsweredByQuery({ size: 5 })}
           ></PetitionList>
         </PetitionsWrapper>
       </Inner>

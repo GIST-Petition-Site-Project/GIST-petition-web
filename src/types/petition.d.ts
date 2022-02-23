@@ -26,6 +26,7 @@ interface QueryParams {
   size?: number | string
   page?: number | string
   categoryId?: number | string
+  sort?: string
 }
 
 interface GetPetitions {
