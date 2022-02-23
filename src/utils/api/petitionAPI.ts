@@ -18,13 +18,7 @@ export const getAgreements = async (petitionId: string) => {
   return response
 }
 
-export const getBestPetitionsByQuery = async (query: QueryParams) => {
-  const size = Number(query?.size) || 5
-  const response = await api.get(`petitions?size=${size}&sort=agreeCount,desc`)
-  return response
-}
-
-export const getExpiredPetitionsByQuery = async (query: QueryParams) => {
+export const getExpiredByQuery = async (query: QueryParams) => {
   const size = Number(query?.size) || 10
   const page = Number(query?.page) || 1
   const response = await api.get(
@@ -33,13 +27,7 @@ export const getExpiredPetitionsByQuery = async (query: QueryParams) => {
   return response
 }
 
-export const getHomeAnsweredPetitionsByQuery = async (query: QueryParams) => {
-  const size = Number(query?.size) || 5
-  const response = await api.get(`petitions/answered?size=${size}`)
-  return response
-}
-
-export const getMyPetitionsByQuery = async (query: QueryParams) => {
+export const getMineByQuery = async (query: QueryParams) => {
   const querystring = {
     ...query,
   }
@@ -64,7 +52,9 @@ export const getPetitionsByQuery = async (query: QueryParams) => {
     page,
   }
 
-  const response = await api.get(`petitions?${qs.stringify(querystring)}`)
+  const response = await api.get(
+    `petitions/ongoing?${qs.stringify(querystring)}`,
+  )
   return response
 }
 
@@ -97,7 +87,7 @@ export const getRetrieveAnswer = async (petitionId: string) => {
   return response
 }
 
-export const getAnsweredPetitionsByQuery = async (query: QueryParams) => {
+export const getAnsweredByQuery = async (query: QueryParams) => {
   const size = Number(query?.size) || 10
   const page = Number(query?.page) || 1
   const response = await api.get(

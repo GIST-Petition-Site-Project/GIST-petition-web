@@ -48,7 +48,6 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  // postAgreePetition
   return (
     <div style={{ position: 'relative' }}>
       <span

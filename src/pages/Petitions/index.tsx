@@ -13,10 +13,7 @@ import PaginationButtons from '@components/PaginationButtons'
 import qs from 'qs'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
-import {
-  getPetitionsByQuery,
-  getExpiredPetitionsByQuery,
-} from '@api/petitionAPI'
+import { getPetitionsByQuery, getExpiredByQuery } from '@api/petitionAPI'
 import { Container, PetitionBoard } from './styles'
 import Inner from '@components/Inner'
 
@@ -105,12 +102,10 @@ const Petitions = (): JSX.Element => {
               </TabPanel>
 
               <TabPanel>
-                <PetitionList
-                  getPetitions={getExpiredPetitionsByQuery}
-                ></PetitionList>
+                <PetitionList getPetitions={getExpiredByQuery}></PetitionList>
                 <Stack>
                   <PaginationButtons
-                    getPetitions={getExpiredPetitionsByQuery}
+                    getPetitions={getExpiredByQuery}
                     pathname={'/petitions'}
                   />
                 </Stack>
