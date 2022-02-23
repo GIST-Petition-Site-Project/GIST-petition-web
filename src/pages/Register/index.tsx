@@ -1,11 +1,17 @@
-import React, { FormEvent, useCallback, useRef, useState } from 'react'
+import React, {
+  FormEvent,
+  memo,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {
   postRegister,
   postConfirmVerificationCode,
   postCreateVerificationCode,
 } from '../../utils/api'
-import { chakra, Text, useToast } from '@chakra-ui/react'
-import { FaUserAlt, FaLock } from 'react-icons/fa'
+import { Text, useToast } from '@chakra-ui/react'
 import {
   RegisterStack,
   RegisterButton,
@@ -30,6 +36,7 @@ const Register = (): JSX.Element => {
     verificationCode: '',
     passwordConfirm: '',
   })
+
   const toast = useToast({
     variant: 'toast',
   })
@@ -238,7 +245,7 @@ const Register = (): JSX.Element => {
             ></UserInput>
           )}
           {!whichUI.isAgreed && (
-            <RegisterButton onClick={handleAgreeBtn}>다음단계</RegisterButton>
+            <RegisterButton onClick={handleAgreeBtn}>다음 단계</RegisterButton>
           )}
           {whichUI.isAgreed &&
             !whichUI.isCodeRequested &&
