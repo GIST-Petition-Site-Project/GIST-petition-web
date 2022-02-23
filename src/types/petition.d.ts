@@ -1,6 +1,7 @@
 interface Petition {
   agreements: number
   answered: boolean
+  expired: boolean
   categoryName: string
   createdAt: string
   description: string

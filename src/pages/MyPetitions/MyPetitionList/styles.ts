@@ -104,7 +104,10 @@ const PetitionItem = styled(ListItem)`
 `
 const PetitionStatusTag = styled(Tag)`
   font-size: 10px;
-  background-color: ${theme.color.SECONDARY_RED}; //나머지 색은 QUATERNARY_GRAY
+  background-color: ${props =>
+    props.open
+      ? `${theme.color.QUATERNARY_GRAY}`
+      : `${theme.color.SECONDARY_RED}`};
   color: white;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     font-size: 12px;
