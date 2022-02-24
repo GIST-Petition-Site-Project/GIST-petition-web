@@ -1,4 +1,3 @@
-
 import React, {
   FormEvent,
   memo,
@@ -43,7 +42,6 @@ import { RootState } from '../../redux/store'
 import { setWhichInfo } from '../../redux/register/registerSlice'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import UserInput from '../../components/UserInput'
-
 
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
