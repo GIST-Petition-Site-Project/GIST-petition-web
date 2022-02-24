@@ -12,7 +12,7 @@ import {
   InputRightElement,
   Stack,
 } from '@chakra-ui/react'
-import { Container } from './styles'
+
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { postLogin } from '@api/userAPI'
 import { useAppDispatch, useAppSelect } from '../../redux/store.hooks'
@@ -140,7 +140,6 @@ const Login = (): JSX.Element => {
           </span>
         </Stack>
       </form>
-    </Container>
   )
 }
 
