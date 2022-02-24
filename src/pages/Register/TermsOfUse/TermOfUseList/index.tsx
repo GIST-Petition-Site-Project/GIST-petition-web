@@ -2,7 +2,7 @@ import { CheckIcon } from '@chakra-ui/icons'
 import { Divider } from '@chakra-ui/react'
 import { memo } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/store'
+import { RootState } from '../../../../redux/store'
 import {
   List,
   TermsOfUseCheckFlex,

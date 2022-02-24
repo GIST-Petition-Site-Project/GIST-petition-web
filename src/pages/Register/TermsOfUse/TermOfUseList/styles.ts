@@ -1,7 +1,7 @@
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
 import { Box, IconButton, Flex } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import theme from '../../../style/theme'
+import theme from '../../../../style/theme'
 
 const List = styled.li`
   display: flex;
