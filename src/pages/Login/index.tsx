@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { setLogin } from '@redux/auth/authSlice'
+import { setLogin } from '../../redux/auth/authSlice'
 import {
   Button,
   chakra,
@@ -12,9 +12,10 @@ import {
   InputRightElement,
   Stack,
 } from '@chakra-ui/react'
-
+import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { postLogin } from '@api/userAPI'
+import { checkLoginError } from '../../utils/checkUser'
+import { postLogin } from '../../utils/api'
 import { useAppDispatch, useAppSelect } from '../../redux/store.hooks'
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
@@ -22,13 +23,7 @@ const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const checkLoginError = (status: number): string => {
-    if (status < 400) return ''
-    else if (status == 600) return 'CapsLock이 켜져 있습니다.'
-    return '이메일 혹은 비밀번호를 확인해주세요'
-  }
-
-  const [input, setInput] = useState<User>({ username: '', password: '' })
+  const [input, setInput] = useState<User>({ userEmail: '', userPwd: '' })
   const [responseState, setResponseState] = useState<number>(0)
 
   const [viewPassword, setViewPassword] = useState<boolean>(false)
@@ -76,58 +71,66 @@ const Login = (): JSX.Element => {
   }, [useAppSelect(select => select.auth.isAuthorized)])
 
   return (
-    <form className="login__form" onSubmit={handleSubmit}>
-      <Stack spacing={4} style={stackStyle}>
-        <Text fontSize="4xl" fontWeight="bold">
-          로그인
-        </Text>
-        <FormControl isRequired>
-          <Text mb="8px">이메일</Text>
-          <InputGroup borderColor="#ccc">
-            <InputLeftElement pointerEvents="none">
-              {<CFaUserAlt color="gray.300" />}
-            </InputLeftElement>
-            <Input
-              type="email"
-              name="username"
-              id="username"
-              placeholder="이메일을 입력하세요."
-              value={input.username}
-              onChange={handleChangeUser}
-              borderRadius="0"
-            />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <Text mb="8px">비밀번호</Text>
-          <InputGroup borderColor="#ccc">
-            <InputLeftElement pointerEvents="none">
-              {<CFaLock color="gray.300" />}
-            </InputLeftElement>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="비밀번호를 입력하세요."
-              value={input.password}
-              onChange={handleChangeUser}
-              borderRadius="0"
-              onKeyPress={checkUpperCase}
-            />
-          </InputGroup>
-        </FormControl>
-        <ErrorText>{checkLoginError(responseState)}</ErrorText>
-        <Text mb="4px" align="right" decoration="underline">
-          <a href="/findpassword">비밀번호를 잊으셨나요?</a>
-        </Text>
+    <Container>
+      <form className="login_form" onSubmit={handleSubmit}>
+        <Stack spacing={4}>
+          <span>로그인</span>
+          <FormControl isRequired>
+            <span>이메일</span>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                {<CFaUserAlt color="gray.300" />}
+              </InputLeftElement>
+              <Input
+                ref={email}
+                type="email"
+                name="userEmail"
+                id="userEmail"
+                placeholder="이메일을 입력하세요."
+                // value={input.userEmail}
+                // onChange={handleChangeUser}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <span>비밀번호</span>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                {<CFaLock color="gray.300" />}
+              </InputLeftElement>
+              <Input
+                ref={pwd}
+                type={viewPassword ? 'text' : 'password'}
+                name="password"
+                id="password"
+                placeholder="비밀번호를 입력하세요."
+                // value={input.password}
+                // onChange={handleChangeUser}
+                onKeyPress={checkUpperCase}
+              />
+              <InputRightElement>
+                <IconButton
+                  color="gray.300"
+                  aria-label="view password"
+                  variant="password"
+                  icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  onClick={handleShowClick}
+                ></IconButton>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
+          <span className="err_msg">{checkLoginError(responseState)}</span>
+          <span className="forgot_pwd account_link">
+            <Link to="#">비밀번호를 잊으셨나요?</Link>
+          </span>
 
           <Button
             type="submit"
             className="login_btn"
             onClick={() => {
               setInput({
-                username: email.current ? email.current.value : '',
-                password: pwd.current ? pwd.current.value : '',
+                userEmail: email.current && email.current.value,
+                userPwd: pwd.current && pwd.current.value,
               })
             }}
           >
@@ -139,6 +142,7 @@ const Login = (): JSX.Element => {
           </span>
         </Stack>
       </form>
+    </Container>
   )
 }
 
