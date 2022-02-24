@@ -1,11 +1,11 @@
-import logo from '../../assets/img/new_logo.svg'
-import { ReactComponent as MobMenuIcon } from '../../assets/img/menu_icon.svg'
+import logo from '@assets/img/new_logo.svg'
+import { ReactComponent as MobMenuIcon } from '@assets/img/menu_icon.svg'
 import { Header, Logo, TopMenu, ItemName, MobMenuButton } from './styles'
 import { useState } from 'react'
 import { Divider, ListItem } from '@chakra-ui/react'
 import MyMenu from './MyMenu'
 import { Link } from 'react-router-dom'
-import Inner from '../Inner'
+import Inner from '@components/Inner'
 
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState<boolean>(false)

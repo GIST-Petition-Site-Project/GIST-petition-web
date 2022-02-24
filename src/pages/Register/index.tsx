@@ -1,3 +1,4 @@
+
 import React, {
   FormEvent,
   memo,
@@ -7,11 +8,25 @@ import React, {
   useState,
 } from 'react'
 import {
-  postRegister,
   postConfirmVerificationCode,
   postCreateVerificationCode,
-} from '../../utils/api'
+} from '@api/verificationAPI'
 import { Text, useToast } from '@chakra-ui/react'
+import { postDelete, postRegister } from '@api/userAPI'
+import {
+  chakra,
+  FormControl,
+  InputGroup,
+  InputLeftElement,
+  Stack,
+  Text,
+  Input,
+  Spinner,
+  Flex,
+  useToast,
+} from '@chakra-ui/react'
+import theme from '@style/theme'
+import { FaUserAlt, FaLock } from 'react-icons/fa'
 import {
   RegisterStack,
   RegisterButton,
@@ -20,13 +35,15 @@ import {
   Title,
 } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { postDelete } from '../../utils/api/user/userDelete'
+
 import TermsOfUse from './TermsOfUse'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { setWhichInfo } from '../../redux/register/registerSlice'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import UserInput from '../../components/UserInput'
+
 
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
@@ -40,9 +57,9 @@ const Register = (): JSX.Element => {
   const toast = useToast({
     variant: 'toast',
   })
-  const dispatch = useDispatch()
-  const whichUI = useSelector((state: RootState) => state.register.whichUI)
-  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
+  const dispatch = useAppDispatch()
+  const whichUI = useAppSelect(state => state.register.whichUI)
+  const agreeInfo = useAppSelect(state => state.register.agreeInfo)
   const [errorText, setErrorText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -194,6 +211,12 @@ const Register = (): JSX.Element => {
       })
     }
   }
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  useEffect(() => {
+    if (auth) {
+      window.history.back()
+    }
+  }, [useAppSelect(select => select.auth.isAuthorized)])
 
   return (
     <section className="register">

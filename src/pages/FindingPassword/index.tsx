@@ -11,16 +11,18 @@ import {
   Flex,
   useToast,
 } from '@chakra-ui/react'
-import theme from '../../style/theme'
+import theme from '@style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { RegisterButton, stackStyle, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
-import { postConfirmVerificationCodeForPassword } from '../../utils/api/findPassword/postConfirmVerificationCodeForPassword'
-import { postCreateVerificationCodeForPassword } from '../../utils/api/findPassword/postCreateVerificationCodeForPassword'
-import { putResetPassword } from '../../utils/api/findPassword/putResetPassword'
-import { setFindPasswordWhichInfo } from '../../redux/findPassword/findPasswordSlice'
+import { RootState } from '@redux/store'
+import {
+  postConfirmVerificationCodeForPassword,
+  postCreateVerificationCodeForPassword,
+  putResetPassword,
+} from '@api/verificationAPI'
+import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
+import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 
 const FindingPassword = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -35,8 +37,8 @@ const FindingPassword = (): JSX.Element => {
     verificationCode: '',
     passwordConfirm: '',
   })
-  const whichUI = useSelector((state: RootState) => state.findPassword)
-  const dispatch = useDispatch()
+  const whichUI = useAppSelect((state: RootState) => state.findPassword)
+  const dispatch = useAppDispatch()
   const toast = useToast({
     variant: 'toast',
   })

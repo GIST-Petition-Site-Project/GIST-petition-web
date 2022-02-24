@@ -1,35 +1,44 @@
-import React, { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { setLogin } from '../../redux/auth/authSlice'
+import { FormEvent, useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { setLogin } from '@redux/auth/authSlice'
 import {
+  Button,
   chakra,
   FormControl,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Stack,
-  Text,
 } from '@chakra-ui/react'
-import { stackStyle, LoginButton, ErrorText } from './styles'
+import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { checkLoginError } from '../../utils/checkUser'
-import { postLogin } from '../../utils/api'
+import { postLogin } from '@api/userAPI'
+import { useAppDispatch, useAppSelect } from '../../redux/store.hooks'
+import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
 const Login = (): JSX.Element => {
-  // chakra icon
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
-  const [input, setInput] = useState<User>({ username: '', password: '' })
-  const [responseState, setResponseState] = useState(0)
-
-  const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setInput({ ...input, [name]: value })
+  const checkLoginError = (status: number): string => {
+    if (status < 400) return ''
+    else if (status == 600) return 'CapsLock이 켜져 있습니다.'
+    return '이메일 혹은 비밀번호를 확인해주세요'
   }
+
+  const [input, setInput] = useState<User>({ username: '', password: '' })
+  const [responseState, setResponseState] = useState<number>(0)
+
+  const [viewPassword, setViewPassword] = useState<boolean>(false)
+  const handleShowClick = () => setViewPassword(!viewPassword)
+
+  const email = useRef<HTMLInputElement>(null)
+  const pwd = useRef<HTMLInputElement>(null)
+
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const checkUpperCase = (e: any) => {
     const text = String.fromCharCode(e.which)
@@ -52,13 +61,20 @@ const Login = (): JSX.Element => {
       setResponseState(loginStatus)
 
       if (loginStatus < 400) {
-        navigate(-1)
+        // navigate(-1)
         dispatch(setLogin())
       }
     } catch (error) {
       console.log(error)
     }
   }
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  useEffect(() => {
+    if (auth) {
+      window.history.back()
+    }
+  }, [useAppSelect(select => select.auth.isAuthorized)])
+
   return (
     <form className="login__form" onSubmit={handleSubmit}>
       <Stack spacing={4} style={stackStyle}>
@@ -105,18 +121,26 @@ const Login = (): JSX.Element => {
           <a href="/findpassword">비밀번호를 잊으셨나요?</a>
         </Text>
 
-        <LoginButton type="submit" className="submit__btn">
-          로그인
-        </LoginButton>
 
-        <Text mb="4px" align="center">
-          계정이 없으신가요?{' '}
-          <a href="/register" style={{ textDecoration: 'underline' }}>
-            계정 만들기
-          </a>
-        </Text>
-      </Stack>
-    </form>
+          <Button
+            type="submit"
+            className="login_btn"
+            onClick={() => {
+              setInput({
+                username: email.current ? email.current.value : '',
+                password: pwd.current ? pwd.current.value : '',
+              })
+            }}
+          >
+            로그인
+          </Button>
+
+          <span className="create_acount account_link">
+            계정이 없으신가요? <Link to="/register">계정 만들기</Link>
+          </span>
+        </Stack>
+      </form>
+    </Container>
   )
 }
 
