@@ -1,18 +1,9 @@
-
-import React, {
-  FormEvent,
-  memo,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import React, { FormEvent, useCallback, useEffect, useState } from 'react'
 import {
   postConfirmVerificationCode,
   postCreateVerificationCode,
-} from '../../utils/api'
+} from '@api/verificationAPI'
 import { Text, useToast } from '@chakra-ui/react'
-
 import {
   RegisterStack,
   RegisterButton,
@@ -21,14 +12,12 @@ import {
   Title,
 } from './styles'
 import { useNavigate } from 'react-router-dom'
-
 import TermsOfUse from './TermsOfUse'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
-import { setWhichInfo } from '../../redux/register/registerSlice'
-import LoadingSpinner from '../../components/LoadingSpinner'
-import UserInput from '../../components/UserInput'
+import { setWhichInfo } from '@redux/register/registerSlice'
+import LoadingSpinner from '@components/LoadingSpinner'
+import UserInput from '@components/UserInput'
+import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
+import { postDelete, postRegister } from '@api/userAPI'
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
   const [input, setInput] = useState<RegisterForm>({

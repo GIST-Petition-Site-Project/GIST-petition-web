@@ -76,8 +76,6 @@ const Login = (): JSX.Element => {
   }, [useAppSelect(select => select.auth.isAuthorized)])
 
   return (
-
-
     <Container>
       <form className="login_form" onSubmit={handleSubmit}>
         <Stack spacing={4}>
@@ -130,7 +128,6 @@ const Login = (): JSX.Element => {
           <span className="forgot_pwd account_link">
             <Link to="#">비밀번호를 잊으셨나요?</Link>
           </span>
-
 
           <Button
             type="submit"
