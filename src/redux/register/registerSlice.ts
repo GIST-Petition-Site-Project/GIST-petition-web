@@ -24,6 +24,7 @@ export const registerSlice = createSlice({
   initialState,
   reducers: {
     setWhichInfo: (state, action) => {
+      console.log(action.payload)
       switch (action.payload) {
         case 'Agreed':
           state.whichUI.isAgreed = !state.whichUI.isAgreed
