@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 
 const PetitionsHead = styled(Box)`
   text-align: center;
-
   height: 50px;
   width: 100%;
   border-bottom: 1px solid #ddd;
@@ -22,8 +21,8 @@ const PetitionsCategory = styled.div`
   width: 150px;
 `
 const PetitionsSubject = styled.div`
-  margin-left: 220px;
-  margin-right: 250px;
+  margin-left: 200px;
+  margin-right: 220px;
 `
 const PetitionsDate = styled.div`
   position: absolute;

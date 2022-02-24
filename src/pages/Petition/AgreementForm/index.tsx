@@ -1,9 +1,9 @@
 import { Flex, FormControl, useDisclosure } from '@chakra-ui/react'
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react'
-import { getStateOfAgreement, postAgreePetition } from '../../../utils/api'
+import { getStateOfAgreement, postAgreePetition } from '@api/petitionAPI'
 import { AgreementTextArea, AgreementWriteButton } from './styles'
 import { useNavigate } from 'react-router-dom'
-import NeedLoginModal from '../../../components/NeedLoginModal'
+import NeedLoginModal from '@components/NeedLoginModal'
 
 const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const [input, setInput] = useState<AgreePetition>({
@@ -48,7 +48,6 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  // postAgreePetition
   return (
     <div style={{ position: 'relative' }}>
       <span

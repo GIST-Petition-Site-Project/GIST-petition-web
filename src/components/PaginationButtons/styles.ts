@@ -4,7 +4,7 @@ import {
   PaginationPrevious,
 } from '@ajna/pagination'
 
-import theme from '../../style/theme'
+import theme from '@style/theme'
 import styled from '@emotion/styled'
 
 const PetitionsPaginationPrevious = styled(PaginationPrevious)`

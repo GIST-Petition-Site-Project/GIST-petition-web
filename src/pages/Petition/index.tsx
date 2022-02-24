@@ -2,11 +2,11 @@
 import { useParams } from 'react-router'
 import { Container, PetitionWrapper, SharingPetition } from './styles'
 import PetitionContents from './PetitionContents'
-import { getPetitionById } from '../../utils/api'
+import { getPetitionById } from '@api/petitionAPI'
 import { useEffect, useState } from 'react'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
-import Inner from '../../components/Inner'
+import Inner from '@components/Inner'
 
 const Petition = (): JSX.Element => {
   const { id } = useParams()
