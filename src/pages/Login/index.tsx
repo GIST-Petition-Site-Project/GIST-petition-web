@@ -121,7 +121,6 @@ const Login = (): JSX.Element => {
           <a href="/findpassword">비밀번호를 잊으셨나요?</a>
         </Text>
 
-
           <Button
             type="submit"
             className="login_btn"
