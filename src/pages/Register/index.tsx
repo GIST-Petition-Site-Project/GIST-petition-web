@@ -12,18 +12,6 @@ import {
 } from '@api/verificationAPI'
 import { Text, useToast } from '@chakra-ui/react'
 import { postDelete, postRegister } from '@api/userAPI'
-import {
-  chakra,
-  FormControl,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-  Text,
-  Input,
-  Spinner,
-  Flex,
-  useToast,
-} from '@chakra-ui/react'
 import theme from '@style/theme'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import {
