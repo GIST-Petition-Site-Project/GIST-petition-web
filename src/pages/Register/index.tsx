@@ -44,7 +44,8 @@ const Register = (): JSX.Element => {
   const whichUI = useSelector((state: RootState) => state.register.whichUI)
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   const [errorText, setErrorText] = useState('')
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (name === 'verificationCode') {
       if (value.length > 6) {
@@ -54,7 +55,7 @@ const Register = (): JSX.Element => {
       return
     }
     setInput({ ...input, [name]: value })
-  }, [])
+  }
 
   const handleAgreeBtn = () => {
     if (agreeInfo.private === true && agreeInfo.service === true) {

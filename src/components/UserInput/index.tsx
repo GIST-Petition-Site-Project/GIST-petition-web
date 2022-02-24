@@ -12,7 +12,7 @@ import { RegisterText } from './styles'
 
 const UserInput = memo(
   ({ text, name, type, value, placeholder, onChange, disabled }: any) => {
-    console.log(name)
+    // console.log(name)
     const CFaUserAlt = chakra(FaUserAlt)
     const CFaLock = chakra(FaLock)
     const inputRef = useRef(null)
