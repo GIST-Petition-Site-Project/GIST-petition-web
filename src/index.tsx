@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { store, persistor } from './redux/store'
+import { store, persistor } from '@redux/store'
 
 ReactDOM.render(
   <React.StrictMode>

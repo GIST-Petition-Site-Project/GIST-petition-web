@@ -8,17 +8,14 @@ import {
   Tab,
   TabPanel,
 } from '@chakra-ui/react'
-import PetitionList from '../../components/PetitionList'
-import PaginationButtons from '../../components/PaginationButtons'
+import PetitionList from '@components/PetitionList'
+import PaginationButtons from '@components/PaginationButtons'
 import qs from 'qs'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
-import {
-  getPetitionsByQuery,
-  getExpiredPetitionsByQuery,
-} from '../../utils/api'
+import { getPetitionsByQuery, getExpiredByQuery } from '@api/petitionAPI'
 import { Container, PetitionBoard } from './styles'
-import Inner from '../../components/Inner'
+import Inner from '@components/Inner'
 
 const Petitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
@@ -115,12 +112,10 @@ const Petitions = (): JSX.Element => {
               </TabPanel>
 
               <TabPanel>
-                <PetitionList
-                  getPetitions={getExpiredPetitionsByQuery}
-                ></PetitionList>
+                <PetitionList getPetitions={getExpiredByQuery}></PetitionList>
                 <Stack>
                   <PaginationButtons
-                    getPetitions={getExpiredPetitionsByQuery}
+                    getPetitions={getExpiredByQuery}
                     pathname={'/petitions'}
                   />
                 </Stack>

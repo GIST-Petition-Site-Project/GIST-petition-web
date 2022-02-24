@@ -1,11 +1,11 @@
 import { PetitionBoard } from './styles'
 import { Stack } from '@chakra-ui/react'
 import { PetitionsText, PetitionsTitle } from './styles'
-import PaginationButtons from '../../components/PaginationButtons'
-import PetitionList from '../../components/PetitionList'
-import { getAnsweredPetitionsByQuery } from '../../utils/api/'
+import PaginationButtons from '@components/PaginationButtons'
+import PetitionList from '@components/PetitionList'
+import { getAnsweredByQuery } from '@api/petitionAPI'
 import { useNavigate } from 'react-router-dom'
-import Inner from '../../components/Inner'
+import Inner from '@components/Inner'
 
 const AnsweredPetitions = (): JSX.Element => {
   const navigate = useNavigate()
@@ -17,10 +17,10 @@ const AnsweredPetitions = (): JSX.Element => {
           <PetitionsTitle>
             <PetitionsText>답변된 청원</PetitionsText>
           </PetitionsTitle>
-          <PetitionList getPetitions={getAnsweredPetitionsByQuery} />
+          <PetitionList getPetitions={getAnsweredByQuery} />
           <Stack>
             <PaginationButtons
-              getPetitions={getAnsweredPetitionsByQuery}
+              getPetitions={getAnsweredByQuery}
               pathname={'/answer'}
             />
           </Stack>

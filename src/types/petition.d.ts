@@ -3,11 +3,11 @@ interface Petition {
   answered: boolean
   expired: boolean
   categoryName: string
-  createdAt: string
+  createdAt: number
   description: string
   id: number
   title: string
-  updatedAt: string
+  updatedAt: number
   userId: number
   tempUrl: string
   message: string
@@ -27,6 +27,7 @@ interface QueryParams {
   size?: number | string
   page?: number | string
   categoryId?: number | string
+  sort?: string
 }
 
 interface GetPetitions {

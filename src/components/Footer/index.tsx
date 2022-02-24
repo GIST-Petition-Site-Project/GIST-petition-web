@@ -1,4 +1,4 @@
-import logo from '../../assets/img/footer_logo.png'
+import logo from '@assets/img/footer_logo.png'
 import { FooterContainer, Text } from './styles'
 import Inner from '../Inner'
 
