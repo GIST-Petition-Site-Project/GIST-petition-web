@@ -65,6 +65,16 @@ const Petitions = (): JSX.Element => {
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }
+  const handlePage = () => {
+    const newSearchParams = {
+      ...queryParams,
+      page: 1,
+    }
+    navigate({
+      pathname: '/petitions',
+      search: new URLSearchParams(newSearchParams).toString(),
+    })
+  }
 
   return (
     <Container>
@@ -89,8 +99,8 @@ const Petitions = (): JSX.Element => {
 
           <Tabs isFitted colorScheme={'red'}>
             <TabList>
-              <Tab>진행중인 청원</Tab>
-              <Tab>만료된 청원</Tab>
+              <Tab onClick={handlePage}>진행중인 청원</Tab>
+              <Tab onClick={handlePage}>만료된 청원</Tab>
             </TabList>
 
             <TabPanels>
