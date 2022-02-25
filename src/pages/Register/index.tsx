@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import {
   postConfirmVerificationCode,
   postCreateVerificationCode,
