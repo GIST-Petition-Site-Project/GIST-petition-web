@@ -10,8 +10,18 @@ import { FaLock, FaUserAlt } from 'react-icons/fa'
 import theme from '../../style/theme'
 import { RegisterText } from './styles'
 
+interface IProps {
+  text: string
+  name: string
+  type: string
+  value: string
+  placeholder: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  disabled: boolean
+}
+
 const UserInput = memo(
-  ({ text, name, type, value, placeholder, onChange, disabled }: any) => {
+  ({ text, name, type, value, placeholder, onChange, disabled }: IProps) => {
     const CFaUserAlt = chakra(FaUserAlt)
     const CFaLock = chakra(FaLock)
     const inputRef = useRef(null)

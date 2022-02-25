@@ -231,6 +231,7 @@ const Register = (): JSX.Element => {
               value={input.password}
               placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
               onChange={handleChange}
+              disabled={false}
             ></UserInput>
           )}
           {whichUI.isVerificated && (
@@ -241,6 +242,7 @@ const Register = (): JSX.Element => {
               value={input.passwordConfirm}
               placeholder="비밀번호를 재입력하세요"
               onChange={handleChange}
+              disabled={false}
             ></UserInput>
           )}
           {!whichUI.isAgreed && (
