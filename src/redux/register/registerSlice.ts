@@ -1,22 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface Register {
-  whichUI: WhichUI
-  agreeInfo: RegisterAgree
-}
-const initialState: Register = {
-  whichUI: {
-    isAgreed: false,
-    isCodeRequested: false,
-    isLoading: false,
-    isExpired: false,
-    isVerificated: false,
-    isValid: false,
-  },
-  agreeInfo: {
-    service: false,
-    private: false,
-  },
+const initialState: WhichUI = {
+  isAgreed: false,
+  isCodeRequested: false,
+  isLoading: false,
+  isExpired: false,
+  isVerificated: false,
+  isValid: false,
 }
 
 export const registerSlice = createSlice({
@@ -26,39 +16,22 @@ export const registerSlice = createSlice({
     setWhichInfo: (state, action) => {
       switch (action.payload) {
         case 'Agreed':
-          state.whichUI.isAgreed = !state.whichUI.isAgreed
+          state.isAgreed = !state.isAgreed
           break
         case 'CodeRequested':
-          state.whichUI.isCodeRequested = !state.whichUI.isCodeRequested
+          state.isCodeRequested = !state.isCodeRequested
           break
         case 'Loading':
-          state.whichUI.isLoading = !state.whichUI.isLoading
+          state.isLoading = !state.isLoading
           break
         case 'Expired':
-          state.whichUI.isExpired = !state.whichUI.isExpired
+          state.isExpired = !state.isExpired
           break
         case 'Verificated':
-          state.whichUI.isVerificated = !state.whichUI.isVerificated
+          state.isVerificated = !state.isVerificated
           break
         case 'Valid':
-          state.whichUI.isValid = !state.whichUI.isValid
-          break
-        default:
-          throw new Error('You sent a wrong action')
-      }
-    },
-    setAgree: (state, action) => {
-      const agreeInfo = state.agreeInfo
-      switch (action.payload) {
-        case 'Total':
-          agreeInfo.private = !state.agreeInfo.private
-          agreeInfo.service = !state.agreeInfo.service
-          break
-        case 'Service':
-          state.agreeInfo.service = !state.agreeInfo.service
-          break
-        case 'Private':
-          state.agreeInfo.private = !state.agreeInfo.private
+          state.isValid = !state.isValid
           break
         default:
           throw new Error('You sent a wrong action')
@@ -67,5 +40,5 @@ export const registerSlice = createSlice({
   },
 })
 
-export const { setWhichInfo, setAgree } = registerSlice.actions
+export const { setWhichInfo } = registerSlice.actions
 export default registerSlice.reducer

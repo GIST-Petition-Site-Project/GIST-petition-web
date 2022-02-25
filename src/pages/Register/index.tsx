@@ -38,11 +38,10 @@ const Register = (): JSX.Element => {
     variant: 'toast',
   })
   const dispatch = useAppDispatch()
-  const whichUI = useAppSelect(state => state.register.whichUI)
+  const whichUI = useAppSelect(state => state.register)
   const [errorText, setErrorText] = useState('')
 
   const handleAgree = (value: string) => {
-    console.log(value)
     switch (value) {
       case 'total':
         if (agreeInfo.private && agreeInfo.service) {
