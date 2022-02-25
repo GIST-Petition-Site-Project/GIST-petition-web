@@ -41,7 +41,7 @@ const PetitionsAgreement = styled.div`
 
 const PetitionCategory = styled(Box)`
   position: absolute;
-  color: #1197d4;
+  color: #8a8a8a;
 `
 const PetitionSubject = styled(Box)`
   text-align: left;
