@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AccordionButton, AccordionItem, IconButton } from '@chakra-ui/react'
-import theme from '../../../style/theme'
+import theme from '@style/theme'
 
 const Item = styled(AccordionItem)`
   padding: 1.5em 1em;

@@ -1,9 +1,9 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TermsOfUseAccordion from '../Accordion'
 import TermOfUseList from './TermOfUseList'
-import { setAgree } from '../../../redux/register/registerSlice'
-import { RootState } from '../../../redux/store'
+import { setAgree } from '@redux/register/registerSlice'
+import { RootState } from '@redux/store'
 import { TermsOfUseBox } from './styles'
 
 const TermsOfUse = memo((): JSX.Element => {

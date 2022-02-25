@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 import { memo, useRef } from 'react'
 import { FaLock, FaUserAlt } from 'react-icons/fa'
-import theme from '../../style/theme'
+import theme from '@style/theme'
 import { RegisterText } from './styles'
 
 interface IProps {
