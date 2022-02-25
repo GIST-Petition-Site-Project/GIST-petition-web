@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import theme from '@style/theme'
 
-const Container = styled.div`
+const Container = styled.section`
   .login_form > .chakra-stack {
     height: 100vh;
     max-width: 28rem;
@@ -17,7 +17,7 @@ const Container = styled.div`
     .chakra-form-control {
       > span {
         display: inline-block;
-        margin-bottom: 8px;
+        margin-bottom: 0.5rem;
       }
       .chakra-input__group {
         border-color: #ccc;

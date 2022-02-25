@@ -47,11 +47,9 @@ const NavBar = (): JSX.Element => {
           </div>
         </TopMenu>
         <MobMenuButton
-          colorScheme={'black'}
           onClick={() => {
             setOpened(!opened)
           }}
-          display={{ base: 'block', md: 'none' }}
           open={opened}
         >
           <MobMenuIcon />

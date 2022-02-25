@@ -1,19 +1,16 @@
 import {
   PaginationPage,
-  PaginationContainer,
-  Pagination,
   usePagination,
   PaginationSeparator,
+  PaginationPrevious,
+  PaginationNext,
+  Pagination,
+  PaginationPageGroup,
 } from '@ajna/pagination'
-
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  PetitionsPaginationNext,
-  PetitionsPaginationPageGroup,
-  PetitionsPaginationPrevious,
-} from './styles'
+import { SPaginationContainer } from './styles'
 
 const PaginationButtons = ({
   getPetitions,
@@ -60,75 +57,15 @@ const PaginationButtons = ({
       currentPage={currentPage}
       onPageChange={handlePageChange}
     >
-      <PaginationContainer
-        mt="40px"
-        flexWrap={{ base: 'wrap', md: 'nowrap' }}
-        justifyContent={{ base: 'space-between', md: 'center' }}
-      >
-        <PetitionsPaginationPrevious
-          fontSize={{ base: '12px', md: 'sm' }}
-          _focus={{ outline: 'none' }}
-          h={{ base: '30px', md: '40px' }}
-          w={{ base: '4rem', md: '5.75rem' }}
-        >
-          이전
-        </PetitionsPaginationPrevious>
-        <PetitionsPaginationPageGroup
-          w={{ base: '', md: '100%' }}
-          separator={
-            <PaginationSeparator
-              bg="#fff"
-              border="1px solid #ccc"
-              borderRadius="0"
-              fontSize="sm"
-              w={{ base: '22.5px', md: '30px' }}
-              h={{ base: '30px', md: '40px' }}
-              m={{ base: '0 3px', md: '0 10px' }}
-              jumpSize={10}
-              _focus={{
-                outline: 'none',
-              }}
-            />
-          }
-        >
+      <SPaginationContainer>
+        <PaginationPrevious>이전</PaginationPrevious>
+        <PaginationPageGroup separator={<PaginationSeparator jumpSize={10} />}>
           {pages.map((page: number) => (
-            <PaginationPage
-              w={{ base: '30px', md: '40px' }}
-              h={{ base: '30px', md: '40px' }}
-              bg="#fff"
-              border="1px solid #ccc"
-              borderRadius="0"
-              fontSize={{ base: '12px', md: 'sm' }}
-              _hover={{
-                bg: '#2F363C',
-                color: '#fff',
-                border: 'none',
-              }}
-              key={`pagination_page_${page}`}
-              page={page}
-              _current={{
-                bg: '#2F363C',
-                color: '#fff',
-                border: 'none',
-              }}
-              _focus={{
-                outline: 'none',
-              }}
-              _active={{
-                bg: '#2F363C',
-              }}
-            />
+            <PaginationPage key={`pagination_page_${page}`} page={page} />
           ))}
-        </PetitionsPaginationPageGroup>
-        <PetitionsPaginationNext
-          fontSize={{ base: '12px', md: 'sm' }}
-          _focus={{ outline: 'none' }}
-          h={{ base: '30px', md: '40px' }}
-          w={{ base: '4rem', md: '5.75rem' }}
-        >
-          다음
-        </PetitionsPaginationNext>
-      </PaginationContainer>
+        </PaginationPageGroup>
+        <PaginationNext>다음</PaginationNext>
+      </SPaginationContainer>
     </Pagination>
   )
 }
