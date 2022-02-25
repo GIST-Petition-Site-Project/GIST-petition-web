@@ -10,10 +10,13 @@ import {
   Spinner,
   Flex,
   useToast,
+  InputRightElement,
+  IconButton,
 } from '@chakra-ui/react'
 import theme from '@style/theme'
-import { FaUserAlt, FaLock } from 'react-icons/fa'
-import { RegisterButton, stackStyle, ErrorText } from './styles'
+import { FaUserAlt, FaLock, FaCheck } from 'react-icons/fa'
+import { MdPassword } from 'react-icons/md'
+import { RegisterButton, Container } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from '@redux/store'
 import {
@@ -23,10 +26,14 @@ import {
 } from '@api/verificationAPI'
 import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 const FindingPassword = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
+  const CMdPassword = chakra(MdPassword)
   const CFaLock = chakra(FaLock)
+  const CFaCheck = chakra(FaCheck)
+
   const navigate = useNavigate()
   const emailRef = useRef<HTMLInputElement>(null)
   const verificationRef = useRef<HTMLInputElement>(null)
@@ -37,6 +44,9 @@ const FindingPassword = (): JSX.Element => {
     verificationCode: '',
     passwordConfirm: '',
   })
+  const [viewPassword, setViewPassword] = useState<boolean>(false)
+  const handleShowClick = () => setViewPassword(!viewPassword)
+
   const whichUI = useAppSelect((state: RootState) => state.findPassword)
   const dispatch = useAppDispatch()
   const toast = useToast({
@@ -176,15 +186,13 @@ const FindingPassword = (): JSX.Element => {
   }
 
   return (
-    <section className="register">
-      <form onSubmit={handleSubmit} className="register__form">
-        <Stack spacing={4} style={stackStyle}>
-          <Text fontSize="4xl" fontWeight="bold">
-            비밀번호 찾기
-          </Text>
+    <Container className="register">
+      <form onSubmit={handleSubmit} className="register_form">
+        <Stack spacing={4}>
+          <span>비밀번호 찾기</span>
           <FormControl isRequired>
-            <Text mb="8px">이메일</Text>
-            <InputGroup borderColor={`${theme.color.ligthGray}`}>
+            <span>이메일</span>
+            <InputGroup>
               <InputLeftElement>
                 {<CFaUserAlt color="gray.300" />}
               </InputLeftElement>
@@ -206,7 +214,7 @@ const FindingPassword = (): JSX.Element => {
               <Text mb="8px">인증 코드</Text>
               <InputGroup borderColor={`${theme.color.ligthGray}`}>
                 <InputLeftElement>
-                  {<CFaLock color="gray.300" />}
+                  {<CMdPassword color="gray.300" />}
                 </InputLeftElement>
                 <Input
                   ref={verificationRef}
@@ -231,13 +239,22 @@ const FindingPassword = (): JSX.Element => {
                 </InputLeftElement>
                 <Input
                   ref={passwordRef}
-                  type="password"
+                  type={viewPassword ? 'text' : 'password'}
                   name="password"
                   placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
                   value={input.password}
                   onChange={handleChange}
                   borderRadius="0"
                 ></Input>
+                <InputRightElement>
+                  <IconButton
+                    color="gray.300"
+                    aria-label="view password"
+                    variant="password"
+                    icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
+                    onClick={handleShowClick}
+                  ></IconButton>
+                </InputRightElement>
               </InputGroup>
             </FormControl>
           )}
@@ -246,16 +263,25 @@ const FindingPassword = (): JSX.Element => {
               <Text mb="8px">비밀번호 확인</Text>
               <InputGroup borderColor={`${theme.color.ligthGray}`}>
                 <InputLeftElement>
-                  {<CFaLock color="gray.300" />}
+                  {<CFaCheck color="gray.300" />}
                 </InputLeftElement>
                 <Input
-                  type="password"
+                  type={viewPassword ? 'text' : 'password'}
                   name="passwordConfirm"
                   placeholder="비밀번호를 재입력하세요"
                   value={input.passwordConfirm}
                   onChange={handleChange}
                   borderRadius="0"
                 ></Input>
+                <InputRightElement>
+                  <IconButton
+                    color="gray.300"
+                    aria-label="view password"
+                    variant="password"
+                    icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
+                    onClick={handleShowClick}
+                  ></IconButton>
+                </InputRightElement>
               </InputGroup>
             </FormControl>
           )}
@@ -302,10 +328,10 @@ const FindingPassword = (): JSX.Element => {
               비밀번호 재설정
             </RegisterButton>
           )}
-          <ErrorText>{errorText}</ErrorText>
+          <span className="err_msg">{errorText}</span>
         </Stack>
       </form>
-    </section>
+    </Container>
   )
 }
 
