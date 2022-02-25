@@ -1,22 +1,9 @@
-import { Text, UnorderedList } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { getDay } from '@utils/time'
 
-import {
-  PetitionAgreement,
-  PetitionCategory,
-  PetitionDate,
-  PetitionItem,
-  PetitionSubject,
-  PetitionsAgreement,
-  PetitionsCategory,
-  PetitionsDate,
-  PetitionsHead,
-  PetitionsHeadWrap,
-  PetitionsSubject,
-} from './styles'
+import { PetitionsHead, PetitionsUl } from './styles'
 
 const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
@@ -36,65 +23,30 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
 
   return (
     <>
-      <PetitionsHead display={{ base: 'none', md: 'flex' }}>
-        <PetitionsHeadWrap>
-          <PetitionsCategory>분류</PetitionsCategory>
-          <PetitionsSubject>제목</PetitionsSubject>
-          <PetitionsDate>날짜</PetitionsDate>
-          <PetitionsAgreement>참여인원</PetitionsAgreement>
-        </PetitionsHeadWrap>
+      <PetitionsHead>
+        <div className="head_wrap">
+          <div className="head_category">분류</div>
+          <div className="head_subject">제목</div>
+          <div className="head_date">날짜</div>
+          <div className="head_agreements">참여인원</div>
+        </div>
       </PetitionsHead>
 
-      <UnorderedList ml={0}>
+      <PetitionsUl className="petition_list">
         {petitionList.map(petition => (
-          <PetitionItem key={petition.id}>
-            <PetitionCategory
-              position={{ md: 'absolute' }}
-              left={{ md: '10px' }}
-              bottom={{ md: '0' }}
-              top={{ md: '0' }}
-              h={{ md: '16px' }}
-              m={{ md: 'auto' }}
-              fontSize={{ base: '14px', md: '16px' }}
-            >
-              {petition.categoryName}
-            </PetitionCategory>
-            <PetitionSubject
-              pb={{ base: '10px', md: '0' }}
-              m={{ base: '25px 0 20px 0', md: '0 220px 0 200px' }}
-            >
-              <Link
-                to={`/petitions/${petition.id}`}
-                style={{ display: 'inline-block', width: '100%' }}
-              >
-                {petition.title}
-              </Link>
-            </PetitionSubject>
-            <PetitionDate
-              right={{ md: '90px' }}
-              w={{ md: '130px' }}
-              bottom={{ base: '20px', md: '0' }}
-              top={{ md: '0' }}
-              h={{ md: '16px' }}
-              m={{ md: 'auto' }}
-              textAlign={'center'}
-            >
-              {getDay(petition.createdAt)}
-            </PetitionDate>
-            <PetitionAgreement
-              w={{ md: '90px' }}
-              bottom={{ base: '20px', md: '0' }}
-              top={{ md: '0' }}
-              h={{ md: '16px' }}
-              m={{ md: 'auto' }}
-              textAlign={'center'}
-            >
+          <li key={petition.id}>
+            <div className="category">{petition.categoryName}</div>
+            <div className="subject">
+              <Link to={`/petitions/${petition.id}`}>{petition.title}</Link>
+            </div>
+            <div className="date">{getDay(petition.createdAt)}</div>
+            <div className="agreements">
               {petition.agreements}
-              <Text display={{ base: 'inline-block', md: 'none' }}>명</Text>
-            </PetitionAgreement>
-          </PetitionItem>
+              <span>명</span>
+            </div>
+          </li>
         ))}
-      </UnorderedList>
+      </PetitionsUl>
       <Outlet />
     </>
   )

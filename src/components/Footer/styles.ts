@@ -20,16 +20,6 @@ const FooterContainer = styled.footer`
   }
 `
 
-// const Inner = styled.div`
-//   height: 100%;
-//   margin: 0 auto;
-//   max-width: ${theme.space.INNER_MAXWIDTH};
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 0 2rem;
-// `
-
 const Text = styled.p`
   font-size: 0.6rem;
   display: flex;

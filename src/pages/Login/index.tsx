@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { setLogin } from '@redux/auth/authSlice'
 import {
   Button,
@@ -15,7 +15,7 @@ import {
 import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { postLogin } from '@api/userAPI'
-import { useAppDispatch, useAppSelect } from '../../redux/store.hooks'
+import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
 const Login = (): JSX.Element => {
@@ -37,7 +37,6 @@ const Login = (): JSX.Element => {
   const email = useRef<HTMLInputElement>(null)
   const pwd = useRef<HTMLInputElement>(null)
 
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const checkUpperCase = (e: any) => {
@@ -126,7 +125,7 @@ const Login = (): JSX.Element => {
           </FormControl>
           <span className="err_msg">{checkLoginError(responseState)}</span>
           <span className="forgot_pwd account_link">
-            <Link to="#">비밀번호를 잊으셨나요?</Link>
+            <a href="/findpassword">비밀번호를 잊으셨나요?</a>
           </span>
 
           <Button
