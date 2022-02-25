@@ -11,15 +11,12 @@ import {
   InputLeftElement,
   InputRightElement,
   Stack,
-  Text,
 } from '@chakra-ui/react'
-
+import { Container } from './styles'
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { postLogin } from '@api/userAPI'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
-import { stackStyle } from '@pages/FindingPassword/styles'
-import { ErrorText } from '@pages/Register/styles'
 
 const Login = (): JSX.Element => {
   const CFaUserAlt = chakra(FaUserAlt)
@@ -131,24 +128,25 @@ const Login = (): JSX.Element => {
             <a href="/findpassword">비밀번호를 잊으셨나요?</a>
           </span>
 
-        <Button
-          type="submit"
-          className="login_btn"
-          onClick={() => {
-            setInput({
-              username: email.current ? email.current.value : '',
-              password: pwd.current ? pwd.current.value : '',
-            })
-          }}
-        >
-          로그인
-        </Button>
+          <Button
+            type="submit"
+            className="login_btn"
+            onClick={() => {
+              setInput({
+                username: email.current ? email.current.value : '',
+                password: pwd.current ? pwd.current.value : '',
+              })
+            }}
+          >
+            로그인
+          </Button>
 
-        <span className="create_acount account_link">
-          계정이 없으신가요? <Link to="/register">계정 만들기</Link>
-        </span>
-      </Stack>
-    </form>
+          <span className="create_acount account_link">
+            계정이 없으신가요? <Link to="/register">계정 만들기</Link>
+          </span>
+        </Stack>
+      </form>
+    </Container>
   )
 }
 

@@ -1,13 +1,20 @@
-<<<<<<< HEAD
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
-import { Collapse, Button, Box, IconButton, Flex } from '@chakra-ui/react'
-=======
-import { Box } from '@chakra-ui/react'
->>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
+import {
+  Collapse,
+  Radio,
+  Button,
+  Box,
+  Checkbox,
+  IconButton,
+  Flex,
+} from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import theme from '@style/theme'
 
-<<<<<<< HEAD
+const TermOfUseBox = styled.div`
+  margin-top: 2rem;
+`
+
 const List = styled.li`
   display: flex;
   justify-content: space-between;
@@ -25,6 +32,9 @@ const TermsOfUseCheckIcon = styled(IconButton)`
   border: 2px solid ${theme.color.LIGHT_GRAY};
   background-color: ${theme.color.WHITE};
   color: ${theme.color.LIGHT_GRAY};
+  min-width: 1rem;
+  width: 1.6rem;
+  height: 1.6rem;
   :focus {
     box-shadow: none;
     background-color: transparent;
@@ -57,18 +67,53 @@ const TermsOfUseCheckIcon = styled(IconButton)`
       box-shadow: none;
     color: ${theme.color.WHITE};
     background-color: ${theme.color.SECONDARY_RED};
-    `}
+    }
+  `}
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 1rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.1rem;
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.2rem;
+    width: 2.1rem;
+    height: 2.1rem;
+  }
 `
 
 const TermsOfUseTotalBox = styled(Box)`
+  margin-left: 0.6em;
   font-size: 1.3rem;
   font-weight: bold;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 1.5rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.6rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.7rem;
+  }
 `
 
 const TermsOfUseIcon = styled(IoMdArrowDropdownCircle)`
   color: ${theme.color.QUATERNARY_GRAY};
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 1.5rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.6rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.7rem;
+  }
 `
 
 const TermsOfUseBtn = styled(Button)`
@@ -78,13 +123,23 @@ const TermsOfUseBtn = styled(Button)`
   padding: 0;
   :hover {
     background-color: transparent;
-=======
+  }
+  :focus {
+    background-color: transparent;
+    box-shadow: none;
+    outline: none;
+  }
+  :active {
+    background-color: transparent;
+    outline: none;
+  }
+`
+
 const TermsOfUseBox = styled(Box)`
   margin-left: 0.9em;
   font-size: 1rem;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     font-size: 1.2rem;
->>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
   }
   @media screen and (min-width: ${theme.breakpoints.lg}) {
     font-size: 1.3rem;
@@ -94,4 +149,18 @@ const TermsOfUseBox = styled(Box)`
   }
 `
 
-export { TermsOfUseBox }
+const TermsOfUseCollapse = styled(Collapse)`
+  padding: 2em 1em;
+`
+
+export {
+  TermOfUseBox,
+  TermsOfUseCollapse,
+  TermsOfUseCheckIcon,
+  TermsOfUseIcon,
+  List,
+  TermsOfUseCheckFlex,
+  TermsOfUseBtn,
+  TermsOfUseTotalBox,
+  TermsOfUseBox,
+}
