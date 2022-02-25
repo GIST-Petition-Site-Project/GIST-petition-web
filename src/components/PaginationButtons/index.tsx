@@ -7,10 +7,16 @@ import {
   Pagination,
   PaginationPageGroup,
 } from '@ajna/pagination'
+import { AxiosResponse } from 'axios'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SPaginationContainer } from './styles'
+
+interface PaginationButton {
+  getPetitions: (query: QueryParams) => Promise<AxiosResponse<any, any>>
+  pathname: string
+}
 
 const PaginationButtons = ({
   getPetitions,

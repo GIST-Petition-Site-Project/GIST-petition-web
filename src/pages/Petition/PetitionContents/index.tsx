@@ -111,7 +111,10 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
                   명
                 </Text>
                 <AgreementForm petitionId={petitionId}></AgreementForm>
-                <AgreementList petitionId={petitionId}></AgreementList>
+                <AgreementList
+                  petitionId={petitionId}
+                  totalAgreement={response?.agreements}
+                ></AgreementList>
               </Stack>
             </div>
           )}
