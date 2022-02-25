@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 import {
   Select,
-  Stack,
   Tabs,
   TabList,
   TabPanels,
@@ -30,9 +29,11 @@ const Petitions = (): JSX.Element => {
     .fill(0)
     .map((_x, i) => i)
 
-  const [sortSelected, setSortSelected] = useState(queryParams?.sort)
+  const [sortSelected, setSortSelected] = useState<string>(
+    queryParams?.sort || '',
+  )
 
-  const [categorySelected, setCategorySelected] = useState(
+  const [categorySelected, setCategorySelected] = useState<number>(
     queryParams?.category || 0,
   )
   const navigate = useNavigate()
@@ -51,7 +52,6 @@ const Petitions = (): JSX.Element => {
 
   const handleCategorySelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategorySelected(Number(e.target.value))
-    console.log(queryParams)
     const newSearchParams = {
       ...queryParams,
       page: 1,
@@ -84,7 +84,7 @@ const Petitions = (): JSX.Element => {
             </div>
           </div>
 
-          <Tabs isFitted colorScheme={'red'}>
+          <Tabs isFitted colorScheme="red">
             <TabList>
               <Tab>진행중인 청원</Tab>
               <Tab>만료된 청원</Tab>
@@ -93,22 +93,22 @@ const Petitions = (): JSX.Element => {
             <TabPanels>
               <TabPanel>
                 <PetitionList getPetitions={getPetitionsByQuery}></PetitionList>
-                <Stack>
+                <div className="pagination">
                   <PaginationButtons
                     getPetitions={getPetitionsByQuery}
                     pathname={'/petitions'}
                   />
-                </Stack>
+                </div>
               </TabPanel>
 
               <TabPanel>
                 <PetitionList getPetitions={getExpiredByQuery}></PetitionList>
-                <Stack>
+                <div className="pagination">
                   <PaginationButtons
                     getPetitions={getExpiredByQuery}
                     pathname={'/petitions'}
                   />
-                </Stack>
+                </div>
               </TabPanel>
             </TabPanels>
           </Tabs>

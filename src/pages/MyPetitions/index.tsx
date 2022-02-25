@@ -1,5 +1,4 @@
 import { PetitionBoard, PetitionsText, PetitionsTitle } from './styles'
-import { Stack } from '@chakra-ui/react'
 import PaginationButtons from '@components/PaginationButtons'
 import { getMineByQuery } from '@api/petitionAPI'
 import MyPetitionList from './MyPetitionList'
@@ -16,12 +15,12 @@ const MyPetitions = (): JSX.Element => {
           <PetitionsText>나의 청원</PetitionsText>
         </PetitionsTitle>
         <MyPetitionList getPetitions={getMineByQuery} />
-        <Stack>
+        <div className="pagination">
           <PaginationButtons
             getPetitions={getMineByQuery}
             pathname={'/mypetitions'}
           />
-        </Stack>
+        </div>
       </PetitionBoard>
     </Inner>
   )
