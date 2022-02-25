@@ -92,6 +92,18 @@ const MobMenuButton = styled(Button)`
   right: 0;
   height: 100%;
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
+  display: block;
+  /* background: rgba(47, 54, 60, 0.9); */
+  background: transparent;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
+  :focus {
+    box-shadow: none;
+  }
+  :hover {
+    background: transparent;
+  }
 `
 
 export { Header, Logo, TopMenu, ItemName, MobMenuButton }
