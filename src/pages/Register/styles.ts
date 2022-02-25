@@ -34,11 +34,6 @@ const RegisterButton = styled.button`
   font-weight: bold;
 `
 
-const RegisterText = styled(Text)`
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-`
-
 const ErrorText = styled.p`
   margin-top: 2em;
   text-align: center;
@@ -56,11 +51,4 @@ const DeleteBtn = styled.button`
   font-weight: bold;
 `
 
-export {
-  RegisterStack,
-  Title,
-  RegisterText,
-  RegisterButton,
-  ErrorText,
-  DeleteBtn,
-}
+export { RegisterStack, Title, RegisterButton, ErrorText, DeleteBtn }
