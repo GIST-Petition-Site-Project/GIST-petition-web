@@ -3,7 +3,14 @@ interface User {
   password: string
 }
 
-interface Register extends User {
+// interface loginUser extends Omit<User, 'username' | 'password'> {
+//   username: string | null
+//   password: string | null
+// }
+
+interface Register {
+  username: string
+  password: string
   verificationCode: string
 }
 
@@ -39,4 +46,18 @@ interface RegisterAgree {
 interface AgreeAttribute {
   isClicked: boolean
 }
+
+interface TermOfUseList {
+  onClick: any
+}
+
 // 회원 가입 UI 관련
+
+interface FindPasswordWhichUI {
+  isCodeRequested: boolean
+  isLoading: boolean
+  isExpired: boolean
+  isVerificated: boolean
+  isValid: boolean
+}
+// 비밀번호찾기 UI 관련

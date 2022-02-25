@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { CheckIcon } from '@chakra-ui/icons'
 import { Box, Divider } from '@chakra-ui/react'
 import React, { useState } from 'react'
@@ -17,6 +18,17 @@ import {
 const TermsOfUse = (): JSX.Element => {
   const [firstOpen, setFirstOpen] = useState(false)
   const [secondOpen, setSecondOpen] = useState(false)
+=======
+import { memo, useCallback, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAgree } from '../../../redux/register/registerSlice'
+import { RootState } from '../../../redux/store'
+import TermsOfUseAccordion from '../Accordion'
+import { TermsOfUseBox } from './styles'
+import TermOfUseList from './TermOfUseList'
+
+const TermsOfUse = memo((): JSX.Element => {
+>>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   const dispatch = useDispatch()
 
@@ -26,6 +38,13 @@ const TermsOfUse = (): JSX.Element => {
         if (agreeInfo.private && agreeInfo.service) {
           dispatch(setAgree('Total'))
           return
+<<<<<<< HEAD
+=======
+        } else if (agreeInfo.private || agreeInfo.service) {
+          !agreeInfo.service && dispatch(setAgree('Service'))
+          !agreeInfo.private && dispatch(setAgree('Private'))
+          return
+>>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
         }
         dispatch(setAgree('Total'))
         return
@@ -38,14 +57,25 @@ const TermsOfUse = (): JSX.Element => {
       default:
         throw Error('Clicked Wrong Btn')
     }
+<<<<<<< HEAD
   }
 
   const handleClick = (e: any) => {
     const target = e.currentTarget
     const value = target.dataset.value
     value && handleAgree(value)
+=======
+>>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
   }
+
+  const handleClick = useCallback((e: any) => {
+    const target = e.currentTarget
+    const value = target.dataset.value
+    value && handleAgree(value)
+  }, [])
+
   return (
+<<<<<<< HEAD
     <section>
       <List>
         <TermsOfUseCheckFlex as="label">
@@ -124,7 +154,13 @@ const TermsOfUse = (): JSX.Element => {
         excepturi rerum ipsa perspiciatis?
       </TermsOfUseCollapse>
     </section>
+=======
+    <TermsOfUseBox>
+      <TermOfUseList onClick={handleClick}></TermOfUseList>
+      <TermsOfUseAccordion onClick={handleClick}></TermsOfUseAccordion>
+    </TermsOfUseBox>
+>>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
   )
-}
+})
 
 export default TermsOfUse

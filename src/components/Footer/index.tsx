@@ -1,11 +1,12 @@
-import logo from '../../assets/img/footer_logo.png'
-import { FooterContainer, Inner, Logo, Text } from './styles'
+import logo from '@assets/img/footer_logo.png'
+import { FooterContainer, Text } from './styles'
+import Inner from '../Inner'
 
 const Footer = (): JSX.Element => {
   return (
     <FooterContainer>
       <Inner>
-        <Logo alt="Logo" src={logo}></Logo>
+        <img alt="Logo" src={logo}></img>
         <Text>
           <span>
             (61005) 광주광역시 북구 첨단과기로 123(오룡동) TEL: 062-715-2074 /

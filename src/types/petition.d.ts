@@ -2,12 +2,14 @@ interface Petition {
   agreements: number
   answered: boolean
   categoryName: string
-  createdAt: string
+  createdAt: number
   description: string
   id: number
   title: string
-  updatedAt: string
+  updatedAt: number
   userId: number
+  tempUrl: string
+  message: string
 }
 
 interface PetitionId {
@@ -23,7 +25,8 @@ interface PetitionsInput {
 interface QueryParams {
   size?: number | string
   page?: number | string
-  category?: number | string
+  categoryId?: number | string
+  sort?: string
 }
 
 interface GetPetitions {
@@ -42,4 +45,7 @@ interface AgreePetition {
 interface GetAgreements {
   description: string
   id: number
+}
+interface Window {
+  Kakao: any
 }

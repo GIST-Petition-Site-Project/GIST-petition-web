@@ -1,8 +1,10 @@
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
-import { Box, Button, List } from '@chakra-ui/react'
+import theme from '@style/theme'
+import { Button, List } from '@chakra-ui/react'
 
 const Header = styled.header`
+  backdrop-filter: blur(1.5px);
+
   height: 3.75rem;
   width: 100%;
   position: fixed;
@@ -10,38 +12,54 @@ const Header = styled.header`
   z-index: 1000;
   background-color: rgba(47, 54, 60, 0.9);
   //#384046, rgba로 opacity를 먹여야 children 요소가 투명해지지 않습니다.
-`
-const Inner = styled(Box)`
-  position: relative;
-  margin: 0 auto;
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    padding: 0 2rem;
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-direction: column;
+    padding: 0;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      padding: 0 ${theme.space.INNER_PADDING};
+      flex-direction: row;
+    }
   }
 `
 
-const Logo = styled.div``
-
-const Logo__Image = styled.img`
-  width: ${theme.size.LOGO_SIZE};
-  margin: auto 0;
-  height: 3.75rem;
+const Logo = styled.div`
+  img {
+    width: ${theme.size.LOGO_SIZE};
+    margin: auto 0;
+    height: 3.75rem;
+  }
 `
 const TopMenu = styled(List)`
-  /* position: absolute;
-  right: 0;
-  bottom: 0; */
-  display: ${props => (props.open ? 'flex' : 'none')};
-  background-color: rgba(47, 54, 60, 0.94);
-  width: 100%;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
+  > div {
     display: flex;
-    background-color: transparent;
-    width: inherit;
+    overflow: hidden;
+    background-color: rgba(47, 54, 60, 0.94);
+    width: 100vw;
+    flex-direction: column;
+    height: 100vh;
+    height: ${props => (props.open ? '100vh' : '0')};
+    transition: height 0.3s;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      flex-direction: row;
+      display: flex;
+      height: unset;
+      background-color: transparent;
+      width: inherit;
+    }
+    .chakra-divider {
+      width: 90%;
+      margin: 0 auto;
+      border-color: #fff;
+      transition: opacity 0.3s;
+      opacity: ${props => (props.open ? '0.15' : '0')};
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        display: none;
+      }
+    }
   }
 `
 const ItemName = styled.div`
@@ -52,24 +70,18 @@ const ItemName = styled.div`
   color: white;
   border: 2px solid transparent;
   text-align: center;
-
+  cursor: pointer;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     margin: 0px 0px 5px 40px;
     font-size: 1.125rem;
     padding: 5px 0px 3px 0px;
-    &:hover {
-      cursor: pointer;
-      border-bottom: 2px solid #d52425;
-    }
   }
   a {
+    display: inline-block;
+    width: 100%;
     &:hover {
-      border-bottom: 2px solid #d52425;
-    }
-    @media screen and (min-width: ${theme.breakpoints.md}) {
-      &:hover {
-        border-bottom: none;
-      }
+      text-decoration: underline #d52425;
+      text-underline-position: under;
     }
   }
 `
@@ -80,6 +92,18 @@ const MobMenuButton = styled(Button)`
   right: 0;
   height: 100%;
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
+  display: block;
+  /* background: rgba(47, 54, 60, 0.9); */
+  background: transparent;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
+  :focus {
+    box-shadow: none;
+  }
+  :hover {
+    background: transparent;
+  }
 `
 
-export { Header, Inner, Logo, Logo__Image, TopMenu, ItemName, MobMenuButton }
+export { Header, Logo, TopMenu, ItemName, MobMenuButton }

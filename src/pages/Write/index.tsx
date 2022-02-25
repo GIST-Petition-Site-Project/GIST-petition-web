@@ -1,34 +1,31 @@
 import WritePrecaution from './WritePrecaution'
 import GuideModal from './GuideModal'
-import { Heading, Stack, Divider } from '@chakra-ui/react'
 import PostEditor from './PostEditor'
-import {
-  Inner,
-  WriteStack,
-  Wrapper,
-  StyledBoxInner,
-  StyledPostEditor,
-} from './styles'
+import { Heading, Stack, Divider, Box } from '@chakra-ui/react'
+import { Container, WriteContainer } from './styles'
+import Inner from '@components/Inner'
 
 const Write = (): JSX.Element => {
   return (
-    <Inner>
-      <WriteStack spacing={6}>
-        <Heading fontSize="20px">청원하기</Heading>
-        <Wrapper>
-          <StyledBoxInner m={{ base: '1rem', md: '2rem' }}>
-            <Stack m="50px 0">
-              <WritePrecaution />
-              <GuideModal />
-            </Stack>
-            <Divider color="#ccc" m="18px" boxSize={'border-box'} />
-            <StyledPostEditor m={{ base: '60px 0', sm: '60px 18px' }}>
-              <PostEditor />
-            </StyledPostEditor>
-          </StyledBoxInner>
-        </Wrapper>
-      </WriteStack>
-    </Inner>
+    <Container>
+      <Inner>
+        <Stack spacing={6}>
+          <Heading>청원하기</Heading>
+          <WriteContainer>
+            <div className="write_wrapper">
+              <Stack className="principle_section">
+                <WritePrecaution />
+                <GuideModal />
+              </Stack>
+              <Divider color="#ccc" m="18px" boxSize={'border-box'} />
+              <Box className="editor_section">
+                <PostEditor />
+              </Box>
+            </div>
+          </WriteContainer>
+        </Stack>
+      </Inner>
+    </Container>
   )
 }
 

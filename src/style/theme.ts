@@ -25,6 +25,7 @@ const size = {
 
 const space = {
   INNER_MAXWIDTH: '60rem',
+  INNER_PADDING: '2rem',
   BUTTON_INNER_MAXWIDTH: '60rem',
 }
 
@@ -33,7 +34,7 @@ const breakpoints = createBreakpoints({
   md: '768px',
   lg: '960px',
   xl: '1200px',
-  '2xl': '1536px',
+  xxl: '1536px',
 })
 
 const theme = extendTheme({

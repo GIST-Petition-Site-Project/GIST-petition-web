@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import { IoMdArrowDropdownCircle } from 'react-icons/io'
 import { Collapse, Button, Box, IconButton, Flex } from '@chakra-ui/react'
+=======
+import { Box } from '@chakra-ui/react'
+>>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
 import styled from '@emotion/styled'
-import theme from '../../../style/theme'
+import theme from '@style/theme'
 
+<<<<<<< HEAD
 const List = styled.li`
   display: flex;
   justify-content: space-between;
@@ -73,28 +78,20 @@ const TermsOfUseBtn = styled(Button)`
   padding: 0;
   :hover {
     background-color: transparent;
+=======
+const TermsOfUseBox = styled(Box)`
+  margin-left: 0.9em;
+  font-size: 1rem;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    font-size: 1.2rem;
+>>>>>>> bb3fbec4e16321a2899ab3ef82cf68196de05831
   }
-  :focus {
-    background-color: transparent;
-    box-shadow: none;
-    outline: none;
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.3rem;
   }
-  :active {
-    background-color: transparent;
-    outline: none;
+  @media screen and (min-width: ${theme.breakpoints.lg}) {
+    font-size: 1.2rem;
   }
 `
 
-const TermsOfUseCollapse = styled(Collapse)`
-  padding: 0.5em 1em;
-`
-
-export {
-  TermsOfUseCollapse,
-  TermsOfUseCheckIcon,
-  TermsOfUseIcon,
-  List,
-  TermsOfUseCheckFlex,
-  TermsOfUseBtn,
-  TermsOfUseTotalBox,
-}
+export { TermsOfUseBox }

@@ -3,6 +3,7 @@ import { Button, Text } from '@chakra-ui/react'
 
 const PetitionProgress = styled.div`
   font-size: 1.25rem;
+  text-align: center;
 `
 
 const PetitionTitleWrap = styled.div`

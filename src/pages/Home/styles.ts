@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
-import MainImg from '../../assets/img/gist_summer.jpg'
+import theme from '@style/theme'
+import MainImg from '@assets/img/gist_summer.jpg'
 import { keyframes } from '@emotion/react'
 import { Box } from '@chakra-ui/react'
 
@@ -17,14 +17,6 @@ const MainBackgroundImage = styled.div`
 const InnerWrap = styled(Box)`
   backdrop-filter: blur(2px);
   height: 100%;
-`
-const Inner = styled(Box)`
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  position: relative;
-  margin: 0 auto;
-  height: 100%;
-  padding: 0 2rem;
-  text-align: center;
 `
 
 const DashBoard = styled(Box)`
@@ -76,12 +68,26 @@ const SloganSecondRow = styled.span`
   animation: ${secondRowIn} linear 2000ms forwards;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 `
+const PetitionsWrapper = styled.div`
+  padding-bottom: 60px;
+  .petitions_title {
+    display: flex;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #333;
+    > span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+`
 
 export {
   MainBackgroundImage,
   InnerWrap,
-  Inner,
   DashBoard,
   SloganFirstRow,
   SloganSecondRow,
+  PetitionsWrapper,
 }

@@ -1,25 +1,41 @@
 import styled from '@emotion/styled'
-import theme from '../../style/theme'
-import { Box, Stack } from '@chakra-ui/react'
+import theme from '@style/theme'
 
-const Inner = styled.div`
-  position: relative;
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  margin: 0 auto;
-  height: 100%;
-  padding: 0 2rem;
+const Container = styled.div`
+  .inner {
+    padding: 0 0.5rem;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      padding: 0 2rem;
+    }
+    > .chakra-stack {
+      position: relative;
+      margin: 9.375rem 0;
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
 `
 
-const WriteStack = styled(Stack)`
-  position: relative;
-  margin: 9.375rem 0;
-`
-const Wrapper = styled(Box)`
+const WriteContainer = styled.div`
   border: 1px solid #ccc;
   border-radius: 0;
+  .write_wrapper {
+    margin: 1rem;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      margin: 2rem;
+    }
+    .principle_section {
+      margin: 50px 0;
+    }
+
+    .editor_section {
+      margin: 60px 0;
+      @media screen and (min-width: ${theme.breakpoints.sm}) {
+        margin: 60px 18px;
+      }
+    }
+  }
 `
 
-const StyledBoxInner = styled(Box)``
-const StyledPostEditor = styled(Box)``
-
-export { Inner, Wrapper, WriteStack, StyledBoxInner, StyledPostEditor }
+export { Container, WriteContainer }

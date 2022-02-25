@@ -15,7 +15,7 @@ import {
   DescriptionInputTextArea,
   CurrentLengthText,
 } from './styles'
-import { postCreatePetition } from '../../../utils/api'
+import { postCreatePetition } from '@api/petitionAPI'
 import { useNavigate } from 'react-router-dom'
 import { Category } from '../../../types/enums'
 
