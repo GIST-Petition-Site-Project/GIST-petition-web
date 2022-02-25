@@ -1,5 +1,5 @@
-import { PetitionBoard } from './styles'
-import { PetitionsText, PetitionsTitle } from './styles'
+import { Container, PetitionBoard } from './styles'
+import { Stack } from '@chakra-ui/react'
 import PaginationButtons from '@components/PaginationButtons'
 import PetitionList from '@components/PetitionList'
 import { getAnsweredByQuery } from '@api/petitionAPI'
@@ -10,14 +10,14 @@ const AnsweredPetitions = (): JSX.Element => {
   const navigate = useNavigate()
 
   return (
-    <>
+    <Container>
       <Inner>
         <PetitionBoard>
-          <PetitionsTitle>
-            <PetitionsText>답변된 청원</PetitionsText>
-          </PetitionsTitle>
+          <div className="petition_type">
+            <span>답변된 청원</span>
+          </div>
           <PetitionList getPetitions={getAnsweredByQuery} />
-          <div className="pagination">
+          <div>
             <PaginationButtons
               getPetitions={getAnsweredByQuery}
               pathname={'/answer'}
@@ -25,7 +25,7 @@ const AnsweredPetitions = (): JSX.Element => {
           </div>
         </PetitionBoard>
       </Inner>
-    </>
+    </Container>
   )
 }
 
