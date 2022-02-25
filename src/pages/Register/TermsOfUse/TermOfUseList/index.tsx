@@ -10,12 +10,15 @@ import {
   TermsOfUseTotalBox,
 } from './styles'
 
-interface OnClick {
+interface Iprops {
+  agreeInfo: {
+    private: boolean
+    service: boolean
+  }
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const TermOfUseList = memo(({ onClick }: OnClick) => {
-  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
+const TermOfUseList = memo(({ agreeInfo, onClick }: Iprops) => {
   return (
     <List>
       <TermsOfUseCheckFlex as="label">

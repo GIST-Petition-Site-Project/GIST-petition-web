@@ -48,10 +48,11 @@ export const registerSlice = createSlice({
       }
     },
     setAgree: (state, action) => {
+      const agreeInfo = state.agreeInfo
       switch (action.payload) {
         case 'Total':
-          state.agreeInfo.private = !state.agreeInfo.private
-          state.agreeInfo.service = !state.agreeInfo.service
+          agreeInfo.private = !state.agreeInfo.private
+          agreeInfo.service = !state.agreeInfo.service
           break
         case 'Service':
           state.agreeInfo.service = !state.agreeInfo.service

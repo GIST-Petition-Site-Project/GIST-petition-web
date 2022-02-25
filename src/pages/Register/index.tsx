@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useCallback, useEffect, useState } from 'react'
 import {
   postConfirmVerificationCode,
   postCreateVerificationCode,
@@ -29,13 +29,44 @@ const Register = (): JSX.Element => {
     passwordConfirm: '',
   })
 
+  const [agreeInfo, setAgreeInfo] = useState<RegisterAgree>({
+    service: false,
+    private: false,
+  })
+
   const toast = useToast({
     variant: 'toast',
   })
   const dispatch = useAppDispatch()
   const whichUI = useAppSelect(state => state.register.whichUI)
-  const agreeInfo = useAppSelect(state => state.register.agreeInfo)
   const [errorText, setErrorText] = useState('')
+
+  const handleAgree = (value: string) => {
+    console.log(value)
+    switch (value) {
+      case 'total':
+        if (agreeInfo.private && agreeInfo.service) {
+          setAgreeInfo({ ...agreeInfo, service: false, private: false })
+          return
+        }
+        setAgreeInfo({ ...agreeInfo, service: true, private: true })
+        return
+      case 'service':
+        setAgreeInfo({ ...agreeInfo, service: !agreeInfo.service })
+        return
+      case 'private':
+        setAgreeInfo({ ...agreeInfo, private: !agreeInfo.private })
+        return
+      default:
+        throw Error('Clicked Wrong Btn')
+    }
+  }
+
+  const handleAgreeBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.currentTarget
+    const value = target.dataset.value
+    value && handleAgree(value)
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -199,7 +230,12 @@ const Register = (): JSX.Element => {
         <RegisterStack>
           <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
           <Title>회원가입</Title>
-          {!whichUI.isAgreed && <TermsOfUse></TermsOfUse>}
+          {!whichUI.isAgreed && (
+            <TermsOfUse
+              agreeInfo={agreeInfo}
+              onAgree={handleAgreeBtnClick}
+            ></TermsOfUse>
+          )}
           {whichUI.isAgreed && (
             <UserInput
               text="이메일"
