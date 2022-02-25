@@ -60,7 +60,7 @@ const Container = styled.div`
       display: flex;
       flex-direction: column;
       width: 8rem;
-      box-shadow: 0px 2px 5px 0.5px #22272e;
+      box-shadow: 0px 1px 4px 0.5px #22272e;
       padding: 8px 0;
       z-index: 1000;
       ::before {
@@ -83,6 +83,7 @@ const Container = styled.div`
         font-weight: 400;
 
         padding: 4px 8px 4px 16px;
+        margin: 2px 0;
         display: inline-block;
         width: 100%;
         text-align: left;
