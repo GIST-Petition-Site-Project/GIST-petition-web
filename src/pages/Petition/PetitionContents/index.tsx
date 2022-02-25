@@ -10,10 +10,10 @@ import {
   PetitionDescription,
   ContentWrap,
 } from './styles'
-import AgreementList from '../AgreementList'
+import AgreementList from './AgreementList'
+import AgreementForm from './AgreementForm'
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '@components/NeedLoginModal'
-import AgreementForm from '../AgreementForm'
 import { getDay } from '@utils/time'
 
 interface IProps {
