@@ -11,7 +11,11 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import { AccordionBtn, BtnContainer, Item, TermsOfUseCheckIcon } from './styles'
 
-const TermsOfUseAccordion = memo(({ onClick }: TermOfUseList) => {
+interface OnClick {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
+
+const TermsOfUseAccordion = memo(({ onClick }: OnClick) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   return (
     <Accordion allowToggle>

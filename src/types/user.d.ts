@@ -47,10 +47,6 @@ interface AgreeAttribute {
   isClicked: boolean
 }
 
-interface TermOfUseList {
-  onClick: any
-}
-
 // 회원 가입 UI 관련
 
 interface FindPasswordWhichUI {

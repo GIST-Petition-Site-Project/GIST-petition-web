@@ -10,7 +10,11 @@ import {
   TermsOfUseTotalBox,
 } from './styles'
 
-const TermOfUseList = memo(({ onClick }: TermOfUseList) => {
+interface OnClick {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
+
+const TermOfUseList = memo(({ onClick }: OnClick) => {
   const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
   return (
     <List>
