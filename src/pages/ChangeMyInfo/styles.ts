@@ -2,9 +2,6 @@ import styled from '@emotion/styled'
 import theme from '@style/theme'
 
 const Container = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   .changeUserInfo_form > .chakra-stack {
     position: relative;
     height: 100vh;
@@ -54,7 +51,8 @@ const RegisterButton = styled.button`
 
 const WithdrawalButton = styled(RegisterButton)`
   background-color: ${theme.color.PRIMARY_RED};
-  width: 35%;
+  width: 20%;
+  transform: translateX(200%);
 `
 
 export { Container, RegisterButton, WithdrawalButton }
