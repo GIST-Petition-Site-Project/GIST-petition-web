@@ -8,10 +8,11 @@ import {
   postCreateVerificationCodeForPassword,
   putResetPassword,
 } from '@api/verificationAPI'
-import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
+
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
 import LoadingSpinner from '@components/LoadingSpinner'
+import { setWhichInfo } from '@redux/userInfo/userInfoSlice'
 
 const FindingPassword = (): JSX.Element => {
   const navigate = useNavigate()
@@ -25,7 +26,7 @@ const FindingPassword = (): JSX.Element => {
     passwordConfirm: '',
   })
 
-  const whichUI = useAppSelect((state: RootState) => state.findPassword)
+  const whichUI = useAppSelect((state: RootState) => state.userInfo)
   const dispatch = useAppDispatch()
   const toast = useToast({
     variant: 'toast',
@@ -50,7 +51,7 @@ const FindingPassword = (): JSX.Element => {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
-    dispatch(setFindPasswordWhichInfo('Loading'))
+    dispatch(setWhichInfo('Loading'))
     const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
@@ -60,10 +61,10 @@ const FindingPassword = (): JSX.Element => {
     if (status > 400) {
       setInput({ ...input, username: '' })
       emailRef.current && emailRef.current.focus()
-      dispatch(setFindPasswordWhichInfo('Loading'))
+      dispatch(setWhichInfo('Loading'))
     } else if (status < 400) {
-      dispatch(setFindPasswordWhichInfo('Loading'))
-      dispatch(setFindPasswordWhichInfo('CodeRequested'))
+      dispatch(setWhichInfo('Loading'))
+      dispatch(setWhichInfo('CodeRequested'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -76,8 +77,8 @@ const FindingPassword = (): JSX.Element => {
     const status = response?.status
     const message = response?.data.message
     if (status < 400) {
-      dispatch(setFindPasswordWhichInfo('Verificated'))
-      dispatch(setFindPasswordWhichInfo('Valid'))
+      dispatch(setWhichInfo('Verificated'))
+      dispatch(setWhichInfo('Valid'))
       return
     }
     switch (message) {
@@ -88,7 +89,7 @@ const FindingPassword = (): JSX.Element => {
       }
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
-        dispatch(setFindPasswordWhichInfo('Expired'))
+        dispatch(setWhichInfo('Expired'))
         break
       }
       case undefined: {
@@ -99,15 +100,15 @@ const FindingPassword = (): JSX.Element => {
   }
 
   const handleResendCode = async () => {
-    dispatch(setFindPasswordWhichInfo('Loading'))
+    dispatch(setWhichInfo('Loading'))
     setErrorText('')
     const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
     const status = response.status
     if (status < 400) {
-      dispatch(setFindPasswordWhichInfo('Expired'))
-      dispatch(setFindPasswordWhichInfo('Loading'))
+      dispatch(setWhichInfo('Expired'))
+      dispatch(setWhichInfo('Loading'))
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -139,7 +140,7 @@ const FindingPassword = (): JSX.Element => {
         })
         navigate('/login')
       } else {
-        dispatch(setFindPasswordWhichInfo('Valid'))
+        dispatch(setWhichInfo('Valid'))
       }
     } else {
       passwordRef.current && passwordRef.current.focus()
@@ -158,8 +159,8 @@ const FindingPassword = (): JSX.Element => {
       passwordConfirm: '',
     })
     setErrorText('')
-    dispatch(setFindPasswordWhichInfo('Verificated'))
-    dispatch(setFindPasswordWhichInfo('CodeRequested'))
+    dispatch(setWhichInfo('Verificated'))
+    dispatch(setWhichInfo('CodeRequested'))
   }
 
   return (
