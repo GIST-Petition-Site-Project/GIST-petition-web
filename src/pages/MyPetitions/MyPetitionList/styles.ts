@@ -29,7 +29,7 @@ const PetitionsHead = styled.div`
     }
     .head_subject {
       margin-left: 220px;
-      margin-right: 220px; // 제목 중앙에 배치 위한 코드
+      margin-right: 220px;
       display: flex;
     }
     .head_date {
@@ -127,9 +127,9 @@ const PetitionStatus = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  bottom: 0%; //52~55번째 줄 코드: tag 중앙에 배치하기 위한 코드
-  padding-bottom: 15px; //모바일에서 category 사이 space 적용
-  padding-left: 3px; // 모바일에서 category와의 배치가 어색해서 2px빼놓음
+  bottom: 0%;
+  padding-bottom: 15px;
+  padding-left: 3px;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     position: absolute;
     font-size: 12px;
@@ -158,7 +158,6 @@ const PetitionCategory = styled.div`
   }
 `
 const PetitionTagWrapper = styled.div`
-  // 모바일에서 PetitionCategory와 PetitionStatus 배치 조정 위한 Tag
   display: flex;
   flex-direction: column;
 `
