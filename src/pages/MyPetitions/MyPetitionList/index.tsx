@@ -46,9 +46,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
           <li key={petition.id}>
             <PetitionTagWrapper>
               <PetitionStatus>
-                <PetitionStatusTag
-                  expired={petition.expired}
-                >
+                <PetitionStatusTag expired={petition.expired}>
                   {petition.expired ? '사전동의만료' : '사전동의중'}
                 </PetitionStatusTag>
               </PetitionStatus>

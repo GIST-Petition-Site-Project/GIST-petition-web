@@ -56,7 +56,7 @@ const PostEditor = () => {
     e.preventDefault()
     try {
       const response = await postCreatePetition(petitionInput)
-      const url = response?.headers?.location || '/petitions'
+      const url = response?.headers?.location.slice(3) || '/petitions'
       navigate(url)
     } catch (error) {
       console.log(error)
