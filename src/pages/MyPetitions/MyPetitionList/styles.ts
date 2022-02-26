@@ -52,6 +52,8 @@ const PetitionsHead = styled.div`
 
 const PetitionsUl = styled.ul`
   margin-left: 0;
+  min-height: 570px;
+
   li {
     position: relative;
     padding: 15px 0;

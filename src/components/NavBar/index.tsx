@@ -1,4 +1,5 @@
-import logo from '@assets/img/new_logo.svg'
+// import logo from '@assets/img/new_logo.svg'
+import logo from '@assets/img/new_logo_black.svg'
 import { ReactComponent as MobMenuIcon } from '@assets/img/menu_icon.svg'
 import { Header, Logo, TopMenu, ItemName, MobMenuButton } from './styles'
 import { useState } from 'react'

@@ -7,7 +7,6 @@ const Container = styled.div`
     padding: 1rem;
     font-size: 1.5rem;
     font-weight: bold;
-    color: white;
     border: 2px solid transparent;
     text-align: center;
     cursor: pointer;
@@ -54,28 +53,28 @@ const Container = styled.div`
       position: absolute;
       right: 24px;
       top: 90%;
-      background-color: rgb(47, 54, 60);
-      color: white;
-      border: 2px solid #22272e;
+      color: #333;
+      box-shadow: 0 2px 4px 0 rgb(33 37 41 / 24%);
       display: flex;
       flex-direction: column;
       width: 8rem;
-      box-shadow: 0px 1px 4px 0.5px #22272e;
+      border: 1px solid #e0e0e0;
       padding: 8px 0;
       z-index: 1000;
+      background-color: #fff;
       ::before {
         top: -19px;
-        right: 16px;
+        right: 24px;
         border: 9px solid transparent;
-        border-bottom-color: #22272e;
+        border-bottom-color: #e0e0e0;
         position: absolute;
         content: '';
       }
       ::after {
-        top: -15px;
-        right: 17px;
+        top: -16px;
+        right: 25px;
         border: 8px solid transparent;
-        border-bottom-color: rgb(47, 54, 60);
+        border-bottom-color: #fff;
         position: absolute;
         content: '';
       }
@@ -89,14 +88,15 @@ const Container = styled.div`
         text-align: left;
         font-size: 1rem;
         &:hover {
-          background-color: #316dca;
+          text-decoration: underline #d52425;
+          text-underline-position: under;
         }
       }
       .dropdown_divider {
         height: 0;
         width: 100%;
         margin: 8px 0;
-        border: 1px solid #22272e;
+        border: 0.5px solid #e0e0e0;
         box-sizing: border-box;
       }
     }

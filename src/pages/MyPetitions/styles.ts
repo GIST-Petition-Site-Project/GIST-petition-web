@@ -3,11 +3,11 @@ import styled from '@emotion/styled'
 const Container = styled.div``
 const PetitionBoard = styled.div`
   position: relative;
-  margin-top: 9.375rem;
+  margin-top: 6rem;
 
   .petition_type {
     display: flex;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #ccc;
     justify-content: space-between;
     align-items: center;
     padding-bottom: 1rem;

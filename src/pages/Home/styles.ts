@@ -8,7 +8,7 @@ import { Box } from '@chakra-ui/react'
 const MainBackgroundImage = styled.div`
   position: relative;
   background-image: url(${MainImg});
-  height: 50vh;
+  height: 440px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -16,7 +16,7 @@ const MainBackgroundImage = styled.div`
 `
 
 const InnerWrap = styled(Box)`
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(1.5px);
   height: 100%;
 `
 
@@ -76,7 +76,7 @@ const PetitionsWrapper = styled.div`
     text-align: center;
     padding-top: 4rem;
     padding-bottom: 2rem;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #ccc;
     > span {
       font-size: 20px;
       font-weight: bold;
