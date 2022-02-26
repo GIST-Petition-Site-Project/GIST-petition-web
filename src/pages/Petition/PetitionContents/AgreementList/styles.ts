@@ -99,8 +99,11 @@ const SPaginationContainer = styled(PaginationContainer)`
       height: 40px;
       margin: 0 10px;
     }
-    :focust {
+    :focus {
       box-shadow: none;
+    }
+    :active {
+      background-color: #fff;
     }
   }
 `

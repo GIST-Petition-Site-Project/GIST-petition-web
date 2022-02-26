@@ -32,7 +32,6 @@ const Petitions = (): JSX.Element => {
   const [sortSelected, setSortSelected] = useState<string>(
     queryParams?.sort || '',
   )
-
   const [categorySelected, setCategorySelected] = useState<number>(
     queryParams?.category || 0,
   )
