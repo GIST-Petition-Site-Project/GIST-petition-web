@@ -43,6 +43,14 @@ interface RegisterAgree {
   private: boolean
 }
 
+interface RegisterTermsOfUseBtn {
+  agreeInfo: {
+    private: boolean
+    service: boolean
+  }
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+}
+
 interface AgreeAttribute {
   isClicked: boolean
 }

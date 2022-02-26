@@ -1,8 +1,6 @@
 import { CheckIcon } from '@chakra-ui/icons'
 import { Divider } from '@chakra-ui/react'
 import { memo } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../../redux/store'
 import {
   List,
   TermsOfUseCheckFlex,
@@ -10,12 +8,7 @@ import {
   TermsOfUseTotalBox,
 } from './styles'
 
-interface OnClick {
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-}
-
-const TermOfUseList = memo(({ onClick }: OnClick) => {
-  const agreeInfo = useSelector((state: RootState) => state.register.agreeInfo)
+const TermOfUseList = memo(({ agreeInfo, onClick }: RegisterTermsOfUseBtn) => {
   return (
     <List>
       <TermsOfUseCheckFlex as="label">
