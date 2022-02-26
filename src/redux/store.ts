@@ -13,10 +13,12 @@ import storage from 'reduxjs-toolkit-persist/lib/storage'
 import authReducer from './auth/authSlice'
 import registerSlice from './register/registerSlice'
 import findPasswordSlice from './findPassword/findPasswordSlice'
+import userInfoSlice from './userInfo/userInfoSlice'
 // import queryReducer from './query/querySlice'
 
 const reducers = combineReducers({
   auth: authReducer,
+  userInfo: userInfoSlice,
   register: registerSlice,
   findPassword: findPasswordSlice,
   // query: queryReducer,
