@@ -10,10 +10,10 @@ import {
   PetitionDescription,
   ContentWrap,
 } from './styles'
-import AgreementList from '../AgreementList'
+import AgreementList from './AgreementList'
+import AgreementForm from './AgreementForm'
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '@components/NeedLoginModal'
-import AgreementForm from '../AgreementForm'
 import { getDay } from '@utils/time'
 
 interface IProps {
@@ -111,7 +111,10 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
                   명
                 </Text>
                 <AgreementForm petitionId={petitionId}></AgreementForm>
-                <AgreementList petitionId={petitionId}></AgreementList>
+                <AgreementList
+                  petitionId={petitionId}
+                  totalAgreement={response?.agreements}
+                ></AgreementList>
               </Stack>
             </div>
           )}

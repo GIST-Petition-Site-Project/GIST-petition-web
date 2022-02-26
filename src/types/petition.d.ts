@@ -34,11 +34,6 @@ interface GetPetitions {
   getPetitions: (query: QueryParams) => Promise<AxiosResponse<any, any>>
 }
 
-interface PaginationButton {
-  getPetitions: (query: QueryParams) => Promise<AxiosResponse<any, any>>
-  pathname: string
-}
-
 interface AgreePetition {
   description: string
 }
@@ -46,6 +41,7 @@ interface AgreePetition {
 interface GetAgreements {
   description: string
   id: number
+  totalPages: number
 }
 interface Window {
   Kakao: any

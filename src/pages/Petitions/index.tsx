@@ -77,6 +77,21 @@ const Petitions = (): JSX.Element => {
     })
   }
 
+  const setInitialState = () => {
+    setSortSelected('createdAt,desc')
+    setCategorySelected(0)
+    const newSearchParams = {
+      ...queryParams,
+      sort: 'createdAt,desc',
+      categoryId: 0,
+      page: 1,
+    }
+    navigate({
+      pathname: '/petitions',
+      search: new URLSearchParams(newSearchParams).toString(),
+    })
+  }
+
   return (
     <Container>
       <Inner>

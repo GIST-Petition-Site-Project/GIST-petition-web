@@ -8,13 +8,19 @@ export const getAgreementCount = async (petitionId: string) => {
   return response
 }
 
-export const getAgreements = async (petitionId: string) => {
+export const getAgreements = async (petitionId: string, query: QueryParams) => {
   if (petitionId.length === 6 || petitionId === 'undefined')
     return {
       status: 500,
       data: null,
     }
-  const response = await api.get(`petitions/${petitionId}/agreements`)
+  const size = Number(query?.size) || 10
+  const page = Number(query?.page) - 1 || 0
+
+  console.log(page, size)
+  const response = await api.get(
+    `petitions/${petitionId}/agreements?size=${size}&page=${page}`,
+  )
   return response
 }
 
