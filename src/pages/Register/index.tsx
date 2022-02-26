@@ -216,6 +216,7 @@ const Register = (): JSX.Element => {
       })
     }
   }
+
   const auth = useAppSelect(select => select.auth.isAuthorized)
   useEffect(() => {
     if (auth) {
@@ -244,6 +245,7 @@ const Register = (): JSX.Element => {
               placeholder="지스트 메일을 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isCodeRequested}
+              onPassword={false}
             ></UserInput>
           )}
 
@@ -256,6 +258,7 @@ const Register = (): JSX.Element => {
               placeholder="이메일로 온 인증 코드를 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isVerificated}
+              onPassword={false}
             ></UserInput>
           )}
           {whichUI.isVerificated && (
@@ -267,6 +270,7 @@ const Register = (): JSX.Element => {
               placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
               onChange={handleChange}
               disabled={false}
+              onPassword={true}
             ></UserInput>
           )}
           {whichUI.isVerificated && (
@@ -278,6 +282,7 @@ const Register = (): JSX.Element => {
               placeholder="비밀번호를 재입력하세요"
               onChange={handleChange}
               disabled={false}
+              onPassword={true}
             ></UserInput>
           )}
           {!whichUI.isAgreed && (

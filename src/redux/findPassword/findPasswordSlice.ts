@@ -12,7 +12,6 @@ export const findPasswordSlice = createSlice({
   initialState,
   reducers: {
     setFindPasswordWhichInfo: (state, action) => {
-      console.log(action.payload)
       switch (action.payload) {
         case 'CodeRequested':
           state.isCodeRequested = !state.isCodeRequested
