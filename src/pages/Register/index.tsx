@@ -203,7 +203,6 @@ const Register = (): JSX.Element => {
           {!whichUI.isAgreed && <TermsOfUse></TermsOfUse>}
           {whichUI.isAgreed && (
             <UserInput
-              page="register"
               text="이메일"
               name="username"
               type="email"
@@ -211,14 +210,12 @@ const Register = (): JSX.Element => {
               placeholder="지스트 메일을 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isCodeRequested}
-              viewPassword={false}
-              onClick={() => ''}
+              onPassword={false}
             ></UserInput>
           )}
 
           {whichUI.isCodeRequested && !whichUI.isExpired && (
             <UserInput
-              page="register"
               text="인증 코드"
               name="verificationCode"
               type="text"
@@ -226,13 +223,11 @@ const Register = (): JSX.Element => {
               placeholder="이메일로 온 인증 코드를 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isVerificated}
-              viewPassword={false}
-              onClick={() => ''}
+              onPassword={false}
             ></UserInput>
           )}
           {whichUI.isVerificated && (
             <UserInput
-              page="register"
               text="비밀번호"
               name="password"
               type="password"
@@ -240,13 +235,11 @@ const Register = (): JSX.Element => {
               placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
               onChange={handleChange}
               disabled={false}
-              viewPassword={false}
-              onClick={() => ''}
+              onPassword={true}
             ></UserInput>
           )}
           {whichUI.isVerificated && (
             <UserInput
-              page="register"
               text="비밀번호 확인"
               name="passwordConfirm"
               type="password"
@@ -254,8 +247,7 @@ const Register = (): JSX.Element => {
               placeholder="비밀번호를 재입력하세요"
               onChange={handleChange}
               disabled={false}
-              viewPassword={false}
-              onClick={() => ''}
+              onPassword={true}
             ></UserInput>
           )}
           {!whichUI.isAgreed && (

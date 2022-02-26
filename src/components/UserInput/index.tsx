@@ -15,7 +15,6 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { MdPassword } from 'react-icons/md'
 
 interface IProps {
-  page: string
   text: string
   name: string
   type: string
@@ -23,13 +22,11 @@ interface IProps {
   placeholder: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   disabled: boolean
-  viewPassword: boolean
-  onClick: () => void
+  onPassword: boolean
 }
 
 const UserInput = memo(
   ({
-    page,
     text,
     name,
     type,
@@ -37,9 +34,19 @@ const UserInput = memo(
     placeholder,
     onChange,
     disabled,
-    viewPassword,
-    onClick,
+    onPassword,
   }: IProps) => {
+    const [viewPassword, setViewPassword] = useState<boolean>(false)
+    const [inputType, setInputType] = useState<string>(type)
+    const handleShowClick = () => {
+      if (!viewPassword) {
+        setInputType('text')
+      } else {
+        setInputType('password')
+      }
+      setViewPassword(!viewPassword)
+    }
+
     let WhichIcon
     switch (name) {
       case 'username':
@@ -56,15 +63,6 @@ const UserInput = memo(
         break
       default:
         throw Error('you sent wrong input name')
-    }
-
-    let onPassword = false
-    let inputType = type
-    if (page === 'findPassword' && name === 'password') {
-      onPassword = true
-      if (viewPassword) {
-        inputType = 'text'
-      }
     }
 
     return (
@@ -91,7 +89,7 @@ const UserInput = memo(
                   aria-label="view password"
                   variant="password"
                   icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
-                  onClick={onClick}
+                  onClick={handleShowClick}
                 ></IconButton>
               </InputRightElement>
             )}

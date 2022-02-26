@@ -24,8 +24,6 @@ const FindingPassword = (): JSX.Element => {
     verificationCode: '',
     passwordConfirm: '',
   })
-  const [viewPassword, setViewPassword] = useState<boolean>(false)
-  const handleShowClick = () => setViewPassword(!viewPassword)
 
   const whichUI = useAppSelect((state: RootState) => state.findPassword)
   const dispatch = useAppDispatch()
@@ -171,7 +169,6 @@ const FindingPassword = (): JSX.Element => {
           <span>비밀번호 찾기</span>
           {
             <UserInput
-              page="findPassword"
               text="이메일"
               name="username"
               type="email"
@@ -179,14 +176,12 @@ const FindingPassword = (): JSX.Element => {
               placeholder="지스트 메일을 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isCodeRequested}
-              viewPassword={false}
-              onClick={handleShowClick}
+              onPassword={false}
             ></UserInput>
           }
 
           {whichUI.isCodeRequested && !whichUI.isExpired && (
             <UserInput
-              page="findPassword"
               text="인증 코드"
               name="verificationCode"
               type="text"
@@ -194,13 +189,11 @@ const FindingPassword = (): JSX.Element => {
               placeholder="이메일로 온 인증 코드를 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isVerificated}
-              viewPassword={false}
-              onClick={handleShowClick}
+              onPassword={false}
             ></UserInput>
           )}
           {whichUI.isVerificated && (
             <UserInput
-              page="findPassword"
               text="비밀번호"
               name="password"
               type="password"
@@ -208,13 +201,11 @@ const FindingPassword = (): JSX.Element => {
               placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
               onChange={handleChange}
               disabled={false}
-              viewPassword={viewPassword}
-              onClick={handleShowClick}
+              onPassword={true}
             ></UserInput>
           )}
           {whichUI.isVerificated && (
             <UserInput
-              page="findPassword"
               text="비밀번호 확인"
               name="passwordConfirm"
               type="password"
@@ -222,8 +213,7 @@ const FindingPassword = (): JSX.Element => {
               placeholder="비밀번호를 재입력하세요"
               onChange={handleChange}
               disabled={false}
-              viewPassword={viewPassword}
-              onClick={handleShowClick}
+              onPassword={true}
             ></UserInput>
           )}
           {!whichUI.isCodeRequested &&
