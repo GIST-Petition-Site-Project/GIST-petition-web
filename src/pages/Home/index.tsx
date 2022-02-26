@@ -15,7 +15,6 @@ import {
   getPetitionsByQuery,
 } from '@api/petitionAPI'
 import Inner from '@components/Inner'
-import { stringify } from 'querystring'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)

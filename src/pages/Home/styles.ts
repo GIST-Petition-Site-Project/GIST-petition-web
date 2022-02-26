@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import theme from '@style/theme'
-import MainImg from '@assets/img/gist_summer.jpg'
+// import MainImg from '@assets/img/gist_summer.jpg'
+import MainImg from '@assets/img/main2.png'
 import { keyframes } from '@emotion/react'
 import { Box } from '@chakra-ui/react'
 
