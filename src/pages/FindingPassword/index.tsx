@@ -27,13 +27,10 @@ import {
 import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import UserInput from '@components/UserInput'
+import LoadingSpinner from '@components/LoadingSpinner'
 
 const FindingPassword = (): JSX.Element => {
-  const CFaUserAlt = chakra(FaUserAlt)
-  const CMdPassword = chakra(MdPassword)
-  const CFaLock = chakra(FaLock)
-  const CFaCheck = chakra(FaCheck)
-
   const navigate = useNavigate()
   const emailRef = useRef<HTMLInputElement>(null)
   const verificationRef = useRef<HTMLInputElement>(null)
@@ -95,7 +92,6 @@ const FindingPassword = (): JSX.Element => {
       username: input.username,
       verificationCode: input.verificationCode,
     })
-    console.log(response)
     const status = response?.status
     const message = response?.data.message
     if (status < 400) {
@@ -190,100 +186,62 @@ const FindingPassword = (): JSX.Element => {
       <form onSubmit={handleSubmit} className="register_form">
         <Stack spacing={4}>
           <span>비밀번호 찾기</span>
-          <FormControl isRequired>
-            <span>이메일</span>
-            <InputGroup>
-              <InputLeftElement>
-                {<CFaUserAlt color="gray.300" />}
-              </InputLeftElement>
-              <Input
-                ref={emailRef}
-                type="email"
-                name="username"
-                placeholder="지스트 메일을 입력하세요"
-                value={input.username}
-                onChange={handleChange}
-                disabled={whichUI.isCodeRequested}
-                borderRadius="0"
-              ></Input>
-            </InputGroup>
-          </FormControl>
+          {
+            <UserInput
+              page="findPassword"
+              text="이메일"
+              name="username"
+              type="email"
+              value={input.username}
+              placeholder="지스트 메일을 입력하세요"
+              onChange={handleChange}
+              disabled={whichUI.isCodeRequested}
+              viewPassword={false}
+              onClick={handleShowClick}
+            ></UserInput>
+          }
 
           {whichUI.isCodeRequested && !whichUI.isExpired && (
-            <FormControl isRequired>
-              <Text mb="8px">인증 코드</Text>
-              <InputGroup borderColor={`${theme.color.ligthGray}`}>
-                <InputLeftElement>
-                  {<CMdPassword color="gray.300" />}
-                </InputLeftElement>
-                <Input
-                  ref={verificationRef}
-                  type="text"
-                  name="verificationCode"
-                  placeholder="이메일로 온 인증 코드를 입력하세요"
-                  value={input.verificationCode}
-                  onChange={handleChange}
-                  disabled={whichUI.isVerificated}
-                  style={{ textTransform: 'uppercase' }}
-                  borderRadius="0"
-                ></Input>
-              </InputGroup>
-            </FormControl>
+            <UserInput
+              page="findPassword"
+              text="인증 코드"
+              name="verificationCode"
+              type="text"
+              value={input.verificationCode}
+              placeholder="이메일로 온 인증 코드를 입력하세요"
+              onChange={handleChange}
+              disabled={whichUI.isVerificated}
+              viewPassword={false}
+              onClick={handleShowClick}
+            ></UserInput>
           )}
           {whichUI.isVerificated && (
-            <FormControl isRequired>
-              <Text mb="8px">비밀번호</Text>
-              <InputGroup borderColor={`${theme.color.ligthGray}`}>
-                <InputLeftElement>
-                  {<CFaLock color="gray.300" />}
-                </InputLeftElement>
-                <Input
-                  ref={passwordRef}
-                  type={viewPassword ? 'text' : 'password'}
-                  name="password"
-                  placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
-                  value={input.password}
-                  onChange={handleChange}
-                  borderRadius="0"
-                ></Input>
-                <InputRightElement>
-                  <IconButton
-                    color="gray.300"
-                    aria-label="view password"
-                    variant="password"
-                    icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
-                    onClick={handleShowClick}
-                  ></IconButton>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
+            <UserInput
+              page="findPassword"
+              text="비밀번호"
+              name="password"
+              type="password"
+              value={input.password}
+              placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
+              onChange={handleChange}
+              disabled={false}
+              viewPassword={viewPassword}
+              onClick={handleShowClick}
+            ></UserInput>
           )}
           {whichUI.isVerificated && (
-            <FormControl isRequired>
-              <Text mb="8px">비밀번호 확인</Text>
-              <InputGroup borderColor={`${theme.color.ligthGray}`}>
-                <InputLeftElement>
-                  {<CFaCheck color="gray.300" />}
-                </InputLeftElement>
-                <Input
-                  type={viewPassword ? 'text' : 'password'}
-                  name="passwordConfirm"
-                  placeholder="비밀번호를 재입력하세요"
-                  value={input.passwordConfirm}
-                  onChange={handleChange}
-                  borderRadius="0"
-                ></Input>
-                <InputRightElement>
-                  <IconButton
-                    color="gray.300"
-                    aria-label="view password"
-                    variant="password"
-                    icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
-                    onClick={handleShowClick}
-                  ></IconButton>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
+            <UserInput
+              page="findPassword"
+              text="비밀번호 확인"
+              name="passwordConfirm"
+              type="password"
+              value={input.passwordConfirm}
+              placeholder="비밀번호를 재입력하세요"
+              onChange={handleChange}
+              disabled={false}
+              viewPassword={viewPassword}
+              onClick={handleShowClick}
+            ></UserInput>
           )}
           {!whichUI.isCodeRequested &&
             !whichUI.isLoading &&
@@ -298,20 +256,7 @@ const FindingPassword = (): JSX.Element => {
             </RegisterButton>
           )}
 
-          {whichUI.isLoading && (
-            <Flex flexDirection="column" alignItems="center">
-              <Spinner
-                m="auto"
-                thickness="4px"
-                speed="0.65s"
-                emptyColor="gray.200"
-                color="#df3127"
-                size="xl"
-                mb="10px"
-              />
-              잠시만 기다려주세요...
-            </Flex>
-          )}
+          {whichUI.isLoading && <LoadingSpinner></LoadingSpinner>}
 
           {whichUI.isCodeRequested &&
             !whichUI.isVerificated &&
