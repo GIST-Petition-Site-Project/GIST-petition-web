@@ -1,21 +1,5 @@
 import React, { FormEvent, useRef, useState } from 'react'
-import {
-  chakra,
-  FormControl,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-  Text,
-  Input,
-  Spinner,
-  Flex,
-  useToast,
-  InputRightElement,
-  IconButton,
-} from '@chakra-ui/react'
-import theme from '@style/theme'
-import { FaUserAlt, FaLock, FaCheck } from 'react-icons/fa'
-import { MdPassword } from 'react-icons/md'
+import { Stack, useToast } from '@chakra-ui/react'
 import { RegisterButton, Container } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from '@redux/store'
@@ -26,7 +10,6 @@ import {
 } from '@api/verificationAPI'
 import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import UserInput from '@components/UserInput'
 import LoadingSpinner from '@components/LoadingSpinner'
 
