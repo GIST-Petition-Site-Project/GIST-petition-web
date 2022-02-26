@@ -47,7 +47,6 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
             <PetitionTagWrapper>
               <PetitionStatus>
                 <PetitionStatusTag
-                  borderRadius={'none'}
                   expired={petition.expired}
                 >
                   {petition.expired ? '사전동의만료' : '사전동의중'}
