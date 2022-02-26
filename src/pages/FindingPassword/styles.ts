@@ -23,6 +23,13 @@ const Container = styled.section`
         .chakra-input {
           border-radius: 0;
         }
+        .chakra-input__right-element {
+          .chakra-button {
+            :focus {
+              box-shadow: none;
+            }
+          }
+        }
       }
     }
     .err_msg {
