@@ -11,6 +11,7 @@ import AnsweredPetitions from '@pages/AnsweredPetitions'
 import { AuthRoute } from './PrivateRouter'
 import FindingPassword from '@pages/FindingPassword'
 import NavBar from '@components/NavBar'
+import ChangeMyInfo from '@pages/ChangeMyInfo'
 
 const RootRouter = (): JSX.Element => {
   return (
@@ -37,6 +38,7 @@ const RootRouter = (): JSX.Element => {
         <Route path="/answer" element={<Outlet />}>
           <Route index element={<AnsweredPetitions />} />
         </Route>
+        <Route path="/changemyinfo" element={<ChangeMyInfo />}></Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

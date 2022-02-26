@@ -34,7 +34,7 @@ const MyMenu = (): JSX.Element => {
         <div className="menu_list">
           <Link to="/mypetitions">나의 청원</Link>
           <div role="none" className="dropdown_divider"></div>
-          <Link to="#">회원 정보 관리</Link>
+          <Link to="/changemyinfo">회원 정보 관리</Link>
           <a onClick={handleLogout}>로그아웃</a>
         </div>
       </details>
