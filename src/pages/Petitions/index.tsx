@@ -100,8 +100,8 @@ const Petitions = (): JSX.Element => {
 
           <Tabs isFitted colorScheme="red">
             <TabList>
-              <Tab onClick={handlePage}>진행중인 청원</Tab>
-              <Tab onClick={handlePage}>만료된 청원</Tab>
+              <Tab onClick={setInitialState}>진행중인 청원</Tab>
+              <Tab onClick={setInitialState}>만료된 청원</Tab>
             </TabList>
 
             <TabPanels>
