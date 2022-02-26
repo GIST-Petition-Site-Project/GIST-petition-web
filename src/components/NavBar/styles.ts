@@ -10,8 +10,10 @@ const Header = styled.header`
   position: fixed;
   top: 0;
   z-index: 1000;
-  background-color: rgba(47, 54, 60, 0.9);
-  //#384046, rgba로 opacity를 먹여야 children 요소가 투명해지지 않습니다.
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 4px 0 hsl(0deg 0% 81% / 50%);
+  border-bottom: 1px solid #ececec;
   .inner {
     display: flex;
     align-items: center;
@@ -37,7 +39,7 @@ const TopMenu = styled(List)`
   > div {
     display: flex;
     overflow: hidden;
-    background-color: rgba(47, 54, 60, 0.94);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 100vw;
     flex-direction: column;
     height: 100vh;
@@ -53,7 +55,7 @@ const TopMenu = styled(List)`
     .chakra-divider {
       width: 90%;
       margin: 0 auto;
-      border-color: #fff;
+      border-color: #333;
       transition: opacity 0.3s;
       opacity: ${props => (props.open ? '0.15' : '0')};
       @media screen and (min-width: ${theme.breakpoints.md}) {
@@ -67,7 +69,7 @@ const ItemName = styled.div`
   padding: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: #333;
   border: 2px solid transparent;
   text-align: center;
   cursor: pointer;
@@ -93,7 +95,6 @@ const MobMenuButton = styled(Button)`
   height: 100%;
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
   display: block;
-  /* background: rgba(47, 54, 60, 0.9); */
   background: transparent;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     display: none;

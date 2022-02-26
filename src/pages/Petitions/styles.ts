@@ -5,7 +5,7 @@ const Container = styled.div``
 
 const PetitionBoard = styled.div`
   position: relative;
-  margin-top: 9.375rem;
+  margin-top: 6rem;
   .petition_type {
     display: flex;
     justify-content: space-between;

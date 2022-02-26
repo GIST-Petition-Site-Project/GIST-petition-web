@@ -15,7 +15,6 @@ import {
   getPetitionsByQuery,
 } from '@api/petitionAPI'
 import Inner from '@components/Inner'
-import { stringify } from 'querystring'
 
 const Home = (): JSX.Element => {
   const [petitionCount, setPetitionCount] = useState(0)
@@ -71,7 +70,9 @@ const Home = (): JSX.Element => {
             <span>최근 답변된 청원</span>
           </div>
           <PetitionList
-            getPetitions={() => getAnsweredByQuery({ size: 5 })}
+            getPetitions={() =>
+              getAnsweredByQuery({ size: 5, sort: 'createdAt,desc' })
+            }
           ></PetitionList>
         </PetitionsWrapper>
       </Inner>
