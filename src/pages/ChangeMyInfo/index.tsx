@@ -148,6 +148,7 @@ const ChangeMyInfo = (): JSX.Element => {
   }
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log(e)
   }
 
   const handleReverify = () => {
@@ -160,6 +161,10 @@ const ChangeMyInfo = (): JSX.Element => {
     setErrorText('')
     dispatch(setFindPasswordWhichInfo('Verificated'))
     dispatch(setFindPasswordWhichInfo('CodeRequested'))
+  }
+
+  const handleWithdrawal = async () => {
+    return
   }
 
   return (
@@ -247,9 +252,9 @@ const ChangeMyInfo = (): JSX.Element => {
             </RegisterButton>
           )}
           <span className="err_msg">{errorText}</span>
-          <WithdrawalButton>회원 탈퇴</WithdrawalButton>
         </Stack>
       </form>
+      <WithdrawalButton>회원 탈퇴</WithdrawalButton>
     </Container>
   )
 }
