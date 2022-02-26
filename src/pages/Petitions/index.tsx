@@ -62,9 +62,13 @@ const Petitions = (): JSX.Element => {
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }
-  const handlePage = () => {
+  const setInitialState = () => {
+    setSortSelected('createdAt,desc')
+    setCategorySelected(0)
     const newSearchParams = {
       ...queryParams,
+      sort: 'createdAt,desc',
+      categoryId: 0,
       page: 1,
     }
     navigate({
