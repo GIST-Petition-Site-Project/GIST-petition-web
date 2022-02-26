@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import theme from '@style/theme'
 
 const Container = styled.section`
-  .register_form > .chakra-stack {
+  .changeUserInfo_form > .chakra-stack {
     height: 100vh;
     max-width: 28rem;
     margin: auto;
