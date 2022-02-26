@@ -46,8 +46,8 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
           <li key={petition.id}>
             <PetitionTagWrapper>
               <PetitionStatus>
-                <PetitionStatusTag>
-                  {!petition.answered ? '청원진행중' : '답변완료'}{' '}
+                <PetitionStatusTag expired={String(petition.expired)}>
+                  {petition.expired ? '사전동의만료' : '사전동의중'}
                 </PetitionStatusTag>
               </PetitionStatus>
               <PetitionCategory className="category">

@@ -62,6 +62,20 @@ const Petitions = (): JSX.Element => {
       search: new URLSearchParams(newSearchParams).toString(),
     })
   }
+  const setInitialState = () => {
+    setSortSelected('createdAt,desc')
+    setCategorySelected(0)
+    const newSearchParams = {
+      ...queryParams,
+      sort: 'createdAt,desc',
+      categoryId: 0,
+      page: 1,
+    }
+    navigate({
+      pathname: '/petitions',
+      search: new URLSearchParams(newSearchParams).toString(),
+    })
+  }
 
   return (
     <Container>
@@ -86,8 +100,8 @@ const Petitions = (): JSX.Element => {
 
           <Tabs isFitted colorScheme="red">
             <TabList>
-              <Tab>진행중인 청원</Tab>
-              <Tab>만료된 청원</Tab>
+              <Tab onClick={setInitialState}>진행중인 청원</Tab>
+              <Tab onClick={setInitialState}>만료된 청원</Tab>
             </TabList>
 
             <TabPanels>

@@ -1,14 +1,18 @@
 import {
   useDisclosure,
+  Modal,
   ModalHeader,
   ModalBody,
-  Modal,
   ModalOverlay,
   ModalContent,
   ModalFooter,
 } from '@chakra-ui/react'
 import { List, ListItem, Container, Heading } from '@chakra-ui/react'
-import { ViewWriteMethodButton, CancleButton } from './styles'
+import {
+  ViewWriteMethodButton,
+  CancleButton,
+  GuideModalContent,
+} from './styles'
 import steps from './steps.json'
 
 const GuideModal = (): JSX.Element => {
@@ -22,20 +26,19 @@ const GuideModal = (): JSX.Element => {
       >
         청원 작성 요령 안내
       </ViewWriteMethodButton>
+
       <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
         <ModalOverlay />
-        <ModalContent borderRadius={0} m={'auto 2rem'}>
+        <GuideModalContent>
           <ModalHeader m="15px"> GIST 청원, 이렇게 등록하세요</ModalHeader>
-          <ModalBody m="0 15px" textAlign={'justify'}>
-            <List p="0 12px">
+          <ModalBody>
+            <List>
               {steps.map(step => (
                 <ListItem key={step.id}>
-                  <Heading as="h2" fontSize="16px">
+                  <Heading as="h2" className="modal-font">
                     Step {step.id}. {step.title}
                   </Heading>
-                  <Container m="15px" lineHeight={'160%'} pl="0">
-                    {step.contents}
-                  </Container>
+                  <Container className="modal-font">{step.contents}</Container>
                 </ListItem>
               ))}
             </List>
@@ -50,7 +53,7 @@ const GuideModal = (): JSX.Element => {
               닫기
             </CancleButton>
           </ModalFooter>
-        </ModalContent>
+        </GuideModalContent>
       </Modal>
     </div>
   )
