@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Collapse, ListItem, Divider } from '@chakra-ui/react'
-
 import {
   StyledDiv3,
   CollapseInner,

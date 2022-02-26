@@ -68,11 +68,6 @@ const PrecautionLeftBtn = styled(Button)`
     box-shadow: none;
   }
   :focus {
-    outline: none;
-    box-shadow: none;
-  }
-  :active {
-    outline: none;
     box-shadow: none;
   }
   @media screen and (min-width: ${theme.breakpoints.md}) {
@@ -115,11 +110,6 @@ const PrecautionRightBtn = styled(Button)`
     box-shadow: none;
   }
   :focus {
-    outline: none;
-    box-shadow: none;
-  }
-  :active {
-    outline: none;
     box-shadow: none;
   }
 
@@ -137,13 +127,10 @@ const PrecautionRightBtn = styled(Button)`
     }
     :focus {
       background-color: ${theme.color.QUATERNARY_GRAY};
-      outline: none;
       box-shadow: none;
     }
     :active {
       background-color: ${theme.color.QUATERNARY_GRAY};
-      outline: none;
-      box-shadow: none;
     }
   }
 `
