@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef, useState } from 'react'
 import { Stack, useToast } from '@chakra-ui/react'
-import { RegisterButton, Container } from './styles'
+import { RegisterButton, Container, WithdrawalButton } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from '@redux/store'
 import {
@@ -247,6 +247,7 @@ const ChangeMyInfo = (): JSX.Element => {
             </RegisterButton>
           )}
           <span className="err_msg">{errorText}</span>
+          <WithdrawalButton>회원 탈퇴</WithdrawalButton>
         </Stack>
       </form>
     </Container>

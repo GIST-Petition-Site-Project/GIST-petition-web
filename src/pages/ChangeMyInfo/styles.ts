@@ -3,8 +3,11 @@ import theme from '@style/theme'
 
 const Container = styled.section`
   .changeUserInfo_form > .chakra-stack {
+    position: relative;
     height: 100vh;
     max-width: 28rem;
+    display: flex;
+    flex-direction: column;
     margin: auto;
     justify-content: center;
     padding: 0 2rem;
@@ -46,4 +49,9 @@ const RegisterButton = styled.button`
   font-weight: bold;
 `
 
-export { Container, RegisterButton }
+const WithdrawalButton = styled(RegisterButton)`
+  background-color: ${theme.color.PRIMARY_RED};
+  transform: translateY(200px);
+`
+
+export { Container, RegisterButton, WithdrawalButton }
