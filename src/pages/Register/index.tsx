@@ -15,10 +15,10 @@ import {
 import { useNavigate } from 'react-router-dom'
 
 import TermsOfUse from './TermsOfUse'
-import { setWhichInfo } from '../../redux/register/registerSlice'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import UserInput from '../../components/UserInput'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
+import { setWhichInfo } from '@redux/userInfo/userInfoSlice'
 
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
@@ -38,7 +38,7 @@ const Register = (): JSX.Element => {
     variant: 'toast',
   })
   const dispatch = useAppDispatch()
-  const whichUI = useAppSelect(state => state.register)
+  const whichUI = useAppSelect(state => state.userInfo)
   const [errorText, setErrorText] = useState('')
 
   const handleAgree = (value: string) => {
