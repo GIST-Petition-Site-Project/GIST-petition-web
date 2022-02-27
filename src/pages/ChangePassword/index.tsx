@@ -18,15 +18,11 @@ interface ChangePassword {
 }
 
 const ChangePassword = (): JSX.Element => {
-  const navigate = useNavigate()
   const [input, setInput] = useState<ChangePassword>({
     prevPassword: '',
     newPassword: '',
     newPasswordConfirm: '',
   })
-
-  const whichUI = useAppSelect((state: RootState) => state.findPassword)
-  const dispatch = useAppDispatch()
   const toast = useToast({
     variant: 'toast',
   })
@@ -35,10 +31,6 @@ const ChangePassword = (): JSX.Element => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setInput({ ...input, [name]: value })
-  }
-
-  const checkPwd = () => {
-    dispatch(setFindPasswordWhichInfo('Valid'))
   }
 
   const handleReset = async () => {
@@ -54,7 +46,6 @@ const ChangePassword = (): JSX.Element => {
         newPassword: input.newPassword,
         originPassword: input.prevPassword,
       })
-      console.log(response)
       const status = response.status
       const message = response.data.message
       setErrorText(message)
@@ -63,8 +54,8 @@ const ChangePassword = (): JSX.Element => {
         toast({
           status: 'success',
           duration: 3000,
-          description: '비밀번호 재설정',
-          title: '비밀번호가 재설정되었습니다',
+          title: '비밀번호 재설정',
+          description: '비밀번호가 재설정되었습니다',
           isClosable: true,
         })
       } else {
@@ -94,37 +85,29 @@ const ChangePassword = (): JSX.Element => {
             disabled={false}
             onPassword={true}
           ></UserInput>
-          {!whichUI.isValid && (
-            <ChangePwdButton onClick={checkPwd}>비밀번호 확인</ChangePwdButton>
-          )}
-          {whichUI.isLoading && <LoadingSpinner></LoadingSpinner>}
-          {whichUI.isValid && (
-            <>
-              <UserInput
-                text="새로운 비밀번호"
-                name="newPassword"
-                type="password"
-                value={input.newPassword}
-                placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
-                onChange={handleChange}
-                disabled={false}
-                onPassword={true}
-              ></UserInput>
-              <UserInput
-                text="새로운 비밀번호 확인"
-                name="newPasswordConfirm"
-                type="password"
-                value={input.newPasswordConfirm}
-                placeholder="비밀번호를 재입력하세요"
-                onChange={handleChange}
-                disabled={false}
-                onPassword={true}
-              ></UserInput>
-              <ChangePwdButton onClick={handleReset} className="submit__btn">
-                비밀번호 재설정
-              </ChangePwdButton>
-            </>
-          )}
+          <UserInput
+            text="새로운 비밀번호"
+            name="newPassword"
+            type="password"
+            value={input.newPassword}
+            placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
+            onChange={handleChange}
+            disabled={false}
+            onPassword={true}
+          ></UserInput>
+          <UserInput
+            text="새로운 비밀번호 확인"
+            name="newPasswordConfirm"
+            type="password"
+            value={input.newPasswordConfirm}
+            placeholder="비밀번호를 재입력하세요"
+            onChange={handleChange}
+            disabled={false}
+            onPassword={true}
+          ></UserInput>
+          <ChangePwdButton onClick={handleReset} className="submit__btn">
+            비밀번호 재설정
+          </ChangePwdButton>
           <span className="err_msg">{errorText}</span>
         </Stack>
       </form>
