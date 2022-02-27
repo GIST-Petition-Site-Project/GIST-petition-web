@@ -67,7 +67,7 @@ const AgreementList = ({ petitionId, totalAgreement }: IProps): JSX.Element => {
             <div className="comment">
               <div>
                 <div className="anonymous">
-                  # {Number(totalAgreement) - index - (currentPage - 1) * 10}
+                  #{Number(totalAgreement) - index - (currentPage - 1) * 10}
                 </div>
                 <div className="date">{getDayTime(res.createdAt)}</div>
               </div>
