@@ -3,7 +3,6 @@ import theme from '@style/theme'
 
 const Container = styled.section`
   .changeUserInfo_form > .chakra-stack {
-    position: relative;
     height: 100vh;
     max-width: 28rem;
     display: flex;
@@ -11,33 +10,41 @@ const Container = styled.section`
     margin: auto;
     justify-content: center;
     padding: 0 2rem;
-
-    > span:nth-of-type(1) {
-      font-size: 2rem;
-      font-weight: bold;
-    }
-    .chakra-form-control {
-      > span {
-        display: inline-block;
-        margin-bottom: 0.5rem;
+    > .changeUserInfo_section {
+      margin-bottom: 3em;
+      > .title {
+        font-size: 2rem;
+        font-weight: bold;
       }
-      .chakra-input__group {
-        border-color: #ccc;
-        .chakra-input {
-          border-radius: 0;
+      > .chakra-form-control {
+        > p {
+          display: inline-block;
+          margin-bottom: 0.5em;
         }
-        .chakra-input__right-element {
-          .chakra-button {
-            :focus {
-              box-shadow: none;
+        > .chakra-input__group {
+          border-color: #ccc;
+          margin-bottom: 0.5em;
+          .chakra-input {
+            border-radius: 0;
+          }
+          .chakra-input__right-element {
+            .chakra-button {
+              :focus {
+                box-shadow: none;
+              }
             }
           }
         }
       }
-    }
-    .err_msg {
-      text-align: center;
-      color: ${theme.color.PRIMARY_RED};
+      > .submit__btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1em;
+      }
+      > .err_msg {
+        text-align: center;
+        color: ${theme.color.PRIMARY_RED};
+      }
     }
   }
 `
@@ -51,8 +58,6 @@ const RegisterButton = styled.button`
 
 const WithdrawalButton = styled(RegisterButton)`
   background-color: ${theme.color.PRIMARY_RED};
-  width: 20%;
-  transform: translateX(200%);
 `
 
 export { Container, RegisterButton, WithdrawalButton }
