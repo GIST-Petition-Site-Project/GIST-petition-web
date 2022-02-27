@@ -35,7 +35,6 @@ const Withdrawal = (): JSX.Element => {
     const response = await deleteUserMe({
       password: password,
     })
-    console.log(response)
     const status = response.status
     const message = response.data.message
     setErrorText(message)
@@ -44,8 +43,8 @@ const Withdrawal = (): JSX.Element => {
       toast({
         status: 'success',
         duration: 3000,
-        description: '회원탈퇴',
-        title: '계정이 삭제되었습니다',
+        title: '회원 탈퇴',
+        description: '계정이 삭제되었습니다',
         isClosable: true,
       })
       navigate('/login')
