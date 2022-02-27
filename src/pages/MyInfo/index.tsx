@@ -12,7 +12,7 @@ import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
 
-const ChangeMyInfo = (): JSX.Element => {
+const MyInfo = (): JSX.Element => {
   const navigate = useNavigate()
   const [input, setInput] = useState<RegisterForm>({
     username: '',
@@ -130,4 +130,4 @@ const ChangeMyInfo = (): JSX.Element => {
   )
 }
 
-export default ChangeMyInfo
+export default MyInfo
