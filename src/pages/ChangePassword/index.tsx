@@ -1,13 +1,15 @@
 import React, { FormEvent, useRef, useState } from 'react'
 import { Stack, useToast } from '@chakra-ui/react'
-import { RegisterButton, Container } from './styles'
+import { ChangePwdButton, Container } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { RootState } from '@redux/store'
-import { putResetPassword } from '@api/verificationAPI'
-import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
+
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
 import LoadingSpinner from '@components/LoadingSpinner'
+import { putPasswordMe } from '@api/userAPI'
+import { setWhichInfo } from '@redux/register/registerSlice'
+import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
 
 interface ChangePassword {
   prevPassword: string
@@ -17,7 +19,6 @@ interface ChangePassword {
 
 const ChangePassword = (): JSX.Element => {
   const navigate = useNavigate()
-
   const [input, setInput] = useState<ChangePassword>({
     prevPassword: '',
     newPassword: '',
@@ -36,6 +37,10 @@ const ChangePassword = (): JSX.Element => {
     setInput({ ...input, [name]: value })
   }
 
+  const checkPwd = () => {
+    dispatch(setFindPasswordWhichInfo('Valid'))
+  }
+
   const handleReset = async () => {
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
@@ -44,9 +49,12 @@ const ChangePassword = (): JSX.Element => {
       return
     }
     if (input.newPassword === input.newPasswordConfirm) {
-      const response = await putResetPassword({
+      console.log(input)
+      const response = await putPasswordMe({
         newPassword: input.newPassword,
+        originalPassword: input.prevPassword,
       })
+      console.log(response)
       const status = response.status
       const message = response.data.message
       setErrorText(message)
@@ -59,9 +67,10 @@ const ChangePassword = (): JSX.Element => {
           title: '비밀번호가 재설정되었습니다',
           isClosable: true,
         })
-        navigate('/login')
-      } else {
-        dispatch(setFindPasswordWhichInfo('Valid'))
+
+        // } else {
+        //   dispatch(setFindPasswordWhichInfo('Valid'))
+        // }
       }
     } else {
       // passwordRef.current && passwordRef.current.focus()
@@ -79,7 +88,7 @@ const ChangePassword = (): JSX.Element => {
           <span>비밀번호 변경</span>
           <UserInput
             text="현재 비밀번호"
-            name="password"
+            name="prevPassword"
             type="password"
             value={input.prevPassword}
             placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
@@ -87,13 +96,15 @@ const ChangePassword = (): JSX.Element => {
             disabled={false}
             onPassword={true}
           ></UserInput>
-          {!whichUI.isValid && <RegisterButton>인증 코드 전송</RegisterButton>}
+          {!whichUI.isValid && (
+            <ChangePwdButton onClick={checkPwd}>비밀번호 확인</ChangePwdButton>
+          )}
           {whichUI.isLoading && <LoadingSpinner></LoadingSpinner>}
           {whichUI.isValid && (
             <>
               <UserInput
                 text="새로운 비밀번호"
-                name="password"
+                name="newPassword"
                 type="password"
                 value={input.newPassword}
                 placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
@@ -103,7 +114,7 @@ const ChangePassword = (): JSX.Element => {
               ></UserInput>
               <UserInput
                 text="새로운 비밀번호 확인"
-                name="passwordConfirm"
+                name="newPasswordConfirm"
                 type="password"
                 value={input.newPasswordConfirm}
                 placeholder="비밀번호를 재입력하세요"
@@ -111,9 +122,9 @@ const ChangePassword = (): JSX.Element => {
                 disabled={false}
                 onPassword={true}
               ></UserInput>
-              <RegisterButton onClick={handleReset} className="submit__btn">
+              <ChangePwdButton onClick={handleReset} className="submit__btn">
                 비밀번호 재설정
-              </RegisterButton>
+              </ChangePwdButton>
             </>
           )}
           <span className="err_msg">{errorText}</span>
