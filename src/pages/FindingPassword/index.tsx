@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from 'react'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { Stack, useToast } from '@chakra-ui/react'
 import { RegisterButton, Container } from './styles'
 import { useNavigate } from 'react-router-dom'
@@ -32,6 +32,12 @@ const FindingPassword = (): JSX.Element => {
     variant: 'toast',
   })
   const [errorText, setErrorText] = useState('')
+
+  useEffect(() => {
+    return () => {
+      dispatch(setWhichInfo('Reset'))
+    }
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target

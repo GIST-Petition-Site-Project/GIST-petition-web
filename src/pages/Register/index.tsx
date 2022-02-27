@@ -22,10 +22,6 @@ import { setWhichInfo } from '@redux/userInfo/userInfoSlice'
 import { Link } from 'react-router-dom'
 
 const Register = (): JSX.Element => {
-  useEffect(() => {
-    return () => console.log('gone')
-  }, [])
-
   const navigate = useNavigate()
   const [input, setInput] = useState<RegisterForm>({
     username: '',
@@ -45,6 +41,12 @@ const Register = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const whichUI = useAppSelect(state => state.userInfo)
   const [errorText, setErrorText] = useState('')
+
+  useEffect(() => {
+    return () => {
+      dispatch(setWhichInfo('Reset'))
+    }
+  }, [])
 
   const handleAgree = (value: string) => {
     switch (value) {

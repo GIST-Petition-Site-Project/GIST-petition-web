@@ -15,6 +15,14 @@ export const userInfoSlice = createSlice({
   reducers: {
     setWhichInfo: (state, action) => {
       switch (action.payload) {
+        case `Reset`:
+          state.isAgreed = false
+          state.isCodeRequested = false
+          state.isExpired = false
+          state.isLoading = false
+          state.isValid = false
+          state.isVerificated = false
+          break
         case 'Agreed':
           state.isAgreed = !state.isAgreed
           break
