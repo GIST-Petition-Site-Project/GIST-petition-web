@@ -52,7 +52,7 @@ const ChangePassword = (): JSX.Element => {
       console.log(input)
       const response = await putPasswordMe({
         newPassword: input.newPassword,
-        originalPassword: input.prevPassword,
+        originPassword: input.prevPassword,
       })
       console.log(response)
       const status = response.status
@@ -67,10 +67,8 @@ const ChangePassword = (): JSX.Element => {
           title: '비밀번호가 재설정되었습니다',
           isClosable: true,
         })
-
-        // } else {
-        //   dispatch(setFindPasswordWhichInfo('Valid'))
-        // }
+      } else {
+        // passwordRef.current && passwordRef.current.focus()
       }
     } else {
       // passwordRef.current && passwordRef.current.focus()
