@@ -51,10 +51,6 @@ interface RegisterTermsOfUseBtn {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-interface AgreeAttribute {
-  isClicked: boolean
-}
-
 // 회원 가입 UI 관련
 
 interface FindPasswordWhichUI {

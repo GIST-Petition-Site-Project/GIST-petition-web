@@ -12,6 +12,8 @@ import { AuthRoute } from './PrivateRouter'
 import FindingPassword from '@pages/FindingPassword'
 import NavBar from '@components/NavBar'
 import MyInfo from '@pages/MyInfo'
+import ChangePassword from '@pages/ChangePassword'
+import Withdrawal from '@pages/Withdrawal'
 
 const RootRouter = (): JSX.Element => {
   return (
@@ -39,6 +41,8 @@ const RootRouter = (): JSX.Element => {
           <Route index element={<AnsweredPetitions />} />
         </Route>
         <Route path="/myinfo" element={<MyInfo />}></Route>
+        <Route path="/changepassword" element={<ChangePassword />}></Route>
+        <Route path="/withdrawal" element={<Withdrawal />}></Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
