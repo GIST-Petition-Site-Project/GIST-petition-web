@@ -1,8 +1,13 @@
-import { Tag } from '@chakra-ui/react'
 import theme from '@style/theme'
 import styled from '@emotion/styled'
 
+interface Status {
+  isAnswered: boolean
+  isExpired: boolean
+}
+
 const PetitionsHead = styled.div`
+  text-align: center;
   height: 50px;
   width: 100%;
   border-bottom: 1px solid #ddd;
@@ -16,28 +21,28 @@ const PetitionsHead = styled.div`
   .head_wrap {
     position: relative;
     width: 100%;
-    display: flex;
 
     .head_status {
-      display: flex;
+      position: absolute;
+      top: 0;
       width: 100px;
-      padding-left: 10px;
     }
     .head_category {
-      display: flex;
-      width: 100px;
+      position: absolute;
+      top: 0;
+      left: 90px;
+      width: 130px;
+      text-align: center;
     }
     .head_subject {
       margin-left: 220px;
       margin-right: 220px;
-      display: flex;
     }
     .head_date {
       position: absolute;
-      display: flex;
       top: 0;
       right: 90px;
-      width: 80px;
+      width: 130px;
       text-align: center;
     }
     .head_agreements {
@@ -63,6 +68,23 @@ const PetitionsUl = styled.ul`
     }
     display: block;
 
+    .category {
+      color: #8a8a8a;
+      bottom: 0%;
+      margin: 0;
+      font-size: 12px;
+      padding-left: 5px;
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        position: absolute;
+        left: 133px;
+        bottom: 0;
+        top: 0;
+        height: 1rem;
+        margin: auto;
+        font-size: 1rem;
+        padding-left: 0;
+      }
+    }
     .subject {
       text-align: left;
       display: block;
@@ -125,63 +147,33 @@ const PetitionsUl = styled.ul`
     }
   }
 `
-const PetitionStatus = styled.div`
+
+const Status = styled.div<Status>`
   height: 100%;
   display: flex;
   align-items: center;
   bottom: 0%;
-  padding-bottom: 15px;
-  padding-left: 3px;
+  padding-bottom: 10px;
   @media screen and (min-width: ${theme.breakpoints.md}) {
     position: absolute;
     font-size: 12px;
     padding-bottom: 0;
-    padding-left: 5px;
   }
-`
-const PetitionCategory = styled.div`
-  color: #8a8a8a;
-  width: 130px;
-  display: flex;
-  align-items: center;
-  bottom: 0%;
-  margin: 0;
-  font-size: 12px;
-  padding-left: 5px;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    position: absolute;
-    left: 100px;
-    bottom: 0;
-    top: 0;
-    height: 1rem;
-    margin: auto;
-    font-size: 1rem;
-    padding-left: 0;
-  }
-`
-const PetitionTagWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`
+  .status_box {
+    margin-left: 3px;
+    border-radius: 2px;
+    font-size: 0.5rem;
+    padding: 0.5em;
+    color: white;
+    background-color: ${props =>
+      props.isAnswered || props.isExpired
+        ? `${theme.color.QUATERNARY_GRAY}`
+        : `${theme.color.SECONDARY_RED}`};
 
-const PetitionStatusTag = styled(Tag)`
-  border-radius: 0;
-  font-size: 10px;
-  background-color: ${props =>
-    props.open
-      ? `${theme.color.QUATERNARY_GRAY}`
-      : `${theme.color.SECONDARY_RED}`};
-  color: white;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    font-size: 12px;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      font-size: 0.8rem;
+      margin-left: 5px;
+    }
   }
 `
-
-export {
-  PetitionsUl,
-  PetitionsHead,
-  PetitionStatus,
-  PetitionCategory,
-  PetitionStatusTag,
-  PetitionTagWrapper,
-}
+export { PetitionsUl, PetitionsHead, Status }

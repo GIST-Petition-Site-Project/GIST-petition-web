@@ -3,29 +3,23 @@ import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { getDay } from '@utils/getTime'
 
-import {
-  PetitionsUl,
-  PetitionCategory,
-  PetitionsHead,
-  PetitionStatus,
-  PetitionStatusTag,
-  PetitionTagWrapper,
-} from './styles'
+import { PetitionsUl, PetitionsHead, Status } from './styles'
 
 const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
 
-  const queryPost = async (query: QueryParams) => {
+  const fetch = async (query: QueryParams) => {
     const response = await getPetitions(query)
     setPetitionList(response?.data?.content || [])
+    console.log(response)
   }
 
   const [petitionList, setPetitionList] = useState<Array<Petition>>([])
 
   useEffect(() => {
-    queryPost(queryParams)
+    fetch(queryParams)
   }, [location.search])
 
   return (
@@ -43,16 +37,22 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
       <PetitionsUl className="petition_list">
         {petitionList.map(petition => (
           <li key={petition.id}>
-            <PetitionTagWrapper>
-              <PetitionStatus>
-                <PetitionStatusTag expired={String(petition.expired)}>
-                  {petition.expired ? '사전동의만료' : '사전동의중'}
-                </PetitionStatusTag>
-              </PetitionStatus>
-              <PetitionCategory className="category">
-                {petition.categoryName}
-              </PetitionCategory>
-            </PetitionTagWrapper>
+            <Status
+              className="status"
+              isAnswered={petition.answered}
+              isExpired={petition.expired}
+            >
+              <div className="status_box">
+                {petition.answered
+                  ? '답변완료'
+                  : petition.expired
+                  ? '청원기간만료'
+                  : petition.released
+                  ? '청원진행중'
+                  : '사전동의진행중'}
+              </div>
+            </Status>
+            <div className="category">{petition.categoryName}</div>
             <div className="subject">
               <Link to={`/petitions/temp/${petition.tempUrl}`}>
                 {petition.title}
