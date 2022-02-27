@@ -91,6 +91,7 @@ const UserInput = memo(
                   variant="password"
                   icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
                   onClick={handleShowClick}
+                  outline="none"
                 ></IconButton>
               </InputRightElement>
             )}
