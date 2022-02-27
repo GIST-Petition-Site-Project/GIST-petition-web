@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
 import LoadingSpinner from '@components/LoadingSpinner'
 import { deleteUserMe } from '@api/userAPI'
+import { setLogout } from '@redux/auth/authSlice'
 
 const Withdrawal = (): JSX.Element => {
   const navigate = useNavigate()
@@ -48,6 +49,7 @@ const Withdrawal = (): JSX.Element => {
         isClosable: true,
       })
       navigate('/login')
+      dispatch(setLogout())
     }
   }
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
