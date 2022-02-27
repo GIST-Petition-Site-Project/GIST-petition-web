@@ -1,8 +1,7 @@
-import { Text, UnorderedList } from '@chakra-ui/react'
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { getDay } from '@utils/time'
+import { getDay } from '@utils/getTime'
 
 import {
   PetitionsUl,
