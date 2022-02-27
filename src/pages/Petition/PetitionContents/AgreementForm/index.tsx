@@ -37,6 +37,9 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
       if (response.status < 400) {
         setIsConsented(response.data)
       }
+      if (response.status >= 400) {
+        setIsConsented(false)
+      }
     } catch (error) {
       console.log(error)
     }
