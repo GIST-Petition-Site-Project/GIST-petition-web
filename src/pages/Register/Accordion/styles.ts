@@ -15,6 +15,26 @@ const Container = styled.div`
     @media screen and (min-width: ${theme.breakpoints.xl}) {
       font-size: 1.2rem;
     }
+    .chakra-accordion__panel {
+      line-height: 1.2em;
+      margin-top: 1rem;
+      padding: 0;
+      overflow: scroll;
+      max-height: 22rem;
+      color: #555;
+      .subheading {
+        font-weight: bold;
+      }
+      .contents {
+        margin-bottom: 1rem;
+        .indentation {
+          margin-left: 0.7em;
+        }
+      }
+      li:nth-of-type(4) > div.contents {
+        margin-bottom: 0;
+      }
+    }
   }
   .btn_wrapper {
     display: flex;
