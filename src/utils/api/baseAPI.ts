@@ -1,6 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-const API_URL = 'https://dev-api.gist-petition.com/v1/'
+const API_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.gist-petition.com/v1/'
+    : 'https://dev-api.gist-petition.com/v1/'
 
 const config: AxiosRequestConfig = {
   baseURL: API_URL,

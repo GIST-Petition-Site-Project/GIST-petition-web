@@ -125,7 +125,7 @@ const Login = (): JSX.Element => {
           </FormControl>
           <span className="err_msg">{checkLoginError(responseState)}</span>
           <span className="forgot_pwd account_link">
-            <a href="/findpassword">비밀번호를 잊으셨나요?</a>
+            <Link to="/findpassword">비밀번호를 잊으셨나요?</Link>
           </span>
 
           <Button
