@@ -44,29 +44,28 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
   }
 
   const share = (sns: string) => {
-    alert('구현중!')
-    // const thisUrl = `https://dev.gist-petition.com/${petitionURL}`
-    // if (sns == 'facebook') {
-    //   const url =
-    //     'http://www.facebook.com/sharer/sharer.php?u=' +
-    //     encodeURIComponent(thisUrl)
-    //   window.open(url, '', 'width=486, height=286')
-    // } else if (sns == 'kakaotalk') {
-    //   window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
-    //   window.Kakao.Link.createDefaultButton({
-    //     container: '#btnKakao',
-    //     objectType: '',
-    //     content: {
-    //       title: 'GIST 청원',
-    //       description: '',
-    //       imageUrl: thisUrl,
-    //       link: {
-    //         mobileWebUrl: thisUrl,
-    //         webUrl: thisUrl,
-    //       },
-    //     },
-    //   })
-    // }
+    const thisUrl = `https://dev.gist-petition.com/${petitionURL}`
+    if (sns == 'facebook') {
+      const url =
+        'http://www.facebook.com/sharer/sharer.php?u=' +
+        encodeURIComponent(thisUrl)
+      window.open(url, '', 'width=486, height=286')
+    } else if (sns == 'kakaotalk') {
+      window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
+      window.Kakao.Link.createDefaultButton({
+        container: '#btnKakao',
+        objectType: 'feed',
+        content: {
+          title: 'GIST 청원',
+          description: response?.title,
+          imageUrl: 'https://www.gist.ac.kr/kr/img/sub01/01030301_img01.png',
+          link: {
+            mobileWebUrl: thisUrl,
+            webUrl: thisUrl,
+          },
+        },
+      })
+    }
   }
 
   useEffect(() => {
