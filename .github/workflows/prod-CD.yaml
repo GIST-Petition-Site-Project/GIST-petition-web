@@ -2,7 +2,7 @@ name: Prod CD # Workflow 이름
 on: # Event 감지
   push:
     branches:
-      - develop
+      - main
   workflow_dispatch:
 jobs: # Job 설정
   build:
