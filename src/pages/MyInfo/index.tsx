@@ -4,26 +4,22 @@ import { useNavigate } from 'react-router-dom'
 import { Container } from './styles'
 import MyInfoList from './MyInfoList'
 import MyInfoItem from './MyInfoList'
+import { Link } from 'react-router-dom'
 
 const MyInfo = (): JSX.Element => {
   const navigate = useNavigate()
-
-  const handleClick = (text: string) => {
-    text === '비밀번호 변경'
-      ? navigate('/changepassword')
-      : navigate('/withdrawal')
-  }
 
   return (
     <Container className="register">
       <Stack spacing={4}>
         <span className="title">회원 정보 변경 </span>
         <ul className="MyInfo_List">
-          <MyInfoItem
-            text="비밀번호 변경"
-            onNavigate={handleClick}
-          ></MyInfoItem>
-          <MyInfoItem text="회원 탈퇴" onNavigate={handleClick}></MyInfoItem>
+          <Link to="/changepassword">
+            <MyInfoItem text="비밀번호 변경"></MyInfoItem>
+          </Link>
+          <Link to="/withdrawal">
+            <MyInfoItem text="회원 탈퇴"></MyInfoItem>
+          </Link>
         </ul>
       </Stack>
     </Container>

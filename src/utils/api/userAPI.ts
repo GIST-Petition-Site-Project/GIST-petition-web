@@ -32,3 +32,8 @@ export const putPasswordMe = async (payload: {
   const response = await api.put(`users/me/password`, payload)
   return response
 }
+
+export const deleteUserMe = async (payload: { password: string }) => {
+  const response = await api.put(`users/me`, payload)
+  return response
+}

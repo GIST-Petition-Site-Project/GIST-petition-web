@@ -5,20 +5,15 @@ import { List } from './styles'
 
 interface Iprops {
   text: string
-  onNavigate: (text: string) => void
 }
 
-const MyInfoItem = ({ text, onNavigate }: Iprops) => {
-  const handleClick = () => {
-    onNavigate(text)
-  }
+const MyInfoItem = ({ text }: Iprops) => {
   return (
     <List>
       <span className="text">{text}</span>
       <IconButton
         className="button"
         aria-label="naviagate"
-        onClick={handleClick}
         icon={<ArrowForwardIcon />}
       ></IconButton>
     </List>
