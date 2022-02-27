@@ -44,7 +44,7 @@ const PrecautionBtns = styled.div`
       margin-bottom: 0.5em;
       flex: 1 1 50%;
       transition: background-color 300ms ease-in;
-
+      font-weight: 600;
       @media screen and (min-width: ${theme.breakpoints.md}) {
         color: ${theme.color.WHTIE};
         margin-bottom: 0;
