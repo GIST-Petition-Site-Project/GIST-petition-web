@@ -24,50 +24,33 @@ const TermsOfUseCheckIcon = styled(IconButton)`
 
   :focus {
     box-shadow: none;
-    background-color: transparent;
-  }
-  :active {
-    box-shadow: none;
-    background-color: transparent;
   }
   :hover {
-    box-shadow: none;
     background-color: transparent;
   }
   ${props =>
     props.isclicked === 'true' &&
     `
-    box-shadow: none;
+    border: 0;
     color: ${theme.color.WHITE};
     background-color: ${theme.color.SECONDARY_RED};
-    :focus {
-      box-shadow: none;
-    color: ${theme.color.WHITE};
-    background-color: ${theme.color.SECONDARY_RED};
-    }
-    :active {
-      box-shadow: none;
-    color: ${theme.color.WHITE};
-    background-color: ${theme.color.SECONDARY_RED};
-    }
     :hover {
-      box-shadow: none;
-    color: ${theme.color.WHITE};
-    background-color: ${theme.color.SECONDARY_RED};
+      background-color: ${theme.color.SECONDARY_RED};
     }
   `}
-  width: 1.4rem;
-  height: 1.4rem;
-  font-size: 1rem;
+
+  width: 1.3rem;
+  height: 1.3rem;
+  font-size: 0.8rem;
   @media screen and (min-width: ${theme.breakpoints.md}) {
-    font-size: 1.1rem;
-    width: 1.6rem;
-    height: 1.6rem;
+    font-size: 0.9rem;
+    width: 1.4rem;
+    height: 1.4rem;
   }
   @media screen and (min-width: ${theme.breakpoints.lg}) {
-    font-size: 1.2rem;
-    width: 1.8rem;
-    height: 1.8rem;
+    font-size: 1rem;
+    width: 1.6rem;
+    height: 1.6rem;
   }
 `
 
