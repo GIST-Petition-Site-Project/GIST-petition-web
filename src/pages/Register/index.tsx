@@ -3,11 +3,10 @@ import {
   postConfirmVerificationCode,
   postCreateVerificationCode,
 } from '@api/verificationAPI'
+import { postRegister } from '@api/userAPI'
 import { Text, useToast } from '@chakra-ui/react'
-import { postDelete, postRegister } from '@api/userAPI'
 import { RegisterStack, RegisterButton, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
-
 import TermsOfUse from './TermsOfUse'
 import { setWhichInfo } from '../../redux/register/registerSlice'
 import LoadingSpinner from '../../components/LoadingSpinner'
@@ -27,7 +26,6 @@ const Register = (): JSX.Element => {
     service: false,
     private: false,
   })
-
   const toast = useToast({
     variant: 'toast',
   })
@@ -96,7 +94,6 @@ const Register = (): JSX.Element => {
     setErrorText(message)
     if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
-      // emailRef.current && emailRef.current.focus()
       dispatch(setWhichInfo('Loading'))
     } else if (status < 400) {
       dispatch(setWhichInfo('Loading'))
@@ -120,7 +117,6 @@ const Register = (): JSX.Element => {
     switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
         setInput({ ...input, verificationCode: '' })
-        // verificationRef.current && verificationRef.current.focus()
         break
       }
       case '만료된 인증 코드입니다.': {
@@ -197,18 +193,6 @@ const Register = (): JSX.Element => {
     setErrorText('')
     dispatch(setWhichInfo('Verificated'))
     dispatch(setWhichInfo('CodeRequested'))
-  }
-
-  const handleDelete = async () => {
-    const response = await postDelete({ username: input.username })
-    if (response?.status < 400) {
-      toast({
-        status: 'success',
-        duration: 2000,
-        description: '계정 삭제완료',
-        isClosable: true,
-      })
-    }
   }
 
   const auth = useAppSelect(select => select.auth.isAuthorized)
@@ -324,5 +308,4 @@ const Register = (): JSX.Element => {
     </section>
   )
 }
-
 export default Register
