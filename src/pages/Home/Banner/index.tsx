@@ -18,16 +18,18 @@ const Banner = (): JSX.Element => {
   return (
     <BannerSection>
       <div className="banner_img">
-        <Inner>
-          <div className="banner_dashboard">
-            <span>
-              지금까지 총 <span>{petitionCount}</span> 개의 청원과
-            </span>
-            <span>
-              <span>0 개의 답변이 등록됐습니다</span>
-            </span>
-          </div>
-        </Inner>
+        <div className="box_filter">
+          <Inner>
+            <div className="banner_dashboard">
+              <span>
+                지금까지 총 <span>{petitionCount}</span> 개의 청원과
+              </span>
+              <span>
+                <span>0 개의 답변이 등록됐습니다</span>
+              </span>
+            </div>
+          </Inner>
+        </div>
       </div>
     </BannerSection>
   )

@@ -70,7 +70,6 @@ const ItemName = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
-  border: 2px solid transparent;
   text-align: center;
   cursor: pointer;
   @media screen and (min-width: ${theme.breakpoints.md}) {

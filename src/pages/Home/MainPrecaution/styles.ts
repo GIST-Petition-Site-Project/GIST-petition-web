@@ -1,10 +1,12 @@
 import styled from '@emotion/styled'
 import theme from '@style/theme'
-import { Button, Box, Link, Text, List } from '@chakra-ui/react'
-import { IoMdArrowDropdownCircle } from 'react-icons/io'
 
-const Precaution = styled.div`
-  background: ${theme.color.WHITE};
+interface Open {
+  leftOpen: boolean
+  rightOpen: boolean
+}
+
+const PrecautionSection = styled.section`
   padding: 1em 2rem;
   display: flex;
   flex-direction: column;
@@ -12,21 +14,6 @@ const Precaution = styled.div`
     padding: 0;
     margin-top: 0;
   } ;
-`
-
-const Inner = styled.div`
-  max-width: ${theme.space.INNER_MAXWIDTH};
-  margin: auto;
-`
-
-const PrecautionText = styled(Text)`
-  color: ${theme.color.BLACK};
-  font-size: 0.8rem;
-
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    color: ${theme.color.WHITE};
-    font-size: 1rem;
-  }
 `
 
 const PrecautionBtns = styled.div`
@@ -37,214 +24,161 @@ const PrecautionBtns = styled.div`
       ${theme.color.QUATERNARY_GRAY} 50%
     );
   }
-`
+  > .inner {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      flex-direction: row;
+      padding: 0 2rem;
+    }
+    button {
+      background-color: ${theme.color.WHITE};
+      padding: 0.5em 1em;
+      border: 2px solid ${theme.color.LIGHT_GRAY};
+      border-radius: 0;
+      height: ${theme.size.BUTTON_HEIGHT};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.5em;
+      flex: 1 1 50%;
+      transition: background-color 300ms ease-in;
 
-const ButtonInner = styled.div`
-  max-width: ${theme.space.BUTTON_INNER_MAXWIDTH};
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    flex-direction: row;
-    padding: 0 2rem;
-  }
-`
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        color: ${theme.color.WHTIE};
+        margin-bottom: 0;
+        border: none;
+      }
 
-const PrecautionLeftBtn = styled(Button)`
-  flex: 1 1 50%;
-  background-color: ${theme.color.WHITE};
-  padding: 0.5em 1em;
-  border: 2px solid ${theme.color.LIGHT_GRAY};
-  border-radius: 0;
-  height: ${theme.size.BUTTON_HEIGHT};
-  display: inline-flex;
-  margin-bottom: 0.5em;
-  color: ${theme.color.WHTIE};
-  transition: background-color 300ms ease-in;
-  :hover {
-    background-color: ${theme.color.LIGHT_GRAY};
-    outline: none;
-    box-shadow: none;
-  }
-  :focus {
-    box-shadow: none;
-  }
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    background-color: ${theme.color.SECONDARY_RED};
-    color: ${theme.color.WHTIE};
-    padding-left: 0;
-    margin-bottom: 0;
-    border: none;
-    justify-content: flex-start;
-    :hover {
-      background-color: ${theme.color.SECONDARY_RED};
-      outline: none;
-      box-shadow: none;
-    }
-    :focus {
-      background-color: ${theme.color.SECONDARY_RED};
-      outline: none;
-      box-shadow: none;
-    }
-    :active {
-      background-color: ${theme.color.SECONDARY_RED};
-      outline: none;
-      box-shadow: none;
-    }
-  }
-`
+      > span {
+        color: ${theme.color.BLACK};
+        font-size: 0.8rem;
+        @media screen and (min-width: ${theme.breakpoints.md}) {
+          color: ${theme.color.WHITE};
+          font-size: 1rem;
+        }
+      }
 
-const PrecautionRightBtn = styled(Button)`
-  flex: 1 1 50%;
-  background-color: ${theme.color.WHITE};
-  padding: 0.5em 1em;
-  border: 2px solid ${theme.color.LIGHT_GRAY};
-  border-radius: 0;
-  height: ${theme.size.BUTTON_HEIGHT};
-  display: inline-flex;
-  margin-bottom: 0.5em;
-  transition: background-color 300ms ease-in;
-  :hover {
-    background-color: ${theme.color.LIGHT_GRAY};
-    box-shadow: none;
-  }
-  :focus {
-    box-shadow: none;
-  }
+      .icon {
+        margin-left: 0.5em;
+        @media screen and (min-width: ${theme.breakpoints.md}) {
+          color: ${theme.color.WHITE};
+        }
+      }
+    }
 
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    color: ${theme.color.WHTIE};
-    padding-right: 0;
-    margin-bottom: 0;
-    border: none;
-    background-color: ${theme.color.QUATERNARY_GRAY};
-    justify-content: flex-end;
-    :hover {
-      background-color: ${theme.color.QUATERNARY_GRAY};
-      outline: none;
-      box-shadow: none;
+    .left_btn {
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        background-color: ${theme.color.SECONDARY_RED};
+        padding-left: 2px;
+        justify-content: flex-start;
+      }
     }
-    :focus {
-      background-color: ${theme.color.QUATERNARY_GRAY};
-      box-shadow: none;
-    }
-    :active {
-      background-color: ${theme.color.QUATERNARY_GRAY};
+
+    .right_btn {
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        background-color: ${theme.color.QUATERNARY_GRAY};
+        padding-right: 2px;
+        justify-content: flex-end;
+      }
     }
   }
 `
 
-const PrecautionIcon = styled(IoMdArrowDropdownCircle)`
-  margin-left: 0.5em;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    color: ${theme.color.WHITE};
-  } ;
-`
-
-const PrecautionMessage = styled.div``
-const LeftBox = styled(Box)`
-  padding: 1em 2em;
-
-  background-color: ${theme.color.WHITE};
-  display: block;
-  border: 2px solid ${theme.color.LIGHT_GRAY};
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    background-color: ${theme.color.SECONDARY_RED};
-    border: 0;
-  } ;
-`
-
-const RightBox = styled(Box)`
-  padding: 1em 2em;
-  background-color: ${theme.color.WHITE};
-  display: block;
-  border: 2px solid ${theme.color.LIGHT_GRAY};
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    background-color: ${theme.color.QUATERNARY_GRAY};
-    border: 0;
-  } ;
-`
-
-const StyledDiv3 = styled.div`
-  padding: 1rem 0;
-  margin-top: 0;
-  color: ${theme.color.BLACK};
-  background-color: ${theme.SECONDARY_RED};
-  /* shadow: md; */
+const PrecautionContents = styled.div<Open>`
   position: relative;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    color: ${theme.color.WHITE};
+  .box {
+    padding: 1em 0;
+    background-color: ${theme.color.WHITE};
+    display: block;
+    border: 2px solid ${theme.color.LIGHT_GRAY};
+    margin-bottom: 1rem;
+    overflow: hidden;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      margin-bottom: 0;
+      position: absolute;
+      border: 0;
+      height: 0;
+      width: 100%;
+    }
+
+    transition: height 200ms ease, z-index 200ms ease 200ms, padding 200ms ease;
+  }
+  .left_box {
+    z-index: ${props => (props.leftOpen ? 10 : 20)};
+    padding: ${props => (props.leftOpen ? '1em 0' : 0)};
+    height: ${props => (props.leftOpen ? '100%' : 0)};
+    display: ${props => (props.leftOpen ? 'block' : 'none')};
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      background-color: ${theme.color.SECONDARY_RED};
+      height: ${props => (props.leftOpen ? '214px' : 0)};
+      display: block;
+    }
+  }
+  .right_box {
+    z-index: ${props => (props.rightOpen ? 10 : 20)};
+    padding: ${props => (props.rightOpen ? '1em 0' : 0)};
+    height: ${props => (props.rightOpen ? '100%' : 0)};
+    display: ${props => (props.rightOpen ? 'block' : 'none')};
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      background-color: ${theme.color.QUATERNARY_GRAY};
+      height: ${props => (props.rightOpen ? '214px' : 0)};
+      display: block;
+    }
+  }
+  .inner {
     padding: 1rem 2rem;
-  } ;
-`
-const CollapseInner = styled.div`
-  position: relative;
-  margin: 0 auto;
-  max-width: 62.5rem;
-  height: 100%;
-  transition: 0.5s 0.5s;
-`
-
-const PrecautionLink = styled(Link)`
-  color: ${theme.color.SECONDARY_RED};
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    color: rgb(253, 253, 150);
-  } ;
-`
-
-const PrecautionList = styled(List)`
-  font-size: 0.8rem;
-  @media screen and (min-width: ${theme.breakpoints.sm}) {
-    font-size: 0.9rem;
+    .petition_list {
+      font-size: 70%;
+      font-size: 0.8rem;
+      height: 100%;
+      @media screen and (min-width: ${theme.breakpoints.sm}) {
+        font-size: 0.9rem;
+      }
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        font-size: 1rem;
+        color: ${theme.color.WHITE};
+      }
+      li:nth-of-type(1) {
+        margin-top: 0;
+      }
+      li {
+        margin-top: 12px;
+        a {
+          color: ${theme.color.SECONDARY_RED};
+          @media screen and (min-width: ${theme.breakpoints.md}) {
+            color: rgb(253, 253, 150);
+          }
+        }
+      }
+      hr {
+        color: #ccc;
+        margin-top: 12px;
+        @media screen and (min-width: ${theme.breakpoints.md}) {
+          color: white;
+        }
+      }
+    }
   }
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    font-size: 1rem;
-  } ;
 `
 
-const MainPetitionBtn = styled(Button)`
+const MainPetitionBtn = styled.button`
   background-color: ${theme.color.SECONDARY_RED};
   color: ${theme.color.WHITE};
   padding: 0.5em 0;
   border-radius: 0;
-  height: ${theme.size.BUTTON_HEIGHT};
-  display: inline-flex;
-  outline: none;
+  height: 2rem;
   font-size: 1rem;
-  /* width: 60rem; */
   transition: all 300ms ease-in;
-  :hover {
-    background-color: ${theme.color.SECONDARY_RED};
-  }
-  :focus {
-    outline: none;
-    box-shadow: none;
-  }
-  :active {
-    outline: none;
-    box-shadow: none;
-  }
   @media screen and (min-width: ${theme.breakpoints.md}) {
     display: none;
   }
 `
 
 export {
-  StyledDiv3,
-  CollapseInner,
-  Precaution,
-  PrecautionText,
+  PrecautionSection,
   PrecautionBtns,
-  PrecautionLeftBtn,
-  PrecautionRightBtn,
-  PrecautionIcon,
-  PrecautionMessage,
-  LeftBox,
-  RightBox,
-  PrecautionLink,
-  Inner,
-  PrecautionList,
-  ButtonInner,
+  PrecautionContents,
   MainPetitionBtn,
 }

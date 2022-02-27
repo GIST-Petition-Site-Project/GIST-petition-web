@@ -1,12 +1,12 @@
 import Inner from '@components/Inner'
 import PetitionList from '@components/PetitionList'
 import { getAnsweredByQuery, getPetitionsByQuery } from '@api/petitionAPI'
-import { PetitionsWrapper } from './styles'
+import { PetitionsSection } from './styles'
 
 const MainPetitions = (): JSX.Element => {
   return (
-    <Inner>
-      <PetitionsWrapper>
+    <PetitionsSection>
+      <Inner>
         <div className="petitions_title">
           <span>추천순 TOP 5</span>
         </div>
@@ -26,8 +26,8 @@ const MainPetitions = (): JSX.Element => {
             getAnsweredByQuery({ size: 5, sort: 'createdAt,desc' })
           }
         ></PetitionList>
-      </PetitionsWrapper>
-    </Inner>
+      </Inner>
+    </PetitionsSection>
   )
 }
 export default MainPetitions
