@@ -58,7 +58,8 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
         content: {
           title: 'GIST 청원',
           description: response?.title,
-          imageUrl: 'https://www.gist.ac.kr/kr/img/sub01/01030301_img01.png',
+          imageUrl:
+            'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
           link: {
             mobileWebUrl: thisUrl,
             webUrl: thisUrl,
