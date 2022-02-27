@@ -10,10 +10,10 @@ const MyInfo = (): JSX.Element => {
       <Stack spacing={4}>
         <span className="title">회원 정보 변경 </span>
         <ul className="MyInfo_List">
-          <Link to="/changepassword">
+          <Link to="/myinfo/changepassword">
             <MyInfoItem text="비밀번호 변경"></MyInfoItem>
           </Link>
-          <Link to="/withdrawal">
+          <Link to="/myinfo/withdrawal">
             <MyInfoItem text="회원 탈퇴"></MyInfoItem>
           </Link>
         </ul>
