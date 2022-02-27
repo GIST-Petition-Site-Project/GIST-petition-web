@@ -9,7 +9,7 @@ const Container = styled.div`
     }
     > .chakra-stack {
       position: relative;
-      margin: 9.375rem 0;
+      margin: 6rem 0;
       h2 {
         font-size: 20px;
       }
