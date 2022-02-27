@@ -142,7 +142,7 @@ const Login = (): JSX.Element => {
           </Button>
 
           <span className="create_acount account_link">
-            계정이 없으신가요? <a href="/register">계정 만들기</a>
+            계정이 없으신가요? <Link to="/register">계정 만들기</Link>
           </span>
         </Stack>
       </form>
