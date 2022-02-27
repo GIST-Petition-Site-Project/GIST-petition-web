@@ -14,10 +14,11 @@ import {
 } from './styles'
 import { useNavigate } from 'react-router-dom'
 import TermsOfUse from './TermsOfUse'
-import { setWhichInfo } from '../../redux/register/registerSlice'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import UserInput from '../../components/UserInput'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
+import { setWhichInfo } from '@redux/userInfo/userInfoSlice'
+import { Link } from 'react-router-dom'
 
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
@@ -37,8 +38,14 @@ const Register = (): JSX.Element => {
     variant: 'toast',
   })
   const dispatch = useAppDispatch()
-  const whichUI = useAppSelect(state => state.register)
+  const whichUI = useAppSelect(state => state.userInfo)
   const [errorText, setErrorText] = useState('')
+
+  useEffect(() => {
+    return () => {
+      dispatch(setWhichInfo('Reset'))
+    }
+  }, [])
 
   const handleAgree = (value: string) => {
     switch (value) {
@@ -319,9 +326,9 @@ const Register = (): JSX.Element => {
           <ErrorText>{errorText}</ErrorText>
           <Text mt="1em" align="center">
             이미 가입하셨나요?{' '}
-            <a href="/login" style={{ textDecoration: 'underline' }}>
+            <Link to="/login" style={{ textDecoration: 'underline' }}>
               로그인
-            </a>
+            </Link>
           </Text>
         </RegisterStack>
       </form>
