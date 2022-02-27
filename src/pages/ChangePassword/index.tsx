@@ -1,15 +1,8 @@
-import React, { FormEvent, useRef, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { Stack, useToast } from '@chakra-ui/react'
 import { ChangePwdButton, Container } from './styles'
-import { useNavigate } from 'react-router-dom'
-import { RootState } from '@redux/store'
-
-import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
-import LoadingSpinner from '@components/LoadingSpinner'
 import { putPasswordMe } from '@api/userAPI'
-import { setWhichInfo } from '@redux/register/registerSlice'
-import { setFindPasswordWhichInfo } from '@redux/findPassword/findPasswordSlice'
 
 interface ChangePassword {
   prevPassword: string
@@ -41,7 +34,6 @@ const ChangePassword = (): JSX.Element => {
       return
     }
     if (input.newPassword === input.newPasswordConfirm) {
-      console.log(input)
       const response = await putPasswordMe({
         newPassword: input.newPassword,
         originPassword: input.prevPassword,

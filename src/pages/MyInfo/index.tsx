@@ -1,14 +1,10 @@
-import React, { FormEvent, useRef, useState } from 'react'
-import { Stack, useToast } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { Container } from './styles'
-import MyInfoList from './MyInfoList'
-import MyInfoItem from './MyInfoList'
+import MyInfoItem from './MyInfoitem'
 import { Link } from 'react-router-dom'
 
 const MyInfo = (): JSX.Element => {
-  const navigate = useNavigate()
-
   return (
     <Container className="register">
       <Stack spacing={4}>

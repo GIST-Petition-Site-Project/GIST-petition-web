@@ -1,6 +1,5 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
-import React from 'react'
 import { List } from './styles'
 
 interface Iprops {
