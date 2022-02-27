@@ -56,9 +56,12 @@ const UserInput = memo(
         WhichIcon = chakra(MdPassword)
         break
       case 'password':
+      case 'prevPassword':
+      case 'newPassword':
         WhichIcon = chakra(FaLock)
         break
       case 'passwordConfirm':
+      case 'newPasswordConfirm':
         WhichIcon = chakra(FaCheck)
         break
       default:

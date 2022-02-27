@@ -38,12 +38,12 @@ const Container = styled.section`
     }
   }
 `
-const RegisterButton = styled.button`
+const WithdrawalButton = styled.button`
   color: ${theme.color.WHITE};
-  background-color: ${theme.color.TERTIARY_GRAY};
+  background-color: ${theme.color.PRIMARY_RED};
   border-radius: 0.1rem;
   height: 2.25rem;
   font-weight: bold;
 `
 
-export { Container, RegisterButton }
+export { Container, WithdrawalButton }
