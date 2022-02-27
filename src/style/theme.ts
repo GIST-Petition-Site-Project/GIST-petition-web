@@ -20,7 +20,7 @@ const color = {
 const size = {
   LOGO_SIZE: '8rem',
   PAGINATION_WIDTH: '5.75rem',
-  BUTTON_HEIGHT: '2rem',
+  BUTTON_HEIGHT: '2.4rem',
 }
 
 const space = {

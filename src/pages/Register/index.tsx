@@ -13,7 +13,6 @@ import {
   Title,
 } from './styles'
 import { useNavigate } from 'react-router-dom'
-
 import TermsOfUse from './TermsOfUse'
 import { setWhichInfo } from '../../redux/register/registerSlice'
 import LoadingSpinner from '../../components/LoadingSpinner'

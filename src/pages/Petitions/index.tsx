@@ -86,6 +86,7 @@ const Petitions = (): JSX.Element => {
               <Select onChange={handleSortSelect} value={sortSelected}>
                 <option value={'createdAt,desc'}>최신순</option>
                 <option value={'agreeCount,desc'}>추천순</option>
+                <option value={'createdAt,asc'}>만료임박순</option>
               </Select>
               <Select onChange={handleCategorySelect} value={categorySelected}>
                 {catergoryIdx.map(item => (
