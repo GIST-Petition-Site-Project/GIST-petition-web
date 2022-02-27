@@ -5,13 +5,7 @@ import {
 } from '@api/verificationAPI'
 import { Text, useToast } from '@chakra-ui/react'
 import { postDelete, postRegister } from '@api/userAPI'
-import {
-  RegisterStack,
-  RegisterButton,
-  ErrorText,
-  DeleteBtn,
-  Title,
-} from './styles'
+import { RegisterStack, RegisterButton, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
 
 import TermsOfUse from './TermsOfUse'
@@ -227,14 +221,24 @@ const Register = (): JSX.Element => {
   return (
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
-        <RegisterStack>
-          <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
-          <Title>회원가입</Title>
+        <RegisterStack spacing={4}>
+          <span>회원가입</span>
           {!whichUI.isAgreed && (
-            <TermsOfUse
-              agreeInfo={agreeInfo}
-              onAgree={handleAgreeBtnClick}
-            ></TermsOfUse>
+            <>
+              <TermsOfUse
+                agreeInfo={agreeInfo}
+                onAgree={handleAgreeBtnClick}
+              ></TermsOfUse>
+              <RegisterButton onClick={handleAgreeBtn}>
+                다음 단계
+              </RegisterButton>
+              <Text align="center">
+                이미 가입하셨나요?{' '}
+                <a href="/login" style={{ textDecoration: 'underline' }}>
+                  로그인
+                </a>
+              </Text>
+            </>
           )}
           {whichUI.isAgreed && (
             <UserInput
@@ -262,31 +266,28 @@ const Register = (): JSX.Element => {
             ></UserInput>
           )}
           {whichUI.isVerificated && (
-            <UserInput
-              text="비밀번호"
-              name="password"
-              type="password"
-              value={input.password}
-              placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
-              onChange={handleChange}
-              disabled={false}
-              onPassword={true}
-            ></UserInput>
-          )}
-          {whichUI.isVerificated && (
-            <UserInput
-              text="비밀번호 확인"
-              name="passwordConfirm"
-              type="password"
-              value={input.passwordConfirm}
-              placeholder="비밀번호를 재입력하세요"
-              onChange={handleChange}
-              disabled={false}
-              onPassword={true}
-            ></UserInput>
-          )}
-          {!whichUI.isAgreed && (
-            <RegisterButton onClick={handleAgreeBtn}>다음 단계</RegisterButton>
+            <>
+              <UserInput
+                text="비밀번호"
+                name="password"
+                type="password"
+                value={input.password}
+                placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
+                onChange={handleChange}
+                disabled={false}
+                onPassword={true}
+              ></UserInput>
+              <UserInput
+                text="비밀번호 확인"
+                name="passwordConfirm"
+                type="password"
+                value={input.passwordConfirm}
+                placeholder="비밀번호를 재입력하세요"
+                onChange={handleChange}
+                disabled={false}
+                onPassword={true}
+              ></UserInput>
+            </>
           )}
           {whichUI.isAgreed &&
             !whichUI.isCodeRequested &&
@@ -318,12 +319,6 @@ const Register = (): JSX.Element => {
             </RegisterButton>
           )}
           <ErrorText>{errorText}</ErrorText>
-          <Text mt="1em" align="center">
-            이미 가입하셨나요?{' '}
-            <a href="/login" style={{ textDecoration: 'underline' }}>
-              로그인
-            </a>
-          </Text>
         </RegisterStack>
       </form>
     </section>

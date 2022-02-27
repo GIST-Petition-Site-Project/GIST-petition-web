@@ -81,6 +81,7 @@ const UserInput = memo(
               onChange={onChange}
               disabled={disabled}
               borderRadius="0"
+              borderColor={'#ccc'}
             ></Input>
             {onPassword && (
               <InputRightElement>
