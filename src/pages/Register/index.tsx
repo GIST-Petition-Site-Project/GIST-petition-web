@@ -3,15 +3,9 @@ import {
   postConfirmVerificationCode,
   postCreateVerificationCode,
 } from '@api/verificationAPI'
+import { postRegister } from '@api/userAPI'
 import { Text, useToast } from '@chakra-ui/react'
-import { postDelete, postRegister } from '@api/userAPI'
-import {
-  RegisterStack,
-  RegisterButton,
-  ErrorText,
-  DeleteBtn,
-  Title,
-} from './styles'
+import { RegisterStack, RegisterButton, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
 import TermsOfUse from './TermsOfUse'
 import LoadingSpinner from '../../components/LoadingSpinner'
@@ -33,7 +27,6 @@ const Register = (): JSX.Element => {
     service: false,
     private: false,
   })
-
   const toast = useToast({
     variant: 'toast',
   })
@@ -108,7 +101,6 @@ const Register = (): JSX.Element => {
     setErrorText(message)
     if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
-      // emailRef.current && emailRef.current.focus()
       dispatch(setWhichInfo('Loading'))
     } else if (status < 400) {
       dispatch(setWhichInfo('Loading'))
@@ -132,7 +124,6 @@ const Register = (): JSX.Element => {
     switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
         setInput({ ...input, verificationCode: '' })
-        // verificationRef.current && verificationRef.current.focus()
         break
       }
       case '만료된 인증 코드입니다.': {
@@ -211,18 +202,6 @@ const Register = (): JSX.Element => {
     dispatch(setWhichInfo('CodeRequested'))
   }
 
-  const handleDelete = async () => {
-    const response = await postDelete({ username: input.username })
-    if (response?.status < 400) {
-      toast({
-        status: 'success',
-        duration: 2000,
-        description: '계정 삭제완료',
-        isClosable: true,
-      })
-    }
-  }
-
   const auth = useAppSelect(select => select.auth.isAuthorized)
   useEffect(() => {
     if (auth) {
@@ -233,14 +212,24 @@ const Register = (): JSX.Element => {
   return (
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
-        <RegisterStack>
-          <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
-          <Title>회원가입</Title>
+        <RegisterStack spacing={4}>
+          <span>회원가입</span>
           {!whichUI.isAgreed && (
-            <TermsOfUse
-              agreeInfo={agreeInfo}
-              onAgree={handleAgreeBtnClick}
-            ></TermsOfUse>
+            <>
+              <TermsOfUse
+                agreeInfo={agreeInfo}
+                onAgree={handleAgreeBtnClick}
+              ></TermsOfUse>
+              <RegisterButton onClick={handleAgreeBtn}>
+                다음 단계
+              </RegisterButton>
+              <Text align="center">
+                이미 가입하셨나요?{' '}
+                <a href="/login" style={{ textDecoration: 'underline' }}>
+                  로그인
+                </a>
+              </Text>
+            </>
           )}
           {whichUI.isAgreed && (
             <UserInput
@@ -268,31 +257,28 @@ const Register = (): JSX.Element => {
             ></UserInput>
           )}
           {whichUI.isVerificated && (
-            <UserInput
-              text="비밀번호"
-              name="password"
-              type="password"
-              value={input.password}
-              placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
-              onChange={handleChange}
-              disabled={false}
-              onPassword={true}
-            ></UserInput>
-          )}
-          {whichUI.isVerificated && (
-            <UserInput
-              text="비밀번호 확인"
-              name="passwordConfirm"
-              type="password"
-              value={input.passwordConfirm}
-              placeholder="비밀번호를 재입력하세요"
-              onChange={handleChange}
-              disabled={false}
-              onPassword={true}
-            ></UserInput>
-          )}
-          {!whichUI.isAgreed && (
-            <RegisterButton onClick={handleAgreeBtn}>다음 단계</RegisterButton>
+            <>
+              <UserInput
+                text="비밀번호"
+                name="password"
+                type="password"
+                value={input.password}
+                placeholder="영문과 숫자를 포함한 8자리 이상의 비밀번호를 입력하세요"
+                onChange={handleChange}
+                disabled={false}
+                onPassword={true}
+              ></UserInput>
+              <UserInput
+                text="비밀번호 확인"
+                name="passwordConfirm"
+                type="password"
+                value={input.passwordConfirm}
+                placeholder="비밀번호를 재입력하세요"
+                onChange={handleChange}
+                disabled={false}
+                onPassword={true}
+              ></UserInput>
+            </>
           )}
           {whichUI.isAgreed &&
             !whichUI.isCodeRequested &&
@@ -324,16 +310,9 @@ const Register = (): JSX.Element => {
             </RegisterButton>
           )}
           <ErrorText>{errorText}</ErrorText>
-          <Text mt="1em" align="center">
-            이미 가입하셨나요?{' '}
-            <Link to="/login" style={{ textDecoration: 'underline' }}>
-              로그인
-            </Link>
-          </Text>
         </RegisterStack>
       </form>
     </section>
   )
 }
-
 export default Register

@@ -81,6 +81,7 @@ const UserInput = memo(
               onChange={onChange}
               disabled={disabled}
               borderRadius="0"
+              borderColor={'#ccc'}
             ></Input>
             {onPassword && (
               <InputRightElement>
@@ -90,6 +91,9 @@ const UserInput = memo(
                   variant="password"
                   icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
                   onClick={handleShowClick}
+                  _focus={{
+                    outline: 'none',
+                  }}
                 ></IconButton>
               </InputRightElement>
             )}
