@@ -27,7 +27,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
         <div className="head_wrap">
           <div className="head_category">분류</div>
           <div className="head_subject">제목</div>
-          <div className="head_date">날짜</div>
+          <div className="head_date">청원 기간</div>
           <div className="head_agreements">참여인원</div>
         </div>
       </PetitionsHead>
@@ -39,7 +39,10 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
             <div className="subject">
               <Link to={`/petitions/${petition.id}`}>{petition.title}</Link>
             </div>
-            <div className="date">{getDay(petition.createdAt)}</div>
+            <div className="date">
+              {getDay(petition.createdAt)} ~{' '}
+              {getDay(petition.createdAt + 2592000000)}
+            </div>
             <div className="agreements">
               {petition.agreements}
               <span>명</span>

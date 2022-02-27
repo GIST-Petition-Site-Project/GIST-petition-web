@@ -45,7 +45,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
 
   const share = (sns: string) => {
     alert('구현중!')
-    // const thisUrl = `https://www.gist-petition.com/${petitionURL}`
+    // const thisUrl = `https://dev.gist-petition.com/${petitionURL}`
     // if (sns == 'facebook') {
     //   const url =
     //     'http://www.facebook.com/sharer/sharer.php?u=' +
@@ -95,7 +95,8 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
                 {!response?.answered ? '청원진행중' : '답변완료'}&nbsp;
               </Text>
               <Text display={'inline'}>
-                ({getDay(response?.createdAt || 0)}~)
+                ({getDay(Number(response?.createdAt))}~
+                {getDay(Number(response?.createdAt) + 2592000000)})
               </Text>
             </PetitionProgress>
             <PetitionTitleWrap>

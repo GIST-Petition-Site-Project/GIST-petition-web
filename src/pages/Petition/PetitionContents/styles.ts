@@ -29,7 +29,7 @@ const CurrentAgreements = styled.span`
 `
 
 const PetitionDescription = styled.div`
-  line-height: 30px;
+  line-height: 1.5em;
   text-align: justify;
 `
 
