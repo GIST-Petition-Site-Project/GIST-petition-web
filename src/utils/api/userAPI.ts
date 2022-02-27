@@ -24,3 +24,11 @@ export const postDelete = async (payload: { username: string }) => {
   const response = await api.delete(`users/username/${payload.username}`)
   return response
 }
+
+export const putPasswordMe = async (payload: {
+  newPassword: string
+  originalPassword: string
+}) => {
+  const response = await api.put(`users/me/password`, payload)
+  return response
+}
