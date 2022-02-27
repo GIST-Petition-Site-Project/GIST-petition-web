@@ -2,10 +2,8 @@ import React, { FormEvent, useRef, useState } from 'react'
 import { Stack, useToast } from '@chakra-ui/react'
 import { Container, WithdrawalButton } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { RootState } from '@redux/store'
-import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
+import { useAppDispatch } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
-import LoadingSpinner from '@components/LoadingSpinner'
 import { deleteUserMe } from '@api/userAPI'
 import { setLogout } from '@redux/auth/authSlice'
 
@@ -13,7 +11,6 @@ const Withdrawal = (): JSX.Element => {
   const navigate = useNavigate()
   const [password, setPassword] = useState('')
 
-  const whichUI = useAppSelect((state: RootState) => state.findPassword)
   const dispatch = useAppDispatch()
   const toast = useToast({
     variant: 'toast',
@@ -70,12 +67,7 @@ const Withdrawal = (): JSX.Element => {
             disabled={false}
             onPassword={true}
           ></UserInput>
-          {!whichUI.isLoading && (
-            <WithdrawalButton onClick={handleDelete}>
-              회원 탈퇴
-            </WithdrawalButton>
-          )}
-          {whichUI.isLoading && <LoadingSpinner></LoadingSpinner>}
+          <WithdrawalButton onClick={handleDelete}>회원 탈퇴</WithdrawalButton>
           <span className="err_msg">{errorText}</span>
         </Stack>
       </form>
