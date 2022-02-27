@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-const initialState: FindPasswordWhichUI = {
+
+const initialState: WhichUI = {
+  isAgreed: false,
   isCodeRequested: false,
   isLoading: false,
   isExpired: false,
@@ -7,12 +9,23 @@ const initialState: FindPasswordWhichUI = {
   isValid: false,
 }
 
-export const findPasswordSlice = createSlice({
-  name: 'findPassword',
+export const userInfoSlice = createSlice({
+  name: 'userInfo',
   initialState,
   reducers: {
-    setFindPasswordWhichInfo: (state, action) => {
+    setWhichInfo: (state, action) => {
       switch (action.payload) {
+        case `Reset`:
+          state.isAgreed = false
+          state.isCodeRequested = false
+          state.isExpired = false
+          state.isLoading = false
+          state.isValid = false
+          state.isVerificated = false
+          break
+        case 'Agreed':
+          state.isAgreed = !state.isAgreed
+          break
         case 'CodeRequested':
           state.isCodeRequested = !state.isCodeRequested
           break
@@ -35,5 +48,5 @@ export const findPasswordSlice = createSlice({
   },
 })
 
-export const { setFindPasswordWhichInfo } = findPasswordSlice.actions
-export default findPasswordSlice.reducer
+export const { setWhichInfo } = userInfoSlice.actions
+export default userInfoSlice.reducer
