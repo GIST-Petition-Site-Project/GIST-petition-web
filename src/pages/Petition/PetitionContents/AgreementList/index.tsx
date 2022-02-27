@@ -11,6 +11,8 @@ import {
   Pagination,
   PaginationPageGroup,
 } from '@ajna/pagination'
+
+import { getDayTime } from '@utils/getTime'
 interface IProps {
   petitionId: string
   totalAgreement: number | undefined
@@ -63,10 +65,11 @@ const AgreementList = ({ petitionId, totalAgreement }: IProps): JSX.Element => {
         {response.map((res, index) => (
           <li key={res.id}>
             <div className="comment">
-              <div className="anonymous">
-                <div>
-                  익명 {Number(totalAgreement) - index - (currentPage - 1) * 10}
+              <div>
+                <div className="anonymous">
+                  # {Number(totalAgreement) - index - (currentPage - 1) * 10}
                 </div>
+                <div className="date">{getDayTime(res.createdAt)}</div>
               </div>
               <div className="content">
                 <div>{res.description}</div>

@@ -9,7 +9,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const [input, setInput] = useState<AgreePetition>({
     description: '동의합니다.',
   })
-  const [isConsented, setIsConsented] = useState(true)
+  const [isConsented, setIsConsented] = useState<boolean>(true)
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ description: e.target.value.replace(/ +/g, ' ') })
@@ -31,7 +31,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
     }
   }
 
-  const checkAgreeByMe = async (id: string) => {
+  const fetch = async (id: string) => {
     try {
       const response = await getStateOfAgreement(id)
       if (response.status < 400) {
@@ -43,7 +43,7 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   }
 
   useEffect(() => {
-    checkAgreeByMe(petitionId)
+    fetch(petitionId)
   }, [petitionId])
 
   const { isOpen, onOpen, onClose } = useDisclosure()

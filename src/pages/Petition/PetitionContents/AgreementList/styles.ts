@@ -13,14 +13,17 @@ const CommentList = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      .anonymous {
+      > div:nth-of-type(1) {
+        display: flex;
+        justify-content: space-between;
         font-size: 14px;
-        font-weight: 600;
         color: #8a8a8a;
-      }
-      .content {
-        margin-top: 8px;
-        white-space: pre-line;
+        .anonymous {
+          font-weight: 600;
+        }
+        .date {
+          font-weight: 400;
+        }
       }
     }
   }

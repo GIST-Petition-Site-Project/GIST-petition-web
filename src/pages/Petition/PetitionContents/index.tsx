@@ -14,7 +14,7 @@ import AgreementList from './AgreementList'
 import AgreementForm from './AgreementForm'
 import { useDisclosure } from '@chakra-ui/react'
 import NeedLoginModal from '@components/NeedLoginModal'
-import { getDay } from '@utils/time'
+import { getDay } from '@utils/getTime'
 
 interface IProps {
   petitionURL: string

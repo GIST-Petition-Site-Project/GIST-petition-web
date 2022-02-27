@@ -41,6 +41,7 @@ interface AgreePetition {
 interface GetAgreements {
   description: string
   id: number
+  createdAt: number
   totalPages: number
 }
 interface Window {
