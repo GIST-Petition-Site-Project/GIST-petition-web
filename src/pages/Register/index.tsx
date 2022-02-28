@@ -81,12 +81,14 @@ const Register = (): JSX.Element => {
   const handleAgreeBtn = () => {
     if (agreeInfo.private === true && agreeInfo.service === true) {
       dispatch(setWhichInfo('Agreed'))
+      setErrorText('')
       return
     }
     setErrorText('모든 약관에 동의해주세요')
   }
 
   const handleCreateCode = async () => {
+    setErrorText('')
     const emailRegex = /@(gm.)?gist.ac.kr$/
     if (!emailRegex.test(input.username)) {
       setErrorText('지스트 메일을 이용해주세요')
