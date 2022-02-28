@@ -36,16 +36,16 @@ const Register = (): JSX.Element => {
   })
   const dispatch = useAppDispatch()
   const whichUI = useAppSelect(state => state.userInfo)
-  const btnUI = useAppSelect(state => state.userInfo.btnUI)
-  const contentUI = useAppSelect(state => state.userInfo.contentUI)
   const [errorText, setErrorText] = useState('')
-  const [btnState, setBtnState] = useState('')
-  const [contentState, setContentState] = useState('')
+  const [btnUI, setBtnState] = useState('')
+  const [contentUI, setContentState] = useState('TermsOfUse')
 
+  const auth = useAppSelect(select => select.auth.isAuthorized)
   useEffect(() => {
-    setBtnState(btnUI)
-    setContentState(contentState)
-  }, [btnUI, contentState])
+    if (auth) {
+      window.history.back()
+    }
+  }, [useAppSelect(select => select.auth.isAuthorized)])
 
   useEffect(() => {
     return () => {
@@ -94,8 +94,8 @@ const Register = (): JSX.Element => {
   const handleAgreeBtn = () => {
     if (agreeInfo.private === true && agreeInfo.service === true) {
       // dispatch(setWhichInfo('Agreed'))
-      dispatch(setBtnInfo('Agreed'))
-      dispatch(setContentInfo('Agreed'))
+      setBtnState('Agreed')
+      setContentState('Email')
       setErrorText('')
       return
     }
@@ -110,7 +110,7 @@ const Register = (): JSX.Element => {
       return
     }
     // dispatch(setWhichInfo('Loading'))
-    dispatch(setBtnInfo('Loading'))
+    setBtnState('Loading')
     const response = await postCreateVerificationCode({
       username: input.username,
     })
@@ -120,12 +120,12 @@ const Register = (): JSX.Element => {
     if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
       // dispatch(setWhichInfo('Loading'))
-      dispatch(setBtnInfo('Agreed'))
+      setBtnState('Agreed')
     } else if (status < 400) {
       // dispatch(setWhichInfo('Loading'))
       // dispatch(setWhichInfo('CodeRequested'))
-      dispatch(setContentInfo('CodeRequested'))
-      dispatch(setBtnInfo('CodeRequested'))
+      setContentState('CodeVerification')
+      setBtnState('CodeRequested')
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -139,9 +139,9 @@ const Register = (): JSX.Element => {
     const message = response?.data.message
     if (status < 400) {
       // dispatch(setWhichInfo('Verificated'))
-      dispatch(setContentInfo('Verificated'))
+      setContentState('Password')
       // dispatch(setWhichInfo('Valid'))
-      dispatch(setBtnInfo('Valid'))
+      setBtnState('Valid')
       return
     }
     switch (message) {
@@ -152,8 +152,8 @@ const Register = (): JSX.Element => {
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
         // dispatch(setWhichInfo('Expired'))
-        dispatch(setContentInfo('Agreed'))
-        dispatch(setBtnInfo('Expired'))
+        setContentState('Email')
+        setBtnState('Expired')
         break
       }
       case undefined: {
@@ -165,7 +165,7 @@ const Register = (): JSX.Element => {
 
   const handleResendCode = async () => {
     // dispatch(setWhichInfo('Loading'))
-    dispatch(setBtnInfo('Loading'))
+    setBtnState('Loading')
     setErrorText('')
     const response = await postCreateVerificationCode({
       username: input.username,
@@ -174,8 +174,8 @@ const Register = (): JSX.Element => {
     if (status < 400) {
       // dispatch(setWhichInfo('Expired'))
       // dispatch(setWhichInfo('Loading'))
-      dispatch(setBtnInfo('CodeRequested'))
-      dispatch(setContentInfo('CodeRequested'))
+      setBtnState('CodeRequested')
+      setContentState('CodeVerification')
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -207,7 +207,7 @@ const Register = (): JSX.Element => {
         })
         navigate('/login')
       } else {
-        dispatch(setBtnInfo('Invalid'))
+        setBtnState('Invalid')
       }
     } else {
       // passwordRef.current && passwordRef.current.focus()
@@ -227,23 +227,15 @@ const Register = (): JSX.Element => {
     })
     setErrorText('')
     // dispatch(setWhichInfo('Agreed'))
-    dispatch(setContentInfo('Agreed'))
-    dispatch(setBtnInfo('Agreed'))
+    setContentState('Email')
+    setBtnState('Agreed')
   }
-
-  const auth = useAppSelect(select => select.auth.isAuthorized)
-  useEffect(() => {
-    if (auth) {
-      window.history.back()
-    }
-  }, [useAppSelect(select => select.auth.isAuthorized)])
-
   return (
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
         <RegisterStack spacing={4}>
           <span>회원가입</span>
-          {contentUI === 'Disagreed' && (
+          {contentUI === 'TermsOfUse' && (
             <>
               <TermsOfUse
                 agreeInfo={agreeInfo}
@@ -260,7 +252,7 @@ const Register = (): JSX.Element => {
               </Text>
             </>
           )}
-          {contentUI === 'Agreed' && (
+          {contentUI === 'Email' && (
             <UserInput
               text="이메일"
               name="username"
@@ -273,7 +265,7 @@ const Register = (): JSX.Element => {
             ></UserInput>
           )}
 
-          {contentUI === 'CodeRequested' && (
+          {contentUI === 'CodeVerification' && (
             <>
               <UserInput
                 text="이메일"
@@ -297,7 +289,7 @@ const Register = (): JSX.Element => {
               ></UserInput>
             </>
           )}
-          {contentUI === 'Verificated' && (
+          {contentUI === 'Password' && (
             <>
               <UserInput
                 text="이메일"
@@ -341,26 +333,26 @@ const Register = (): JSX.Element => {
               ></UserInput>
             </>
           )}
-          {btnState === 'Loading' && <LoadingSpinner></LoadingSpinner>}
-          {btnState === 'Agreed' && (
+          {btnUI === 'Loading' && <LoadingSpinner></LoadingSpinner>}
+          {btnUI === 'Agreed' && (
             <RegisterButton onClick={handleCreateCode}>
               인증 코드 전송
             </RegisterButton>
           )}
-          {btnState === 'Expired' && (
+          {btnUI === 'Expired' && (
             <RegisterButton onClick={handleResendCode}>
               인증코드 재전송
             </RegisterButton>
           )}
-          {btnState === 'CodeRequested' && (
+          {btnUI === 'CodeRequested' && (
             <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
           )}
-          {btnState === 'Invalid' && (
+          {btnUI === 'Invalid' && (
             <RegisterButton onClick={handleReverify}>
               다시 인증하기
             </RegisterButton>
           )}
-          {btnState === 'Valid' && (
+          {btnUI === 'Valid' && (
             <RegisterButton onClick={handleRegister} className="submit__btn">
               회원가입
             </RegisterButton>
