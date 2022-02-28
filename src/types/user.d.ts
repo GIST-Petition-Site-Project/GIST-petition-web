@@ -36,6 +36,8 @@ interface WhichUI {
   isExpired: boolean
   isVerificated: boolean
   isValid: boolean
+  btnUI: string
+  contentUI: string
 }
 
 interface RegisterAgree {
