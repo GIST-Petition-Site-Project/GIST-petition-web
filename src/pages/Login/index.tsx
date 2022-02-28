@@ -90,7 +90,7 @@ const Login = (): JSX.Element => {
                 type="email"
                 name="username"
                 id="uesrname"
-                placeholder="이메일을 입력하세요."
+                placeholder="지스트 이메일을 입력하세요."
                 // value={input.userEmail}
                 // onChange={handleChangeUser}
               />

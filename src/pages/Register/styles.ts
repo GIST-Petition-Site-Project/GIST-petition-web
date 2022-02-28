@@ -3,21 +3,13 @@ import styled from '@emotion/styled'
 import theme from '@style/theme'
 
 const RegisterStack = styled(Stack)`
-  /* position: absolute;
-  top: 10rem;
-  left: 0;
-  right: 0;
-  width: 70%;
-  max-width: 30em;
-  margin: auto; */
-
   height: 100vh;
   max-width: 28rem;
   margin: auto;
   justify-content: center;
   padding: 0 2rem;
 
-  span:nth-of-type(1) {
+  > span:nth-of-type(1) {
     font-size: 2rem;
     font-weight: bold;
   }

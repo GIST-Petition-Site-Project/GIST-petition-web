@@ -45,6 +45,7 @@ const ContentWrap = styled.div`
 `
 
 const SharingPetition = styled.div`
+  margin: 5rem 0;
   .share-url {
     height: 2rem;
     margin: 1rem 0;
@@ -102,6 +103,9 @@ const SharingPetition = styled.div`
         color: white;
         @media screen and (min-width: ${theme.breakpoints.sm}) {
           content: '복사';
+          font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+            Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
+            'Noto Sans KR', 'Malgun Gothic', sans-serif;
         }
       }
     }
@@ -110,7 +114,6 @@ const SharingPetition = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
     > div {
       font-weight: 600;
     }
