@@ -227,9 +227,9 @@ const Register = (): JSX.Element => {
               </RegisterButton>
               <Text align="center">
                 이미 가입하셨나요?{' '}
-                <a href="/login" style={{ textDecoration: 'underline' }}>
+                <Link to="/login" style={{ textDecoration: 'underline' }}>
                   로그인
-                </a>
+                </Link>
               </Text>
             </>
           )}
