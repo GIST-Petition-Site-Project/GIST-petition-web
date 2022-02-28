@@ -102,6 +102,7 @@ const SharingPetition = styled.div`
         color: white;
         @media screen and (min-width: ${theme.breakpoints.sm}) {
           content: '복사';
+          /* font-family: 'Courier New', Courier, monospace; */
         }
       }
     }

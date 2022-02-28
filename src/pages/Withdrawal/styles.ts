@@ -13,23 +13,9 @@ const Container = styled.section`
       font-size: 2rem;
       font-weight: bold;
     }
-    .chakra-form-control {
-      > span {
-        display: inline-block;
-        margin-bottom: 0.5rem;
-      }
-      .chakra-input__group {
-        border-color: #ccc;
-        .chakra-input {
-          border-radius: 0;
-        }
-        .chakra-input__right-element {
-          .chakra-button {
-            :focus {
-              box-shadow: none;
-            }
-          }
-        }
+    .chakra-button {
+      :focus {
+        box-shadow: none;
       }
     }
     .err_msg {
