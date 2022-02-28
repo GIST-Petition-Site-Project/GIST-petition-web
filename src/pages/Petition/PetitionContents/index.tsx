@@ -31,12 +31,18 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
   >()
   const { isOpen, onClose } = useDisclosure()
 
+  const fetch = async (petitionURL: string) => {
+    const response = await getPetitionById(petitionURL)
+    setResponse(response?.data)
+    const getAnswer = await getRetrieveAnswer(petitionId)
+    setAnswerContent(getAnswer?.data)
+
+    share('kakaotalk')
+  }
   const clip = () => {
-    let url = ''
     const textarea = document.createElement('textarea')
     document.body.appendChild(textarea)
-    url = String(document.querySelector('.url')?.textContent)
-    textarea.value = url
+    textarea.value = String(location)
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
@@ -51,13 +57,15 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
         encodeURIComponent(thisUrl)
       window.open(url, '', 'width=486, height=286')
     } else if (sns == 'kakaotalk') {
-      window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
+      if (!window.Kakao.isInitialized()) {
+        window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
+      }
       window.Kakao.Link.createDefaultButton({
         container: '#btnKakao',
         objectType: 'feed',
         content: {
-          title: 'GIST 청원',
-          description: response?.title,
+          title: response?.title || 'GIST 청원',
+          description: response?.description || '',
           imageUrl:
             'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
           link: {
@@ -70,13 +78,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
   }
 
   useEffect(() => {
-    const getPetitionInformation = async (petitionURL: string) => {
-      const response = await getPetitionById(petitionURL)
-      setResponse(response?.data)
-      const getAnswer = await getRetrieveAnswer(petitionId)
-      setAnswerContent(getAnswer?.data)
-    }
-    getPetitionInformation(petitionURL)
+    fetch(petitionURL)
   }, [petitionId])
 
   return (
@@ -131,7 +133,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
               </ContentWrap>
             </div>
           </Stack>
-          {response?.answered ? (
+          {response?.answered && (
             <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
               <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
                 답변
@@ -145,79 +147,75 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
                 </ContentWrap>
               </div>
             </Stack>
-          ) : (
-            <div>
-              <SharingPetition>
-                <div className="share-btns">
-                  <div>공유하기</div>
-                  <ul className="sns">
-                    <li className="kakaotalk">
-                      <a
-                        href="#n"
-                        id="btnKakao"
-                        onClick={() => {
-                          share('kakaotalk')
-                          return false
-                        }}
-                        className="kakaotalk"
-                        target="_self"
-                        title="카카오톡 새창열림"
-                      >
-                        <RiKakaoTalkFill />
-                      </a>
-                    </li>
-                    <li className="facebook">
-                      <a
-                        href="#n"
-                        onClick={() => {
-                          share('facebook')
-                          return false
-                        }}
-                        className="facebook"
-                        target="_self"
-                        title="페이스북 새창열림"
-                      >
-                        <RiFacebookFill />
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="share-url">
-                  <div className="url-box">
-                    <div>URL</div>
-                    <div className="url">
-                      https://www.gist-petition.com/
-                      {petitionURL}
-                    </div>
-                  </div>
-                  <div className="copy-btn">
-                    <button onClick={clip}>
-                      <IoMdAlbums />
-                    </button>
-                  </div>
-                </div>
-              </SharingPetition>
-              <Stack>
-                <Text
-                  textAlign={'left'}
-                  fontWeight={'bold'}
-                  fontSize={'20px'}
-                  p={'0.5em 0'}
-                >
-                  청원동의{' '}
-                  <span style={{ color: '#FF0000' }}>
-                    {response?.agreements}{' '}
-                  </span>
-                  명
-                </Text>
-                <AgreementForm petitionId={petitionId}></AgreementForm>
-                <AgreementList
-                  petitionId={petitionId}
-                  totalAgreement={response?.agreements}
-                ></AgreementList>
-              </Stack>
-            </div>
           )}
+          <div>
+            <SharingPetition>
+              <div className="share-btns">
+                <div>공유하기</div>
+                <ul className="sns">
+                  <li className="kakaotalk">
+                    <a
+                      href="#n"
+                      id="btnKakao"
+                      onClick={() => {
+                        share('kakaotalk')
+                        return false
+                      }}
+                      className="kakaotalk"
+                      target="_self"
+                      title="카카오톡 새창열림"
+                    >
+                      <RiKakaoTalkFill />
+                    </a>
+                  </li>
+                  <li className="facebook">
+                    <a
+                      href="#n"
+                      onClick={() => {
+                        share('facebook')
+                        return false
+                      }}
+                      className="facebook"
+                      target="_self"
+                      title="페이스북 새창열림"
+                    >
+                      <RiFacebookFill />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="share-url">
+                <div className="url-box">
+                  <div>URL</div>
+                  <div className="url">{String(location)}</div>
+                </div>
+                <div className="copy-btn">
+                  <button onClick={clip}>
+                    <IoMdAlbums />
+                  </button>
+                </div>
+              </div>
+            </SharingPetition>
+            <Stack>
+              <Text
+                textAlign={'left'}
+                fontWeight={'bold'}
+                fontSize={'20px'}
+                p={'0.5em 0'}
+              >
+                청원동의{' '}
+                <span style={{ color: '#FF0000' }}>
+                  {response?.agreements}{' '}
+                </span>
+                명
+              </Text>
+              <AgreementForm petitionId={petitionId}></AgreementForm>
+              <AgreementList
+                petitionId={petitionId}
+                totalAgreement={response?.agreements}
+              ></AgreementList>
+            </Stack>
+          </div>
 
           <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
         </>
