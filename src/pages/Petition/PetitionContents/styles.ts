@@ -45,6 +45,7 @@ const ContentWrap = styled.div`
 `
 
 const SharingPetition = styled.div`
+  margin: 5rem 0;
   .share-url {
     height: 2rem;
     margin: 1rem 0;
@@ -113,7 +114,6 @@ const SharingPetition = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
     > div {
       font-weight: 600;
     }

@@ -25,6 +25,9 @@ const CommentList = styled.div`
           font-weight: 400;
         }
       }
+      .content {
+        margin-top: 8px;
+      }
     }
   }
 `
