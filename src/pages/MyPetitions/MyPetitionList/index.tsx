@@ -17,7 +17,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   }
 
   const [petitionList, setPetitionList] = useState<Array<Petition>>([])
-
+  console.log(petitionList)
   useEffect(() => {
     fetch(queryParams)
   }, [location.search])

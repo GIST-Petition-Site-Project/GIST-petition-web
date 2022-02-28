@@ -30,13 +30,12 @@ const PetitionsHead = styled.div`
     .head_category {
       position: absolute;
       top: 0;
-      left: 90px;
-      width: 130px;
+      left: 110px;
+      width: 140px;
       text-align: center;
     }
     .head_subject {
-      margin-left: 220px;
-      margin-right: 220px;
+      margin: 0 220px 0 280px;
     }
     .head_date {
       position: absolute;
@@ -61,7 +60,7 @@ const PetitionsUl = styled.ul`
 
   li {
     position: relative;
-    padding: 15px 0;
+    padding: 20px 0;
     border-bottom: 1px solid #ddd;
     :hover {
       background-color: #f8f8f8;
@@ -74,14 +73,17 @@ const PetitionsUl = styled.ul`
       margin: 0;
       font-size: 12px;
       padding-left: 5px;
+      width: unset;
       @media screen and (min-width: ${theme.breakpoints.md}) {
         position: absolute;
-        left: 133px;
+        text-align: center;
+        left: 110px;
         bottom: 0;
         top: 0;
+        width: 140px;
         height: 1rem;
         margin: auto;
-        font-size: 1rem;
+        font-size: 0.9rem;
         padding-left: 0;
       }
     }
@@ -95,7 +97,7 @@ const PetitionsUl = styled.ul`
       @media screen and (min-width: ${theme.breakpoints.md}) {
         padding-left: 0;
         padding-bottom: 0;
-        margin: 0 220px 0 220px;
+        margin: 0 220px 0 280px;
       }
       :hover {
         text-decoration: underline;
