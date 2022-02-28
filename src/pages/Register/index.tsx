@@ -4,19 +4,16 @@ import {
   postCreateVerificationCode,
 } from '@api/verificationAPI'
 import { postRegister } from '@api/userAPI'
-import { StatHelpText, Text, useToast } from '@chakra-ui/react'
+import { Text, useToast } from '@chakra-ui/react'
 import { RegisterStack, RegisterButton, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
 import TermsOfUse from './TermsOfUse'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import UserInput from '../../components/UserInput'
-import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
-import {
-  setBtnInfo,
-  setContentInfo,
-  setWhichInfo,
-} from '@redux/userInfo/userInfoSlice'
+import { useAppSelect } from '@redux/store.hooks'
 import { Link } from 'react-router-dom'
+import Email from './Email'
+import EmailAndVerification from './EmailAndVerification'
 
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
@@ -34,8 +31,6 @@ const Register = (): JSX.Element => {
   const toast = useToast({
     variant: 'toast',
   })
-  const dispatch = useAppDispatch()
-  const whichUI = useAppSelect(state => state.userInfo)
   const [errorText, setErrorText] = useState('')
   const [btnUI, setBtnState] = useState('')
   const [contentUI, setContentState] = useState('TermsOfUse')
@@ -46,12 +41,6 @@ const Register = (): JSX.Element => {
       window.history.back()
     }
   }, [useAppSelect(select => select.auth.isAuthorized)])
-
-  useEffect(() => {
-    return () => {
-      dispatch(setWhichInfo('Reset'))
-    }
-  }, [])
 
   const handleAgree = (value: string) => {
     switch (value) {
@@ -93,7 +82,6 @@ const Register = (): JSX.Element => {
 
   const handleAgreeBtn = () => {
     if (agreeInfo.private === true && agreeInfo.service === true) {
-      // dispatch(setWhichInfo('Agreed'))
       setBtnState('Agreed')
       setContentState('Email')
       setErrorText('')
@@ -109,7 +97,6 @@ const Register = (): JSX.Element => {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
-    // dispatch(setWhichInfo('Loading'))
     setBtnState('Loading')
     const response = await postCreateVerificationCode({
       username: input.username,
@@ -119,11 +106,8 @@ const Register = (): JSX.Element => {
     setErrorText(message)
     if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
-      // dispatch(setWhichInfo('Loading'))
       setBtnState('Agreed')
     } else if (status < 400) {
-      // dispatch(setWhichInfo('Loading'))
-      // dispatch(setWhichInfo('CodeRequested'))
       setContentState('CodeVerification')
       setBtnState('CodeRequested')
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
@@ -138,9 +122,7 @@ const Register = (): JSX.Element => {
     const status = response?.status
     const message = response?.data.message
     if (status < 400) {
-      // dispatch(setWhichInfo('Verificated'))
       setContentState('Password')
-      // dispatch(setWhichInfo('Valid'))
       setBtnState('Valid')
       return
     }
@@ -151,7 +133,6 @@ const Register = (): JSX.Element => {
       }
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
-        // dispatch(setWhichInfo('Expired'))
         setContentState('Email')
         setBtnState('Expired')
         break
@@ -164,7 +145,6 @@ const Register = (): JSX.Element => {
   }
 
   const handleResendCode = async () => {
-    // dispatch(setWhichInfo('Loading'))
     setBtnState('Loading')
     setErrorText('')
     const response = await postCreateVerificationCode({
@@ -172,8 +152,6 @@ const Register = (): JSX.Element => {
     })
     const status = response.status
     if (status < 400) {
-      // dispatch(setWhichInfo('Expired'))
-      // dispatch(setWhichInfo('Loading'))
       setBtnState('CodeRequested')
       setContentState('CodeVerification')
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
@@ -226,7 +204,6 @@ const Register = (): JSX.Element => {
       passwordConfirm: '',
     })
     setErrorText('')
-    // dispatch(setWhichInfo('Agreed'))
     setContentState('Email')
     setBtnState('Agreed')
   }
@@ -253,64 +230,29 @@ const Register = (): JSX.Element => {
             </>
           )}
           {contentUI === 'Email' && (
-            <UserInput
-              text="이메일"
-              name="username"
-              type="email"
+            <Email
               value={input.username}
-              placeholder="지스트 이메일을 입력하세요."
               onChange={handleChange}
-              disabled={whichUI.isCodeRequested}
-              onPassword={false}
-            ></UserInput>
+              disabled={false}
+            ></Email>
           )}
 
           {contentUI === 'CodeVerification' && (
-            <>
-              <UserInput
-                text="이메일"
-                name="username"
-                type="email"
-                value={input.username}
-                placeholder="지스트 이메일을 입력하세요."
-                onChange={handleChange}
-                disabled={whichUI.isCodeRequested}
-                onPassword={false}
-              ></UserInput>
-              <UserInput
-                text="인증 코드"
-                name="verificationCode"
-                type="text"
-                value={input.verificationCode}
-                placeholder="이메일로 온 인증 코드를 입력하세요."
-                onChange={handleChange}
-                disabled={whichUI.isVerificated}
-                onPassword={false}
-              ></UserInput>
-            </>
+            <EmailAndVerification
+              emailValue={input.username}
+              verificationValue={input.verificationCode}
+              disabled={false}
+              onChange={handleChange}
+            ></EmailAndVerification>
           )}
           {contentUI === 'Password' && (
             <>
-              <UserInput
-                text="이메일"
-                name="username"
-                type="email"
-                value={input.username}
-                placeholder="지스트 이메일을 입력하세요."
+              <EmailAndVerification
+                emailValue={input.username}
+                verificationValue={input.verificationCode}
+                disabled={true}
                 onChange={handleChange}
-                disabled={whichUI.isCodeRequested}
-                onPassword={false}
-              ></UserInput>
-              <UserInput
-                text="인증 코드"
-                name="verificationCode"
-                type="text"
-                value={input.verificationCode}
-                placeholder="이메일로 온 인증 코드를 입력하세요."
-                onChange={handleChange}
-                disabled={whichUI.isVerificated}
-                onPassword={false}
-              ></UserInput>
+              ></EmailAndVerification>
               <UserInput
                 text="비밀번호"
                 name="password"
