@@ -32,8 +32,8 @@ const Register = (): JSX.Element => {
     variant: 'toast',
   })
   const [errorText, setErrorText] = useState('')
-  const [btnUI, setBtnState] = useState('')
-  const [contentUI, setContentState] = useState('TermsOfUse')
+  const [btnUI, setBtnUI] = useState('')
+  const [contentUI, setContentUI] = useState('TermsOfUse')
 
   const auth = useAppSelect(select => select.auth.isAuthorized)
   useEffect(() => {
@@ -82,8 +82,8 @@ const Register = (): JSX.Element => {
 
   const handleAgreeBtn = () => {
     if (agreeInfo.private === true && agreeInfo.service === true) {
-      setBtnState('Agreed')
-      setContentState('Email')
+      setBtnUI('Agreed')
+      setContentUI('Email')
       setErrorText('')
       return
     }
@@ -97,7 +97,7 @@ const Register = (): JSX.Element => {
       setErrorText('지스트 메일을 이용해주세요')
       return
     }
-    setBtnState('Loading')
+    setBtnUI('Loading')
     const response = await postCreateVerificationCode({
       username: input.username,
     })
@@ -106,10 +106,10 @@ const Register = (): JSX.Element => {
     setErrorText(message)
     if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
-      setBtnState('Agreed')
+      setBtnUI('Agreed')
     } else if (status < 400) {
-      setContentState('CodeVerification')
-      setBtnState('CodeRequested')
+      setContentUI('CodeVerification')
+      setBtnUI('CodeRequested')
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -122,8 +122,8 @@ const Register = (): JSX.Element => {
     const status = response?.status
     const message = response?.data.message
     if (status < 400) {
-      setContentState('Password')
-      setBtnState('Valid')
+      setContentUI('Password')
+      setBtnUI('Valid')
       return
     }
     switch (message) {
@@ -133,8 +133,8 @@ const Register = (): JSX.Element => {
       }
       case '만료된 인증 코드입니다.': {
         setInput({ ...input, verificationCode: '' })
-        setContentState('Email')
-        setBtnState('Expired')
+        setContentUI('Email')
+        setBtnUI('Expired')
         break
       }
       case undefined: {
@@ -145,15 +145,15 @@ const Register = (): JSX.Element => {
   }
 
   const handleResendCode = async () => {
-    setBtnState('Loading')
+    setBtnUI('Loading')
     setErrorText('')
     const response = await postCreateVerificationCode({
       username: input.username,
     })
     const status = response.status
     if (status < 400) {
-      setBtnState('CodeRequested')
-      setContentState('CodeVerification')
+      setBtnUI('CodeRequested')
+      setContentUI('CodeVerification')
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
@@ -185,7 +185,7 @@ const Register = (): JSX.Element => {
         })
         navigate('/login')
       } else {
-        setBtnState('Invalid')
+        setBtnUI('Invalid')
       }
     } else {
       // passwordRef.current && passwordRef.current.focus()
@@ -204,8 +204,8 @@ const Register = (): JSX.Element => {
       passwordConfirm: '',
     })
     setErrorText('')
-    setContentState('Email')
-    setBtnState('Agreed')
+    setContentUI('Email')
+    setBtnUI('Agreed')
   }
   return (
     <section className="register">
