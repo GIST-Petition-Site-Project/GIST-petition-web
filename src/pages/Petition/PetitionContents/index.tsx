@@ -191,7 +191,9 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
               <span className="num_of_agree">
                 청원동의 <span>{response?.agreements} </span>명
               </span>
-              <AgreementForm petitionId={petitionId}></AgreementForm>
+              {!response?.expired && (
+                <AgreementForm petitionId={petitionId}></AgreementForm>
+              )}
               <AgreementList
                 petitionId={petitionId}
                 totalAgreement={response?.agreements}
