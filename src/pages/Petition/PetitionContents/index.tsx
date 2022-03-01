@@ -18,18 +18,39 @@ import NeedLoginModal from '@components/NeedLoginModal'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
+import { idText } from 'typescript'
 
-interface IProps {
-  petitionURL: string
-  petitionId: string
+interface Props {
+  id: string
+  petition: Petition | undefined
+  answer: Answer | undefined
+  totalPages: number
+  totalAgreement: number
+  agreements: Agreement[]
+  isConsented: boolean
 }
 
-const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
-  const [response, setResponse] = useState<Petition | undefined>()
-  const [answerContent, setAnswerContent] = useState<
-    AnswerContent | undefined
-  >()
+const PetitionContents = ({
+  id,
+  petition,
+  answer,
+  totalPages,
+  agreements,
+  totalAgreement,
+  isConsented,
+}: Props): JSX.Element => {
   const { isOpen, onClose } = useDisclosure()
+
+  const agreementListProps = {
+    totalAgreement,
+    totalPages,
+    agreements,
+  }
+
+  const agreementFormProps = {
+    id,
+    isConsented,
+  }
 
   const clip = () => {
     let url = ''
@@ -44,7 +65,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
   }
 
   const share = (sns: string) => {
-    const thisUrl = `https://dev.gist-petition.com/${petitionURL}`
+    const thisUrl = location.href
     if (sns == 'facebook') {
       const url =
         'http://www.facebook.com/sharer/sharer.php?u=' +
@@ -57,7 +78,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
         objectType: 'feed',
         content: {
           title: 'GIST 청원',
-          description: response?.title,
+          description: petition?.title,
           imageUrl:
             'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
           link: {
@@ -69,22 +90,12 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
     }
   }
 
-  useEffect(() => {
-    const getPetitionInformation = async (petitionURL: string) => {
-      const response = await getPetitionById(petitionURL)
-      setResponse(response?.data)
-      const getAnswer = await getRetrieveAnswer(petitionId)
-      setAnswerContent(getAnswer?.data)
-    }
-    getPetitionInformation(petitionURL)
-  }, [petitionId])
-
   return (
     <>
-      {response?.message !== undefined ? (
+      {petition?.message !== undefined ? (
         <PetitionTitleWrap>
           <PetitionTitle ml={'20px'} mr={'20px'}>
-            {response?.message}
+            {petition?.message}
           </PetitionTitle>
         </PetitionTitleWrap>
       ) : (
@@ -92,21 +103,21 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
           <Stack spacing={6} color={'#333'}>
             <PetitionProgress>
               <Text fontWeight={'bold'} display={'inline-block'}>
-                {!response?.answered ? '청원진행중' : '답변완료'}&nbsp;
+                {!petition?.answered ? '청원진행중' : '답변완료'}&nbsp;
               </Text>
               <Text display={'inline'}>
-                ({getDay(Number(response?.createdAt))}~
-                {getDay(Number(response?.createdAt) + 2592000000)})
+                ({getDay(Number(petition?.createdAt))}~
+                {getDay(Number(petition?.createdAt) + 2592000000)})
               </Text>
             </PetitionProgress>
             <PetitionTitleWrap>
               <PetitionTitle ml={'20px'} mr={'20px'}>
-                {response?.title}
+                {petition?.title}
               </PetitionTitle>
             </PetitionTitleWrap>
             <CurrentAgreementsText>
               <Text>
-                총 <CurrentAgreements>{response?.agreements}</CurrentAgreements>
+                총 <CurrentAgreements>{petition?.agreements}</CurrentAgreements>
                 명이 동의했습니다.
               </Text>
             </CurrentAgreementsText>
@@ -119,12 +130,12 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
             <div>
               <ContentWrap>
                 <PetitionDescription>
-                  {response?.description}
+                  {petition?.description}
                 </PetitionDescription>
               </ContentWrap>
             </div>
           </Stack>
-          {response?.answered ? (
+          {petition?.answered ? (
             <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
               <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
                 답변
@@ -132,9 +143,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
               <Divider color={'#ccc'}></Divider>
               <div>
                 <ContentWrap>
-                  <PetitionDescription>
-                    {answerContent?.content}
-                  </PetitionDescription>
+                  <PetitionDescription>{answer?.content}</PetitionDescription>
                 </ContentWrap>
               </div>
             </Stack>
@@ -178,10 +187,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
                 <div className="share-url">
                   <div className="url-box">
                     <div>URL</div>
-                    <div className="url">
-                      https://www.gist-petition.com/
-                      {petitionURL}
-                    </div>
+                    <div className="url">{location.href}</div>
                   </div>
                   <div className="copy-btn">
                     <button onClick={clip}>
@@ -199,15 +205,12 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
                 >
                   청원동의{' '}
                   <span style={{ color: '#FF0000' }}>
-                    {response?.agreements}{' '}
+                    {petition?.agreements}{' '}
                   </span>
                   명
                 </Text>
-                <AgreementForm petitionId={petitionId}></AgreementForm>
-                <AgreementList
-                  petitionId={petitionId}
-                  totalAgreement={response?.agreements}
-                ></AgreementList>
+                <AgreementForm {...agreementFormProps}></AgreementForm>
+                <AgreementList {...agreementListProps}></AgreementList>
               </Stack>
             </div>
           )}
