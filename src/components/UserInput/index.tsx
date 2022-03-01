@@ -7,10 +7,10 @@ import {
   InputLeftElement,
   InputRightElement,
 } from '@chakra-ui/react'
-import { memo, useRef, useState } from 'react'
+import { memo, useState } from 'react'
 import { FaCheck, FaLock, FaUserAlt } from 'react-icons/fa'
 import theme from '@style/theme'
-import { RegisterText } from './styles'
+import { SUserInput } from './styles'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { MdPassword } from 'react-icons/md'
 
@@ -69,9 +69,9 @@ const UserInput = memo(
     }
 
     return (
-      <>
+      <SUserInput>
         <FormControl isRequired>
-          <RegisterText>{text}</RegisterText>
+          <span className="page_type">{text}</span>
           <InputGroup borderColor={`${theme.color.ligthGray}`}>
             <InputLeftElement>
               {<WhichIcon color="gray.300"></WhichIcon>}
@@ -83,8 +83,6 @@ const UserInput = memo(
               value={value}
               onChange={onChange}
               disabled={disabled}
-              borderRadius="0"
-              borderColor={'#ccc'}
             ></Input>
             {onPassword && (
               <InputRightElement>
@@ -94,15 +92,12 @@ const UserInput = memo(
                   variant="password"
                   icon={viewPassword ? <ViewOffIcon /> : <ViewIcon />}
                   onClick={handleShowClick}
-                  _focus={{
-                    outline: 'none',
-                  }}
                 ></IconButton>
               </InputRightElement>
             )}
           </InputGroup>
         </FormControl>
-      </>
+      </SUserInput>
     )
   },
 )

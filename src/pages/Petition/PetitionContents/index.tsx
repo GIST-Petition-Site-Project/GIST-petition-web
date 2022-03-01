@@ -103,7 +103,14 @@ const PetitionContents = ({
           <Stack spacing={6} color={'#333'}>
             <PetitionProgress>
               <Text fontWeight={'bold'} display={'inline-block'}>
-                {!petition?.answered ? '청원진행중' : '답변완료'}&nbsp;
+                {response?.answered
+                  ? '답변완료'
+                  : response?.expired
+                  ? '청원기간만료'
+                  : response?.released
+                  ? '청원진행중'
+                  : '사전동의진행중'}
+                &nbsp;
               </Text>
               <Text display={'inline'}>
                 ({getDay(Number(petition?.createdAt))}~
