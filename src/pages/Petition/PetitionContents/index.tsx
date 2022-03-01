@@ -103,11 +103,11 @@ const PetitionContents = ({
           <Stack spacing={6} color={'#333'}>
             <PetitionProgress>
               <Text fontWeight={'bold'} display={'inline-block'}>
-                {response?.answered
+                {petition?.answered
                   ? '답변완료'
-                  : response?.expired
+                  : petition?.expired
                   ? '청원기간만료'
-                  : response?.released
+                  : petition?.released
                   ? '청원진행중'
                   : '사전동의진행중'}
                 &nbsp;
