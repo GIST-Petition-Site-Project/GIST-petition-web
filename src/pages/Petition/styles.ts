@@ -7,16 +7,17 @@ const Container = styled.div`
     @media screen and (min-width: ${theme.breakpoints.md}) {
       padding: 0 2rem;
     }
-  }
-`
-const PetitionWrapper = styled.div`
-  border: 1px solid #ccc;
-  position: relative;
-  margin: 6rem 0 50px 0;
-  padding: 30px 1.5rem;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    padding: 50px 30px;
+
+    .petition_wrap {
+      border: 1px solid #ccc;
+      position: relative;
+      margin: 6rem 0 50px 0;
+      padding: 30px 1.5rem;
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        padding: 50px 30px;
+      }
+    }
   }
 `
 
-export { Container, PetitionWrapper }
+export { Container }
