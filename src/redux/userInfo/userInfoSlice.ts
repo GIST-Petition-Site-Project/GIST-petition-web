@@ -7,6 +7,8 @@ const initialState: WhichUI = {
   isExpired: false,
   isVerificated: false,
   isValid: false,
+  btnUI: 'Disagreed',
+  contentUI: 'Disagreed',
 }
 
 export const userInfoSlice = createSlice({
@@ -21,7 +23,7 @@ export const userInfoSlice = createSlice({
           state.isExpired = false
           state.isLoading = false
           state.isValid = false
-          state.isVerificated = false
+          ;(state.isVerificated = false), (state.btnUI = 'Disagreed')
           break
         case 'Agreed':
           state.isAgreed = !state.isAgreed
@@ -45,8 +47,15 @@ export const userInfoSlice = createSlice({
           throw new Error('You sent a wrong action')
       }
     },
+    setBtnInfo: (state, action) => {
+      state.btnUI = action.payload
+    },
+    setContentInfo: (state, action) => {
+      state.contentUI = action.payload
+    },
   },
 })
 
-export const { setWhichInfo } = userInfoSlice.actions
+export const { setWhichInfo, setBtnInfo, setContentInfo } =
+  userInfoSlice.actions
 export default userInfoSlice.reducer
