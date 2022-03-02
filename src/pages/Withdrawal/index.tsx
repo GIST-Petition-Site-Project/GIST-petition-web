@@ -26,7 +26,7 @@ const Withdrawal = (): JSX.Element => {
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(password)) {
-      setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
+      setErrorText('영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요.')
       return
     }
     const response = await deleteUserMe({
