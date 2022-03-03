@@ -16,9 +16,6 @@ import { setWhichInfo } from '@redux/userInfo/userInfoSlice'
 
 const FindingPassword = (): JSX.Element => {
   const navigate = useNavigate()
-  const emailRef = useRef<HTMLInputElement>(null)
-  const verificationRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
   const [input, setInput] = useState<RegisterForm>({
     username: '',
     password: '',
@@ -66,7 +63,6 @@ const FindingPassword = (): JSX.Element => {
     setErrorText(message)
     if (status > 400) {
       setInput({ ...input, username: '' })
-      emailRef.current && emailRef.current.focus()
       dispatch(setWhichInfo('Loading'))
     } else if (status < 400) {
       dispatch(setWhichInfo('Loading'))
@@ -90,7 +86,6 @@ const FindingPassword = (): JSX.Element => {
     switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
         setInput({ ...input, verificationCode: '' })
-        verificationRef.current && verificationRef.current.focus()
         break
       }
       case '만료된 인증 코드입니다.': {
@@ -119,7 +114,20 @@ const FindingPassword = (): JSX.Element => {
     }
   }
 
-  const handleReset = async () => {
+  const handleReverify = () => {
+    setInput({
+      ...input,
+      verificationCode: '',
+      password: '',
+      passwordConfirm: '',
+    })
+    setErrorText('')
+    dispatch(setWhichInfo('Verificated'))
+    dispatch(setWhichInfo('CodeRequested'))
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
@@ -149,24 +157,8 @@ const FindingPassword = (): JSX.Element => {
         dispatch(setWhichInfo('Valid'))
       }
     } else {
-      passwordRef.current && passwordRef.current.focus()
       setErrorText('비밀번호가 일치하지 않습니다')
     }
-  }
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
-
-  const handleReverify = () => {
-    setInput({
-      ...input,
-      verificationCode: '',
-      password: '',
-      passwordConfirm: '',
-    })
-    setErrorText('')
-    dispatch(setWhichInfo('Verificated'))
-    dispatch(setWhichInfo('CodeRequested'))
   }
 
   return (
@@ -226,12 +218,12 @@ const FindingPassword = (): JSX.Element => {
           {!whichUI.isCodeRequested &&
             !whichUI.isLoading &&
             !whichUI.isExpired && (
-              <RegisterButton onClick={handleCreateCode}>
+              <RegisterButton type="button" onClick={handleCreateCode}>
                 인증 코드 전송
               </RegisterButton>
             )}
           {whichUI.isExpired && (
-            <RegisterButton onClick={handleResendCode}>
+            <RegisterButton type="button" onClick={handleResendCode}>
               인증코드 재전송
             </RegisterButton>
           )}
@@ -241,15 +233,17 @@ const FindingPassword = (): JSX.Element => {
           {whichUI.isCodeRequested &&
             !whichUI.isVerificated &&
             !whichUI.isExpired && (
-              <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
+              <RegisterButton type="button" onClick={handleConfirmCode}>
+                인증
+              </RegisterButton>
             )}
           {!whichUI.isExpired && whichUI.isVerificated && !whichUI.isValid && (
-            <RegisterButton onClick={handleReverify}>
+            <RegisterButton type="button" onClick={handleReverify}>
               다시 인증하기
             </RegisterButton>
           )}
           {whichUI.isVerificated && whichUI.isValid && (
-            <RegisterButton onClick={handleReset} className="submit__btn">
+            <RegisterButton type="submit" className="submit__btn">
               비밀번호 재설정
             </RegisterButton>
           )}
