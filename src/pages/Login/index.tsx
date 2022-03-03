@@ -19,7 +19,6 @@ import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
 const Login = (): JSX.Element => {
-  console.log(location.hash)
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
