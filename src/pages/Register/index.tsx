@@ -258,7 +258,7 @@ const Register = (): JSX.Element => {
                 name="password"
                 type="password"
                 value={input.password}
-                placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요."
+                placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
@@ -268,7 +268,7 @@ const Register = (): JSX.Element => {
                 name="passwordConfirm"
                 type="password"
                 value={input.passwordConfirm}
-                placeholder="비밀번호를 재입력하세요."
+                placeholder="비밀번호를 재입력하세요"
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}

@@ -94,7 +94,7 @@ const Login = (): JSX.Element => {
                 type="email"
                 name="username"
                 id="uesrname"
-                placeholder="지스트 이메일을 입력하세요."
+                placeholder="지스트 이메일을 입력하세요"
                 // value={input.userEmail}
                 // onChange={handleChangeUser}
               />
@@ -111,7 +111,7 @@ const Login = (): JSX.Element => {
                 type={viewPassword ? 'text' : 'password'}
                 name="password"
                 id="password"
-                placeholder="비밀번호를 입력하세요."
+                placeholder="비밀번호를 입력하세요"
                 // value={input.password}
                 // onChange={handleChangeUser}
                 onKeyPress={checkUpperCase}

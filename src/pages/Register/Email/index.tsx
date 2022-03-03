@@ -14,7 +14,7 @@ const Email = ({ value, onChange, disabled }: Iprops) => {
       name="username"
       type="email"
       value={value}
-      placeholder="지스트 이메일을 입력하세요."
+      placeholder="지스트 이메일을 입력하세요"
       onChange={onChange}
       disabled={disabled}
       onPassword={false}

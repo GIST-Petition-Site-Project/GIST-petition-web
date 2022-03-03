@@ -180,7 +180,7 @@ const FindingPassword = (): JSX.Element => {
               name="username"
               type="email"
               value={input.username}
-              placeholder="지스트 이메일을 입력하세요."
+              placeholder="지스트 이메일을 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isCodeRequested}
               onPassword={false}
@@ -193,7 +193,7 @@ const FindingPassword = (): JSX.Element => {
               name="verificationCode"
               type="text"
               value={input.verificationCode}
-              placeholder="이메일로 온 인증 코드를 입력하세요."
+              placeholder="이메일로 온 인증 코드를 입력하세요"
               onChange={handleChange}
               disabled={whichUI.isVerificated}
               onPassword={false}
@@ -205,7 +205,7 @@ const FindingPassword = (): JSX.Element => {
               name="password"
               type="password"
               value={input.password}
-              placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요."
+              placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
               onChange={handleChange}
               disabled={false}
               onPassword={true}

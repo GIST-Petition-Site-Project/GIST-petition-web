@@ -72,7 +72,7 @@ const ChangePassword = (): JSX.Element => {
             name="prevPassword"
             type="password"
             value={input.prevPassword}
-            placeholder="현재 비밀번호를 입력하세요."
+            placeholder="현재 비밀번호를 입력하세요"
             onChange={handleChange}
             disabled={false}
             onPassword={true}
@@ -82,7 +82,7 @@ const ChangePassword = (): JSX.Element => {
             name="newPassword"
             type="password"
             value={input.newPassword}
-            placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요."
+            placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
             onChange={handleChange}
             disabled={false}
             onPassword={true}
