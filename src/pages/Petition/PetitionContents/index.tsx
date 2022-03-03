@@ -59,7 +59,6 @@ const PetitionContents = ({
   }
 
   const share = (sns: string) => {
-    console.log(sharingURL)
     if (sns == 'facebook') {
       const url =
         'http://www.facebook.com/sharer/sharer.php?u=' +
