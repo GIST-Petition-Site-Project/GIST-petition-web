@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { setLogin } from '@redux/auth/authSlice'
 import {
   Button,
@@ -58,19 +58,23 @@ const Login = (): JSX.Element => {
     try {
       const loginStatus = await postLogin(input)
       setResponseState(loginStatus)
-
       if (loginStatus < 400) {
-        // navigate(-1)
         dispatch(setLogin())
       }
     } catch (error) {
       console.log(error)
     }
   }
+
   const auth = useAppSelect(select => select.auth.isAuthorized)
+  const navigate = useNavigate()
   useEffect(() => {
     if (auth) {
-      window.history.back()
+      if (location.hash) {
+        navigate({ pathname: location.hash.replace('#', '') })
+      } else {
+        navigate('/')
+      }
     }
   }, [useAppSelect(select => select.auth.isAuthorized)])
 

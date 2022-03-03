@@ -9,7 +9,6 @@ import {
 import AgreementList from './AgreementList'
 import AgreementForm from './AgreementForm'
 import { useDisclosure } from '@chakra-ui/react'
-import NeedLoginModal from '@components/NeedLoginModal'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
@@ -34,8 +33,6 @@ const PetitionContents = ({
   totalAgreement,
   isConsented,
 }: Props): JSX.Element => {
-  const { isOpen, onClose } = useDisclosure()
-
   const agreementListProps = {
     totalAgreement,
     totalPages,
@@ -204,8 +201,6 @@ const PetitionContents = ({
               <AgreementList {...agreementListProps} />
             </Stack>
           </AgreementsSection>
-
-          <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
         </>
       )}
     </>

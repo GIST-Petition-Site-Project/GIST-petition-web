@@ -54,7 +54,15 @@ const AgreementForm = ({ id, isConsented }: Props): JSX.Element => {
               </button>
             </div>
           ) : (
-            <div className="needLogin" onClick={_e => navigate('/login')}>
+            <div
+              className="needLogin"
+              onClick={_e => {
+                navigate({
+                  pathname: '/login',
+                  hash: location.pathname,
+                })
+              }}
+            >
               동의하려면&nbsp;<span>로그인</span>&nbsp;해주세요
             </div>
           )}
