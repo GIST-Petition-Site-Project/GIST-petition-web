@@ -1,7 +1,6 @@
 import { Stack } from '@chakra-ui/react'
 import { Container } from './styles'
 import MyInfoItem from './MyInfoitem'
-import { Link } from 'react-router-dom'
 
 const MyInfo = (): JSX.Element => {
   return (
