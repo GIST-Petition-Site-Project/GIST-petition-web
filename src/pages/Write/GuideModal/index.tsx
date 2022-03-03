@@ -4,7 +4,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalOverlay,
-  ModalContent,
   ModalFooter,
 } from '@chakra-ui/react'
 import { List, ListItem, Container, Heading } from '@chakra-ui/react'

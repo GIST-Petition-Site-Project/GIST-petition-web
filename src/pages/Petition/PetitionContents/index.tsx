@@ -1,15 +1,12 @@
-import { Divider, Stack, Text } from '@chakra-ui/react'
+import { Divider, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { getPetitionById, getRetrieveAnswer } from '@api/petitionAPI'
 import {
-  PetitionProgress,
-  PetitionTitleWrap,
-  PetitionTitle,
-  CurrentAgreementsText,
-  CurrentAgreements,
-  PetitionDescription,
-  ContentWrap,
+  HeadSection,
+  DescriptionSection,
+  AnswerSection,
   SharingPetition,
+  AgreementsSection,
 } from './styles'
 import AgreementList from './AgreementList'
 import AgreementForm from './AgreementForm'
@@ -53,11 +50,9 @@ const PetitionContents = ({
   }
 
   const clip = () => {
-    let url = ''
     const textarea = document.createElement('textarea')
     document.body.appendChild(textarea)
-    url = String(document.querySelector('.url')?.textContent)
-    textarea.value = url
+    textarea.value = String(location)
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
@@ -72,13 +67,15 @@ const PetitionContents = ({
         encodeURIComponent(thisUrl)
       window.open(url, '', 'width=486, height=286')
     } else if (sns == 'kakaotalk') {
-      window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
+      if (!window.Kakao.isInitialized()) {
+        window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
+      }
       window.Kakao.Link.createDefaultButton({
         container: '#btnKakao',
         objectType: 'feed',
         content: {
-          title: 'GIST 청원',
-          description: petition?.title,
+          title: petition?.title || 'GIST 청원',
+          description: petition?.description || '',
           imageUrl:
             'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
           link: {
@@ -219,8 +216,67 @@ const PetitionContents = ({
                 <AgreementForm {...agreementFormProps}></AgreementForm>
                 <AgreementList {...agreementListProps}></AgreementList>
               </Stack>
-            </div>
+            </AnswerSection>
           )}
+          <SharingPetition>
+            <div className="share-btns">
+              <div>공유하기</div>
+              <ul className="sns">
+                <li className="kakaotalk">
+                  <a
+                    href="#n"
+                    id="btnKakao"
+                    onClick={() => {
+                      share('kakaotalk')
+                    }}
+                    className="kakaotalk"
+                    target="_self"
+                    title="카카오톡 새창열림"
+                  >
+                    <RiKakaoTalkFill />
+                  </a>
+                </li>
+                <li className="facebook">
+                  <a
+                    href="#n"
+                    onClick={() => {
+                      share('facebook')
+                    }}
+                    className="facebook"
+                    target="_self"
+                    title="페이스북 새창열림"
+                  >
+                    <RiFacebookFill />
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="share-url">
+              <div className="url-box">
+                <div>URL</div>
+                <div className="url">{String(location)}</div>
+              </div>
+              <div className="copy-btn">
+                <button onClick={clip}>
+                  <IoMdAlbums />
+                </button>
+              </div>
+            </div>
+          </SharingPetition>
+          <AgreementsSection>
+            <Stack>
+              <span className="num_of_agree">
+                청원동의 <span>{response?.agreements} </span>명
+              </span>
+              {!response?.expired && (
+                <AgreementForm petitionId={petitionId}></AgreementForm>
+              )}
+              <AgreementList
+                petitionId={petitionId}
+                totalAgreement={response?.agreements}
+              ></AgreementList>
+            </Stack>
+          </AgreementsSection>
 
           <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
         </>

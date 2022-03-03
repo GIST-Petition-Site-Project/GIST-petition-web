@@ -44,7 +44,7 @@ const MyMenu = (): JSX.Element => {
           <Link to="/mypetitions">나의 청원</Link>
         </ItemName>
         <ItemName>
-          <Link to="#">회원 정보 관리</Link>
+          <a href="/myinfo">회원 정보 관리</a>
         </ItemName>
         <ItemName>
           <Link to="#" onClick={handleLogout}>
