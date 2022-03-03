@@ -6,6 +6,7 @@ import { useAppDispatch } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
 import { deleteUserMe } from '@api/userAPI'
 import { setLogout } from '@redux/auth/authSlice'
+import { check } from 'prettier'
 
 const Withdrawal = (): JSX.Element => {
   const navigate = useNavigate()
@@ -22,7 +23,15 @@ const Withdrawal = (): JSX.Element => {
     setPassword(value)
   }
 
-  const handleDelete = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const input = prompt(
+      '정말 탈퇴하시겠습니까?\n탈퇴를 원하시면 "탈퇴합니다"를 입력해주세요.',
+      '',
+    )
+    if (input !== '탈퇴합니다') {
+      return
+    }
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(password)) {
@@ -48,9 +57,6 @@ const Withdrawal = (): JSX.Element => {
       dispatch(setLogout())
     }
   }
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
 
   return (
     <Container className="register">
@@ -67,7 +73,7 @@ const Withdrawal = (): JSX.Element => {
             disabled={false}
             onPassword={true}
           ></UserInput>
-          <WithdrawalButton onClick={handleDelete}>회원 탈퇴</WithdrawalButton>
+          <WithdrawalButton>회원 탈퇴</WithdrawalButton>
           <span className="err_msg">{errorText}</span>
         </Stack>
       </form>
