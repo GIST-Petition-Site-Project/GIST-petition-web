@@ -1,6 +1,4 @@
 import { CommentList, SPaginationContainer } from './styles'
-import { useEffect, useState } from 'react'
-import { getAgreements } from '@api/petitionAPI'
 import qs from 'qs'
 import {
   usePagination,

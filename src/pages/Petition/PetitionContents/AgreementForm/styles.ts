@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { Button, Textarea } from '@chakra-ui/react'
 
 const SAgreementForm = styled.div`
   position: relative;

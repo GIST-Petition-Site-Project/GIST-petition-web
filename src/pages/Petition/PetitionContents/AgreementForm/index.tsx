@@ -1,6 +1,6 @@
 import { FormControl } from '@chakra-ui/react'
-import { ChangeEvent, FormEvent, useState, useEffect } from 'react'
-import { getStateOfAgreement, postAgreePetition } from '@api/petitionAPI'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { postAgreePetition } from '@api/petitionAPI'
 import { SAgreementForm } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelect } from '@redux/store.hooks'
