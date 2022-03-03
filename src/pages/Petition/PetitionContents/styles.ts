@@ -81,7 +81,7 @@ const SharingPetition = styled.div`
       justify-content: space-around;
       margin-top: 1rem;
       li {
-        a {
+        button {
           width: 45px;
           height: 45px;
           border-radius: 100px;
@@ -92,13 +92,13 @@ const SharingPetition = styled.div`
         }
       }
       li:nth-of-type(1) {
-        a {
+        button {
           color: #3b1e1e;
           background-color: #f9e000;
         }
       }
       li:nth-of-type(2) {
-        a {
+        button {
           color: #ffffff;
           background-color: #4267b2;
         }
