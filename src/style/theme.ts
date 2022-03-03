@@ -13,6 +13,7 @@ const color = {
   TERTIARY_GRAY: '#5A5E5D',
   QUATERNARY_GRAY: '#616463',
   LIGHT_GRAY: '#ccc',
+  SECOND_Light_GRAY: '#8a8a8a',
   BLACK: '#333333',
   WHITE: '#FFFFFF',
 }

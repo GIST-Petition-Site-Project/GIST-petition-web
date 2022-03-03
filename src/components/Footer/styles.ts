@@ -9,6 +9,10 @@ const FooterContainer = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      font-size: 0.8rem;
+      flex: 20%;
+    }
     .logo {
       height: 4rem;
       margin-right: 0.5em;
@@ -19,8 +23,16 @@ const FooterContainer = styled.footer`
 const Text = styled.p`
   display: flex;
   flex-direction: column;
+  color: ${theme.color.SECOND_Light_GRAY};
   @media screen and (min-width: ${theme.breakpoints.md}) {
     font-size: 0.8rem;
+    flex: 80%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    > .teamLink {
+      margin-left: 10em;
+    }
   }
   > a {
     font-size: 0.8rem;
