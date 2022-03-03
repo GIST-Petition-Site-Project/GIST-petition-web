@@ -8,7 +8,6 @@ import {
 } from './styles'
 import AgreementList from './AgreementList'
 import AgreementForm from './AgreementForm'
-import { useDisclosure } from '@chakra-ui/react'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
@@ -33,6 +32,11 @@ const PetitionContents = ({
   totalAgreement,
   isConsented,
 }: Props): JSX.Element => {
+  const sharingURL =
+    process.env.NODE_ENV === 'development'
+      ? 'https://dev.gist-petition.com' + location.pathname
+      : location.origin + location.pathname
+
   const agreementListProps = {
     totalAgreement,
     totalPages,
@@ -47,7 +51,7 @@ const PetitionContents = ({
   const clip = () => {
     const textarea = document.createElement('textarea')
     document.body.appendChild(textarea)
-    textarea.value = String(location)
+    textarea.value = String(location.origin + location.pathname)
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
@@ -55,11 +59,10 @@ const PetitionContents = ({
   }
 
   const share = (sns: string) => {
-    const thisUrl = location.href
     if (sns == 'facebook') {
       const url =
         'http://www.facebook.com/sharer/sharer.php?u=' +
-        encodeURIComponent(thisUrl)
+        encodeURIComponent(sharingURL)
       window.open(url, '', 'width=256, height=512')
     } else if (sns == 'kakaotalk') {
       if (!window.Kakao.isInitialized()) {
@@ -74,8 +77,8 @@ const PetitionContents = ({
           imageUrl:
             'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
           link: {
-            mobileWebUrl: thisUrl,
-            webUrl: thisUrl,
+            mobileWebUrl: sharingURL,
+            webUrl: sharingURL,
           },
         },
       })
@@ -181,7 +184,7 @@ const PetitionContents = ({
             <div className="share-url">
               <div className="url-box">
                 <div>URL</div>
-                <div className="url">{String(location)}</div>
+                <div className="url">{sharingURL}</div>
               </div>
               <div className="copy-btn">
                 <button onClick={clip}>
