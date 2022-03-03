@@ -15,27 +15,40 @@ import NeedLoginModal from '@components/NeedLoginModal'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
+import { idText } from 'typescript'
 
-interface IProps {
-  petitionURL: string
-  petitionId: string
+interface Props {
+  id: string
+  petition: Petition | undefined
+  answer: Answer | undefined
+  totalPages: number
+  totalAgreement: number
+  agreements: Agreement[]
+  isConsented: boolean
 }
 
-const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
-  const [response, setResponse] = useState<Petition | undefined>()
-  const [answerContent, setAnswerContent] = useState<
-    AnswerContent | undefined
-  >()
+const PetitionContents = ({
+  id,
+  petition,
+  answer,
+  totalPages,
+  agreements,
+  totalAgreement,
+  isConsented,
+}: Props): JSX.Element => {
   const { isOpen, onClose } = useDisclosure()
 
-  const fetch = async (petitionURL: string) => {
-    const response = await getPetitionById(petitionURL)
-    setResponse(response?.data)
-    const getAnswer = await getRetrieveAnswer(petitionId)
-    setAnswerContent(getAnswer?.data)
-
-    share('kakaotalk')
+  const agreementListProps = {
+    totalAgreement,
+    totalPages,
+    agreements,
   }
+
+  const agreementFormProps = {
+    id,
+    isConsented,
+  }
+
   const clip = () => {
     const textarea = document.createElement('textarea')
     document.body.appendChild(textarea)
@@ -47,7 +60,7 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
   }
 
   const share = (sns: string) => {
-    const thisUrl = `https://dev.gist-petition.com/${petitionURL}`
+    const thisUrl = location.href
     if (sns == 'facebook') {
       const url =
         'http://www.facebook.com/sharer/sharer.php?u=' +
@@ -61,8 +74,8 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
         container: '#btnKakao',
         objectType: 'feed',
         content: {
-          title: response?.title || 'GIST 청원',
-          description: response?.description || '',
+          title: petition?.title || 'GIST 청원',
+          description: petition?.description || '',
           imageUrl:
             'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
           link: {
@@ -74,16 +87,12 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
     }
   }
 
-  useEffect(() => {
-    fetch(petitionURL)
-  }, [petitionId])
-
   return (
     <>
-      {response?.message !== undefined ? (
+      {petition?.message !== undefined ? (
         <HeadSection>
           <div className="title">
-            <div>{response?.message}</div>
+            <div>{petition?.message}</div>
           </div>
         </HeadSection>
       ) : (
@@ -92,26 +101,26 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
             <Stack spacing={6}>
               <div className="info">
                 <span className="progress">
-                  {response?.answered
+                  {petition?.answered
                     ? '답변완료'
-                    : response?.expired
+                    : petition?.expired
                     ? '청원기간만료'
-                    : response?.released
+                    : petition?.released
                     ? '청원진행중'
                     : '사전동의진행중'}
                   &nbsp;
                 </span>
                 <span className="duration">
-                  ({getDay(Number(response?.createdAt))}~
-                  {getDay(Number(response?.createdAt) + 2592000000)})
+                  ({getDay(Number(petition?.createdAt))}~
+                  {getDay(Number(petition?.createdAt) + 2592000000)})
                 </span>
               </div>
               <div className="title">
-                <div>{response?.title}</div>
+                <div>{petition?.title}</div>
               </div>
               <div className="current_agree">
                 <span className="num_of_agree">
-                  총 <span>{response?.agreements}</span>
+                  총 <span>{petition?.agreements}</span>
                   명이 동의했습니다.
                 </span>
               </div>
@@ -123,19 +132,19 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
               <Divider color={'#ccc'}></Divider>
               <div>
                 <div className="content">
-                  <div className="description">{response?.description}</div>
+                  <div className="description">{petition?.description}</div>
                 </div>
               </div>
             </Stack>
           </DescriptionSection>
-          {response?.answered && (
+          {petition?.answered && (
             <AnswerSection>
               <Stack spacing={4}>
                 <span>답변</span>
                 <Divider color={'#ccc'}></Divider>
                 <div>
                   <div className="content">
-                    <div className="answer">{answerContent?.content}</div>
+                    <div className="answer">{answer?.content}</div>
                   </div>
                 </div>
               </Stack>
@@ -189,15 +198,12 @@ const PetitionContents = ({ petitionURL, petitionId }: IProps): JSX.Element => {
           <AgreementsSection>
             <Stack>
               <span className="num_of_agree">
-                청원동의 <span>{response?.agreements} </span>명
+                청원동의 <span>{petition?.agreements} </span>명
               </span>
-              {!response?.expired && (
-                <AgreementForm petitionId={petitionId}></AgreementForm>
+              {!petition?.expired && (
+                <AgreementForm {...agreementFormProps}></AgreementForm>
               )}
-              <AgreementList
-                petitionId={petitionId}
-                totalAgreement={response?.agreements}
-              ></AgreementList>
+              <AgreementList {...agreementListProps} />
             </Stack>
           </AgreementsSection>
 

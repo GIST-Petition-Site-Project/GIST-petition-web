@@ -1,13 +1,23 @@
 import api from './baseAPI'
 import qs from 'qs'
 
+const isTempURL = () => {
+  return location.pathname.includes('temp')
+}
+
+export const getId = async (param: string) => {
+  if (location.pathname.includes('temp')) {
+    const response = await api.get(`petitions/temp/${param}`)
+    return response.data.id
+  } else return param
+}
+
 export const getPetitionsByQuery = async (query: QueryParams) => {
   const page = (Number(query?.page) || 1) - 1
   const querystring = {
     ...query,
     page,
   }
-
   const response = await api.get(
     `petitions/ongoing?${qs.stringify(querystring)}`,
   )
@@ -34,29 +44,23 @@ export const getMineByQuery = async (query: QueryParams) => {
   return response
 }
 
-export const getAgreementCount = async (petitionId: string) => {
-  if (petitionId.length === 6 || petitionId === 'undefined')
-    return { status: 500 }
-  const response = await api.get(`petitions/${petitionId}/agreements`)
+export const getAgreementCount = async (param: string) => {
+  const id = await getId(param)
+  const response = await api.get(`petitions/${id}/agreements`)
   return response
 }
 
-export const getAgreements = async (petitionId: string, query: QueryParams) => {
-  if (petitionId.length === 6 || petitionId === 'undefined')
-    return {
-      status: 500,
-      data: null,
-    }
+export const getAgreements = async (id: string, query: QueryParams) => {
   const size = Number(query?.size) || 10
   const page = Number(query?.page) - 1 || 0
   const response = await api.get(
-    `petitions/${petitionId}/agreements?size=${size}&page=${page}`,
+    `petitions/${id}/agreements?size=${size}&page=${page}`,
   )
   return response
 }
 
-export const getPetitionById = async (petitionId: string) => {
-  const response = await api.get(petitionId)
+export const getPetitionById = async (id: string) => {
+  const response = await api.get(`/petitions/${id}`)
   return response
 }
 
@@ -65,20 +69,13 @@ export const getPetitionCount = async () => {
   return response
 }
 
-export const getStateOfAgreement = async (petitionId: string) => {
-  if (petitionId.length === 6 || petitionId === 'undefined')
-    return { status: 500, data: true }
-  const response = await api.get(`petitions/${petitionId}/agreements/me`)
+export const getStateOfAgreement = async (id: string) => {
+  const response = await api.get(`petitions/${id}/agreements/me`)
   return response
 }
 
-export const postAgreePetition = async (
-  petitionId: string,
-  payload: AgreePetition,
-) => {
-  if (petitionId.length === 6 || petitionId === 'undefined')
-    return { status: 500 }
-  const response = await api.post(`petitions/${petitionId}/agreements`, payload)
+export const postAgreePetition = async (id: string, payload: AgreePetition) => {
+  const response = await api.post(`petitions/${id}/agreements`, payload)
   return response
 }
 
@@ -88,8 +85,6 @@ export const postCreatePetition = async (payload: PetitionsInput) => {
 }
 
 export const getRetrieveAnswer = async (petitionId: string) => {
-  if (petitionId.length === 6 || petitionId === 'undefined')
-    return { status: 500, data: null }
   const response = await api.get(`petitions/${petitionId}/answer`)
   return response
 }

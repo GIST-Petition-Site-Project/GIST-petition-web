@@ -28,10 +28,10 @@ const RootRouter = (): JSX.Element => {
         </Route>
         <Route path="/petitions" element={<Outlet />}>
           <Route index element={<Petitions />} />
-          <Route path=":petitionId" element={<Petition />} />
+          <Route path=":param" element={<Petition />} />
         </Route>
         <Route path="/petitions/temp" element={<Outlet />}>
-          <Route path=":id" element={<Petition />} />
+          <Route path=":param" element={<Petition />} />
         </Route>
         <Route path="/mypetitions" element={<AuthRoute />}>
           <Route index element={<MyPetitions />} />

@@ -1,4 +1,4 @@
-interface AnswerContent {
+interface Answer {
   content: string
   createdAt: string
   id: number

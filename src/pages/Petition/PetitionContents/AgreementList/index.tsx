@@ -13,27 +13,23 @@ import {
 } from '@ajna/pagination'
 
 import { getDayTime } from '@utils/getTime'
+import { useLocation, useNavigate } from 'react-router-dom'
 interface IProps {
-  petitionId: string
-  totalAgreement: number | undefined
+  totalAgreement: number
+  totalPages: number
+  agreements: Agreement[]
 }
 
-const AgreementList = ({ petitionId, totalAgreement }: IProps): JSX.Element => {
+const AgreementList = ({
+  totalAgreement,
+  totalPages,
+  agreements,
+}: IProps): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
 
-  const [totalPages, setTotalPages] = useState<number>(0)
-  const [response, setResponse] = useState<Array<GetAgreements>>([])
-  const fetch = async (petitionId: any, queryParams: any) => {
-    try {
-      const response = await getAgreements(petitionId, queryParams)
-      setResponse(response?.data?.content || [])
-      setTotalPages(response?.data?.totalPages)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const { search } = useLocation()
 
   const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
     pagesCount: totalPages,
@@ -46,23 +42,23 @@ const AgreementList = ({ petitionId, totalAgreement }: IProps): JSX.Element => {
     },
   })
 
+  const navigate = useNavigate()
   const handlePageChange = (e: number) => {
-    setCurrentPage(e)
     const newSearchParams = {
       ...queryParams,
       page: e,
     }
-    fetch(petitionId, newSearchParams)
+    setCurrentPage(e)
+    navigate({
+      pathname: location.pathname,
+      search: qs.stringify(newSearchParams),
+    })
   }
-
-  useEffect(() => {
-    fetch(petitionId, queryParams)
-  }, [petitionId])
 
   return (
     <CommentList>
       <ul>
-        {response.map((res, index) => (
+        {agreements.map((res, index) => (
           <li key={res.id}>
             <div className="comment">
               <div>
