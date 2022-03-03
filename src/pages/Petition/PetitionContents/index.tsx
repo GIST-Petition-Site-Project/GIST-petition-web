@@ -12,6 +12,7 @@ import { useDisclosure } from '@chakra-ui/react'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
+import { useEffect } from 'react'
 
 interface Props {
   id: string
@@ -59,7 +60,7 @@ const PetitionContents = ({
       const url =
         'http://www.facebook.com/sharer/sharer.php?u=' +
         encodeURIComponent(thisUrl)
-      window.open(url, '', 'width=486, height=286')
+      window.open(url, '', 'width=256, height=512')
     } else if (sns == 'kakaotalk') {
       if (!window.Kakao.isInitialized()) {
         window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
@@ -80,6 +81,10 @@ const PetitionContents = ({
       })
     }
   }
+
+  useEffect(() => {
+    share('kakaotalk')
+  }, [])
 
   return (
     <>
@@ -149,31 +154,27 @@ const PetitionContents = ({
               <div>공유하기</div>
               <ul className="sns">
                 <li className="kakaotalk">
-                  <a
-                    href="#n"
+                  <button
                     id="btnKakao"
                     onClick={() => {
                       share('kakaotalk')
                     }}
                     className="kakaotalk"
-                    target="_self"
                     title="카카오톡 새창열림"
                   >
                     <RiKakaoTalkFill />
-                  </a>
+                  </button>
                 </li>
                 <li className="facebook">
-                  <a
-                    href="#n"
+                  <button
                     onClick={() => {
                       share('facebook')
                     }}
                     className="facebook"
-                    target="_self"
                     title="페이스북 새창열림"
                   >
                     <RiFacebookFill />
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
