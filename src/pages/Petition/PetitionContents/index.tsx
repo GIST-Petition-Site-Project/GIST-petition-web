@@ -1,6 +1,4 @@
 import { Divider, Stack } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import { getPetitionById, getRetrieveAnswer } from '@api/petitionAPI'
 import {
   HeadSection,
   DescriptionSection,
@@ -15,7 +13,7 @@ import NeedLoginModal from '@components/NeedLoginModal'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
-import { idText } from 'typescript'
+import { useEffect } from 'react'
 
 interface Props {
   id: string
@@ -86,6 +84,10 @@ const PetitionContents = ({
       })
     }
   }
+
+  useEffect(() => {
+    share('kakaotalk')
+  }, [])
 
   return (
     <>
