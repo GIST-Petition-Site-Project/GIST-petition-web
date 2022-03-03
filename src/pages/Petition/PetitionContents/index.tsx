@@ -90,131 +90,63 @@ const PetitionContents = ({
   return (
     <>
       {petition?.message !== undefined ? (
-        <PetitionTitleWrap>
-          <PetitionTitle ml={'20px'} mr={'20px'}>
-            {petition?.message}
-          </PetitionTitle>
-        </PetitionTitleWrap>
+        <HeadSection>
+          <div className="title">
+            <div>{petition?.message}</div>
+          </div>
+        </HeadSection>
       ) : (
         <>
-          <Stack spacing={6} color={'#333'}>
-            <PetitionProgress>
-              <Text fontWeight={'bold'} display={'inline-block'}>
-                {petition?.answered
-                  ? '답변완료'
-                  : petition?.expired
-                  ? '청원기간만료'
-                  : petition?.released
-                  ? '청원진행중'
-                  : '사전동의진행중'}
-                &nbsp;
-              </Text>
-              <Text display={'inline'}>
-                ({getDay(Number(petition?.createdAt))}~
-                {getDay(Number(petition?.createdAt) + 2592000000)})
-              </Text>
-            </PetitionProgress>
-            <PetitionTitleWrap>
-              <PetitionTitle ml={'20px'} mr={'20px'}>
-                {petition?.title}
-              </PetitionTitle>
-            </PetitionTitleWrap>
-            <CurrentAgreementsText>
-              <Text>
-                총 <CurrentAgreements>{petition?.agreements}</CurrentAgreements>
-                명이 동의했습니다.
-              </Text>
-            </CurrentAgreementsText>
-          </Stack>
-          <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
-            <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
-              청원내용
-            </Text>
-            <Divider color={'#ccc'}></Divider>
-            <div>
-              <ContentWrap>
-                <PetitionDescription>
-                  {petition?.description}
-                </PetitionDescription>
-              </ContentWrap>
-            </div>
-          </Stack>
-          {petition?.answered ? (
-            <Stack color={'#333'} mt={'20px'} mb={'20px'} spacing={4}>
-              <Text fontSize={'20px'} fontWeight={'bold'} align={'left'}>
-                답변
-              </Text>
-              <Divider color={'#ccc'}></Divider>
-              <div>
-                <ContentWrap>
-                  <PetitionDescription>{answer?.content}</PetitionDescription>
-                </ContentWrap>
+          <HeadSection>
+            <Stack spacing={6}>
+              <div className="info">
+                <span className="progress">
+                  {petition?.answered
+                    ? '답변완료'
+                    : petition?.expired
+                    ? '청원기간만료'
+                    : petition?.released
+                    ? '청원진행중'
+                    : '사전동의진행중'}
+                  &nbsp;
+                </span>
+                <span className="duration">
+                  ({getDay(Number(petition?.createdAt))}~
+                  {getDay(Number(petition?.createdAt) + 2592000000)})
+                </span>
+              </div>
+              <div className="title">
+                <div>{petition?.title}</div>
+              </div>
+              <div className="current_agree">
+                <span className="num_of_agree">
+                  총 <span>{petition?.agreements}</span>
+                  명이 동의했습니다.
+                </span>
               </div>
             </Stack>
-          ) : (
-            <div>
-              <SharingPetition>
-                <div className="share-btns">
-                  <div>공유하기</div>
-                  <ul className="sns">
-                    <li className="kakaotalk">
-                      <a
-                        href="#n"
-                        id="btnKakao"
-                        onClick={() => {
-                          share('kakaotalk')
-                          return false
-                        }}
-                        className="kakaotalk"
-                        target="_self"
-                        title="카카오톡 새창열림"
-                      >
-                        <RiKakaoTalkFill />
-                      </a>
-                    </li>
-                    <li className="facebook">
-                      <a
-                        href="#n"
-                        onClick={() => {
-                          share('facebook')
-                          return false
-                        }}
-                        className="facebook"
-                        target="_self"
-                        title="페이스북 새창열림"
-                      >
-                        <RiFacebookFill />
-                      </a>
-                    </li>
-                  </ul>
+          </HeadSection>
+          <DescriptionSection>
+            <Stack spacing={4}>
+              <span>청원내용</span>
+              <Divider color={'#ccc'}></Divider>
+              <div>
+                <div className="content">
+                  <div className="description">{petition?.description}</div>
                 </div>
-                <div className="share-url">
-                  <div className="url-box">
-                    <div>URL</div>
-                    <div className="url">{location.href}</div>
-                  </div>
-                  <div className="copy-btn">
-                    <button onClick={clip}>
-                      <IoMdAlbums />
-                    </button>
+              </div>
+            </Stack>
+          </DescriptionSection>
+          {petition?.answered && (
+            <AnswerSection>
+              <Stack spacing={4}>
+                <span>답변</span>
+                <Divider color={'#ccc'}></Divider>
+                <div>
+                  <div className="content">
+                    <div className="answer">{answer?.content}</div>
                   </div>
                 </div>
-              </SharingPetition>
-              <Stack>
-                <Text
-                  textAlign={'left'}
-                  fontWeight={'bold'}
-                  fontSize={'20px'}
-                  p={'0.5em 0'}
-                >
-                  청원동의{' '}
-                  <span style={{ color: '#FF0000' }}>
-                    {petition?.agreements}{' '}
-                  </span>
-                  명
-                </Text>
-                <AgreementForm {...agreementFormProps}></AgreementForm>
-                <AgreementList {...agreementListProps}></AgreementList>
               </Stack>
             </AnswerSection>
           )}
@@ -266,15 +198,12 @@ const PetitionContents = ({
           <AgreementsSection>
             <Stack>
               <span className="num_of_agree">
-                청원동의 <span>{response?.agreements} </span>명
+                청원동의 <span>{petition?.agreements} </span>명
               </span>
-              {!response?.expired && (
-                <AgreementForm petitionId={petitionId}></AgreementForm>
+              {!petition?.expired && (
+                <AgreementForm {...agreementFormProps}></AgreementForm>
               )}
-              <AgreementList
-                petitionId={petitionId}
-                totalAgreement={response?.agreements}
-              ></AgreementList>
+              <AgreementList {...agreementListProps} />
             </Stack>
           </AgreementsSection>
 

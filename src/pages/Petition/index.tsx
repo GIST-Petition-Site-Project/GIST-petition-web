@@ -1,5 +1,5 @@
 import { useLocation, useParams } from 'react-router'
-import { Container, PetitionWrapper } from './styles'
+import { Container } from './styles'
 import PetitionContents from './PetitionContents'
 import {
   getAgreements,
@@ -80,9 +80,9 @@ const Petition = (): JSX.Element => {
   return (
     <Container>
       <Inner>
-        <PetitionWrapper>
+        <div className="petition_wrap">
           <PetitionContents {...petitionContentsProps}></PetitionContents>
-        </PetitionWrapper>
+        </div>
       </Inner>
     </Container>
   )
