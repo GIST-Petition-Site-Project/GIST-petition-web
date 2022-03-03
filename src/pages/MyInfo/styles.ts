@@ -14,7 +14,7 @@ const Container = styled.section`
       font-size: 2rem;
       font-weight: bold;
     }
-    > .MyInfo_List {
+    > .my_info_list {
       margin-top: 2em;
     }
   }
