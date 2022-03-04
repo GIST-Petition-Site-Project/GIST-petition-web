@@ -9,7 +9,7 @@ import Write from '@pages/Write'
 import MyPetitions from '@pages/MyPetitions'
 import AnsweredPetitions from '@pages/AnsweredPetitions'
 import { AuthRoute } from './PrivateRouter'
-import FindingPassword from '@pages/FindingPassword'
+import FindPassword from '@pages/FindPassword'
 import NavBar from '@components/NavBar'
 import MyInfo from '@pages/MyInfo'
 import ChangePassword from '@pages/ChangePassword'
@@ -36,7 +36,7 @@ const RootRouter = (): JSX.Element => {
         <Route path="/mypetitions" element={<AuthRoute />}>
           <Route index element={<MyPetitions />} />
         </Route>
-        <Route path="/findpassword" element={<FindingPassword />}></Route>
+        <Route path="/findpassword" element={<FindPassword />}></Route>
         <Route path="/answer" element={<Outlet />}>
           <Route index element={<AnsweredPetitions />} />
         </Route>

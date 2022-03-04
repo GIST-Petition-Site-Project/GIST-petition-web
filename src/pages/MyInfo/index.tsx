@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
-import { Container } from './styles'
-import MyInfoItem from './MyInfoitem'
+import { Container, List } from './styles'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { IconButton } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 
 const MyInfo = (): JSX.Element => {
@@ -9,13 +9,27 @@ const MyInfo = (): JSX.Element => {
     <Container className="register">
       <Stack spacing={4}>
         <span className="title">회원 정보 변경 </span>
-        <ul className="MyInfo_List">
-          <Link to="/myinfo/changepassword">
-            <MyInfoItem text="비밀번호 변경"></MyInfoItem>
-          </Link>
-          <Link to="/myinfo/withdrawal">
-            <MyInfoItem text="회원 탈퇴"></MyInfoItem>
-          </Link>
+        <ul className="my_info_list">
+          <List>
+            <Link to="/myinfo/changepassword">
+              <span className="text">비밀번호 변경</span>
+              <IconButton
+                className="button"
+                aria-label="naviagate"
+                icon={<ArrowForwardIcon />}
+              />
+            </Link>
+          </List>
+          <List>
+            <Link to="/myinfo/withdrawal">
+              <span className="text">회원 탈퇴</span>
+              <IconButton
+                className="button"
+                aria-label="naviagate"
+                icon={<ArrowForwardIcon />}
+              />
+            </Link>
+          </List>
         </ul>
       </Stack>
     </Container>

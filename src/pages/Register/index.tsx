@@ -158,7 +158,10 @@ const Register = (): JSX.Element => {
     }
   }
 
-  const handleRegister = async () => {
+  // const handleRegister = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log('d')
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
@@ -191,9 +194,6 @@ const Register = (): JSX.Element => {
       // passwordRef.current && passwordRef.current.focus()
       setErrorText('비밀번호가 일치하지 않습니다')
     }
-  }
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
   }
 
   const handleReverify = () => {
@@ -258,7 +258,7 @@ const Register = (): JSX.Element => {
                 name="password"
                 type="password"
                 value={input.password}
-                placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요."
+                placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
@@ -268,7 +268,7 @@ const Register = (): JSX.Element => {
                 name="passwordConfirm"
                 type="password"
                 value={input.passwordConfirm}
-                placeholder="비밀번호를 재입력하세요."
+                placeholder="비밀번호를 재입력하세요"
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
@@ -277,25 +277,27 @@ const Register = (): JSX.Element => {
           )}
           {btnUI === 'Loading' && <LoadingSpinner></LoadingSpinner>}
           {btnUI === 'Agreed' && (
-            <RegisterButton onClick={handleCreateCode}>
+            <RegisterButton type="button" onClick={handleCreateCode}>
               인증 코드 전송
             </RegisterButton>
           )}
           {btnUI === 'Expired' && (
-            <RegisterButton onClick={handleResendCode}>
+            <RegisterButton type="button" onClick={handleResendCode}>
               인증코드 재전송
             </RegisterButton>
           )}
           {btnUI === 'CodeRequested' && (
-            <RegisterButton onClick={handleConfirmCode}>인증</RegisterButton>
+            <RegisterButton type="button" onClick={handleConfirmCode}>
+              인증
+            </RegisterButton>
           )}
           {btnUI === 'Invalid' && (
-            <RegisterButton onClick={handleReverify}>
+            <RegisterButton type="button" onClick={handleReverify}>
               다시 인증하기
             </RegisterButton>
           )}
           {btnUI === 'Valid' && (
-            <RegisterButton onClick={handleRegister} className="submit__btn">
+            <RegisterButton type="submit" className="submit__btn">
               회원가입
             </RegisterButton>
           )}
