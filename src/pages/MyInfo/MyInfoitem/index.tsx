@@ -17,7 +17,7 @@ const MyInfoItem = ({ link, text }: Iprops) => {
           className="button"
           aria-label="naviagate"
           icon={<ArrowForwardIcon />}
-        ></IconButton>
+        />
       </Link>
     </List>
   )

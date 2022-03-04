@@ -8,8 +8,8 @@ const MyInfo = (): JSX.Element => {
       <Stack spacing={4}>
         <span className="title">회원 정보 변경 </span>
         <ul className="my_info_list">
-          <MyInfoItem link="changepassword" text="비밀번호 변경"></MyInfoItem>
-          <MyInfoItem link="withdrawal" text="회원 탈퇴"></MyInfoItem>
+          <MyInfoItem link="changepassword" text="비밀번호 변경" />
+          <MyInfoItem link="withdrawal" text="회원 탈퇴" />
         </ul>
       </Stack>
     </Container>
