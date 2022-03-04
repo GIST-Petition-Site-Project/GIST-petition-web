@@ -14,11 +14,13 @@ import NavBar from '@components/NavBar'
 import MyInfo from '@pages/MyInfo'
 import ChangePassword from '@pages/ChangePassword'
 import Withdrawal from '@pages/Withdrawal'
+import ScrollTop from './ScrollTop'
 
 const RootRouter = (): JSX.Element => {
   return (
     <BrowserRouter>
-      <NavBar></NavBar>
+      <ScrollTop />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
