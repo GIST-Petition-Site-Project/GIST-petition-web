@@ -1,6 +1,8 @@
 import { Stack } from '@chakra-ui/react'
-import MyInfoItem from './MyInfoItem'
-import { Container } from './styles'
+import { Container, List } from './styles'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { IconButton } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 const MyInfo = (): JSX.Element => {
   return (
@@ -8,8 +10,26 @@ const MyInfo = (): JSX.Element => {
       <Stack spacing={4}>
         <span className="title">회원 정보 변경 </span>
         <ul className="my_info_list">
-          <MyInfoItem link="changepassword" text="비밀번호 변경" />
-          <MyInfoItem link="withdrawal" text="회원 탈퇴" />
+          <List>
+            <Link to="/myinfo/changepassword">
+              <span className="text">비밀번호 변경</span>
+              <IconButton
+                className="button"
+                aria-label="naviagate"
+                icon={<ArrowForwardIcon />}
+              />
+            </Link>
+          </List>
+          <List>
+            <Link to="/myinfo/withdrawal">
+              <span className="text">회원 탈퇴</span>
+              <IconButton
+                className="button"
+                aria-label="naviagate"
+                icon={<ArrowForwardIcon />}
+              />
+            </Link>
+          </List>
         </ul>
       </Stack>
     </Container>
