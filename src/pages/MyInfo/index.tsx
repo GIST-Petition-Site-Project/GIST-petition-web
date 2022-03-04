@@ -1,6 +1,6 @@
 import { Stack } from '@chakra-ui/react'
-import { Container } from './styles'
 import MyInfoItem from './MyInfoItem'
+import { Container } from './styles'
 
 const MyInfo = (): JSX.Element => {
   return (
