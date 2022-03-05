@@ -2,17 +2,14 @@ import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { Stack, useToast } from '@chakra-ui/react'
 import { FindPasswordBtn, Container } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { RootState } from '@redux/store'
 import {
   postConfirmVerificationCodeForPassword,
   postCreateVerificationCodeForPassword,
   putResetPassword,
 } from '@api/verificationAPI'
 
-import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
 import LoadingSpinner from '@components/LoadingSpinner'
-import { setWhichInfo } from '@redux/userInfo/userInfoSlice'
 import EmailAndVerification from '@components/EmailAndVerification'
 import Email from '@components/Email'
 
@@ -25,7 +22,6 @@ const FindingPassword = (): JSX.Element => {
     passwordConfirm: '',
   })
 
-  const whichUI = useAppSelect((state: RootState) => state.userInfo)
   const toast = useToast({
     variant: 'toast',
   })
