@@ -12,8 +12,8 @@ import LoadingSpinner from '@components/LoadingSpinner'
 import UserInput from '@components/UserInput'
 import { useAppSelect } from '@redux/store.hooks'
 import { Link } from 'react-router-dom'
-import Email from './Email'
-import EmailAndVerification from './EmailAndVerification'
+import Email from '../../components/Email'
+import EmailAndVerification from '../../components/EmailAndVerification'
 
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
