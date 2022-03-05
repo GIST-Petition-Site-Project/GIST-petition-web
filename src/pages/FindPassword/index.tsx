@@ -61,7 +61,10 @@ const FindingPassword = (): JSX.Element => {
     setErrorText(message)
     if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
-      setBtnUI('Agreed')
+      setBtnUI('Default')
+    } else if (message === '존재하지 않는 회원입니다.') {
+      setInput({ ...input, username: '' })
+      setBtnUI('Default')
     } else if (status < 400) {
       setContentUI('CodeVerification')
       setBtnUI('CodeRequested')
@@ -122,7 +125,7 @@ const FindingPassword = (): JSX.Element => {
     })
     setErrorText('')
     setContentUI('Email')
-    setBtnUI('Agreed')
+    setBtnUI('Default')
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -212,23 +215,10 @@ const FindingPassword = (): JSX.Element => {
             </>
           )}
 
-          {!whichUI.isCodeRequested &&
-            !whichUI.isLoading &&
-            !whichUI.isExpired && (
-              <FindPasswordBtn type="button" onClick={handleCreateCode}>
-                인증 코드 전송
-              </FindPasswordBtn>
-            )}
-          {whichUI.isExpired && (
-            <FindPasswordBtn type="button" onClick={handleResendCode}>
-              인증코드 재전송
-            </FindPasswordBtn>
-          )}
-
           {whichUI.isLoading && <LoadingSpinner></LoadingSpinner>}
 
           {btnUI === 'Loading' && <LoadingSpinner></LoadingSpinner>}
-          {btnUI === 'Agreed' && (
+          {btnUI === 'Default' && (
             <FindPasswordBtn type="button" onClick={handleCreateCode}>
               인증 코드 전송
             </FindPasswordBtn>
