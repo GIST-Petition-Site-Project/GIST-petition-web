@@ -210,9 +210,6 @@ const FindingPassword = (): JSX.Element => {
               ></UserInput>
             </>
           )}
-
-          {whichUI.isLoading && <LoadingSpinner></LoadingSpinner>}
-
           {btnUI === 'Loading' && <LoadingSpinner></LoadingSpinner>}
           {btnUI === 'Default' && (
             <FindPasswordBtn type="button" onClick={handleCreateCode}>
