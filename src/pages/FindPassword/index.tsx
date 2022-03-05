@@ -30,7 +30,7 @@ const FindingPassword = (): JSX.Element => {
     variant: 'toast',
   })
   const [errorText, setErrorText] = useState('')
-  const [btnUI, setBtnUI] = useState('')
+  const [btnUI, setBtnUI] = useState('Default')
   const [contentUI, setContentUI] = useState('Email')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,8 +150,8 @@ const FindingPassword = (): JSX.Element => {
         toast({
           status: 'success',
           duration: 3000,
-          description: '비밀번호 재설정',
-          title: '비밀번호가 재설정되었습니다',
+          title: '비밀번호 재설정',
+          description: '비밀번호가 재설정되었습니다',
           isClosable: true,
         })
         navigate('/login')
