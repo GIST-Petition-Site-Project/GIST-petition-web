@@ -14,6 +14,7 @@ import NavBar from '@components/NavBar'
 import MyInfo from '@pages/MyInfo'
 import ChangePassword from '@pages/ChangePassword'
 import Withdrawal from '@pages/Withdrawal'
+import Guide from '@pages/Guide'
 
 const RootRouter = (): JSX.Element => {
   return (
@@ -48,7 +49,9 @@ const RootRouter = (): JSX.Element => {
           ></Route>
           <Route path="/myinfo/withdrawal" element={<Withdrawal />}></Route>
         </Route>
-
+        <Route path="/guide" element={<Outlet />}>
+          <Route index element={<Guide />} />
+        </Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
