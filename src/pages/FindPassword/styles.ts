@@ -24,7 +24,7 @@ const Container = styled.section`
     }
   }
 `
-const RegisterButton = styled.button`
+const FindPasswordBtn = styled.button`
   color: ${theme.color.WHITE};
   background-color: ${theme.color.TERTIARY_GRAY};
   border-radius: 0.1rem;
@@ -32,4 +32,4 @@ const RegisterButton = styled.button`
   font-weight: bold;
 `
 
-export { Container, RegisterButton }
+export { Container, FindPasswordBtn }

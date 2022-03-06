@@ -3,6 +3,7 @@ import { Stack, useToast } from '@chakra-ui/react'
 import { ChangePwdButton, Container } from './styles'
 import UserInput from '@components/UserInput'
 import { putPasswordMe } from '@api/userAPI'
+import { useNavigate } from 'react-router'
 
 interface ChangePassword {
   prevPassword: string
@@ -11,6 +12,7 @@ interface ChangePassword {
 }
 
 const ChangePassword = (): JSX.Element => {
+  const navigate = useNavigate()
   const [input, setInput] = useState<ChangePassword>({
     prevPassword: '',
     newPassword: '',
@@ -26,21 +28,38 @@ const ChangePassword = (): JSX.Element => {
     setInput({ ...input, [name]: value })
   }
 
-  const handleReset = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.newPassword)) {
       setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
       return
     }
+
+    if (input.newPassword !== input.newPasswordConfirm) {
+      setErrorText('비밀번호가 일치하지 않습니다')
+      return
+    }
+
     if (input.newPassword === input.newPasswordConfirm) {
+      if (input.prevPassword === input.newPassword) {
+        setErrorText('현재 비밀번호와 다른 새로운 비밀번호를 입력해주세요')
+        return
+      }
+
       const response = await putPasswordMe({
         newPassword: input.newPassword,
         originPassword: input.prevPassword,
       })
+
       const status = response.status
       const message = response.data.message
-      setErrorText(message)
+
+      if (status >= 400) {
+        setErrorText(message)
+        return
+      }
 
       if (status < 400) {
         toast({
@@ -50,16 +69,9 @@ const ChangePassword = (): JSX.Element => {
           description: '비밀번호가 재설정되었습니다',
           isClosable: true,
         })
-      } else {
-        // passwordRef.current && passwordRef.current.focus()
+        navigate('/myinfo')
       }
-    } else {
-      // passwordRef.current && passwordRef.current.focus()
-      setErrorText('비밀번호가 일치하지 않습니다')
     }
-  }
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
   }
 
   return (
@@ -72,7 +84,7 @@ const ChangePassword = (): JSX.Element => {
             name="prevPassword"
             type="password"
             value={input.prevPassword}
-            placeholder="현재 비밀번호를 입력하세요."
+            placeholder="현재 비밀번호를 입력하세요"
             onChange={handleChange}
             disabled={false}
             onPassword={true}
@@ -82,7 +94,7 @@ const ChangePassword = (): JSX.Element => {
             name="newPassword"
             type="password"
             value={input.newPassword}
-            placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요."
+            placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
             onChange={handleChange}
             disabled={false}
             onPassword={true}
@@ -97,7 +109,7 @@ const ChangePassword = (): JSX.Element => {
             disabled={false}
             onPassword={true}
           ></UserInput>
-          <ChangePwdButton onClick={handleReset} className="submit__btn">
+          <ChangePwdButton type="submit" className="submit__btn">
             비밀번호 재설정
           </ChangePwdButton>
           <span className="err_msg">{errorText}</span>

@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { Button, Textarea } from '@chakra-ui/react'
 
 const SAgreementForm = styled.div`
   position: relative;
@@ -11,10 +10,27 @@ const SAgreementForm = styled.div`
     color: #8a8a8a;
     font-weight: 300;
   }
+  .needLogin {
+    display: flex;
+    height: 60px;
+    border: 1px solid #ccc;
+    font-size: 0.875rem;
+    resize: none;
+    box-sizing: border-box;
+    width: 100%auto;
+    padding: 0.6rem;
+    color: '#ccc';
+    cursor: pointer;
+
+    > span {
+      text-decoration: underline;
+    }
+  }
 
   .wrapper {
     display: flex;
     height: 60px;
+
     textarea {
       border-radius: 0;
       border: 1px solid #ccc;
@@ -23,9 +39,12 @@ const SAgreementForm = styled.div`
       box-sizing: border-box;
       width: 100%;
       padding: 0.6rem;
-
       :focus {
         outline: none;
+      }
+      > span {
+        color: red;
+        text-decoration: underline;
       }
     }
     .agreement_btn {

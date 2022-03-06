@@ -1,15 +1,20 @@
-import { FormControl, useDisclosure } from '@chakra-ui/react'
-import { ChangeEvent, FormEvent, useState, useEffect } from 'react'
-import { getStateOfAgreement, postAgreePetition } from '@api/petitionAPI'
+import { FormControl } from '@chakra-ui/react'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { postAgreePetition } from '@api/petitionAPI'
 import { SAgreementForm } from './styles'
 import { useNavigate } from 'react-router-dom'
-import NeedLoginModal from '@components/NeedLoginModal'
+import { useAppSelect } from '@redux/store.hooks'
 
-const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
+interface Props {
+  id: string
+  isConsented: boolean
+}
+
+const AgreementForm = ({ id, isConsented }: Props): JSX.Element => {
+  const isAuthorized = useAppSelect(select => select.auth.isAuthorized)
   const [input, setInput] = useState<AgreePetition>({
-    description: '동의합니다.',
+    description: '동의합니다',
   })
-  const [isConsented, setIsConsented] = useState<boolean>(true)
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ description: e.target.value.replace(/ +/g, ' ') })
@@ -19,61 +24,50 @@ const AgreementForm = ({ petitionId }: PetitionId): JSX.Element => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const response = await postAgreePetition(petitionId, input)
-      if (response?.status === 401) {
-        onOpen()
-      } else if (response.status < 400) {
-        navigate(0)
-        setIsConsented(true)
-      }
+      await postAgreePetition(id, input)
     } catch (error) {
       console.log(error)
     }
+    navigate(0)
   }
-
-  const fetch = async (id: string) => {
-    try {
-      const response = await getStateOfAgreement(id)
-      if (response.status < 400) {
-        setIsConsented(response.data)
-      }
-      if (response.status >= 400) {
-        setIsConsented(false)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetch(petitionId)
-  }, [petitionId])
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <SAgreementForm>
       <span>{input.description.length}/100</span>
       <form onSubmit={handleSubmit}>
         <FormControl>
-          <div className="wrapper">
-            <textarea
-              placeholder="동의합니다."
-              onChange={handleChange}
-              value={input.description}
-              maxLength={100}
-            />
-            <button
-              className="agreement_btn"
-              disabled={isConsented}
-              type="submit"
+          {isAuthorized ? (
+            <div className="wrapper">
+              <textarea
+                placeholder={isConsented ? '동의했습니다' : '동의합니다'}
+                onChange={handleChange}
+                value={input.description}
+                maxLength={100}
+                disabled={isConsented}
+              />
+              <button
+                className="agreement_btn"
+                disabled={isConsented}
+                type="submit"
+              >
+                {!isConsented ? '동의하기' : '동의완료'}
+              </button>
+            </div>
+          ) : (
+            <div
+              className="needLogin"
+              onClick={_e => {
+                navigate({
+                  pathname: '/login',
+                  hash: location.pathname,
+                })
+              }}
             >
-              {!isConsented ? '동의하기' : '동의완료'}
-            </button>
-          </div>
+              동의하려면&nbsp;<span>로그인</span>&nbsp;해주세요
+            </div>
+          )}
         </FormControl>
       </form>
-      <NeedLoginModal disclosure={{ isOpen, onClose }}></NeedLoginModal>
     </SAgreementForm>
   )
 }

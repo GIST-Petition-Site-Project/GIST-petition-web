@@ -5,7 +5,7 @@ import { Container, MobileMenu, Before } from './styles'
 import { ItemName } from '../styles'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const MyMenu = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -20,13 +20,20 @@ const MyMenu = (): JSX.Element => {
   }
 
   const [opened, setOpened] = useState<boolean>(false)
+  const details = useRef<HTMLDetailsElement>(null)
 
   return useAppSelect(select => select.auth.isAuthorized) ? (
     <Container>
-      <details className="details_overlay">
+      <details className="details_overlay" ref={details}>
         <summary
           onClick={() => {
             setOpened(!opened)
+          }}
+          onKeyDown={e => {
+            if (e.key === 'Escape' && opened && details.current) {
+              details.current.open = !open
+              setOpened(!opened)
+            }
           }}
         >
           <Before open={opened}></Before>내 정보
@@ -44,7 +51,7 @@ const MyMenu = (): JSX.Element => {
           <Link to="/mypetitions">나의 청원</Link>
         </ItemName>
         <ItemName>
-          <Link to="#">회원 정보 관리</Link>
+          <a href="/myinfo">회원 정보 관리</a>
         </ItemName>
         <ItemName>
           <Link to="#" onClick={handleLogout}>

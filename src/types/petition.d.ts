@@ -39,7 +39,7 @@ interface AgreePetition {
   description: string
 }
 
-interface GetAgreements {
+interface Agreement {
   description: string
   id: number
   createdAt: number

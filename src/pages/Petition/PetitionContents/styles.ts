@@ -1,48 +1,5 @@
 import styled from '@emotion/styled'
-import { Button, Text } from '@chakra-ui/react'
 import theme from '@style/theme'
-
-const PetitionProgress = styled.div`
-  font-size: 1.25rem;
-  text-align: center;
-`
-
-const PetitionTitleWrap = styled.div`
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-`
-
-const PetitionTitle = styled(Text)`
-  margin: 0 1.25em;
-`
-
-const CurrentAgreementsText = styled.div`
-  text-align: center;
-  font-size: 1.25em;
-`
-
-const CurrentAgreements = styled.span`
-  display: inline;
-  color: #df3127;
-  font-weight: bold;
-`
-
-const PetitionDescription = styled.div`
-  line-height: 1.5em;
-  text-align: justify;
-`
-
-const AgreementButton = styled(Button)`
-  width: 7.5rem;
-  height: 2.5rem;
-  border-radius: 0;
-  border: 2px solid #df3127;
-  color: #df3127;
-`
-const ContentWrap = styled.div`
-  white-space: pre-line;
-`
 
 const SharingPetition = styled.div`
   margin: 5rem 0;
@@ -124,7 +81,7 @@ const SharingPetition = styled.div`
       justify-content: space-around;
       margin-top: 1rem;
       li {
-        a {
+        button {
           width: 45px;
           height: 45px;
           border-radius: 100px;
@@ -135,13 +92,13 @@ const SharingPetition = styled.div`
         }
       }
       li:nth-of-type(1) {
-        a {
+        button {
           color: #3b1e1e;
           background-color: #f9e000;
         }
       }
       li:nth-of-type(2) {
-        a {
+        button {
           color: #ffffff;
           background-color: #4267b2;
         }
@@ -150,14 +107,90 @@ const SharingPetition = styled.div`
   }
 `
 
+const HeadSection = styled.div`
+  color: #333;
+  .info {
+    font-size: 1.25rem;
+    text-align: center;
+    .progress {
+      font-weight: bold;
+      display: inline-block;
+    }
+    .duration {
+    }
+  }
+  .title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    div {
+      margin: 0 1.25em;
+    }
+  }
+  .current_agree {
+    text-align: center;
+    font-size: 1.25em;
+    .num_of_agree {
+      > span {
+        color: #df3127;
+        font-weight: bold;
+      }
+    }
+  }
+`
+
+const DescriptionSection = styled.div`
+  color: #333;
+  margin: 20px 0;
+  .chakra-stack {
+    > span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    div > .content {
+      white-space: pre-line;
+      .description {
+        line-height: 1.5em;
+        text-align: justify;
+      }
+    }
+  }
+`
+
+const AnswerSection = styled.div`
+  color: #333;
+  margin: 20px 0;
+  .chakra-stack {
+    > span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    div > .content {
+      white-space: pre-line;
+      .answer {
+        line-height: 1.5em;
+        text-align: justify;
+      }
+    }
+  }
+`
+
+const AgreementsSection = styled.div`
+  .num_of_agree {
+    text-align: left;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0.5em 0;
+    > span {
+      color: #ff0000;
+    }
+  }
+`
+
 export {
-  PetitionProgress,
-  PetitionTitleWrap,
-  PetitionTitle,
-  CurrentAgreementsText,
-  CurrentAgreements,
-  PetitionDescription,
-  AgreementButton,
-  ContentWrap,
+  HeadSection,
+  DescriptionSection,
+  AnswerSection,
   SharingPetition,
+  AgreementsSection,
 }

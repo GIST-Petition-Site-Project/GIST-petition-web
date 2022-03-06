@@ -11,12 +11,11 @@ import {
 } from 'reduxjs-toolkit-persist'
 import storage from 'reduxjs-toolkit-persist/lib/storage'
 import authReducer from './auth/authSlice'
-import userInfoSlice from './userInfo/userInfoSlice'
+
 // import queryReducer from './query/querySlice'
 
 const reducers = combineReducers({
   auth: authReducer,
-  userInfo: userInfoSlice,
   // query: queryReducer,
 })
 

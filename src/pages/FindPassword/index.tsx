@@ -1,21 +1,19 @@
-import React, { FormEvent, useEffect, useState } from 'react'
-import {
-  postConfirmVerificationCode,
-  postCreateVerificationCode,
-} from '@api/verificationAPI'
-import { postRegister } from '@api/userAPI'
-import { Text, useToast } from '@chakra-ui/react'
-import { RegisterStack, RegisterButton, ErrorText } from './styles'
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import { Stack, useToast } from '@chakra-ui/react'
+import { FindPasswordBtn, Container } from './styles'
 import { useNavigate } from 'react-router-dom'
-import TermsOfUse from './TermsOfUse'
-import LoadingSpinner from '@components/LoadingSpinner'
-import UserInput from '@components/UserInput'
-import { useAppSelect } from '@redux/store.hooks'
-import { Link } from 'react-router-dom'
-import Email from '../../components/Email'
-import EmailAndVerification from '../../components/EmailAndVerification'
+import {
+  postConfirmVerificationCodeForPassword,
+  postCreateVerificationCodeForPassword,
+  putResetPassword,
+} from '@api/verificationAPI'
 
-const Register = (): JSX.Element => {
+import UserInput from '@components/UserInput'
+import LoadingSpinner from '@components/LoadingSpinner'
+import EmailAndVerification from '@components/EmailAndVerification'
+import Email from '@components/Email'
+
+const FindingPassword = (): JSX.Element => {
   const navigate = useNavigate()
   const [input, setInput] = useState<RegisterForm>({
     username: '',
@@ -24,49 +22,12 @@ const Register = (): JSX.Element => {
     passwordConfirm: '',
   })
 
-  const [agreeInfo, setAgreeInfo] = useState<RegisterAgree>({
-    service: false,
-    private: false,
-  })
   const toast = useToast({
     variant: 'toast',
   })
   const [errorText, setErrorText] = useState('')
-  const [btnUI, setBtnUI] = useState('')
-  const [contentUI, setContentUI] = useState('TermsOfUse')
-
-  const auth = useAppSelect(select => select.auth.isAuthorized)
-  useEffect(() => {
-    if (auth) {
-      window.history.back()
-    }
-  }, [useAppSelect(select => select.auth.isAuthorized)])
-
-  const handleAgree = (value: string) => {
-    switch (value) {
-      case 'total':
-        if (agreeInfo.private && agreeInfo.service) {
-          setAgreeInfo({ ...agreeInfo, service: false, private: false })
-          return
-        }
-        setAgreeInfo({ ...agreeInfo, service: true, private: true })
-        return
-      case 'service':
-        setAgreeInfo({ ...agreeInfo, service: !agreeInfo.service })
-        return
-      case 'private':
-        setAgreeInfo({ ...agreeInfo, private: !agreeInfo.private })
-        return
-      default:
-        throw Error('Clicked Wrong Btn')
-    }
-  }
-
-  const handleAgreeBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const target = e.currentTarget
-    const value = target.dataset.value
-    value && handleAgree(value)
-  }
+  const [btnUI, setBtnUI] = useState('Default')
+  const [contentUI, setContentUI] = useState('Email')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -80,16 +41,6 @@ const Register = (): JSX.Element => {
     setInput({ ...input, [name]: value })
   }
 
-  const handleAgreeBtn = () => {
-    if (agreeInfo.private === true && agreeInfo.service === true) {
-      setBtnUI('Agreed')
-      setContentUI('Email')
-      setErrorText('')
-      return
-    }
-    setErrorText('모든 약관에 동의해주세요')
-  }
-
   const handleCreateCode = async () => {
     setErrorText('')
     const emailRegex = /@(gm.)?gist.ac.kr$/
@@ -98,7 +49,7 @@ const Register = (): JSX.Element => {
       return
     }
     setBtnUI('Loading')
-    const response = await postCreateVerificationCode({
+    const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
     const status = response?.status
@@ -106,7 +57,10 @@ const Register = (): JSX.Element => {
     setErrorText(message)
     if (message === '이미 존재하는 회원입니다.') {
       setInput({ ...input, username: '' })
-      setBtnUI('Agreed')
+      setBtnUI('Default')
+    } else if (message === '존재하지 않는 회원입니다.') {
+      setInput({ ...input, username: '' })
+      setBtnUI('Default')
     } else if (status < 400) {
       setContentUI('CodeVerification')
       setBtnUI('CodeRequested')
@@ -115,7 +69,7 @@ const Register = (): JSX.Element => {
   }
 
   const handleConfirmCode = async () => {
-    const response = await postConfirmVerificationCode({
+    const response = await postConfirmVerificationCodeForPassword({
       username: input.username,
       verificationCode: input.verificationCode,
     })
@@ -147,7 +101,7 @@ const Register = (): JSX.Element => {
   const handleResendCode = async () => {
     setBtnUI('Loading')
     setErrorText('')
-    const response = await postCreateVerificationCode({
+    const response = await postCreateVerificationCodeForPassword({
       username: input.username,
     })
     const status = response.status
@@ -155,44 +109,6 @@ const Register = (): JSX.Element => {
       setBtnUI('CodeRequested')
       setContentUI('CodeVerification')
       setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
-    }
-  }
-
-  // const handleRegister = async () => {
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log('d')
-    setErrorText('')
-    const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
-    if (!passwordRegex.test(input.password)) {
-      setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
-      return
-    }
-    if (input.password === input.passwordConfirm) {
-      const response = await postRegister({
-        username: input.username,
-        verificationCode: input.verificationCode,
-        password: input.password,
-      })
-      const status = response.status
-      const message = response.data.message
-      setErrorText(message)
-
-      if (status < 400) {
-        toast({
-          status: 'success',
-          duration: 3000,
-          description: '회원가입이 완료되었습니다',
-          title: '계정 생성완료',
-          isClosable: true,
-        })
-        navigate('/login')
-      } else {
-        setBtnUI('Invalid')
-      }
-    } else {
-      // passwordRef.current && passwordRef.current.focus()
-      setErrorText('비밀번호가 일치하지 않습니다')
     }
   }
 
@@ -205,30 +121,49 @@ const Register = (): JSX.Element => {
     })
     setErrorText('')
     setContentUI('Email')
-    setBtnUI('Agreed')
+    setBtnUI('Default')
   }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setErrorText('')
+    const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
+    if (!passwordRegex.test(input.password)) {
+      setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
+      return
+    }
+    if (input.password === input.passwordConfirm) {
+      const response = await putResetPassword({
+        password: input.password,
+        username: input.username,
+        verificationCode: input.verificationCode,
+      })
+      const status = response.status
+      const message = response.data.message
+      setErrorText(message)
+
+      if (status < 400) {
+        toast({
+          status: 'success',
+          duration: 3000,
+          title: '비밀번호 재설정',
+          description: '비밀번호가 재설정되었습니다',
+          isClosable: true,
+        })
+        navigate('/login')
+      } else {
+        setBtnUI('Invalid')
+      }
+    } else {
+      setErrorText('비밀번호가 일치하지 않습니다')
+    }
+  }
+
   return (
-    <section className="register">
-      <form onSubmit={handleSubmit} className="register__form">
-        <RegisterStack spacing={4}>
-          <span>회원가입</span>
-          {contentUI === 'TermsOfUse' && (
-            <>
-              <TermsOfUse
-                agreeInfo={agreeInfo}
-                onAgree={handleAgreeBtnClick}
-              ></TermsOfUse>
-              <RegisterButton onClick={handleAgreeBtn}>
-                다음 단계
-              </RegisterButton>
-              <Text align="center">
-                이미 가입하셨나요?{' '}
-                <Link to="/login" style={{ textDecoration: 'underline' }}>
-                  로그인
-                </Link>
-              </Text>
-            </>
-          )}
+    <Container className="register">
+      <form onSubmit={handleSubmit} className="register_form">
+        <Stack spacing={4}>
+          <span>비밀번호 찾기</span>
           {contentUI === 'Email' && (
             <Email
               value={input.username}
@@ -276,35 +211,36 @@ const Register = (): JSX.Element => {
             </>
           )}
           {btnUI === 'Loading' && <LoadingSpinner></LoadingSpinner>}
-          {btnUI === 'Agreed' && (
-            <RegisterButton type="button" onClick={handleCreateCode}>
+          {btnUI === 'Default' && (
+            <FindPasswordBtn type="button" onClick={handleCreateCode}>
               인증 코드 전송
-            </RegisterButton>
+            </FindPasswordBtn>
           )}
           {btnUI === 'Expired' && (
-            <RegisterButton type="button" onClick={handleResendCode}>
+            <FindPasswordBtn type="button" onClick={handleResendCode}>
               인증코드 재전송
-            </RegisterButton>
+            </FindPasswordBtn>
           )}
           {btnUI === 'CodeRequested' && (
-            <RegisterButton type="button" onClick={handleConfirmCode}>
+            <FindPasswordBtn type="button" onClick={handleConfirmCode}>
               인증
-            </RegisterButton>
+            </FindPasswordBtn>
           )}
           {btnUI === 'Invalid' && (
-            <RegisterButton type="button" onClick={handleReverify}>
+            <FindPasswordBtn type="button" onClick={handleReverify}>
               다시 인증하기
-            </RegisterButton>
+            </FindPasswordBtn>
           )}
           {btnUI === 'Valid' && (
-            <RegisterButton type="submit" className="submit__btn">
-              회원가입
-            </RegisterButton>
+            <FindPasswordBtn type="submit" className="submit__btn">
+              비밀번호 재설정
+            </FindPasswordBtn>
           )}
-          <ErrorText>{errorText}</ErrorText>
-        </RegisterStack>
+          <span className="err_msg">{errorText}</span>
+        </Stack>
       </form>
-    </section>
+    </Container>
   )
 }
-export default Register
+
+export default FindingPassword

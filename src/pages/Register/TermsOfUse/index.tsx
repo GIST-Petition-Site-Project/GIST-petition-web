@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import TermsOfUseAccordion from '../Accordion'
+import TermsOfUseAccordion from './Accordion'
 import TermOfUseList from './TermOfUseList'
 import { TermsOfUseBox } from './styles'
 

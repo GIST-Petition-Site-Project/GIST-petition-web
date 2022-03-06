@@ -9,17 +9,22 @@ import Write from '@pages/Write'
 import MyPetitions from '@pages/MyPetitions'
 import AnsweredPetitions from '@pages/AnsweredPetitions'
 import { AuthRoute } from './PrivateRouter'
-import FindingPassword from '@pages/FindingPassword'
+import FindPassword from '@pages/FindPassword'
 import NavBar from '@components/NavBar'
 import MyInfo from '@pages/MyInfo'
 import ChangePassword from '@pages/ChangePassword'
 import Withdrawal from '@pages/Withdrawal'
+<<<<<<< HEAD
 import Guide from '@pages/Guide'
+=======
+import ScrollTop from './ScrollTop'
+>>>>>>> 8515be1e1e37360f974fed802232b8ccc8dc6c4a
 
 const RootRouter = (): JSX.Element => {
   return (
     <BrowserRouter>
-      <NavBar></NavBar>
+      <ScrollTop />
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -29,15 +34,15 @@ const RootRouter = (): JSX.Element => {
         </Route>
         <Route path="/petitions" element={<Outlet />}>
           <Route index element={<Petitions />} />
-          <Route path=":petitionId" element={<Petition />} />
+          <Route path=":param" element={<Petition />} />
         </Route>
         <Route path="/petitions/temp" element={<Outlet />}>
-          <Route path=":id" element={<Petition />} />
+          <Route path=":param" element={<Petition />} />
         </Route>
         <Route path="/mypetitions" element={<AuthRoute />}>
           <Route index element={<MyPetitions />} />
         </Route>
-        <Route path="/findpassword" element={<FindingPassword />}></Route>
+        <Route path="/findpassword" element={<FindPassword />}></Route>
         <Route path="/answer" element={<Outlet />}>
           <Route index element={<AnsweredPetitions />} />
         </Route>
