@@ -14,11 +14,8 @@ import NavBar from '@components/NavBar'
 import MyInfo from '@pages/MyInfo'
 import ChangePassword from '@pages/ChangePassword'
 import Withdrawal from '@pages/Withdrawal'
-<<<<<<< HEAD
 import Guide from '@pages/Guide'
-=======
 import ScrollTop from './ScrollTop'
->>>>>>> 8515be1e1e37360f974fed802232b8ccc8dc6c4a
 
 const RootRouter = (): JSX.Element => {
   return (

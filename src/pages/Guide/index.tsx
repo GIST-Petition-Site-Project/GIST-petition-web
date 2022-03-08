@@ -8,6 +8,7 @@ import {
 } from './styles'
 import { Stack, Heading } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
 
 const Guide = (): JSX.Element => {
   return (
@@ -163,10 +164,10 @@ const Guide = (): JSX.Element => {
           </ContentContainer>
           <ButtonContainer>
             <button className="write">
-              <a href="/write">청원 바로가기</a>
+              <Link to="/write">청원 바로가기</Link>
             </button>
             <button className="petitions">
-              <a href="/petitions">청원 목록 보기</a>
+              <Link to="/petitions">청원 목록 보기</Link>
             </button>
           </ButtonContainer>
         </Stack>

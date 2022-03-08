@@ -24,7 +24,7 @@ const ContentContainer = styled.div`
   padding: 0.65em;
   border: 1px solid #ddd;
   .box-title {
-    padding: 0.5em 0 1em 1em;
+    padding: 0.5em 0 1em 0;
     font-size: 19px;
     line-height: 24px;
     font-weight: bold;
@@ -37,39 +37,44 @@ const ContentContainer = styled.div`
   }
 `
 const StepHeadContainer = styled.ul`
-  display: none;
-  @media screen and (min-width: ${theme.breakpoints.md}) {
-    display: flex;
-    padding: 20px 0;
-    background: #cccccc82;
-    margin-top: 0;
+  display: grid;
+  padding: 20px 0;
+  background: #cccccc82;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 2fr);
+  @media screen and (min-width: ${theme.breakpoints.sm}) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
   }
   > li {
-    flex: 1;
+    margin: auto;
     .circle {
+      margin: 20px 0;
       position: relative;
       border-radius: 50%;
-      font-size: 16px;
+      font-size: 1rem;
       text-align: center;
       color: ${theme.color.WHITE};
       background-color: ${theme.color.QUATERNARY_GRAY};
-      width: 140px;
-      height: 140px;
-      margin-left: 30px;
-      display: none;
-      @media screen and (min-width: ${theme.breakpoints.md}) {
+      width: 120px;
+      height: 120px;
+      display: block;
+      @media screen and (min-width: ${theme.breakpoints.sm}) {
+        margin: 0;
+        width: 140px;
+        height: 140px;
+      }
+      .num {
         display: block;
+        padding: 35px 0 15px;
+        font-size: 18px;
+        font-weight: 500;
+        color: ${theme.color.WHITE};
       }
     }
   }
-  .num {
-    display: block;
-    padding: 35px 0 15px;
-    font-size: 18px;
-    font-weight: 500;
-    color: ${theme.color.WHITE};
-  }
 `
+
 const StepContainer = styled.ul`
   margin-top: 20px;
   border: 1px solid #ddd;
@@ -84,14 +89,14 @@ const StepContainer = styled.ul`
     border-bottom: 2px solid #e2e2e2;
     .step-title {
       display: inline-flex;
-      justify-content: center;
+      width: 100%;
+      /* justify-content: center; */
       align-items: center;
       height: 100%;
-      padding-left: 30px;
+      padding: 0 15px;
       .title {
-        width: 130px;
-        margin: 0;
         font-size: 16px;
+        min-width: 110px;
         @media screen and (min-width: ${theme.breakpoints.md}) {
           font-size: 20px;
         }
@@ -105,14 +110,13 @@ const StepContainer = styled.ul`
         .title-text {
           font-weight: bold;
           color: #3c3c3c;
-          @media screen and (min-width: ${theme.breakpoints.md}) {
-            padding-right: 20px;
-          }
+          padding-right: 20px;
         }
       }
       .content {
         font-size: 14px;
         line-height: 1.27;
+        text-align: left;
         color: #8a8a8a;
         @media screen and (min-width: ${theme.breakpoints.md}) {
           font-size: 18px;
@@ -139,17 +143,15 @@ const StepContainer = styled.ul`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+
   button {
     border: 2px solid ${theme.color.LIGHT_GRAY};
     border-radius: 0;
     height: ${theme.size.BUTTON_HEIGHT};
-    display: flex;
-    align-items: center;
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 1rem;
     color: ${theme.color.WHTIE};
-    margin-bottom: 0;
-    width: 5rem;
+    min-width: 33.33333%;
   }
 `
 
