@@ -28,6 +28,11 @@ const NavBar = (): JSX.Element => {
           <div onClick={closeMenu}>
             <ListItem>
               <ItemName>
+                <Link to="/guide">이용안내</Link>
+              </ItemName>
+            </ListItem>
+            <ListItem>
+              <ItemName>
                 <Link to="/write">청원하기</Link>
               </ItemName>
             </ListItem>
