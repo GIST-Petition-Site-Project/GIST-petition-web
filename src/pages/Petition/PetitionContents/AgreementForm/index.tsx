@@ -16,12 +16,9 @@ const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
     description: '동의합니다',
   })
 
-  const handleChange = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => {
-      setInput({ description: e.target.value.replace(/ +/g, ' ') })
-    },
-    [input],
-  )
+  const handleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInput({ description: e.target.value.replace(/ +/g, ' ') })
+  }, [])
 
   const navigate = useNavigate()
   const handleSubmit = useCallback(
