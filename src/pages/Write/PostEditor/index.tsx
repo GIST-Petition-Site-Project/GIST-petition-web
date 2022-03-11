@@ -1,4 +1,10 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
+import React, {
+  useState,
+  ChangeEvent,
+  FormEvent,
+  useMemo,
+  useCallback,
+} from 'react'
 import {
   ButtonGroup,
   Stack,
@@ -20,12 +26,16 @@ import { useNavigate } from 'react-router-dom'
 import { Category } from '../../../types/enums'
 
 const PostEditor = () => {
-  const numberOfCategory =
-    Object.keys(Category).filter(el => isNaN(Number(el))).length - 1
+  const countCategoryIdx = useMemo(() => {
+    const numberOfCategory =
+      Object.keys(Category).filter(el => isNaN(Number(el))).length - 1
 
-  const catergoryIdx = Array(numberOfCategory)
-    .fill(0)
-    .map((_x, i) => i + 1)
+    const catergoryIdx = Array(numberOfCategory)
+      .fill(0)
+      .map((_x, i) => i + 1)
+
+    return catergoryIdx
+  }, [])
 
   const [petitionInput, setPetitionInput] = useState<PetitionsInput>({
     title: '',
@@ -33,38 +43,44 @@ const PostEditor = () => {
     description: '',
   })
 
-  const handleChange = (
-    e:
-      | ChangeEvent<HTMLInputElement>
-      | ChangeEvent<HTMLTextAreaElement>
-      | ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const { value, name } = e.target
-    if (name === 'categoryId') {
-      setPetitionInput({ ...petitionInput, [name]: Number(value) })
-      return
-    }
-    setPetitionInput({
-      ...petitionInput,
-      [name]: value.replace(/ +/g, ' '),
-    })
-  }
+  const handleChange = useCallback(
+    (
+      e:
+        | ChangeEvent<HTMLInputElement>
+        | ChangeEvent<HTMLSelectElement>
+        | ChangeEvent<HTMLTextAreaElement>,
+    ) => {
+      const { value, name } = e.target
+      if (name === 'categoryId') {
+        setPetitionInput({ ...petitionInput, [name]: Number(value) })
+        return
+      }
+      setPetitionInput({
+        ...petitionInput,
+        [name]: value.replace(/ +/g, ' '),
+      })
+    },
+    [petitionInput],
+  )
 
   const navigate = useNavigate()
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    try {
-      const response = await postCreatePetition(petitionInput)
-      const url = response?.headers?.location.slice(3) || '/petitions'
-      navigate(url)
-    } catch (error) {
-      console.log(error)
-      if (petitionInput.title === ' ' || petitionInput.description === ' ') {
-        alert('제목 또는 내용을 추가해주세요')
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      try {
+        const response = await postCreatePetition(petitionInput)
+        const url = response?.headers?.location.slice(3) || '/petitions'
+        navigate(url)
+      } catch (error) {
+        console.log(error)
+        if (petitionInput.title === ' ' || petitionInput.description === ' ') {
+          alert('제목 또는 내용을 추가해주세요')
+        }
       }
-    }
-  }
+    },
+    [petitionInput],
+  )
 
   return (
     <Flex gap="10px" justifyContent="center" flexDirection="column">
@@ -99,7 +115,7 @@ const PostEditor = () => {
               value={petitionInput.categoryId}
             >
               <option disabled>카테고리를 선택해주세요.</option>
-              {catergoryIdx.map(idx => (
+              {countCategoryIdx.map(idx => (
                 <option value={idx} key={idx}>
                   {Category[idx]}
                 </option>
@@ -143,4 +159,4 @@ const PostEditor = () => {
   )
 }
 
-export default PostEditor
+export default React.memo(PostEditor)
