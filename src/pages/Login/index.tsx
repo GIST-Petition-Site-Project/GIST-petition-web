@@ -1,8 +1,7 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { setLogin } from '@redux/auth/authSlice'
 import {
-  Button,
   chakra,
   FormControl,
   IconButton,
@@ -53,18 +52,21 @@ const Login = (): JSX.Element => {
     }
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    try {
-      const loginStatus = await postLogin(input)
-      setResponseState(loginStatus)
-      if (loginStatus < 400) {
-        dispatch(setLogin())
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      try {
+        const loginStatus = await postLogin(input)
+        setResponseState(loginStatus)
+        if (loginStatus < 400) {
+          dispatch(setLogin())
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+    },
+    [input],
+  )
 
   const auth = useAppSelect(select => select.auth.isAuthorized)
   const navigate = useNavigate()
@@ -95,8 +97,6 @@ const Login = (): JSX.Element => {
                 name="username"
                 id="uesrname"
                 placeholder="지스트 이메일을 입력하세요"
-                // value={input.userEmail}
-                // onChange={handleChangeUser}
               />
             </InputGroup>
           </FormControl>
@@ -112,8 +112,6 @@ const Login = (): JSX.Element => {
                 name="password"
                 id="password"
                 placeholder="비밀번호를 입력하세요"
-                // value={input.password}
-                // onChange={handleChangeUser}
                 onKeyPress={checkUpperCase}
               />
               <InputRightElement>
@@ -132,7 +130,7 @@ const Login = (): JSX.Element => {
             <Link to="/findpassword">비밀번호를 잊으셨나요?</Link>
           </span>
 
-          <Button
+          <button
             type="submit"
             className="login_btn"
             onClick={() => {
@@ -143,7 +141,7 @@ const Login = (): JSX.Element => {
             }}
           >
             로그인
-          </Button>
+          </button>
 
           <span className="create_acount account_link">
             계정이 없으신가요? <Link to="/register">계정 만들기</Link>

@@ -17,18 +17,39 @@ const PetitionBoard = styled.div`
       font-weight: bold;
     }
     .selects {
-      width: 268px;
+      width: 224px;
       display: flex;
       justify-content: space-between;
-
-      .chakra-select__wrapper {
-        display: inline-block;
-        max-width: 128px;
-        .chakra-select {
-          width: 100%;
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        width: 268px;
+      }
+      .select_wrapper {
+        position: relative;
+        select {
+          width: 108px;
+          @media screen and (min-width: ${theme.breakpoints.md}) {
+            width: 128px;
+          }
+          padding: 0 32px 0 16px;
+          padding-inline-start: 1rem;
+          padding-inline-end: 2em;
+          -webkit-appearance: none;
+          appearance: none;
+          background-color: transparent;
           height: 32px;
-          border-radius: 0;
-          border-color: #ccc;
+          border: 1px solid #ccc;
+          word-wrap: break-word;
+          :focus-visible {
+            outline: none;
+          }
+        }
+        ::after {
+          position: absolute;
+          content: '⌵';
+          font-weight: bold;
+          font-size: 1.2rem;
+          top: 2px;
+          right: 14px;
         }
       }
     }

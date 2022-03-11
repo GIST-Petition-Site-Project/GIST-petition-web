@@ -17,6 +17,7 @@ import EmailAndVerification from '../../components/EmailAndVerification'
 
 const Register = (): JSX.Element => {
   const navigate = useNavigate()
+
   const [input, setInput] = useState<RegisterForm>({
     username: '',
     password: '',
@@ -38,7 +39,7 @@ const Register = (): JSX.Element => {
   const auth = useAppSelect(select => select.auth.isAuthorized)
   useEffect(() => {
     if (auth) {
-      window.history.back()
+      navigate('/')
     }
   }, [useAppSelect(select => select.auth.isAuthorized)])
 

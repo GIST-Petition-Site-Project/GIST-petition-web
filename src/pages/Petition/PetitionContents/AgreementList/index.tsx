@@ -12,6 +12,7 @@ import {
 
 import { getDayTime } from '@utils/getTime'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useCallback } from 'react'
 interface IProps {
   totalAgreement: number
   totalPages: number
@@ -41,17 +42,20 @@ const AgreementList = ({
   })
 
   const navigate = useNavigate()
-  const handlePageChange = (e: number) => {
-    const newSearchParams = {
-      ...queryParams,
-      page: e,
-    }
-    setCurrentPage(e)
-    navigate({
-      pathname: location.pathname,
-      search: qs.stringify(newSearchParams),
-    })
-  }
+  const handlePageChange = useCallback(
+    (e: number) => {
+      const newSearchParams = {
+        ...queryParams,
+        page: e,
+      }
+      setCurrentPage(e)
+      navigate({
+        pathname: location.pathname,
+        search: qs.stringify(newSearchParams),
+      })
+    },
+    [currentPage],
+  )
 
   return (
     <CommentList>

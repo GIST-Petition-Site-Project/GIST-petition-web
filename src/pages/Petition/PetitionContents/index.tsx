@@ -13,7 +13,7 @@ import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
 import { useEffect } from 'react'
 
-interface Props {
+interface IProps {
   id: string
   petition: Petition | undefined
   answer: Answer | undefined
@@ -31,7 +31,7 @@ const PetitionContents = ({
   agreements,
   totalAgreement,
   isConsented,
-}: Props): JSX.Element => {
+}: IProps): JSX.Element => {
   const sharingURL =
     process.env.NODE_ENV === 'development'
       ? 'https://dev.gist-petition.com' + location.pathname
