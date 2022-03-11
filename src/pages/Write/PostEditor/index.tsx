@@ -1,26 +1,21 @@
 import React, {
-  useState,
   ChangeEvent,
   FormEvent,
+  useState,
   useMemo,
   useCallback,
 } from 'react'
 import {
   ButtonGroup,
   Stack,
-  Flex,
   InputGroup,
   Input,
   FormControl,
   FormLabel,
+  Select,
+  Textarea,
 } from '@chakra-ui/react'
-import {
-  SubmitButton,
-  BackButton,
-  CategorySelect,
-  DescriptionInputTextArea,
-  CurrentLengthText,
-} from './styles'
+import { EditorSection } from './styles'
 import { postCreatePetition } from '@api/petitionAPI'
 import { useNavigate } from 'react-router-dom'
 import { Category } from '../../../types/enums'
@@ -83,22 +78,19 @@ const PostEditor = () => {
   )
 
   return (
-    <Flex gap="10px" justifyContent="center" flexDirection="column">
+    <EditorSection>
       <form className="petitions__form" onSubmit={handleSubmit}>
         <Stack spacing={6}>
-          <FormControl isRequired>
-            <Flex justifyContent="space-between">
+          <FormControl className="subject_form contents" isRequired>
+            <div>
               <FormLabel>제목</FormLabel>
-              <CurrentLengthText>
-                {petitionInput.title.length}/100
-              </CurrentLengthText>
-            </Flex>
+              <span>{petitionInput.title.length}/100</span>
+            </div>
             <InputGroup borderColor="#ccc">
               <Input
                 placeholder="제목을 작성해 주세요."
                 onChange={handleChange}
                 name="title"
-                borderRadius="0"
                 focusBorderColor="none"
                 value={petitionInput.title}
                 maxLength={100}
@@ -106,9 +98,9 @@ const PostEditor = () => {
             </InputGroup>
           </FormControl>
 
-          <FormControl isRequired>
+          <FormControl className="category_form" isRequired>
             <FormLabel>카테고리</FormLabel>
-            <CategorySelect
+            <Select
               focusBorderColor="none"
               onChange={handleChange}
               name="categoryId"
@@ -120,17 +112,15 @@ const PostEditor = () => {
                   {Category[idx]}
                 </option>
               ))}
-            </CategorySelect>
+            </Select>
           </FormControl>
 
-          <FormControl isRequired>
-            <Flex justifyContent="space-between">
+          <FormControl className="description_form contents" isRequired>
+            <div>
               <FormLabel> 청원내용</FormLabel>
-              <CurrentLengthText>
-                {petitionInput.description.length}/10000
-              </CurrentLengthText>
-            </Flex>
-            <DescriptionInputTextArea
+              <span>{petitionInput.description.length}/10000</span>
+            </div>
+            <Textarea
               placeholder="내용을 작성해 주세요."
               onChange={handleChange}
               name="description"
@@ -140,22 +130,23 @@ const PostEditor = () => {
             />
           </FormControl>
 
-          <ButtonGroup justifyContent="space-around">
-            <BackButton
+          <ButtonGroup>
+            <button
+              className="cancle_btn"
               type="button"
               onClick={() => {
                 navigate(-1)
               }}
             >
               작성 취소
-            </BackButton>
-            <SubmitButton type="submit" className="submit__btn">
+            </button>
+            <button className="submit_btn" type="submit">
               작성 완료
-            </SubmitButton>
+            </button>
           </ButtonGroup>
         </Stack>
       </form>
-    </Flex>
+    </EditorSection>
   )
 }
 
