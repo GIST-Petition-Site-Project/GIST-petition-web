@@ -80,7 +80,6 @@ const Container = styled.div`
       }
       a {
         font-weight: 400;
-
         padding: 4px 8px 4px 16px;
         margin: 2px 0;
         display: inline-block;

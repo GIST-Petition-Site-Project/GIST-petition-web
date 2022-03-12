@@ -78,7 +78,8 @@ const ItemName = styled.div`
     font-size: 1.125rem;
     padding: 5px 0px 3px 0px;
   }
-  a {
+  a,
+  div {
     display: inline-block;
     width: 100%;
     &:hover {
