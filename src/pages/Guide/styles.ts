@@ -152,6 +152,12 @@ const ButtonContainer = styled.div`
     font-size: 1rem;
     color: ${theme.color.WHTIE};
     min-width: 33.33333%;
+    a {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      line-height: 35px;
+    }
   }
 `
 
