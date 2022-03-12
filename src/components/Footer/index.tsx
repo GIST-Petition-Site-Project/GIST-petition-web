@@ -11,7 +11,7 @@ const Footer = (): JSX.Element => {
         <Text>
           <a
             className="teamLink"
-            href="http://betterit-teampage.s3-website.ap-northeast-2.amazonaws.com/"
+            href="https://www.gist-petition.com/team/index.html"
           >
             <span> 팀페이지로 가기</span>
           </a>
