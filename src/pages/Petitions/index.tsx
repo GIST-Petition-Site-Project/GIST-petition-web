@@ -1,12 +1,5 @@
-import { ChangeEvent, useMemo, useState } from 'react'
-import {
-  Select,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-} from '@chakra-ui/react'
+import { ChangeEvent, useCallback, useState } from 'react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import PetitionList from '@components/PetitionList'
 import PaginationButtons from '@components/PaginationButtons'
 import qs from 'qs'
@@ -16,22 +9,18 @@ import { getPetitionsByQuery, getExpiredByQuery } from '@api/petitionAPI'
 import { Container, PetitionBoard } from './styles'
 import Inner from '@components/Inner'
 
+const numberOfCategory = Object.keys(Category).filter(el =>
+  isNaN(Number(el)),
+).length
+
+const catergoryIdx = Array(numberOfCategory)
+  .fill(0)
+  .map((_x, i) => i)
+
 const Petitions = (): JSX.Element => {
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
-
-  const countCategoryIdx = useMemo(() => {
-    const numberOfCategory = Object.keys(Category).filter(el =>
-      isNaN(Number(el)),
-    ).length
-
-    const catergoryIdx = Array(numberOfCategory)
-      .fill(0)
-      .map((_x, i) => i)
-
-    return catergoryIdx
-  }, [])
 
   const [sortSelected, setSortSelected] = useState<string>(
     queryParams?.sort || '',
