@@ -11,12 +11,11 @@ import AgreementForm from './AgreementForm'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
-interface Props {
+interface IProps {
   id: string
   petition: Petition | undefined
-  answer: Answer | undefined
   totalPages: number
   totalAgreement: number
   agreements: Agreement[]
@@ -26,16 +25,16 @@ interface Props {
 const PetitionContents = ({
   id,
   petition,
-  answer,
   totalPages,
   agreements,
   totalAgreement,
   isConsented,
-}: Props): JSX.Element => {
-  const sharingURL =
+}: IProps): JSX.Element => {
+  const sharingURL = useRef<string>(
     process.env.NODE_ENV === 'development'
       ? 'https://dev.gist-petition.com' + location.pathname
-      : location.origin + location.pathname
+      : location.origin + location.pathname,
+  )
 
   const agreementListProps = {
     totalAgreement,
@@ -62,7 +61,7 @@ const PetitionContents = ({
     if (sns == 'facebook') {
       const url =
         'http://www.facebook.com/sharer/sharer.php?u=' +
-        encodeURIComponent(sharingURL)
+        encodeURIComponent(sharingURL.current)
       window.open(url, '', 'width=256, height=512')
     } else if (sns == 'kakaotalk') {
       if (!window.Kakao.isInitialized()) {
@@ -72,13 +71,13 @@ const PetitionContents = ({
         container: '#btnKakao',
         objectType: 'feed',
         content: {
-          title: petition?.title || 'GIST 청원',
-          description: petition?.description || '',
+          title: petition?.title,
+          description: petition?.description,
           imageUrl:
             'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
           link: {
-            mobileWebUrl: sharingURL,
-            webUrl: sharingURL,
+            mobileWebUrl: sharingURL.current,
+            webUrl: sharingURL.current,
           },
         },
       })
@@ -86,8 +85,10 @@ const PetitionContents = ({
   }
 
   useEffect(() => {
-    share('kakaotalk')
-  }, [])
+    if (petition) {
+      share('kakaotalk')
+    }
+  }, [petition])
 
   return (
     <>
@@ -146,7 +147,7 @@ const PetitionContents = ({
                 <Divider color={'#ccc'}></Divider>
                 <div>
                   <div className="content">
-                    <div className="answer">{answer?.content}</div>
+                    <div className="answer">{petition?.answer}</div>
                   </div>
                 </div>
               </Stack>
@@ -184,7 +185,7 @@ const PetitionContents = ({
             <div className="share-url">
               <div className="url-box">
                 <div>URL</div>
-                <div className="url">{sharingURL}</div>
+                <div className="url">{sharingURL.current}</div>
               </div>
               <div className="copy-btn">
                 <button onClick={clip}>

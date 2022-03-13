@@ -1,16 +1,16 @@
 interface Petition {
   agreements: number
+  answer: string
   answered: boolean
-  expired: boolean
-  released: boolean
   categoryName: string
   createdAt: number
   description: string
+  expired: boolean
   id: number
+  released: boolean
+  tempUrl: string
   title: string
   updatedAt: number
-  userId: number
-  tempUrl: string
   message: string
 }
 

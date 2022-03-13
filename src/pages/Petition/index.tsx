@@ -5,7 +5,6 @@ import {
   getAgreements,
   getId,
   getPetitionById,
-  getRetrieveAnswer,
   getStateOfAgreement,
 } from '@api/petitionAPI'
 import { useEffect, useState } from 'react'
@@ -22,7 +21,6 @@ const Petition = (): JSX.Element => {
 
   const [id, setId] = useState('')
   const [petition, setPetition] = useState<Petition>()
-  const [answer, setAnswer] = useState<Answer>()
   const [agreements, setAgreements] = useState<Agreement[]>([])
   const [totalPages, setTotalPages] = useState(0)
   const [totalAgreement, setTotalAgreement] = useState(0)
@@ -45,16 +43,6 @@ const Petition = (): JSX.Element => {
     fetchPetition(param as string)
   }, [])
 
-  const fetchAnswer = async () => {
-    if (!petition?.answered) return
-    const response = await getRetrieveAnswer(id)
-    setAnswer(response.data)
-  }
-
-  useEffect(() => {
-    fetchAnswer()
-  }, [petition])
-
   const fetchAgreements = async () => {
     if (!id) return
     const agreementsResponse = await getAgreements(id, queryParams)
@@ -70,7 +58,6 @@ const Petition = (): JSX.Element => {
   const petitionContentsProps = {
     id,
     petition,
-    answer,
     agreements,
     totalPages,
     totalAgreement,
