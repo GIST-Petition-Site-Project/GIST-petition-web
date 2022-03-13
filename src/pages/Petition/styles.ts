@@ -9,11 +9,11 @@ const Container = styled.div`
     }
 
     .petition_wrap {
-      border: 1px solid #ccc;
       position: relative;
       margin: 6rem 0 50px 0;
-      padding: 30px 1.5rem;
+      padding: 0 1rem 30px;
       @media screen and (min-width: ${theme.breakpoints.md}) {
+        border: 1px solid #ccc;
         padding: 50px 30px;
       }
     }
