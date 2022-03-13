@@ -147,7 +147,9 @@ const PetitionContents = ({
                 <Divider color={'#ccc'}></Divider>
                 <div>
                   <div className="content">
-                    <div className="answer">{petition?.answer}</div>
+                    <div className="answer">
+                      {petition?.answer?.description}
+                    </div>
                   </div>
                 </div>
               </Stack>
