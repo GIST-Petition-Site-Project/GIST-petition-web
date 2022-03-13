@@ -81,6 +81,7 @@ const Register = (): JSX.Element => {
   }
 
   const handleAgreeBtn = () => {
+    console.log('hi')
     if (agreeInfo.private === true && agreeInfo.service === true) {
       setBtnUI('Agreed')
       setContentUI('Email')
@@ -161,38 +162,41 @@ const Register = (): JSX.Element => {
   // const handleRegister = async () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('d')
-    setErrorText('')
-    const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
-    if (!passwordRegex.test(input.password)) {
-      setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
-      return
-    }
-    if (input.password === input.passwordConfirm) {
-      const response = await postRegister({
-        username: input.username,
-        verificationCode: input.verificationCode,
-        password: input.password,
-      })
-      const status = response.status
-      const message = response.data.message
-      setErrorText(message)
-
-      if (status < 400) {
-        toast({
-          status: 'success',
-          duration: 3000,
-          description: '회원가입이 완료되었습니다',
-          title: '계정 생성완료',
-          isClosable: true,
-        })
-        navigate('/login')
-      } else {
-        setBtnUI('Invalid')
+    if (contentUI === 'Password') {
+      setErrorText('')
+      const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
+      if (!passwordRegex.test(input.password)) {
+        setErrorText(
+          '영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요',
+        )
+        return
       }
-    } else {
-      // passwordRef.current && passwordRef.current.focus()
-      setErrorText('비밀번호가 일치하지 않습니다')
+      if (input.password === input.passwordConfirm) {
+        const response = await postRegister({
+          username: input.username,
+          verificationCode: input.verificationCode,
+          password: input.password,
+        })
+        const status = response.status
+        const message = response.data.message
+        setErrorText(message)
+
+        if (status < 400) {
+          toast({
+            status: 'success',
+            duration: 3000,
+            description: '회원가입이 완료되었습니다',
+            title: '계정 생성완료',
+            isClosable: true,
+          })
+          navigate('/login')
+        } else {
+          setBtnUI('Invalid')
+        }
+      } else {
+        // passwordRef.current && passwordRef.current.focus()
+        setErrorText('비밀번호가 일치하지 않습니다')
+      }
     }
   }
 
@@ -221,12 +225,6 @@ const Register = (): JSX.Element => {
               <RegisterButton onClick={handleAgreeBtn}>
                 다음 단계
               </RegisterButton>
-              <Text align="center">
-                이미 가입하셨나요?{' '}
-                <Link to="/login" style={{ textDecoration: 'underline' }}>
-                  로그인
-                </Link>
-              </Text>
             </>
           )}
           {contentUI === 'Email' && (
@@ -301,6 +299,12 @@ const Register = (): JSX.Element => {
               회원가입
             </RegisterButton>
           )}
+          <Text align="center">
+            이미 가입하셨나요?{' '}
+            <Link to="/login" style={{ textDecoration: 'underline' }}>
+              로그인
+            </Link>
+          </Text>
           <ErrorText>{errorText}</ErrorText>
         </RegisterStack>
       </form>
