@@ -1,6 +1,6 @@
 interface Petition {
-  agreements: number
-  answer: string
+  agreeCount: number
+  answer: Answer
   answered: boolean
   categoryName: string
   createdAt: number

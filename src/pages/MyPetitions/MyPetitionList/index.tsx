@@ -70,7 +70,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                   {getDay(petition.createdAt + 2592000000)}
                 </div>
                 <div className="agreements">
-                  {petition.agreements}
+                  {petition.agreeCount}
                   <span>명</span>
                 </div>
               </li>

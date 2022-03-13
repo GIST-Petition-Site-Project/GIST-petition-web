@@ -123,7 +123,7 @@ const PetitionContents = ({
               </div>
               <div className="current_agree">
                 <span className="num_of_agree">
-                  총 <span>{petition?.agreements}</span>
+                  총 <span>{petition?.agreeCount}</span>
                   명이 동의했습니다.
                 </span>
               </div>
@@ -197,7 +197,7 @@ const PetitionContents = ({
           <AgreementsSection>
             <Stack>
               <span className="num_of_agree">
-                청원동의 <span>{petition?.agreements} </span>명
+                청원동의 <span>{petition?.agreeCount} </span>명
               </span>
               {!petition?.expired && (
                 <AgreementForm {...agreementFormProps}></AgreementForm>
