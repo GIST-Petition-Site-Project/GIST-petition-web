@@ -6,27 +6,21 @@ import { keyframes } from '@emotion/react'
 const firstRowIn = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(20px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
   }
 `
 
 const secondRowIn = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(20px);
   }
-
   50%{
     opacity: 0;
-    transform: translateY(20px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
   }
 `
 
@@ -47,7 +41,7 @@ const BannerSection = styled.section`
       position: absolute;
       display: flex;
       margin: auto;
-      height: 88px;
+      height: 72px;
       flex-direction: column;
       font-weight: bold;
       color: ${theme.color.WHITE};
@@ -55,7 +49,7 @@ const BannerSection = styled.section`
       letter-spacing: 0.1em;
       text-align: center;
       bottom: 0;
-      top: 0;
+      top: 59px;
       left: 0;
       right: 0;
       font-size: 1.5rem;

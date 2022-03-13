@@ -8,7 +8,7 @@ const MyInfo = (): JSX.Element => {
   return (
     <Container className="register">
       <Stack spacing={4}>
-        <span className="title">회원 정보 변경 </span>
+        <span className="title">회원 정보 관리 </span>
         <ul className="my_info_list">
           <List>
             <Link to="/myinfo/changepassword">
@@ -20,7 +20,7 @@ const MyInfo = (): JSX.Element => {
               />
             </Link>
           </List>
-          <List>
+          {/* <List>
             <Link to="/myinfo/withdrawal">
               <span className="text">회원 탈퇴</span>
               <IconButton
@@ -29,7 +29,7 @@ const MyInfo = (): JSX.Element => {
                 icon={<ArrowForwardIcon />}
               />
             </Link>
-          </List>
+          </List> */}
         </ul>
       </Stack>
     </Container>

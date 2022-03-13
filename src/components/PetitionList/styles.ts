@@ -45,6 +45,13 @@ const PetitionsHead = styled.div`
 const PetitionsUl = styled.ul`
   margin-left: 0;
 
+  .empty_message {
+    margin: 12em 0;
+    span {
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+  }
   li {
     position: relative;
     padding: 20px 0;

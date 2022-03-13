@@ -49,7 +49,7 @@ const RootRouter = (): JSX.Element => {
             path="/myinfo/changepassword"
             element={<ChangePassword />}
           ></Route>
-          <Route path="/myinfo/withdrawal" element={<Withdrawal />}></Route>
+          {/* <Route path="/myinfo/withdrawal" element={<Withdrawal />}></Route> */}
         </Route>
         <Route path="/guide" element={<Outlet />}>
           <Route index element={<Guide />} />

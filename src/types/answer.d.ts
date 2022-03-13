@@ -1,5 +1,5 @@
 interface Answer {
-  content: string
+  description: string
   createdAt: string
   id: number
   petitionId: number

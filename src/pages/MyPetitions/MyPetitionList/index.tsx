@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { getDay } from '@utils/getTime'
 
@@ -33,39 +33,50 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
       </PetitionsHead>
 
       <PetitionsUl className="petition_list">
-        {petitionList.map(petition => (
-          <li key={petition.id}>
-            <Status
-              className="status"
-              isAnswered={petition.answered}
-              isExpired={petition.expired}
-            >
-              <div className="status_box">
-                {petition.answered
-                  ? '답변완료'
-                  : petition.expired
-                  ? '청원기간만료'
-                  : petition.released
-                  ? '청원진행중'
-                  : '사전동의진행중'}
-              </div>
-            </Status>
-            <div className="category">{petition.categoryName}</div>
-            <div className="subject">
-              <Link to={`/petitions/temp/${petition.tempUrl}`}>
-                {petition.title}
-              </Link>
-            </div>
-            <div className="date">
-              {getDay(petition.createdAt)} ~{' '}
-              {getDay(petition.createdAt + 2592000000)}
-            </div>
-            <div className="agreements">
-              {petition.agreements}
-              <span>명</span>
-            </div>
-          </li>
-        ))}
+        {petitionList.length === 0 ? (
+          <div className="empty_message">
+            <span>나의 청원이 없습니다.</span>
+            <br />
+            <br />
+            <span>청원을 등록해주세요!</span>
+          </div>
+        ) : (
+          <>
+            {petitionList.map(petition => (
+              <li key={petition.id}>
+                <Status
+                  className="status"
+                  isAnswered={petition.answered}
+                  isExpired={petition.expired}
+                >
+                  <div className="status_box">
+                    {petition.answered
+                      ? '답변완료'
+                      : petition.expired
+                      ? '청원기간만료'
+                      : petition.released
+                      ? '청원진행중'
+                      : '사전동의진행중'}
+                  </div>
+                </Status>
+                <div className="category">{petition.categoryName}</div>
+                <div className="subject">
+                  <Link to={`/petitions/temp/${petition.tempUrl}`}>
+                    {petition.title}
+                  </Link>
+                </div>
+                <div className="date">
+                  {getDay(petition.createdAt)} ~{' '}
+                  {getDay(petition.createdAt + 2592000000)}
+                </div>
+                <div className="agreements">
+                  {petition.agreeCount}
+                  <span>명</span>
+                </div>
+              </li>
+            ))}
+          </>
+        )}
       </PetitionsUl>
       <Outlet />
     </>

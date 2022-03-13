@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 import {
   Select,
   Tabs,
@@ -21,13 +21,17 @@ const Petitions = (): JSX.Element => {
     ignoreQueryPrefix: true,
   })
 
-  const numberOfCategory = Object.keys(Category).filter(el =>
-    isNaN(Number(el)),
-  ).length
+  const countCategoryIdx = useMemo(() => {
+    const numberOfCategory = Object.keys(Category).filter(el =>
+      isNaN(Number(el)),
+    ).length
 
-  const catergoryIdx = Array(numberOfCategory)
-    .fill(0)
-    .map((_x, i) => i)
+    const catergoryIdx = Array(numberOfCategory)
+      .fill(0)
+      .map((_x, i) => i)
+
+    return catergoryIdx
+  }, [])
 
   const [sortSelected, setSortSelected] = useState<string>(
     queryParams?.sort || '',

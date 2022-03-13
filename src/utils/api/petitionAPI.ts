@@ -1,9 +1,7 @@
 import api from './baseAPI'
 import qs from 'qs'
 
-const isTempURL = () => {
-  return location.pathname.includes('temp')
-}
+const PAGE_DEFAULT_SIZE = 10
 
 export const getId = async (param: string) => {
   if (location.pathname.includes('temp')) {
@@ -37,8 +35,10 @@ export const getExpiredByQuery = async (query: QueryParams) => {
 }
 
 export const getMineByQuery = async (query: QueryParams) => {
+  const page = (Number(query?.page) || 1) - 1
   const querystring = {
     ...query,
+    page,
   }
   const response = await api.get(`petitions/me?${qs.stringify(querystring)}`)
   return response
@@ -51,10 +51,15 @@ export const getAgreementCount = async (param: string) => {
 }
 
 export const getAgreements = async (id: string, query: QueryParams) => {
-  const size = Number(query?.size) || 10
-  const page = Number(query?.page) - 1 || 0
+  const size = Number(query?.size) || PAGE_DEFAULT_SIZE
+  const page = (Number(query?.page) || 1) - 1
+  const querystring = {
+    ...query,
+    size,
+    page,
+  }
   const response = await api.get(
-    `petitions/${id}/agreements?size=${size}&page=${page}`,
+    `petitions/${id}/agreements?${qs.stringify(querystring)}`,
   )
   return response
 }
@@ -84,16 +89,14 @@ export const postCreatePetition = async (payload: PetitionsInput) => {
   return response
 }
 
-export const getRetrieveAnswer = async (petitionId: string) => {
-  const response = await api.get(`petitions/${petitionId}/answer`)
-  return response
-}
-
 export const getAnsweredByQuery = async (query: QueryParams) => {
-  const size = Number(query?.size) || 10
-  const page = Number(query?.page) || 1
+  const page = (Number(query?.page) || 1) - 1
+  const querystring = {
+    ...query,
+    page,
+  }
   const response = await api.get(
-    `petitions/answered?size=${size}&page=${page - 1}`,
+    `petitions/answered?${qs.stringify(querystring)}`,
   )
   return response
 }

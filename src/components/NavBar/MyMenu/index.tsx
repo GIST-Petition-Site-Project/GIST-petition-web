@@ -4,14 +4,15 @@ import { postLogout } from '@api/userAPI'
 import { Container, MobileMenu, Before } from './styles'
 import { ItemName } from '../styles'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useRef, useState } from 'react'
 
 const MyMenu = (): JSX.Element => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const handleLogout = async () => {
     try {
-      const status = await postLogout()
+      await postLogout()
       dispatch(setLogout())
       window.location.reload()
     } catch (error) {
@@ -62,7 +63,16 @@ const MyMenu = (): JSX.Element => {
     </Container>
   ) : (
     <ItemName>
-      <Link to="/login">로그인</Link>
+      <div
+        onClick={_e => {
+          navigate({
+            pathname: '/login',
+            hash: location.pathname,
+          })
+        }}
+      >
+        로그인
+      </div>
     </ItemName>
   )
 }
