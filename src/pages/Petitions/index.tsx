@@ -22,12 +22,13 @@ const Petitions = (): JSX.Element => {
   })
 
   const countCategoryIdx = useMemo(() => {
-    const numberOfCategory =
-      Object.keys(Category).filter(el => isNaN(Number(el))).length - 1
+    const numberOfCategory = Object.keys(Category).filter(el =>
+      isNaN(Number(el)),
+    ).length
 
     const catergoryIdx = Array(numberOfCategory)
       .fill(0)
-      .map((_x, i) => i + 1)
+      .map((_x, i) => i)
 
     return catergoryIdx
   }, [])
