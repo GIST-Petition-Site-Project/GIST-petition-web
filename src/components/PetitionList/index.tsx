@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { getDay } from '@utils/getTime'
 
@@ -14,6 +14,16 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     const response = await getPetitions(query)
     setPetitionList(response?.data?.content)
   }
+
+  const progress = useRef<string>(
+    getPetitions.name === 'getPetitionsByQuery'
+      ? '진행중인'
+      : getPetitions.name === 'getExpiredByQuery'
+      ? '만료된'
+      : getPetitions.name === 'getAnsweredByQuery'
+      ? '답변된'
+      : '',
+  )
 
   const [petitionList, setPetitionList] = useState<Array<Petition>>([])
 
@@ -33,22 +43,30 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
       </PetitionsHead>
 
       <PetitionsUl className="petition_list">
-        {petitionList.map(petition => (
-          <li key={petition.id}>
-            <div className="category">{petition.categoryName}</div>
-            <div className="subject">
-              <Link to={`/petitions/${petition.id}`}>{petition.title}</Link>
-            </div>
-            <div className="date">
-              {getDay(petition.createdAt)} ~{' '}
-              {getDay(petition.createdAt + 2592000000)}
-            </div>
-            <div className="agreements">
-              {petition.agreements}
-              <span>명</span>
-            </div>
-          </li>
-        ))}
+        {petitionList.length === 0 ? (
+          <div className="empty_message">
+            <span>{progress.current} 청원이 없습니다.</span>
+          </div>
+        ) : (
+          <>
+            {petitionList.map(petition => (
+              <li key={petition.id}>
+                <div className="category">{petition.categoryName}</div>
+                <div className="subject">
+                  <Link to={`/petitions/${petition.id}`}>{petition.title}</Link>
+                </div>
+                <div className="date">
+                  {getDay(petition.createdAt)} ~{' '}
+                  {getDay(petition.createdAt + 2592000000)}
+                </div>
+                <div className="agreements">
+                  {petition.agreements}
+                  <span>명</span>
+                </div>
+              </li>
+            ))}
+          </>
+        )}
       </PetitionsUl>
       <Outlet />
     </>
