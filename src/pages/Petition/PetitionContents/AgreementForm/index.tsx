@@ -1,35 +1,38 @@
 import { FormControl } from '@chakra-ui/react'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 import { postAgreePetition } from '@api/petitionAPI'
 import { SAgreementForm } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelect } from '@redux/store.hooks'
 
-interface Props {
+interface IProps {
   id: string
   isConsented: boolean
 }
 
-const AgreementForm = ({ id, isConsented }: Props): JSX.Element => {
+const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
   const isAuthorized = useAppSelect(select => select.auth.isAuthorized)
   const [input, setInput] = useState<AgreePetition>({
     description: '동의합니다',
   })
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ description: e.target.value.replace(/ +/g, ' ') })
-  }
+  }, [])
 
   const navigate = useNavigate()
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    try {
-      await postAgreePetition(id, input)
-    } catch (error) {
-      console.log(error)
-    }
-    navigate(0)
-  }
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      try {
+        await postAgreePetition(id, input)
+      } catch (error) {
+        console.log(error)
+      }
+      navigate(0)
+    },
+    [input],
+  )
 
   return (
     <SAgreementForm>

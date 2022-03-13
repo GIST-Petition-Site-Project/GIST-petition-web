@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useAppSelect } from '@redux/store.hooks'
 import { useEffect } from 'react'
 

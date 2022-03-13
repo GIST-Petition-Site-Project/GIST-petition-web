@@ -40,7 +40,7 @@ const Petitions = (): JSX.Element => {
     queryParams?.category || 0,
   )
   const navigate = useNavigate()
-  const handleSortSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSortSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setSortSelected(e.target.value)
     const newSearchParams = {
       ...queryParams,
@@ -51,7 +51,7 @@ const Petitions = (): JSX.Element => {
       pathname: '/petitions',
       search: new URLSearchParams(newSearchParams).toString(),
     })
-  }
+  }, [])
 
   const handleCategorySelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategorySelected(Number(e.target.value))
@@ -86,19 +86,27 @@ const Petitions = (): JSX.Element => {
         <PetitionBoard>
           <div className="petition_type">
             <span>모든 청원</span>
+
             <div className="selects">
-              <Select onChange={handleSortSelect} value={sortSelected}>
-                <option value={'createdAt,desc'}>최신순</option>
-                <option value={'agreeCount,desc'}>추천순</option>
-                <option value={'createdAt,asc'}>만료임박순</option>
-              </Select>
-              <Select onChange={handleCategorySelect} value={categorySelected}>
-                {countCategoryIdx.map(item => (
-                  <option value={item} key={item}>
-                    {Category[item]}
-                  </option>
-                ))}
-              </Select>
+              <div className="select_wrapper">
+                <select onChange={handleSortSelect} value={sortSelected}>
+                  <option value={'createdAt,desc'}>최신순</option>
+                  <option value={'agreeCount,desc'}>추천순</option>
+                  <option value={'createdAt,asc'}>만료임박순</option>
+                </select>
+              </div>
+              <div className="select_wrapper">
+                <select
+                  onChange={handleCategorySelect}
+                  value={categorySelected}
+                >
+                  {catergoryIdx.map(item => (
+                    <option value={item} key={item}>
+                      {Category[item]}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
 

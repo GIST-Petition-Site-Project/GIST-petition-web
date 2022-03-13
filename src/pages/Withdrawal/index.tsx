@@ -6,7 +6,6 @@ import { useAppDispatch } from '@redux/store.hooks'
 import UserInput from '@components/UserInput'
 import { deleteUserMe } from '@api/userAPI'
 import { setLogout } from '@redux/auth/authSlice'
-import { check } from 'prettier'
 
 const Withdrawal = (): JSX.Element => {
   const navigate = useNavigate()
