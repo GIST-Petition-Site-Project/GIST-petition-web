@@ -18,8 +18,10 @@ const Container = styled.div`
 `
 
 const WriteContainer = styled.div`
-  border: 1px solid #ccc;
-  border-radius: 0;
+  @media screen and (min-width: ${theme.breakpoints.md}) {
+    border: 1px solid #ccc;
+    border-radius: 0;
+  }
   .write_wrapper {
     margin: 1rem;
     @media screen and (min-width: ${theme.breakpoints.md}) {

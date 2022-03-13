@@ -47,7 +47,7 @@ const BannerSection = styled.section`
       position: absolute;
       display: flex;
       margin: auto;
-      height: 88px;
+      height: 72px;
       flex-direction: column;
       font-weight: bold;
       color: ${theme.color.WHITE};
@@ -55,7 +55,7 @@ const BannerSection = styled.section`
       letter-spacing: 0.1em;
       text-align: center;
       bottom: 0;
-      top: 0;
+      top: 59px;
       left: 0;
       right: 0;
       font-size: 1.5rem;
