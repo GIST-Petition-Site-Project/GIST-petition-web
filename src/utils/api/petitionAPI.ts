@@ -89,11 +89,6 @@ export const postCreatePetition = async (payload: PetitionsInput) => {
   return response
 }
 
-export const getRetrieveAnswer = async (petitionId: string) => {
-  const response = await api.get(`petitions/${petitionId}/answer`)
-  return response
-}
-
 export const getAnsweredByQuery = async (query: QueryParams) => {
   const page = (Number(query?.page) || 1) - 1
   const querystring = {
