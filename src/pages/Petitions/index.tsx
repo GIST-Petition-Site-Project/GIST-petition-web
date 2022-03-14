@@ -29,7 +29,7 @@ const Petitions = (): JSX.Element => {
     queryParams?.category || 0,
   )
   const navigate = useNavigate()
-  const handleSortSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSortSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setSortSelected(e.target.value)
     const newSearchParams = {
       ...queryParams,
@@ -40,7 +40,7 @@ const Petitions = (): JSX.Element => {
       pathname: '/petitions',
       search: new URLSearchParams(newSearchParams).toString(),
     })
-  }, [])
+  }
 
   const handleCategorySelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategorySelected(Number(e.target.value))
