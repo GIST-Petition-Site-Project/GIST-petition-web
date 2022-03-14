@@ -73,7 +73,7 @@ const PetitionContents = ({
           title: petition?.title,
           description: petition?.description,
           imageUrl:
-            'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web-ts/develop/src/assets/img/share_img.png',
+            'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web/develop/src/assets/img/share_image.png',
           link: {
             mobileWebUrl: sharingURL.current,
             webUrl: sharingURL.current,
