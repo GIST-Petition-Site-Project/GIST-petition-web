@@ -62,7 +62,9 @@ const Login = (): JSX.Element => {
       setResponseState(loginStatus)
       if (loginStatus < 400) {
         dispatch(setLogin())
-        if (location.hash) {
+        if (location.hash !== '#prev') {
+          navigate({ pathname: location.hash.replace('#', '') })
+        } else if (location.hash) {
           navigate(-1)
         } else {
           navigate('/')
