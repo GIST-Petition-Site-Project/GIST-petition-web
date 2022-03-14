@@ -8,7 +8,7 @@ import {
   PrecautionContents,
   MainPetitionBtn,
 } from './styles'
-import { IoMdArrowDropdownCircle } from 'react-icons/io'
+import { FaChevronDown } from 'react-icons/fa'
 
 const MainPrecaution = (): JSX.Element => {
   const [leftOpen, setLeftOpen] = useState(false)
@@ -38,11 +38,11 @@ const MainPrecaution = (): JSX.Element => {
         <Inner>
           <button className="left_btn" onClick={leftToggle}>
             <span>이런 청원은 삭제·숨김 처리될 수 있습니다</span>
-            <IoMdArrowDropdownCircle className="icon"></IoMdArrowDropdownCircle>
+            <FaChevronDown className="icon" />
           </button>
           <button className="right_btn" onClick={rightToggle}>
             <span>이런 청원은 답변이 어려울 수 있습니다</span>
-            <IoMdArrowDropdownCircle className="icon"></IoMdArrowDropdownCircle>
+            <FaChevronDown className="icon" />
           </button>
         </Inner>
       </PrecautionBtns>

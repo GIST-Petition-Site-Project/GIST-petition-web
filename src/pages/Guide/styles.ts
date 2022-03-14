@@ -25,9 +25,12 @@ const ContentContainer = styled.div`
   border: 1px solid #ddd;
   .box-title {
     padding: 0.5em 0 1em 0;
-    font-size: 19px;
+    font-size: 16px;
     line-height: 24px;
     font-weight: bold;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      font-size: 20px;
+    }
   }
   .box-text {
     padding: 29px;

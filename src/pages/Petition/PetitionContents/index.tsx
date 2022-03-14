@@ -33,9 +33,8 @@ const PetitionContents = ({
   const sharingURL = useRef<string>(
     process.env.NODE_ENV === 'development'
       ? 'https://dev.gist-petition.com' + location.pathname
-      : location.origin + location.pathname,
+      : location.host + location.pathname,
   )
-
   const agreementListProps = {
     totalAgreement,
     totalPages,
@@ -147,9 +146,7 @@ const PetitionContents = ({
                 <Divider color={'#ccc'}></Divider>
                 <div>
                   <div className="content">
-                    <div className="answer">
-                      {petition?.answer?.description}
-                    </div>
+                    <div className="answer">{petition?.answer.description}</div>
                   </div>
                 </div>
               </Stack>

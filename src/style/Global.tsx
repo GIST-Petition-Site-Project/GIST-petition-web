@@ -6,6 +6,14 @@ const style = css`
       Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
       'Noto Sans KR', 'Malgun Gothic', sans-serif;
   }
+  header {
+    padding: 0 0 calc(constant(safe-area-inset-top) + 5px);
+    padding: 0 0 calc(env(safe-area-inset-top) + 5px);
+  }
+  footer {
+    padding: 0 0 calc(constant(safe-area-inset-bottom));
+    padding: 0 0 calc(env(safe-area-inset-bottom));
+  }
   body,
   div,
   span,
@@ -73,8 +81,6 @@ const style = css`
   embed,
   figure,
   figcaption,
-  footer,
-  header,
   hgroup,
   menu,
   nav,
@@ -99,8 +105,6 @@ const style = css`
   details,
   figcaption,
   figure,
-  footer,
-  header,
   hgroup,
   menu,
   nav,
