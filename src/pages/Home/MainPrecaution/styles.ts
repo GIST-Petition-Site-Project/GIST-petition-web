@@ -45,6 +45,7 @@ const PrecautionBtns = styled.div`
       flex: 1 1 50%;
       transition: background-color 300ms ease-in;
       font-weight: 600;
+      position: relative;
       @media screen and (min-width: ${theme.breakpoints.md}) {
         color: ${theme.color.WHTIE};
         margin-bottom: 0;
@@ -61,9 +62,14 @@ const PrecautionBtns = styled.div`
       }
 
       .icon {
-        margin-left: 0.5em;
+        right: 1rem;
+        position: absolute;
+        font-size: 0.8em;
         @media screen and (min-width: ${theme.breakpoints.md}) {
           color: ${theme.color.WHITE};
+          margin-left: 0.5em;
+          position: unset;
+          font-size: 1em;
         }
       }
     }
