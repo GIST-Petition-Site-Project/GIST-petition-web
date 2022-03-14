@@ -9,10 +9,7 @@ const Footer = (): JSX.Element => {
       <Inner>
         <img className="logo" alt="Logo" src={logo}></img>
         <Text>
-          <a
-            className="teamLink"
-            href="https://www.gist-petition.com/team/index.html"
-          >
+          <a className="teamLink" href="https://www.gist-petition.com/team">
             <span> 팀페이지로 가기</span>
           </a>
           <a href="https://open.kakao.com/o/s7Qprk3d">
