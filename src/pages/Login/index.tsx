@@ -54,20 +54,24 @@ const Login = (): JSX.Element => {
     }
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    try {
-      const loginStatus = await postLogin(input)
-      setResponseState(loginStatus)
-      if (loginStatus < 400) {
-        dispatch(setLogin())
-        if (location.hash !== '#prev') {
-          navigate({ pathname: location.hash.replace('#', '') })
-        } else if (location.hash) {
-          navigate(-1)
-        } else {
-          navigate('/')
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      try {
+        const loginStatus = await postLogin(input)
+        setResponseState(loginStatus)
+        if (loginStatus < 400) {
+          dispatch(setLogin())
+          if (location.hash !== '#prev') {
+            navigate({ pathname: location.hash.replace('#', '') })
+          } else if (location.hash) {
+            navigate(-1)
+          } else {
+            navigate('/')
+          }
         }
+      } catch (error) {
+        console.log(error)
       }
     },
     [input],
