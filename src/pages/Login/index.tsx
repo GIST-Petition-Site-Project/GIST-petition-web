@@ -38,6 +38,8 @@ const Login = (): JSX.Element => {
   const pwd = useRef<HTMLInputElement>(null)
 
   const dispatch = useAppDispatch()
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  const navigate = useNavigate()
 
   const checkUpperCase = (e: any) => {
     const text = String.fromCharCode(e.which)
@@ -60,23 +62,26 @@ const Login = (): JSX.Element => {
       setResponseState(loginStatus)
       if (loginStatus < 400) {
         dispatch(setLogin())
+        if (location.hash) {
+          navigate(-1)
+        } else {
+          navigate('/')
+        }
       }
     } catch (error) {
       console.log(error)
     }
   }
 
-  const auth = useAppSelect(select => select.auth.isAuthorized)
-  const navigate = useNavigate()
   useEffect(() => {
     if (auth) {
       if (location.hash) {
-        navigate({ pathname: location.hash.replace('#', '') })
+        navigate(-1)
       } else {
         navigate('/')
       }
     }
-  }, [useAppSelect(select => select.auth.isAuthorized)])
+  }, [])
 
   return (
     <Container>

@@ -59,7 +59,7 @@ const AgreementForm = ({ id, isConsented }: Props): JSX.Element => {
               onClick={_e => {
                 navigate({
                   pathname: '/login',
-                  hash: location.pathname,
+                  hash: 'prev',
                 })
               }}
             >

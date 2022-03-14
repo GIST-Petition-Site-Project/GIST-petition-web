@@ -7,9 +7,11 @@ import { Divider, ListItem } from '@chakra-ui/react'
 import MyMenu from './MyMenu'
 import { Link } from 'react-router-dom'
 import Inner from '@components/Inner'
+import { useAppSelect } from '@redux/store.hooks'
 
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState<boolean>(false)
+  const isAuthorized = useAppSelect(select => select.auth.isAuthorized)
   const closeMenu = () => {
     if (opened) {
       setOpened(!opened)
