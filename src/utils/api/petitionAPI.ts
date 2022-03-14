@@ -80,6 +80,7 @@ export const getStateOfAgreement = async (id: string) => {
 }
 
 export const postAgreePetition = async (id: string, payload: AgreePetition) => {
+  console.log(id)
   const response = await api.post(`petitions/${id}/agreements`, payload)
   return response
 }

@@ -31,7 +31,7 @@ const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
       }
       navigate(0)
     },
-    [input],
+    [input, id],
   )
 
   return (
