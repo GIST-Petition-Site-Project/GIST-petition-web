@@ -27,6 +27,7 @@ const PetitionBoard = styled.div`
         position: relative;
         select {
           width: 108px;
+          border-radius: 0;
           @media screen and (min-width: ${theme.breakpoints.md}) {
             width: 128px;
           }

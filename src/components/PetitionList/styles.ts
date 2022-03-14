@@ -47,7 +47,7 @@ const PetitionsUl = styled.ul`
 
   .empty_message {
     text-align: center;
-    margin: 12em 0;
+    margin: 10em 0;
     span {
       font-size: 1.2em;
       font-weight: 600;
