@@ -190,7 +190,7 @@ const Register = (): JSX.Element => {
             title: '계정 생성완료',
             isClosable: true,
           })
-          navigate('/login')
+          navigate('/login#/')
         } else {
           setBtnUI('Invalid')
         }
@@ -302,7 +302,7 @@ const Register = (): JSX.Element => {
           )}
           <Text align="center">
             이미 가입하셨나요?{' '}
-            <Link to="/login" style={{ textDecoration: 'underline' }}>
+            <Link to="/login#/" style={{ textDecoration: 'underline' }}>
               로그인
             </Link>
           </Text>
