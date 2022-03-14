@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { setLogin } from '@redux/auth/authSlice'
 import {
   chakra,
@@ -39,6 +39,7 @@ const Login = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const auth = useAppSelect(select => select.auth.isAuthorized)
   const navigate = useNavigate()
+  const { hash } = useLocation()
 
   const checkUpperCase = (e: any) => {
     const text = String.fromCharCode(e.which)
@@ -85,7 +86,7 @@ const Login = (): JSX.Element => {
         navigate('/')
       }
     }
-  }, [])
+  }, [hash])
 
   return (
     <Container>
