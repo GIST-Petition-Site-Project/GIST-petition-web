@@ -62,7 +62,7 @@ const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
               onClick={_e => {
                 navigate({
                   pathname: '/login',
-                  hash: location.pathname,
+                  hash: 'prev',
                 })
               }}
             >

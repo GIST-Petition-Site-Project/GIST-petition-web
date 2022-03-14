@@ -7,7 +7,7 @@ const AuthRoute = () => {
   const navigate = useNavigate()
   useEffect(() => {
     if (!auth) {
-      navigate({ pathname: '/login', hash: location.pathname })
+      navigate({ pathname: '/login', hash: 'prev' })
     }
     return
   }, [])

@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { setLogin } from '@redux/auth/authSlice'
 import {
   chakra,
@@ -37,6 +37,9 @@ const Login = (): JSX.Element => {
   const pwd = useRef<HTMLInputElement>(null)
 
   const dispatch = useAppDispatch()
+  const auth = useAppSelect(select => select.auth.isAuthorized)
+  const navigate = useNavigate()
+  const { hash } = useLocation()
 
   const checkUpperCase = (e: any) => {
     const text = String.fromCharCode(e.which)
@@ -60,6 +63,13 @@ const Login = (): JSX.Element => {
         setResponseState(loginStatus)
         if (loginStatus < 400) {
           dispatch(setLogin())
+          if (location.hash !== '#prev') {
+            navigate({ pathname: location.hash.replace('#', '') })
+          } else if (location.hash) {
+            navigate(-1)
+          } else {
+            navigate('/')
+          }
         }
       } catch (error) {
         console.log(error)
@@ -68,17 +78,15 @@ const Login = (): JSX.Element => {
     [input],
   )
 
-  const auth = useAppSelect(select => select.auth.isAuthorized)
-  const navigate = useNavigate()
   useEffect(() => {
     if (auth) {
       if (location.hash) {
-        navigate({ pathname: location.hash.replace('#', '') })
+        navigate(-1)
       } else {
         navigate('/')
       }
     }
-  }, [useAppSelect(select => select.auth.isAuthorized)])
+  }, [hash])
 
   return (
     <Container>

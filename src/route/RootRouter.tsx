@@ -13,7 +13,7 @@ import FindPassword from '@pages/FindPassword'
 import NavBar from '@components/NavBar'
 import MyInfo from '@pages/MyInfo'
 import ChangePassword from '@pages/ChangePassword'
-import Withdrawal from '@pages/Withdrawal'
+// import Withdrawal from '@pages/Withdrawal'
 import Guide from '@pages/Guide'
 import ScrollTop from './ScrollTop'
 
