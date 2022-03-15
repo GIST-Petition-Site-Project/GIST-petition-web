@@ -33,7 +33,7 @@ const PetitionContents = ({
   const sharingURL =
     process.env.NODE_ENV === 'development'
       ? 'https://dev.gist-petition.com' + location.pathname
-      : location.pathname + location.pathname
+      : location.origin + location.pathname
 
   const agreementListProps = {
     totalAgreement,
