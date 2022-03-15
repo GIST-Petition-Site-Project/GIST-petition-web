@@ -30,11 +30,11 @@ const PetitionContents = ({
   totalAgreement,
   isConsented,
 }: IProps): JSX.Element => {
-  const sharingURL = useRef<string>(
+  const sharingURL =
     process.env.NODE_ENV === 'development'
       ? 'https://dev.gist-petition.com' + location.pathname
-      : location.host + location.pathname,
-  )
+      : location.host + location.pathname
+
   const agreementListProps = {
     totalAgreement,
     totalPages,
@@ -60,7 +60,7 @@ const PetitionContents = ({
     if (sns == 'facebook') {
       const url =
         'http://www.facebook.com/sharer/sharer.php?u=' +
-        encodeURIComponent(sharingURL.current)
+        encodeURIComponent(sharingURL)
       window.open(url, '', 'width=256, height=512')
     } else if (sns == 'kakaotalk') {
       if (!window.Kakao.isInitialized()) {
@@ -75,8 +75,8 @@ const PetitionContents = ({
           imageUrl:
             'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web/develop/src/assets/img/share_image.png',
           link: {
-            mobileWebUrl: sharingURL.current,
-            webUrl: sharingURL.current,
+            mobileWebUrl: sharingURL,
+            webUrl: sharingURL,
           },
         },
       })
@@ -184,7 +184,7 @@ const PetitionContents = ({
             <div className="share-url">
               <div className="url-box">
                 <div>URL</div>
-                <div className="url">{sharingURL.current}</div>
+                <div className="url">{sharingURL}</div>
               </div>
               <div className="copy-btn">
                 <button onClick={clip}>
