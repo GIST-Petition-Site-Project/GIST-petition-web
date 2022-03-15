@@ -33,7 +33,7 @@ const PetitionContents = ({
   const sharingURL =
     process.env.NODE_ENV === 'development'
       ? 'https://dev.gist-petition.com' + location.pathname
-      : location.host + location.pathname
+      : location.pathname + location.pathname
 
   const agreementListProps = {
     totalAgreement,
@@ -56,36 +56,36 @@ const PetitionContents = ({
     alert('URL이 복사되었습니다.')
   }
 
-  const share = (sns: string) => {
-    if (sns == 'facebook') {
-      const url =
-        'http://www.facebook.com/sharer/sharer.php?u=' +
-        encodeURIComponent(sharingURL)
-      window.open(url, '', 'width=256, height=512')
-    } else if (sns == 'kakaotalk') {
-      if (!window.Kakao.isInitialized()) {
-        window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
-      }
-      window.Kakao.Link.createDefaultButton({
-        container: '#btnKakao',
-        objectType: 'feed',
-        content: {
-          title: petition?.title,
-          description: petition?.description,
-          imageUrl:
-            'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web/develop/src/assets/img/share_image.png',
-          link: {
-            mobileWebUrl: sharingURL,
-            webUrl: sharingURL,
-          },
-        },
-      })
+  const shareFacebook = () => {
+    const url =
+      'http://www.facebook.com/sharer/sharer.php?u=' +
+      encodeURIComponent(sharingURL)
+    window.open(url, '', 'width=256, height=512')
+  }
+
+  const shareKakaoTalk = () => {
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
     }
+    window.Kakao.Link.createDefaultButton({
+      container: '#btnKakao',
+      objectType: 'feed',
+      content: {
+        title: petition?.title,
+        description: petition?.description,
+        imageUrl:
+          'https://raw.githubusercontent.com/GIST-Petition-Site-Project/GIST-petition-web/develop/src/assets/img/share_image.png',
+        link: {
+          mobileWebUrl: sharingURL,
+          webUrl: sharingURL,
+        },
+      },
+    })
   }
 
   useEffect(() => {
     if (petition) {
-      share('kakaotalk')
+      shareKakaoTalk()
     }
   }, [petition])
 
@@ -160,7 +160,7 @@ const PetitionContents = ({
                   <button
                     id="btnKakao"
                     onClick={() => {
-                      share('kakaotalk')
+                      shareKakaoTalk()
                     }}
                     className="kakaotalk"
                     title="카카오톡 새창열림"
@@ -171,7 +171,7 @@ const PetitionContents = ({
                 <li className="facebook">
                   <button
                     onClick={() => {
-                      share('facebook')
+                      shareFacebook()
                     }}
                     className="facebook"
                     title="페이스북 새창열림"
