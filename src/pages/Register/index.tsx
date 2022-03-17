@@ -115,7 +115,7 @@ const Register = (): JSX.Element => {
         setBtnUI('Agreed')
       }
     } catch (error) {
-      setErrorText('오류가 발생했습니다. 재시도해주세요')
+      setErrorText('오류가 발생했습니다. 다시 시도해주세요')
       setBtnUI('Agreed')
     }
   }
