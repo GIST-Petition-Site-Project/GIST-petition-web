@@ -307,17 +307,20 @@ const Register = (): JSX.Element => {
               회원가입
             </RegisterButton>
           )}
-          <Text align="center">이미 가입하셨나요?</Text>
-          <div
-            onClick={event => {
-              navigate(
-                { pathname: '/login', hash: location.hash },
-                { replace: true },
-              )
-            }}
-          >
-            로그인
-          </div>
+          <span className="login_link">
+            이미 가입하셨나요?{' '}
+            <a
+              onClick={_e => {
+                navigate(
+                  { pathname: '/login', hash: location.hash },
+                  { replace: true },
+                )
+              }}
+            >
+              로그인
+            </a>
+          </span>
+
           <ErrorText>{errorText}</ErrorText>
         </RegisterStack>
       </form>

@@ -13,6 +13,13 @@ const RegisterStack = styled(Stack)`
     font-size: 2rem;
     font-weight: bold;
   }
+  .login_link {
+    text-align: center;
+    > a {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 `
 
 const RegisterButton = styled.button`

@@ -152,20 +152,19 @@ const Login = (): JSX.Element => {
             로그인
           </button>
 
-          <text className="create_acount account_link">
+          <span className="create_account account_link">
             계정이 없으신가요?{' '}
-          </text>
-          <text
-            className="create_acount account_link"
-            onClick={_event => {
-              navigate(
-                { pathname: '/register', hash: location.hash },
-                { replace: true },
-              )
-            }}
-          >
-            회원가입
-          </text>
+            <a
+              onClick={_e => {
+                navigate(
+                  { pathname: '/register', hash: location.hash },
+                  { replace: true },
+                )
+              }}
+            >
+              회원가입
+            </a>
+          </span>
         </Stack>
       </form>
     </Container>
