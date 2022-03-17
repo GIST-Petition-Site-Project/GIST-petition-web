@@ -82,7 +82,6 @@ const Register = (): JSX.Element => {
   }
 
   const handleAgreeBtn = () => {
-    console.log('hi')
     if (agreeInfo.private === true && agreeInfo.service === true) {
       setBtnUI('Agreed')
       setContentUI('Email')
@@ -100,19 +99,24 @@ const Register = (): JSX.Element => {
       return
     }
     setBtnUI('Loading')
-    const response = await postCreateVerificationCode({
-      username: input.username,
-    })
-    const status = response?.status
-    const message = response?.data.message
-    setErrorText(message)
-    if (message === '이미 존재하는 회원입니다.') {
-      setInput({ ...input, username: '' })
+    try {
+      const response = await postCreateVerificationCode({
+        username: input.username,
+      })
+      const status = response?.status
+      const message = response?.data.message
+      setErrorText(message)
+      if (status < 400) {
+        setContentUI('CodeVerification')
+        setBtnUI('CodeRequested')
+        setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
+      } else {
+        setInput({ ...input, username: '' })
+        setBtnUI('Agreed')
+      }
+    } catch (error) {
+      setErrorText('오류가 발생했습니다. 재시도해주세요')
       setBtnUI('Agreed')
-    } else if (status < 400) {
-      setContentUI('CodeVerification')
-      setBtnUI('CodeRequested')
-      setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
     }
   }
 
