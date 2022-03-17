@@ -47,12 +47,13 @@ const Container = styled.section`
     .account_link {
       > a {
         text-decoration: underline;
+        cursor: pointer;
       }
     }
     .forgot_pwd {
       text-align: right;
     }
-    .create_acount {
+    .create_account {
       text-align: center;
     }
   }

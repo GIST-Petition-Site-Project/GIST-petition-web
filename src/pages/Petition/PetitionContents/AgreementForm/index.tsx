@@ -60,10 +60,15 @@ const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
             <div
               className="needLogin"
               onClick={_e => {
-                navigate({
-                  pathname: '/login',
-                  hash: 'prev',
-                })
+                navigate(
+                  {
+                    pathname: '/login',
+                    hash: location.pathname,
+                  },
+                  {
+                    replace: true,
+                  },
+                )
               }}
             >
               동의하려면&nbsp;<span>로그인</span>&nbsp;해주세요
