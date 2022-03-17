@@ -194,7 +194,10 @@ const Register = (): JSX.Element => {
             title: '계정 생성완료',
             isClosable: true,
           })
-          navigate('/login#/')
+          navigate(
+            { pathname: '/login', hash: location.hash },
+            { replace: true },
+          )
         } else {
           setBtnUI('Invalid')
         }
@@ -304,12 +307,17 @@ const Register = (): JSX.Element => {
               회원가입
             </RegisterButton>
           )}
-          <Text align="center">
-            이미 가입하셨나요?{' '}
-            <Link to="/login#/" style={{ textDecoration: 'underline' }}>
-              로그인
-            </Link>
-          </Text>
+          <Text align="center">이미 가입하셨나요?</Text>
+          <div
+            onClick={event => {
+              navigate(
+                { pathname: '/login', hash: location.hash },
+                { replace: true },
+              )
+            }}
+          >
+            로그인
+          </div>
           <ErrorText>{errorText}</ErrorText>
         </RegisterStack>
       </form>

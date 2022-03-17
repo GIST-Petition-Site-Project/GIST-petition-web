@@ -63,10 +63,11 @@ const Login = (): JSX.Element => {
         setResponseState(loginStatus)
         if (loginStatus < 400) {
           dispatch(setLogin())
-          if (location.hash !== '#prev') {
-            navigate({ pathname: location.hash.replace('#', '') })
-          } else if (location.hash) {
-            navigate(-1)
+          if (location.hash) {
+            navigate(
+              { pathname: location.hash.replace('#', '') },
+              { replace: true },
+            )
           } else {
             navigate('/')
           }
@@ -81,7 +82,7 @@ const Login = (): JSX.Element => {
   useEffect(() => {
     if (auth) {
       if (location.hash) {
-        navigate(-1)
+        navigate(location.hash.replace('#', ''), { replace: true })
       } else {
         navigate('/')
       }
@@ -151,9 +152,20 @@ const Login = (): JSX.Element => {
             로그인
           </button>
 
-          <span className="create_acount account_link">
-            계정이 없으신가요? <Link to="/register">계정 만들기</Link>
-          </span>
+          <text className="create_acount account_link">
+            계정이 없으신가요?{' '}
+          </text>
+          <text
+            className="create_acount account_link"
+            onClick={_event => {
+              navigate(
+                { pathname: '/register', hash: location.hash },
+                { replace: true },
+              )
+            }}
+          >
+            회원가입
+          </text>
         </Stack>
       </form>
     </Container>

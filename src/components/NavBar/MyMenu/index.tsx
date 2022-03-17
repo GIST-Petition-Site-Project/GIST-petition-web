@@ -66,10 +66,13 @@ const MyMenu = (): JSX.Element => {
       <div
         onClick={_e => {
           if (location.pathname.includes('login')) return
-          navigate({
-            pathname: '/login',
-            hash: 'prev',
-          })
+          navigate(
+            {
+              pathname: '/login',
+              hash: location.pathname,
+            },
+            { replace: true },
+          )
         }}
       >
         로그인
