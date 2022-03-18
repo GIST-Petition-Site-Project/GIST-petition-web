@@ -36,7 +36,7 @@ const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
 
   return (
     <SAgreementForm>
-      <span>{input.description.length}/100</span>
+      {isAuthorized ? <span>{input.description.length}/100</span> : null}
       <form onSubmit={handleSubmit}>
         <FormControl>
           {isAuthorized ? (
