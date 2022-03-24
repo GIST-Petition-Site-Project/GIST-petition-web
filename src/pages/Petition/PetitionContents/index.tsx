@@ -147,7 +147,9 @@ const PetitionContents = ({
                 <Divider color={'#ccc'}></Divider>
                 <div>
                   <div className="content">
-                    <Youtube url={'XbL-AwYX8ME'}></Youtube>
+                    {petition?.answer.videoUrl && (
+                      <Youtube url={petition?.answer.videoUrl}></Youtube>
+                    )}
                     <div className="answer">{petition?.answer.description}</div>
                   </div>
                 </div>
