@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { AspectRatio } from '@chakra-ui/react'
+import theme from '@style/theme'
 
 const Container = styled(AspectRatio)`
   margin: auto;
@@ -10,4 +11,9 @@ const YoutubeVideo = styled.iframe`
   margin: auto;
 `
 
-export { YoutubeVideo, Container }
+const ErrorText = styled.p`
+  text-align: center;
+  color: ${theme.color.PRIMARY_RED};
+`
+
+export { YoutubeVideo, Container, ErrorText }
