@@ -17,12 +17,11 @@ const Youtube = ({ url }: Iprops) => {
 
   const validateURL = (url: string) => {
     const result = regex.test(url)
-    console.log(result)
     if (!result) {
       setOnError(true)
     } else {
       setOnError(false)
-      setVideoId(url.match(regex)![1])
+      setVideoId(url.match(regex)?.[1] ?? '')
     }
   }
 
