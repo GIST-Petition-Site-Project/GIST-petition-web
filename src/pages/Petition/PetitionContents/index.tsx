@@ -12,6 +12,7 @@ import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
 import { useEffect, useRef } from 'react'
+import Youtube from '@components/youtube'
 
 interface IProps {
   id: string
@@ -146,6 +147,9 @@ const PetitionContents = ({
                 <Divider color={'#ccc'}></Divider>
                 <div>
                   <div className="content">
+                    {petition?.answer.videoUrl && (
+                      <Youtube url={petition?.answer.videoUrl}></Youtube>
+                    )}
                     <div className="answer">{petition?.answer.description}</div>
                   </div>
                 </div>

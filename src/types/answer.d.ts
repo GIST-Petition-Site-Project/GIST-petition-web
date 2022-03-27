@@ -4,4 +4,5 @@ interface Answer {
   id: number
   petitionId: number
   updatedAt: string
+  videoUrl: string
 }
