@@ -100,3 +100,15 @@ export const getAnsweredByQuery = async (query: QueryParams) => {
   )
   return response
 }
+
+export const getRejectedByQuery = async (query: QueryParams) => {
+  const page = (Number(query?.page) || 1) - 1
+  const querystring = {
+    ...query,
+    page,
+  }
+  const response = await api.get(
+    `petitions/rejected?${qs.stringify(querystring)}`,
+  )
+  return response
+}
