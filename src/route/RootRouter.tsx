@@ -16,6 +16,7 @@ import ChangePassword from '@pages/ChangePassword'
 // import Withdrawal from '@pages/Withdrawal'
 import Guide from '@pages/Guide'
 import ScrollTop from './ScrollTop'
+import RejectedPetitions from '@pages/RejectedPetitions'
 
 const RootRouter = (): JSX.Element => {
   return (
@@ -42,6 +43,9 @@ const RootRouter = (): JSX.Element => {
         <Route path="/findpassword" element={<FindPassword />}></Route>
         <Route path="/answer" element={<Outlet />}>
           <Route index element={<AnsweredPetitions />} />
+        </Route>
+        <Route path="/rejected" element={<Outlet />}>
+          <Route index element={<RejectedPetitions />} />
         </Route>
         <Route path="/myinfo" element={<AuthRoute />}>
           <Route index element={<MyInfo />} />
