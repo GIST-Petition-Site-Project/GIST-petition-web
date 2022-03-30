@@ -10,7 +10,7 @@ const RejectedPetitions = (): JSX.Element => {
       <Inner>
         <PetitionBoard>
           <div className="petition_type">
-            <span>답변된 청원</span>
+            <span>반려된 청원</span>
           </div>
           <PetitionList getPetitions={getRejectedByQuery} />
           <div>
