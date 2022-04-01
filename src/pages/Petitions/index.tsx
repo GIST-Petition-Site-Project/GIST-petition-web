@@ -5,7 +5,11 @@ import PaginationButtons from '@components/PaginationButtons'
 import qs from 'qs'
 import { Category } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
-import { getPetitionsByQuery, getExpiredByQuery } from '@api/petitionAPI'
+import {
+  getPetitionsByQuery,
+  getExpiredByQuery,
+  getRejectedByQuery,
+} from '@api/petitionAPI'
 import { Container, PetitionBoard } from './styles'
 import Inner from '@components/Inner'
 
@@ -103,6 +107,7 @@ const Petitions = (): JSX.Element => {
             <TabList>
               <Tab onClick={setInitialState}>진행중인 청원</Tab>
               <Tab onClick={setInitialState}>만료된 청원</Tab>
+              <Tab onClick={setInitialState}>반려된 청원</Tab>
             </TabList>
 
             <TabPanels>
@@ -121,6 +126,16 @@ const Petitions = (): JSX.Element => {
                 <div className="pagination">
                   <PaginationButtons
                     getPetitions={getExpiredByQuery}
+                    pathname={'/petitions'}
+                  />
+                </div>
+              </TabPanel>
+
+              <TabPanel>
+                <PetitionList getPetitions={getRejectedByQuery}></PetitionList>
+                <div className="pagination">
+                  <PaginationButtons
+                    getPetitions={getRejectedByQuery}
                     pathname={'/petitions'}
                   />
                 </div>
