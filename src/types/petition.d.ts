@@ -6,6 +6,7 @@ interface Petition {
   createdAt: number
   description: string
   expired: boolean
+  rejected: boolean
   id: number
   released: boolean
   tempUrl: string

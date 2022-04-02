@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 interface Status {
   isAnswered: boolean
   isExpired: boolean
+  isRejected: boolean
 }
 
 const PetitionsHead = styled.div`
@@ -176,7 +177,7 @@ const Status = styled.div<Status>`
     padding: 0.5em;
     color: white;
     background-color: ${props =>
-      props.isAnswered || props.isExpired
+      props.isAnswered || props.isExpired || props.isRejected
         ? `${theme.color.QUATERNARY_GRAY}`
         : `${theme.color.SECONDARY_RED}`};
 

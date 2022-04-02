@@ -48,12 +48,15 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                   className="status"
                   isAnswered={petition.answered}
                   isExpired={petition.expired}
+                  isRejected={petition.rejected}
                 >
                   <div className="status_box">
                     {petition.answered
                       ? '답변완료'
                       : petition.expired
                       ? '청원기간만료'
+                      : petition.rejected
+                      ? '반려된청원'
                       : petition.released
                       ? '청원진행중'
                       : '사전동의진행중'}
