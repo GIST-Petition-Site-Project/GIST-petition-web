@@ -90,8 +90,6 @@ const PetitionContents = ({
     }
   }, [petition])
 
-  console.log(petition)
-
   return (
     <>
       {petition?.message !== undefined ? (
@@ -144,32 +142,31 @@ const PetitionContents = ({
               </div>
             </Stack>
           </DescriptionSection>
-          {petition?.answered ||
-            (petition?.rejected && (
-              <AnswerSection>
-                <Stack spacing={4}>
-                  <span>{petition?.answered ? '답변' : '반려 사유'}</span>
-                  <Divider color={'#ccc'}></Divider>
-                  <div>
-                    <div className="content">
-                      {petition?.answer?.videoUrl && (
-                        <Youtube url={petition?.answer.videoUrl}></Youtube>
-                      )}
-                      {petition?.answered && (
-                        <div className="answer">
-                          {petition?.answer.description}
-                        </div>
-                      )}
-                      {petition?.rejected && (
-                        <div className="answer">
-                          {petition?.rejection.description}
-                        </div>
-                      )}
-                    </div>
+          {(petition?.answered || petition?.rejected) && (
+            <AnswerSection>
+              <Stack spacing={4}>
+                <span>{petition?.answered ? '답변' : '반려 사유'}</span>
+                <Divider color={'#ccc'}></Divider>
+                <div>
+                  <div className="content">
+                    {petition?.answer?.videoUrl && (
+                      <Youtube url={petition?.answer.videoUrl}></Youtube>
+                    )}
+                    {petition?.answered && (
+                      <div className="answer">
+                        {petition?.answer.description}
+                      </div>
+                    )}
+                    {petition?.rejected && (
+                      <div className="answer">
+                        {petition?.rejection.description}
+                      </div>
+                    )}
                   </div>
-                </Stack>
-              </AnswerSection>
-            ))}
+                </div>
+              </Stack>
+            </AnswerSection>
+          )}
           <SharingPetition>
             <div className="share-btns">
               <div>공유하기</div>
