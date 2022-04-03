@@ -148,7 +148,7 @@ const PetitionContents = ({
             (petition?.rejected && (
               <AnswerSection>
                 <Stack spacing={4}>
-                  <span>{petition?.answered ? '답변' : '반려된사유'}</span>
+                  <span>{petition?.answered ? '답변' : '반려 사유'}</span>
                   <Divider color={'#ccc'}></Divider>
                   <div>
                     <div className="content">
