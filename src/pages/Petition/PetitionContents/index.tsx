@@ -111,7 +111,7 @@ const PetitionContents = ({
                     : petition?.expired
                     ? '청원기간만료'
                     : petition?.rejected
-                    ? '반려된청원'
+                    ? '청원반려'
                     : petition?.released
                     ? '청원진행중'
                     : '사전동의진행중'}
@@ -216,7 +216,7 @@ const PetitionContents = ({
               <span className="num_of_agree">
                 청원동의 <span>{petition?.agreeCount} </span>명
               </span>
-              {!petition?.expired && (
+              {!petition?.expired && !petition?.rejected && (
                 <AgreementForm {...agreementFormProps}></AgreementForm>
               )}
               <AgreementList {...agreementListProps} />
