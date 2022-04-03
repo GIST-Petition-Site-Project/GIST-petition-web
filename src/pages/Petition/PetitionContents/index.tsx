@@ -90,6 +90,8 @@ const PetitionContents = ({
     }
   }, [petition])
 
+  console.log(petition)
+
   return (
     <>
       {petition?.message !== undefined ? (
@@ -108,6 +110,8 @@ const PetitionContents = ({
                     ? '답변완료'
                     : petition?.expired
                     ? '청원기간만료'
+                    : petition?.rejected
+                    ? '반려된청원'
                     : petition?.released
                     ? '청원진행중'
                     : '사전동의진행중'}
@@ -140,22 +144,32 @@ const PetitionContents = ({
               </div>
             </Stack>
           </DescriptionSection>
-          {petition?.answered && (
-            <AnswerSection>
-              <Stack spacing={4}>
-                <span>답변</span>
-                <Divider color={'#ccc'}></Divider>
-                <div>
-                  <div className="content">
-                    {petition?.answer.videoUrl && (
-                      <Youtube url={petition?.answer.videoUrl}></Youtube>
-                    )}
-                    <div className="answer">{petition?.answer.description}</div>
+          {petition?.answered ||
+            (petition?.rejected && (
+              <AnswerSection>
+                <Stack spacing={4}>
+                  <span>{petition?.answered ? '답변' : '반려된사유'}</span>
+                  <Divider color={'#ccc'}></Divider>
+                  <div>
+                    <div className="content">
+                      {petition?.answer?.videoUrl && (
+                        <Youtube url={petition?.answer.videoUrl}></Youtube>
+                      )}
+                      {petition?.answered && (
+                        <div className="answer">
+                          {petition?.answer.description}
+                        </div>
+                      )}
+                      {petition?.rejected && (
+                        <div className="answer">
+                          {petition?.rejection.description}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </Stack>
-            </AnswerSection>
-          )}
+                </Stack>
+              </AnswerSection>
+            ))}
           <SharingPetition>
             <div className="share-btns">
               <div>공유하기</div>

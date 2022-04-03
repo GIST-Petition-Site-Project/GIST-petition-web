@@ -180,7 +180,6 @@ const Status = styled.div<Status>`
       props.isAnswered || props.isExpired || props.isRejected
         ? `${theme.color.QUATERNARY_GRAY}`
         : `${theme.color.SECONDARY_RED}`};
-
     @media screen and (min-width: ${theme.breakpoints.md}) {
       font-size: 0.8rem;
       margin-left: 5px;

@@ -6,3 +6,10 @@ interface Answer {
   updatedAt: string
   videoUrl: string
 }
+
+interface Rejection {
+  description: string
+  createdAt: string
+  id: number
+  updatedAt: string
+}
