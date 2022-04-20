@@ -8,7 +8,7 @@ import {
   getStateOfAgreement,
 } from '@api/petitionAPI'
 import { useEffect, useState } from 'react'
-
+import { Helmet } from 'react-helmet'
 import Inner from '@components/Inner'
 import qs from 'qs'
 
@@ -65,13 +65,30 @@ const Petition = (): JSX.Element => {
   }
 
   return (
-    <Container>
-      <Inner>
-        <div className="petition_wrap">
-          <PetitionContents {...petitionContentsProps}></PetitionContents>
-        </div>
-      </Inner>
-    </Container>
+    <>
+      <Helmet>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content={petition?.description || '지스트 청원'}
+        />
+        <meta
+          property="og:description"
+          content={
+            petition?.message?.slice(0, 100) ||
+            '학교에 나의 의견을 공식적으로 건의하자!'
+          }
+        />
+        <meta property="og:image" content="../../assets/img/share_image.png" />
+      </Helmet>
+      <Container>
+        <Inner>
+          <div className="petition_wrap">
+            <PetitionContents {...petitionContentsProps}></PetitionContents>
+          </div>
+        </Inner>
+      </Container>
+    </>
   )
 }
 
