@@ -8,9 +8,9 @@ import {
   getStateOfAgreement,
 } from '@api/petitionAPI'
 import { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet'
 import Inner from '@components/Inner'
 import qs from 'qs'
+import setMetaTags from '@utils/setMetatags'
 
 const Petition = (): JSX.Element => {
   const { param } = useParams()
@@ -25,6 +25,7 @@ const Petition = (): JSX.Element => {
   const [totalPages, setTotalPages] = useState(0)
   const [totalAgreement, setTotalAgreement] = useState(0)
   const [isConsented, setIsConsented] = useState(false)
+
   const fetchPetition = async (param: string) => {
     const id = await getId(param)
     setId(id)
@@ -55,6 +56,25 @@ const Petition = (): JSX.Element => {
     fetchAgreements()
   }, [search, petition])
 
+  // 커스텀훅으로 빼도 좋을것 같음 @kimjngyun
+  useEffect(() => {
+    if (petition) {
+      setMetaTags(
+        petition.title,
+        petition.description,
+        location.origin + location.pathname,
+      )
+    }
+
+    return () => {
+      setMetaTags(
+        '지스트 청원',
+        '학교에 나의 의견을 공식적으로 건의하자!',
+        'https://www.gist-petition.com',
+      )
+    }
+  }, [petition])
+
   const petitionContentsProps = {
     id,
     petition,
@@ -65,30 +85,13 @@ const Petition = (): JSX.Element => {
   }
 
   return (
-    <>
-      <Helmet>
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={petition?.description || '지스트 청원'}
-        />
-        <meta
-          property="og:description"
-          content={
-            petition?.message?.slice(0, 100) ||
-            '학교에 나의 의견을 공식적으로 건의하자!'
-          }
-        />
-        <meta property="og:image" content="../../assets/img/share_image.png" />
-      </Helmet>
-      <Container>
-        <Inner>
-          <div className="petition_wrap">
-            <PetitionContents {...petitionContentsProps}></PetitionContents>
-          </div>
-        </Inner>
-      </Container>
-    </>
+    <Container>
+      <Inner>
+        <div className="petition_wrap">
+          <PetitionContents {...petitionContentsProps}></PetitionContents>
+        </div>
+      </Inner>
+    </Container>
   )
 }
 
