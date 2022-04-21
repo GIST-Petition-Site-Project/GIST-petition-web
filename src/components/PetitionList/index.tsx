@@ -26,7 +26,6 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   )
 
   const [petitionList, setPetitionList] = useState<Array<Petition>>([])
-
   useEffect(() => {
     queryPost(queryParams)
   }, [location.search])
@@ -44,9 +43,15 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
 
       <PetitionsUl className="petition_list">
         {petitionList.length === 0 ? (
-          <div className="empty_message">
-            <span>{progress.current} 청원이 없습니다.</span>
-          </div>
+          location.pathname === '/' ? (
+            <div className="empty_message" style={{ margin: '5em 0 1em 0' }}>
+              <span>{progress.current} 청원이 없습니다.</span>
+            </div>
+          ) : (
+            <div className="empty_message">
+              <span>{progress.current} 청원이 없습니다.</span>
+            </div>
+          )
         ) : (
           <>
             {petitionList.map(petition => (
