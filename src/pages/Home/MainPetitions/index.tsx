@@ -1,6 +1,10 @@
 import Inner from '@components/Inner'
 import PetitionList from '@components/PetitionList'
-import { getAnsweredByQuery, getPetitionsByQuery } from '@api/petitionAPI'
+import {
+  getAnsweredByQuery,
+  getPetitionsByQuery,
+  getRejectedByQuery,
+} from '@api/petitionAPI'
 import { PetitionsSection } from './styles'
 
 const MainPetitions = (): JSX.Element => {
@@ -24,6 +28,14 @@ const MainPetitions = (): JSX.Element => {
         <PetitionList
           getPetitions={() =>
             getAnsweredByQuery({ size: 5, sort: 'createdAt,desc' })
+          }
+        ></PetitionList>
+        <div className="petitions_title">
+          <span>최근 반려된 청원</span>
+        </div>
+        <PetitionList
+          getPetitions={() =>
+            getRejectedByQuery({ size: 5, sort: 'createdAt,desc' })
           }
         ></PetitionList>
       </Inner>
