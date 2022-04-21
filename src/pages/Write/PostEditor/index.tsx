@@ -52,7 +52,7 @@ const PostEditor = () => {
       }
       setPetitionInput({
         ...petitionInput,
-        [name]: value.replace(/ +/g, ' '),
+        [name]: value,
       })
     },
     [petitionInput],
