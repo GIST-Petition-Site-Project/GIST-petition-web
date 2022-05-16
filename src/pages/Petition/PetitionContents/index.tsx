@@ -11,7 +11,7 @@ import AgreementForm from './AgreementForm'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Youtube from '@components/youtube'
 
 interface IProps {
@@ -31,6 +31,7 @@ const PetitionContents = ({
   totalAgreement,
   isConsented,
 }: IProps): JSX.Element => {
+  const [status, setStatus] = useState('')
   const sharingURL =
     process.env.NODE_ENV === 'development'
       ? 'https://dev.gist-petition.com' + location.pathname
@@ -88,6 +89,22 @@ const PetitionContents = ({
     if (petition) {
       shareKakaoTalk()
     }
+
+    if (petition?.status === 'ANSWERED') {
+      setStatus('답변완료')
+    } else if (petition?.status === 'REJECTED') {
+      setStatus('청원반려')
+    } else if (petition?.expired) {
+      setStatus('청원기간만료')
+    } else if (petition?.status === 'RELEASED') {
+      if (petition?.agreeCount >= 50) {
+        setStatus('답변대기중')
+      } else {
+        setStatus('청원진행중')
+      }
+    } else if (petition?.status === 'TEMPORARY') {
+      setStatus('사전동의진행중')
+    }
   }, [petition])
 
   return (
@@ -104,15 +121,7 @@ const PetitionContents = ({
             <Stack spacing={6}>
               <div className="info">
                 <span className="progress">
-                  {petition?.answered
-                    ? '답변완료'
-                    : petition?.expired
-                    ? '청원기간만료'
-                    : petition?.rejected
-                    ? '청원반려'
-                    : petition?.released
-                    ? '청원진행중'
-                    : '사전동의진행중'}
+                  {status}
                   &nbsp;
                 </span>
                 <span className="duration">
@@ -142,22 +151,26 @@ const PetitionContents = ({
               </div>
             </Stack>
           </DescriptionSection>
-          {(petition?.answered || petition?.rejected) && (
+          {(petition?.status === 'ANSWERED' || 'REJECTED') && (
             <AnswerSection>
               <Stack spacing={4}>
-                <span>{petition?.answered ? '답변' : '반려 사유'}</span>
+                <span>
+                  {petition?.status === 'ANSWERED'
+                    ? '답변'
+                    : petition?.status === 'REJECTED' && '반려 사유'}
+                </span>
                 <Divider color={'#ccc'}></Divider>
                 <div>
                   <div className="content">
                     {petition?.answer?.videoUrl && (
                       <Youtube url={petition?.answer.videoUrl}></Youtube>
                     )}
-                    {petition?.answered && (
+                    {petition?.status === 'ANSWERED' && (
                       <div className="answer">
                         {petition?.answer.description}
                       </div>
                     )}
-                    {petition?.rejected && (
+                    {petition?.status === 'REJECTED' && (
                       <div className="answer">
                         {petition?.rejection.description}
                       </div>
@@ -213,7 +226,7 @@ const PetitionContents = ({
               <span className="num_of_agree">
                 청원동의 <span>{petition?.agreeCount} </span>명
               </span>
-              {!petition?.expired && !petition?.rejected && (
+              {!petition?.expired && petition?.status !== 'REJECTED' && (
                 <AgreementForm {...agreementFormProps}></AgreementForm>
               )}
               <AgreementList {...agreementListProps} />

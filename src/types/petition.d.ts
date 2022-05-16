@@ -1,19 +1,17 @@
 interface Petition {
   agreeCount: number
   answer: Answer
-  answered: boolean
   categoryName: string
   createdAt: number
   description: string
   expired: boolean
   rejection: Rejection
-  rejected: boolean
   id: number
-  released: boolean
   tempUrl: string
   title: string
   updatedAt: number
   message: string
+  status: string
 }
 
 interface PetitionId {
