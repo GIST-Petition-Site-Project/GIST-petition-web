@@ -14,6 +14,7 @@ interface Petition {
   title: string
   updatedAt: number
   message: string
+  status: string
 }
 
 interface PetitionId {
