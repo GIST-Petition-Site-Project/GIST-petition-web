@@ -105,7 +105,6 @@ const PetitionContents = ({
     } else if (petition?.status === 'TEMPORARY') {
       setStatus('사전동의진행중')
     }
-    console.log(petition?.agreeCount)
   }, [petition])
 
   return (
@@ -227,7 +226,7 @@ const PetitionContents = ({
               <span className="num_of_agree">
                 청원동의 <span>{petition?.agreeCount} </span>명
               </span>
-              {!petition?.expired && !petition?.rejected && (
+              {!petition?.expired && petition?.status !== 'REJECTED' && (
                 <AgreementForm {...agreementFormProps}></AgreementForm>
               )}
               <AgreementList {...agreementListProps} />
