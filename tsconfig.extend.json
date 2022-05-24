@@ -9,7 +9,8 @@
       "@components/*": ["src/components/*"],
       "@api/*": ["src/utils/api/*"],
       "@redux/*": ["src/redux/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   }
 }

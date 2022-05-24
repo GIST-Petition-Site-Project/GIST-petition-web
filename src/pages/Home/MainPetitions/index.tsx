@@ -7,8 +7,11 @@ import {
   getRejectedByQuery,
 } from '@api/petitionAPI'
 import { PetitionsSection } from './styles'
+import { useTranslate } from '@hooks/useTranslate'
+import locale from './locale'
 
 const MainPetitions = (): JSX.Element => {
+  const t = useTranslate(locale)
   return (
     <PetitionsSection>
       <Inner>
@@ -35,7 +38,7 @@ const MainPetitions = (): JSX.Element => {
           }
         ></PetitionList>
         <div className="petitions_title">
-          <span>최근 답변된 청원</span>
+          <span>{t('recent')}</span>
         </div>
         <PetitionList
           getPetitions={() =>
@@ -43,7 +46,7 @@ const MainPetitions = (): JSX.Element => {
           }
         ></PetitionList>
         <div className="petitions_title">
-          <span>최근 반려된 청원</span>
+          <span>{t('reject')}</span>
         </div>
         <PetitionList
           getPetitions={() =>
