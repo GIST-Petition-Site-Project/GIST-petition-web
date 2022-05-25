@@ -7,17 +7,27 @@ import { Divider, ListItem } from '@chakra-ui/react'
 import MyMenu from './MyMenu'
 import { Link } from 'react-router-dom'
 import Inner from '@components/Inner'
-import { useAppSelect } from '@redux/store.hooks'
-
+import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
+import { toggleLang } from '@redux/lang/langSlice'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState<boolean>(false)
   const isAuthorized = useAppSelect(select => select.auth.isAuthorized)
   const writePathname = isAuthorized ? '/write' : '/login#/write'
+
   const closeMenu = () => {
     if (opened) {
       setOpened(!opened)
     }
   }
+  const dispatch = useAppDispatch()
+
+  const handleLangChange = () => {
+    dispatch(toggleLang())
+  }
+
+  const t = useTranslate(locale)
 
   return (
     <Header>
@@ -31,7 +41,14 @@ const NavBar = (): JSX.Element => {
           <div onClick={closeMenu}>
             <ListItem>
               <ItemName>
-                <Link to="/guide">이용안내</Link>
+                <div onClick={handleLangChange}>
+                  {useAppSelect(select => select.lang.mode)}
+                </div>
+              </ItemName>
+            </ListItem>
+            <ListItem>
+              <ItemName>
+                <Link to="/guide">{t('about')}</Link>
               </ItemName>
             </ListItem>
             <ListItem>
