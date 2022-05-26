@@ -16,7 +16,7 @@ const MainPetitions = (): JSX.Element => {
     <PetitionsSection>
       <Inner>
         <div className="petitions_title">
-          <span>추천순 TOP 5</span>
+          <span>{t('recommened')}</span>
         </div>
         <PetitionList
           getPetitions={() =>
@@ -27,7 +27,7 @@ const MainPetitions = (): JSX.Element => {
           }
         ></PetitionList>
         <div className="petitions_title">
-          <span>답변 대기 중인 청원</span>
+          <span>{t('waiting')}</span>
         </div>
         <PetitionList
           getPetitions={() =>
