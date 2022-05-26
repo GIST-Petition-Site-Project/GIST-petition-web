@@ -53,17 +53,17 @@ const NavBar = (): JSX.Element => {
             </ListItem>
             <ListItem>
               <ItemName>
-                <Link to={writePathname}>청원하기</Link>
+                <Link to={writePathname}>{t('petition')}</Link>
               </ItemName>
             </ListItem>
             <ListItem>
               <ItemName>
-                <Link to="/petitions">모든 청원</Link>
+                <Link to="/petitions">{t('all')}</Link>
               </ItemName>
             </ListItem>
             <ListItem>
               <ItemName>
-                <Link to="/answer">답변된 청원</Link>
+                <Link to="/answer">{t('answered')}</Link>
               </ItemName>
             </ListItem>
             <Divider></Divider>

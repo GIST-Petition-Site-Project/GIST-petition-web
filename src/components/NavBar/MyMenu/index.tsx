@@ -7,7 +7,12 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react'
 
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
+
 const MyMenu = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogout = async () => {
@@ -37,26 +42,27 @@ const MyMenu = (): JSX.Element => {
             }
           }}
         >
-          <Before open={opened}></Before>내 정보
+          <Before open={opened}></Before>
+          {t('myinfo')}
         </summary>
         <div className="menu_list">
-          <Link to="/mypetitions">나의 청원</Link>
+          <Link to="/mypetitions">{t('mine')}</Link>
           <div role="none" className="dropdown_divider"></div>
-          <a href="/myinfo">회원 정보 관리</a>
-          <a onClick={handleLogout}>로그아웃</a>
+          <a href="/myinfo">{t('account')}</a>
+          <a onClick={handleLogout}>{t('signout')}</a>
         </div>
       </details>
 
       <MobileMenu>
         <ItemName>
-          <Link to="/mypetitions">나의 청원</Link>
+          <Link to="/mypetitions">{t('mine')}</Link>
         </ItemName>
         <ItemName>
-          <a href="/myinfo">회원 정보 관리</a>
+          <a href="/myinfo">{t('account')}</a>
         </ItemName>
         <ItemName>
           <Link to="#" onClick={handleLogout}>
-            로그아웃
+            {t('signout')}
           </Link>
         </ItemName>
       </MobileMenu>
@@ -75,7 +81,7 @@ const MyMenu = (): JSX.Element => {
           )
         }}
       >
-        로그인
+        {t('signin')}
       </div>
     </ItemName>
   )
