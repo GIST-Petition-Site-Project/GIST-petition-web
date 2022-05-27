@@ -4,14 +4,13 @@ import {
   postCreateVerificationCode,
 } from '@api/verificationAPI'
 import { postRegister } from '@api/userAPI'
-import { Text, useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 import { RegisterStack, RegisterButton, ErrorText } from './styles'
 import { useNavigate } from 'react-router-dom'
 import TermsOfUse from './TermsOfUse'
 import LoadingSpinner from '@components/LoadingSpinner'
 import UserInput from '@components/UserInput'
 import { useAppSelect } from '@redux/store.hooks'
-import { Link } from 'react-router-dom'
 import Email from '../../components/Email'
 import EmailAndVerification from '../../components/EmailAndVerification'
 

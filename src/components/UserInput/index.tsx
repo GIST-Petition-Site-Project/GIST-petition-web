@@ -71,7 +71,6 @@ const UserInput = memo(
     return (
       <SUserInput>
         <FormControl isRequired>
-          <span className="page_type">{text}</span>
           <InputGroup borderColor={`${theme.color.ligthGray}`}>
             <InputLeftElement>
               {<WhichIcon color="gray.300"></WhichIcon>}
