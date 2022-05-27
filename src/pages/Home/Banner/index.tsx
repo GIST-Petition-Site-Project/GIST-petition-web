@@ -3,8 +3,12 @@ import Inner from '@components/Inner'
 import { useEffect, useState } from 'react'
 import { BannerSection } from './styles'
 import qs from 'qs'
+import { useTranslate } from '@hooks/useTranslate'
+import locale from './locale'
 
 const Banner = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
@@ -30,11 +34,14 @@ const Banner = (): JSX.Element => {
           <Inner>
             <div className="banner_dashboard">
               <span>
-                지금까지 총 <span>{petitionCount}</span> 개의 청원과
+                {t('above1')}
+                <span>{petitionCount}</span>
+                {t('above2')}
               </span>
               <span>
                 <span>
-                  <span>{answeredCount}</span> 개의 답변이 등록됐습니다
+                  <span>{answeredCount}</span>
+                  {t('below')}
                 </span>
               </span>
             </div>

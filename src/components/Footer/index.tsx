@@ -10,14 +10,32 @@ const Footer = (): JSX.Element => {
         <img className="logo" alt="Logo" src={logo}></img>
         <Text>
           <a className="teamLink" href="https://www.gist-petition.com/team">
-            <span> 팀페이지로 가기</span>
+            <div>
+              <span>Better IT 팀 소개 페이지</span>
+            </div>
           </a>
           <a href="https://open.kakao.com/o/s7Qprk3d">
             <button>
-              <span>Open 채팅방</span> <RiKakaoTalkFill />
+              <div>
+                <span>오픈 채팅방</span>
+                <RiKakaoTalkFill />
+              </div>
             </button>
           </a>
-          <span>대표 이메일: rjsgh7943@gist.ac.kr</span>
+          <p>
+            <div>
+              <span>대학원 총학생회</span>
+              <span>haeinjung@gm.gist.ac.kr</span>
+            </div>
+            <div>
+              <span>비상대책위원회 소통국</span>
+              <span> heejupark@gm.gist.ac.kr</span>
+            </div>
+            <div>
+              <span>Better IT 대표</span>
+              <span> rjsgh7943@gist.ac.kr</span>
+            </div>
+          </p>
         </Text>
       </Inner>
     </FooterContainer>

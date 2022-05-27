@@ -16,8 +16,12 @@ import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { postLogin } from '@api/userAPI'
 import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
+import { useTranslate } from '@hooks/useTranslate'
+import locale from './locale'
 
 const Login = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   const CFaUserAlt = chakra(FaUserAlt)
   const CFaLock = chakra(FaLock)
 
@@ -93,9 +97,8 @@ const Login = (): JSX.Element => {
     <Container>
       <form className="login_form" onSubmit={handleSubmit}>
         <Stack spacing={4}>
-          <span>로그인</span>
+          <span>{t('signin')}</span>
           <FormControl isRequired>
-            <span>이메일</span>
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 {<CFaUserAlt color="gray.300" />}
@@ -105,12 +108,11 @@ const Login = (): JSX.Element => {
                 type="email"
                 name="username"
                 id="uesrname"
-                placeholder="지스트 이메일을 입력하세요"
+                placeholder={t('email')}
               />
             </InputGroup>
           </FormControl>
           <FormControl>
-            <span>비밀번호</span>
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 {<CFaLock color="gray.300" />}
@@ -120,7 +122,7 @@ const Login = (): JSX.Element => {
                 type={viewPassword ? 'text' : 'password'}
                 name="password"
                 id="password"
-                placeholder="비밀번호를 입력하세요"
+                placeholder={t('password')}
                 onKeyPress={checkUpperCase}
               />
               <InputRightElement>
@@ -136,7 +138,7 @@ const Login = (): JSX.Element => {
           </FormControl>
           <span className="err_msg">{checkLoginError(responseState)}</span>
           <span className="forgot_pwd account_link">
-            <Link to="/findpassword">비밀번호를 잊으셨나요?</Link>
+            <Link to="/findpassword">{t('forgotPwd')}</Link>
           </span>
 
           <button
@@ -149,11 +151,11 @@ const Login = (): JSX.Element => {
               })
             }}
           >
-            로그인
+            {t('signin')}
           </button>
 
           <span className="create_account account_link">
-            계정이 없으신가요?{' '}
+            {t('signupMsg')}{' '}
             <a
               onClick={_e => {
                 navigate(
@@ -162,7 +164,7 @@ const Login = (): JSX.Element => {
                 )
               }}
             >
-              회원가입
+              {t('signup')}
             </a>
           </span>
         </Stack>

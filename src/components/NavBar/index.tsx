@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import { toggleLang } from '@redux/lang/langSlice'
 import locale from './locale'
 import { useTranslate } from '@hooks/useTranslate'
+import { MdGTranslate, MdTranslate } from 'react-icons/md'
+
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState<boolean>(false)
   const isAuthorized = useAppSelect(select => select.auth.isAuthorized)
@@ -41,29 +43,29 @@ const NavBar = (): JSX.Element => {
           <div onClick={closeMenu}>
             <ListItem>
               <ItemName>
-                <div onClick={handleLangChange}>
-                  {useAppSelect(select => select.lang.mode)}
-                </div>
-              </ItemName>
-            </ListItem>
-            <ListItem>
-              <ItemName>
                 <Link to="/guide">{t('about')}</Link>
               </ItemName>
             </ListItem>
             <ListItem>
               <ItemName>
-                <Link to={writePathname}>청원하기</Link>
+                <Link to={writePathname}>{t('petition')}</Link>
               </ItemName>
             </ListItem>
             <ListItem>
               <ItemName>
-                <Link to="/petitions">모든 청원</Link>
+                <Link to="/petitions">{t('all')}</Link>
               </ItemName>
             </ListItem>
             <ListItem>
               <ItemName>
-                <Link to="/answer">답변된 청원</Link>
+                <Link to="/answer">{t('answered')}</Link>
+              </ItemName>
+            </ListItem>
+            <ListItem>
+              <ItemName className="translate-btn">
+                <div onClick={handleLangChange}>
+                  <MdTranslate />
+                </div>
               </ItemName>
             </ListItem>
             <Divider></Divider>
@@ -80,6 +82,9 @@ const NavBar = (): JSX.Element => {
         >
           <MobMenuIcon />
         </MobMenuButton>
+        <div className="translate-btn__mob" onClick={handleLangChange}>
+          <MdTranslate />
+        </div>
       </Inner>
     </Header>
   )

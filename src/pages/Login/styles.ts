@@ -15,10 +15,6 @@ const Container = styled.section`
     }
 
     .chakra-form-control {
-      > span {
-        display: inline-block;
-        margin-bottom: 0.5rem;
-      }
       .chakra-input__group {
         border-color: #ccc;
         .chakra-input {

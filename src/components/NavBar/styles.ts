@@ -25,6 +25,29 @@ const Header = styled.header`
       padding: 0 ${theme.space.INNER_PADDING};
       flex-direction: row;
     }
+    .translate-btn {
+      display: none;
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        display: block;
+      }
+    }
+    .translate-btn__mob {
+      svg {
+        height: 100%;
+        width: 24px;
+        margin: auto;
+      }
+      position: absolute;
+      height: 100%;
+      width: 60px;
+      right: 0;
+      :hover {
+        cursor: pointer;
+      }
+      @media screen and (min-width: ${theme.breakpoints.md}) {
+        display: none;
+      }
+    }
   }
 `
 
@@ -87,12 +110,24 @@ const ItemName = styled.div`
       text-underline-position: under;
     }
   }
+
+  .signin__mob {
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      display: none;
+    }
+  }
+  .signin {
+    display: none;
+    @media screen and (min-width: ${theme.breakpoints.md}) {
+      display: block;
+    }
+  }
 `
 
 const MobMenuButton = styled(Button)`
   border-radius: 0;
   position: absolute;
-  right: 0;
+  left: 0;
   height: 100%;
   transform: ${props => (props.open ? 'rotate(-90deg)' : 'none')};
   display: block;

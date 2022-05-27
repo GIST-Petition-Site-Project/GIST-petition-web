@@ -7,7 +7,6 @@ import {
   StepHeadContainer,
 } from './styles'
 import { Stack, Heading } from '@chakra-ui/react'
-import { ChevronRightIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
 
 const Guide = (): JSX.Element => {
@@ -24,9 +23,14 @@ const Guide = (): JSX.Element => {
               <p>
                 지스트 청원은 학생들이 학교운영과 관련된 의견을 공유하고, 이에
                 대한 요구를 학교 측에 제시하여 직접 답변을 받을 수 있는
-                서비스입니다. 지스트 청원은 학생 개발팀 Better IT팀과 대학원
-                총학생회에서 관리하고 있으며, 학생과 학교 간의 직접 소통을
-                지향합니다.
+                서비스입니다. 지스트 청원의 개발은{' '}
+                <a href="https://www.gist-petition.com/team">
+                  <span className="strong">Better IT팀</span>
+                </a>
+                이 맡고 있고, 게시판 운영은{' '}
+                <span className="strong">대학원 총학생회</span>와{' '}
+                <span className="strong">비상대책위원회 소통국</span>에서
+                관리하고 있으며, 학생과 학교 간의 직접 소통을 지향합니다.
               </p>
             </div>
           </ContentContainer>
@@ -142,7 +146,7 @@ const Guide = (): JSX.Element => {
             <li className="step-content">
               <div className="content-wrap">
                 <div>
-                  50명 이상의 청원동의를 받은 청원은 대학원 학생회를 통해 원내
+                  50명 이상의 청원동의를 받은 청원은 대학원 총학생회를 통해 원내
                   관련 부서에 전달됩니다. 청원에 대한 답변은 답변 현황 페이지에
                   게시됩니다.
                 </div>

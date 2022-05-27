@@ -37,6 +37,9 @@ const ContentContainer = styled.div`
     color: ${theme.color.QUATERNARY_GRAY};
     background: #cccccc82;
     line-height: 1.3;
+    a {
+      text-decoration: underline;
+    }
   }
 `
 const StepHeadContainer = styled.ul`
