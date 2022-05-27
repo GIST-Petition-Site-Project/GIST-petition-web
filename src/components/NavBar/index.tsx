@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelect } from '@redux/store.hooks'
 import { toggleLang } from '@redux/lang/langSlice'
 import locale from './locale'
 import { useTranslate } from '@hooks/useTranslate'
-import { MdGTranslate, MdTranslate } from 'react-icons/md'
+import { MdTranslate } from 'react-icons/md'
 
 const NavBar = (): JSX.Element => {
   const [opened, setOpened] = useState<boolean>(false)

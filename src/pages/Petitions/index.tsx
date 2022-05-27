@@ -12,6 +12,8 @@ import {
 } from '@api/petitionAPI'
 import { Container, PetitionBoard } from './styles'
 import Inner from '@components/Inner'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const numberOfCategory = Object.keys(Category).filter(el =>
   isNaN(Number(el)),
@@ -73,19 +75,21 @@ const Petitions = (): JSX.Element => {
     })
   }
 
+  const t = useTranslate(locale)
+
   return (
     <Container>
       <Inner>
         <PetitionBoard>
           <div className="petition_type">
-            <span>모든 청원</span>
+            <span>{t('allPetitions')}</span>
 
             <div className="selects">
               <div className="select_wrapper">
                 <select onChange={handleSortSelect} value={sortSelected}>
-                  <option value={'createdAt,desc'}>최신순</option>
-                  <option value={'agreeCount,desc'}>추천순</option>
-                  <option value={'createdAt,asc'}>만료임박순</option>
+                  <option value={'createdAt,desc'}>{t('latest')}</option>
+                  <option value={'agreeCount,desc'}>{t('consented')}</option>
+                  <option value={'createdAt,asc'}>{t('expiredNear')}</option>
                 </select>
               </div>
               <div className="select_wrapper">
@@ -105,9 +109,9 @@ const Petitions = (): JSX.Element => {
 
           <Tabs isFitted colorScheme="red">
             <TabList>
-              <Tab onClick={setInitialState}>진행중인 청원</Tab>
-              <Tab onClick={setInitialState}>만료된 청원</Tab>
-              <Tab onClick={setInitialState}>반려된 청원</Tab>
+              <Tab onClick={setInitialState}>{t('progress')}</Tab>
+              <Tab onClick={setInitialState}>{t('expired')}</Tab>
+              <Tab onClick={setInitialState}>{t('rejected')}</Tab>
             </TabList>
 
             <TabPanels>
