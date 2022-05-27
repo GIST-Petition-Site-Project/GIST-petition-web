@@ -9,6 +9,8 @@ import { useRef, useState } from 'react'
 
 import locale from './locale'
 import { useTranslate } from '@hooks/useTranslate'
+import { FaRegUser } from 'react-icons/fa'
+import { GrLogin } from 'react-icons/gr'
 
 const MyMenu = (): JSX.Element => {
   const t = useTranslate(locale)
@@ -43,7 +45,7 @@ const MyMenu = (): JSX.Element => {
           }}
         >
           <Before open={opened}></Before>
-          {t('myinfo')}
+          <FaRegUser />
         </summary>
         <div className="menu_list">
           <Link to="/mypetitions">{t('mine')}</Link>
@@ -81,7 +83,8 @@ const MyMenu = (): JSX.Element => {
           )
         }}
       >
-        {t('signin')}
+        <span className="signin__mob">{t('signin')}</span>
+        <GrLogin className="signin" style={{ marginLeft: '-20px' }} />
       </div>
     </ItemName>
   )

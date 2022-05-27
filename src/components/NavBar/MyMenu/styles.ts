@@ -15,7 +15,7 @@ const Container = styled.div`
     @media screen and (min-width: ${theme.breakpoints.md}) {
       display: block;
       font-size: 1.125rem;
-      margin: 0px 0px 5px 40px;
+      margin: 0px 0px 5px 20px;
       padding: 5px 0px 3px 0px;
     }
 
@@ -64,7 +64,7 @@ const Container = styled.div`
       background-color: #fff;
       ::before {
         top: -19px;
-        right: 24px;
+        right: 9px;
         border: 9px solid transparent;
         border-bottom-color: #e0e0e0;
         position: absolute;
@@ -72,7 +72,7 @@ const Container = styled.div`
       }
       ::after {
         top: -16px;
-        right: 25px;
+        right: 10px;
         border: 8px solid transparent;
         border-bottom-color: #fff;
         position: absolute;
