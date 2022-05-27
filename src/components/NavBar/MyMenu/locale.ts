@@ -7,7 +7,7 @@ const locale: Locale = {
     signout: '로그아웃',
   },
   en: {
-    signin: 'Sigin In',
+    signin: 'Sign In',
     myinfo: 'My Info',
     mine: 'My Petitions',
     account: 'Account Setting',
