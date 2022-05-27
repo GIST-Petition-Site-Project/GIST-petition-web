@@ -6,10 +6,10 @@ const locale: Locale = {
     reject: '최근 반려된 청원',
   },
   en: {
-    consented: 'Most Consented Petition',
+    consented: 'Most Consented Petitions',
     waiting: 'Waiting For Answer',
-    recent: 'Recently Answered Petition',
-    reject: 'Recently Rejected Petition',
+    recent: 'Recently Answered Petitions',
+    reject: 'Recently Rejected Petitions',
   },
 }
 

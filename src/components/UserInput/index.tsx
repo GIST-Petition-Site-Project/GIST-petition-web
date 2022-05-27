@@ -15,7 +15,6 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { MdPassword } from 'react-icons/md'
 
 interface IProps {
-  text: string
   name: string
   type: string
   value: string
@@ -27,7 +26,6 @@ interface IProps {
 
 const UserInput = memo(
   ({
-    text,
     name,
     type,
     value,

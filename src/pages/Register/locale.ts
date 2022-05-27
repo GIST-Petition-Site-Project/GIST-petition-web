@@ -14,7 +14,7 @@ const locale: Locale = {
     check: 'Please check your details and try again.',
     signin: 'Sign In',
     email: 'GIST e-mail',
-    password: 'password',
+    password: 'Password',
     forgotPwd: 'Forgot password?',
     signupMsg: "Don't have an account?",
     signup: 'Sign Up',

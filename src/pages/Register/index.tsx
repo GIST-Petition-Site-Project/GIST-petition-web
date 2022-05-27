@@ -259,7 +259,6 @@ const Register = (): JSX.Element => {
                 onChange={handleChange}
               ></EmailAndVerification>
               <UserInput
-                text="비밀번호"
                 name="password"
                 type="password"
                 value={input.password}
@@ -269,7 +268,6 @@ const Register = (): JSX.Element => {
                 onPassword={true}
               ></UserInput>
               <UserInput
-                text="비밀번호 확인"
                 name="passwordConfirm"
                 type="password"
                 value={input.passwordConfirm}

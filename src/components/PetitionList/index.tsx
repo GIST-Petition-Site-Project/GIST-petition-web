@@ -39,11 +39,11 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
         {petitionList.length === 0 ? (
           location.pathname === '/' ? (
             <div className="empty_message" style={{ margin: '5em 0 1em 0' }}>
-              <span>청원이 없습니다.</span>
+              <span>{t('empty')}</span>
             </div>
           ) : (
             <div className="empty_message">
-              <span>청원이 없습니다.</span>
+              <span>{t('empty')}</span>
             </div>
           )
         ) : (
@@ -58,10 +58,7 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                   {getDay(petition.createdAt)} ~{' '}
                   {getDay(petition.createdAt + 2592000000)}
                 </div>
-                <div className="agreements">
-                  {petition.agreeCount}
-                  <span>명</span>
-                </div>
+                <div className="agreements">{petition.agreeCount}</div>
               </li>
             ))}
           </>
