@@ -10,7 +10,7 @@ const locale: Locale = {
     category: 'category',
     title: 'title',
     duration: 'duration',
-    consent: 'consents',
+    consent: 'supporters',
     empty: "There're no petitions.",
   },
 }

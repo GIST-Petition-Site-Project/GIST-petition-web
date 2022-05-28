@@ -4,13 +4,17 @@ import PostEditor from './PostEditor'
 import { Heading, Stack, Divider, Box } from '@chakra-ui/react'
 import { Container, WriteContainer } from './styles'
 import Inner from '@components/Inner'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const Write = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   return (
     <Container>
       <Inner>
         <Stack spacing={6}>
-          <Heading>청원하기</Heading>
+          <Heading>{t('petition')}</Heading>
           <WriteContainer>
             <div className="write_wrapper">
               <Stack className="principle_section">
