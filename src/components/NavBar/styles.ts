@@ -97,7 +97,7 @@ const ItemName = styled.div`
   cursor: pointer;
   border: 2px solid transparent;
   @media screen and (min-width: ${theme.breakpoints.md}) {
-    margin: 0px 0px 5px 40px;
+    margin: 0px 0px 5px 36px;
     font-size: 1.125rem;
     padding: 5px 0px 3px 0px;
   }
