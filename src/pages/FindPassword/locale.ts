@@ -25,7 +25,7 @@ const locale: Locale = {
     findPassword: 'Find Password',
     useGistEmail: "Enter your 'GIST' email.",
     codeSent: ' - Verification code has been sent.',
-    notUser: 'No account found with this email.',
+    notUser: 'No accounts were found for this email',
     notCode: 'The verification code is not correct. Try again.',
     expiredCode: 'Verification code was expired',
     newPwd: 'new password',
