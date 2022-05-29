@@ -31,7 +31,7 @@ const locale: Locale = {
     newPwd: 'new password',
     confirmPwd: 'confirm new password',
 
-    diffPwd: 'Please make sure your passwords match.',
+    diffPwd: 'Passwords do not match.',
     formatPwd:
       'Password must be at least 8 characters and contain both numbers and letters.',
 
