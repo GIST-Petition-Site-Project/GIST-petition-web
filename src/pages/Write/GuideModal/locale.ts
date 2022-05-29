@@ -25,7 +25,7 @@ const locale: Locale = {
   en: {
     btn: 'Guide to Write a Petition',
 
-    mainTitle: 'Follow These Steps, Write GIST Petition!',
+    mainTitle: 'Follow These Steps!',
 
     title1: 'Check Existing Petitions',
     contents1:

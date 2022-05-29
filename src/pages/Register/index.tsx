@@ -137,10 +137,14 @@ const Register = (): JSX.Element => {
     }
     switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
+        setErrorText(t('notCode'))
+
         setInput({ ...input, verificationCode: '' })
         break
       }
       case '만료된 인증 코드입니다.': {
+        setErrorText(t('expiredCode'))
+
         setInput({ ...input, verificationCode: '' })
         setContentUI('Email')
         setBtnUI('Expired')
@@ -150,7 +154,6 @@ const Register = (): JSX.Element => {
         throw Error('API 호출에 실패했습니다')
       }
     }
-    setErrorText(message)
   }
 
   const handleResendCode = async () => {
@@ -163,7 +166,7 @@ const Register = (): JSX.Element => {
     if (status < 400) {
       setBtnUI('CodeRequested')
       setContentUI('CodeVerification')
-      setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
+      setErrorText(`${input.username}${t('codeSent')}`)
     }
   }
 
@@ -174,9 +177,7 @@ const Register = (): JSX.Element => {
       setErrorText('')
       const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
       if (!passwordRegex.test(input.password)) {
-        setErrorText(
-          '영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요',
-        )
+        setErrorText(t('formatPwd'))
         return
       }
       if (input.password === input.passwordConfirm) {
@@ -193,8 +194,8 @@ const Register = (): JSX.Element => {
           toast({
             status: 'success',
             duration: 3000,
-            description: '회원가입이 완료되었습니다',
-            title: '계정 생성완료',
+            description: t('success'),
+            title: t('registered'),
             isClosable: true,
           })
           navigate(
@@ -206,7 +207,7 @@ const Register = (): JSX.Element => {
         }
       } else {
         // passwordRef.current && passwordRef.current.focus()
-        setErrorText('비밀번호가 일치하지 않습니다')
+        setErrorText(t('diffPwd'))
       }
     }
   }
@@ -266,7 +267,7 @@ const Register = (): JSX.Element => {
                 name="password"
                 type="password"
                 value={input.password}
-                placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
+                placeholder={t('password')}
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
@@ -275,7 +276,7 @@ const Register = (): JSX.Element => {
                 name="passwordConfirm"
                 type="password"
                 value={input.passwordConfirm}
-                placeholder="비밀번호를 재입력하세요"
+                placeholder={t('confirmPwd')}
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
@@ -290,7 +291,7 @@ const Register = (): JSX.Element => {
           )}
           {btnUI === 'Expired' && (
             <RegisterButton type="button" onClick={handleResendCode}>
-              인증코드 재전송
+              {t('reCodeBtn')}
             </RegisterButton>
           )}
           {btnUI === 'CodeRequested' && (
@@ -300,7 +301,7 @@ const Register = (): JSX.Element => {
           )}
           {btnUI === 'Invalid' && (
             <RegisterButton type="button" onClick={handleReverify}>
-              다시 인증하기
+              {t('reVerifyBtn')}
             </RegisterButton>
           )}
           {btnUI === 'Valid' && (
