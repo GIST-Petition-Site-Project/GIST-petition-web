@@ -10,6 +10,10 @@ const locale: Locale = {
     content1_2: '삭제나 숨김',
     content1_3: ' 처리될 수 있습니다.',
 
+    content2:
+      '사전동의 5개 이상을 받고 운영측이 승인한 청원은 지스트청원 게시판에 공개됩니다. \
+      청원을 작성한 날로부터 30일 안에 50명의 동의를 받은 청원에 대해‚ GIST대학 내 관련 부서에 청원을 보내 답변을 받아 게시합니다.',
+
     content3_1: '한 번 작성된 청원은 ',
     content3_2: '수정 및 삭제가 불가능',
     content3_3:
@@ -33,6 +37,11 @@ const locale: Locale = {
       including personal information leakage, repeated content, false information, etc. ",
     content1_2: 'can be deleted or hidden',
     content1_3: '. ',
+
+    content2:
+      'The petition approved by the manager after receiving more than 5 prior consent will be released on the petition list. \
+      Within 30 days from the date of writing the petition, \
+      a petition with more than 50 consents will be sent to the relevant department of GIST College and posted with answer.',
 
     content3_1: 'Once a petition has been made, ',
     content3_2: 'it cannot be modified or deleted',

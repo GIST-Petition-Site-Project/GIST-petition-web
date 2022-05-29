@@ -22,12 +22,7 @@ const WritePrecaution = (): JSX.Element => {
           </ListItem>
 
           <ListItem>
-            <PrincipleContents>
-              청원글 게시 후 30일 안에 사전동의를 받아 승인된 청원에 한해
-              국민청원 게시판에 공개됩니다. 청원이 공개된 날로부터 30일 동안
-              50명의 동의를 받은 청원에 대해&sbquo; GIST대학 내 관련 부서에
-              청원을 보내 답변을 받아 게시합니다.
-            </PrincipleContents>
+            <PrincipleContents>{t('content2')}</PrincipleContents>
           </ListItem>
           <ListItem>
             <PrincipleContents>
