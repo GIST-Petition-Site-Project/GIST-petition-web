@@ -74,7 +74,7 @@ const PostEditor = () => {
       } catch (error) {
         console.log(error)
         if (petitionInput.title === ' ' || petitionInput.description === ' ') {
-          alert('제목 또는 내용을 추가해주세요')
+          alert(t('fill'))
         }
       }
     },
