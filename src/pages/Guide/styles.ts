@@ -34,7 +34,7 @@ const ContentContainer = styled.div`
   }
   .box-text {
     padding: 29px;
-    color: ${theme.color.QUATERNARY_GRAY};
+    color: #333;
     background: #cccccc82;
     line-height: 1.3;
     a {
