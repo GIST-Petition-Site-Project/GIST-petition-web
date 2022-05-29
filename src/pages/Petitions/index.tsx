@@ -3,7 +3,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import PetitionList from '@components/PetitionList'
 import PaginationButtons from '@components/PaginationButtons'
 import qs from 'qs'
-import { Category } from '../../types/enums'
+import { koCategory, enCategory } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
 import {
   getPetitionsByQuery,
@@ -14,8 +14,9 @@ import { Container, PetitionBoard } from './styles'
 import Inner from '@components/Inner'
 import locale from './locale'
 import { useTranslate } from '@hooks/useTranslate'
+import { useAppSelect } from '@redux/store.hooks'
 
-const numberOfCategory = Object.keys(Category).filter(el =>
+const numberOfCategory = Object.keys(koCategory).filter(el =>
   isNaN(Number(el)),
 ).length
 
@@ -99,7 +100,9 @@ const Petitions = (): JSX.Element => {
                 >
                   {catergoryIdx.map(item => (
                     <option value={item} key={item}>
-                      {Category[item]}
+                      {useAppSelect(select => select.lang.mode) === 'ko'
+                        ? koCategory[item]
+                        : enCategory[item]}
                     </option>
                   ))}
                 </select>

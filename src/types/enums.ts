@@ -1,4 +1,4 @@
-export enum Category {
+export enum koCategory {
   '전체',
   '기숙사',
   '시설운영',
@@ -9,4 +9,17 @@ export enum Category {
   '대외협력',
   '권익소통',
   '기타',
+}
+
+export enum enCategory {
+  'All',
+  'dormitory',
+  'facility',
+  'career/job',
+  'register/scholarship',
+  'student support/event/club',
+  'planning/budget/public relations',
+  'foreign cooperation',
+  'rights and interests',
+  'etc',
 }

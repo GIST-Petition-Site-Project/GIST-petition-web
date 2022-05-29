@@ -15,9 +15,9 @@ const locale: Locale = {
     expired: 'Expired',
     rejected: 'Rejected',
 
-    latest: 'latest',
-    consented: 'most consented',
-    expiredNear: 'expired near',
+    latest: 'Recent',
+    consented: 'Poular',
+    expiredNear: 'Expired near',
   },
 }
 

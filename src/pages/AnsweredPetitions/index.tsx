@@ -3,14 +3,18 @@ import PaginationButtons from '@components/PaginationButtons'
 import PetitionList from '@components/PetitionList'
 import { getAnsweredByQuery } from '@api/petitionAPI'
 import Inner from '@components/Inner'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const AnsweredPetitions = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   return (
     <Container>
       <Inner>
         <PetitionBoard>
           <div className="petition_type">
-            <span>답변된 청원</span>
+            <span>{t('answered')}</span>
           </div>
           <PetitionList getPetitions={getAnsweredByQuery} />
           <div>

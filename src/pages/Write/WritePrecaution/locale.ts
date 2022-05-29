@@ -34,14 +34,14 @@ const locale: Locale = {
       and the 'Regulatory Policy' of the Korea Internet Self-Governance Organization. \
       Stimulating, hateful and violent content, slang, content that promotes discrimination \
       or demeans against somebody, infringes on other people's rights, \
-      including personal information leakage, repeated content, false information, etc. ",
+      including personal information leakage, repeated content, misinformation, etc. ",
     content1_2: 'can be deleted or hidden',
     content1_3: '. ',
 
     content2:
-      'The petition approved by the manager after receiving more than 5 prior consent will be released on the petition list. \
+      'The petition approved by the administrator after receiving more than 5 prior consent will be released on the petition list. \
       Within 30 days from the date of writing the petition, \
-      a petition with more than 50 consents will be sent to the relevant department of GIST College and posted with answer.',
+      a petition with more than 50 consent will be sent to the relevant department of GIST College and posted with answer.',
 
     content3_1: 'Once a petition has been made, ',
     content3_2: 'it cannot be modified or deleted',

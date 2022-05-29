@@ -18,16 +18,17 @@ import {
 import { EditorSection } from './styles'
 import { postCreatePetition } from '@api/petitionAPI'
 import { useNavigate } from 'react-router-dom'
-import { Category } from '../../../types/enums'
+import { koCategory, enCategory } from '../../../types/enums'
 import locale from './locale'
 import { useTranslate } from '@hooks/useTranslate'
+import { useAppSelect } from '@redux/store.hooks'
 
 const PostEditor = () => {
   const t = useTranslate(locale)
 
   const countCategoryIdx = useMemo(() => {
     const numberOfCategory =
-      Object.keys(Category).filter(el => isNaN(Number(el))).length - 1
+      Object.keys(koCategory).filter(el => isNaN(Number(el))).length - 1
 
     const catergoryIdx = Array(numberOfCategory)
       .fill(0)
@@ -112,7 +113,9 @@ const PostEditor = () => {
               <option disabled>{t('select')}</option>
               {countCategoryIdx.map(idx => (
                 <option value={idx} key={idx}>
-                  {Category[idx]}
+                  {useAppSelect(select => select.lang.mode) === 'ko'
+                    ? koCategory[idx]
+                    : enCategory[idx]}
                 </option>
               ))}
             </Select>
