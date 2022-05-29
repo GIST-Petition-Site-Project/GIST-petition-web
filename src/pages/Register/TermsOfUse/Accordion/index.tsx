@@ -9,9 +9,13 @@ import {
 } from '@chakra-ui/react'
 import { memo } from 'react'
 import { Container, TermsOfUseCheckIcon } from './styles'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const TermsOfUseAccordion = memo(
   ({ agreeInfo, onClick }: RegisterTermsOfUseBtn) => {
+    const t = useTranslate(locale)
+
     return (
       <Container>
         <Accordion allowToggle>
@@ -25,7 +29,7 @@ const TermsOfUseAccordion = memo(
                 isclicked={agreeInfo.service ? 'true' : 'false'}
               />
               <AccordionButton>
-                <div>서비스 이용약관</div>
+                <div>{t('termsOfUse')}</div>
                 <AccordionIcon />
               </AccordionButton>
             </div>
@@ -320,7 +324,7 @@ const TermsOfUseAccordion = memo(
                 isclicked={agreeInfo.private ? 'true' : 'false'}
               />
               <AccordionButton>
-                <div>개인정보수집 및 이용 동의</div>
+                <div>{t('privacy')}</div>
                 <AccordionIcon />
               </AccordionButton>
             </div>

@@ -7,8 +7,12 @@ import {
   TermsOfUseCheckIcon,
   TermsOfUseTotalBox,
 } from './styles'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const TermOfUseList = memo(({ agreeInfo, onClick }: RegisterTermsOfUseBtn) => {
+  const t = useTranslate(locale)
+
   return (
     <List>
       <TermsOfUseCheckFlex as="label">
@@ -19,7 +23,7 @@ const TermOfUseList = memo(({ agreeInfo, onClick }: RegisterTermsOfUseBtn) => {
           data-value="total"
           isclicked={agreeInfo.private && agreeInfo.service ? 'true' : 'false'}
         />
-        <TermsOfUseTotalBox>전체 약관 동의</TermsOfUseTotalBox>
+        <TermsOfUseTotalBox>{t('acceptAll')}</TermsOfUseTotalBox>
       </TermsOfUseCheckFlex>
       <Divider orientation="horizontal" borderBottomWidth="2.5px" />
     </List>
