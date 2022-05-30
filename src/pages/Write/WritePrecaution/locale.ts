@@ -32,7 +32,7 @@ const locale: Locale = {
       Posts in question could be deleted based on the \
       'Deliberation Regulation on Information and Communication' of the Korea Communications Standards Commission \
       and the 'Regulatory Policy' of the Korea Internet Self-Governance Organization. \
-      Stimulating, hateful and violent content, slang, content that promotes discrimination \
+      Stimulating, hateful and violent content, swear word, content that promotes discrimination \
       or demeans against somebody, infringes on other people's rights, \
       including personal information leakage, repeated content, misinformation, etc. ",
     content1_2: 'can be deleted or hidden',
