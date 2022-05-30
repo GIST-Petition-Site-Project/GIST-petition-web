@@ -3,16 +3,20 @@ import { Container, List } from './styles'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { useTranslate } from '@hooks/useTranslate'
+import locale from './locale'
 
 const MyInfo = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   return (
     <Container className="register">
       <Stack spacing={4}>
-        <span className="title">회원 정보 관리 </span>
+        <span className="title">{t('manage')}</span>
         <ul className="my_info_list">
           <List>
             <Link to="/myinfo/changepassword">
-              <span className="text">비밀번호 변경</span>
+              <span className="text">{t('changePwd')}</span>
               <IconButton
                 className="button"
                 aria-label="naviagate"

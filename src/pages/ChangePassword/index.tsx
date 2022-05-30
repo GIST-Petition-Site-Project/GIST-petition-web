@@ -4,6 +4,8 @@ import { ChangePwdButton, Container } from './styles'
 import UserInput from '@components/UserInput'
 import { putPasswordMe } from '@api/userAPI'
 import { useNavigate } from 'react-router'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 interface ChangePassword {
   prevPassword: string
@@ -12,6 +14,8 @@ interface ChangePassword {
 }
 
 const ChangePassword = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   const navigate = useNavigate()
   const [input, setInput] = useState<ChangePassword>({
     prevPassword: '',
@@ -33,18 +37,18 @@ const ChangePassword = (): JSX.Element => {
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.newPassword)) {
-      setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
+      setErrorText(t('formatPwd'))
       return
     }
 
     if (input.newPassword !== input.newPasswordConfirm) {
-      setErrorText('비밀번호가 일치하지 않습니다')
+      setErrorText(t('diffPwd'))
       return
     }
 
     if (input.newPassword === input.newPasswordConfirm) {
       if (input.prevPassword === input.newPassword) {
-        setErrorText('현재 비밀번호와 다른 새로운 비밀번호를 입력해주세요')
+        setErrorText(t('samePwd'))
         return
       }
 
@@ -57,7 +61,7 @@ const ChangePassword = (): JSX.Element => {
       const message = response.data.message
 
       if (status >= 400) {
-        setErrorText(message)
+        setErrorText(t('notCurrentPwd'))
         return
       }
 
@@ -65,8 +69,8 @@ const ChangePassword = (): JSX.Element => {
         toast({
           status: 'success',
           duration: 3000,
-          title: '비밀번호 재설정',
-          description: '비밀번호가 재설정되었습니다',
+          title: t('success'),
+          description: t('pwdChanged'),
           isClosable: true,
         })
         navigate('/myinfo')
@@ -78,12 +82,12 @@ const ChangePassword = (): JSX.Element => {
     <Container className="register">
       <form onSubmit={handleSubmit} className="register_form">
         <Stack spacing={4}>
-          <span>비밀번호 변경</span>
+          <span>{t('changePwd')}</span>
           <UserInput
             name="prevPassword"
             type="password"
             value={input.prevPassword}
-            placeholder="현재 비밀번호를 입력하세요"
+            placeholder={t('currentPwd')}
             onChange={handleChange}
             disabled={false}
             onPassword={true}
@@ -92,7 +96,7 @@ const ChangePassword = (): JSX.Element => {
             name="newPassword"
             type="password"
             value={input.newPassword}
-            placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
+            placeholder={t('newPwd')}
             onChange={handleChange}
             disabled={false}
             onPassword={true}
@@ -101,13 +105,13 @@ const ChangePassword = (): JSX.Element => {
             name="newPasswordConfirm"
             type="password"
             value={input.newPasswordConfirm}
-            placeholder="비밀번호를 재입력하세요"
+            placeholder={t('confirmPwd')}
             onChange={handleChange}
             disabled={false}
             onPassword={true}
           ></UserInput>
           <ChangePwdButton type="submit" className="submit__btn">
-            비밀번호 재설정
+            {t('changeBtn')}
           </ChangePwdButton>
           <span className="err_msg">{errorText}</span>
         </Stack>
