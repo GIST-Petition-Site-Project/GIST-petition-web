@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 import Youtube from '@components/youtube'
 import locale from './locale'
 import { useTranslate } from '@hooks/useTranslate'
+import { useAppSelect } from '@redux/store.hooks'
 
 interface IProps {
   id: string
@@ -109,7 +110,7 @@ const PetitionContents = ({
     } else if (petition?.status === 'TEMPORARY') {
       setStatus(t('prior'))
     }
-  }, [petition])
+  }, [petition, useAppSelect(select => select.lang.mode)])
 
   return (
     <>

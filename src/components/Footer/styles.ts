@@ -26,7 +26,7 @@ const FooterContainer = styled.footer`
   }
 `
 
-const Text = styled.p`
+const Text = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +57,8 @@ const Text = styled.p`
     }
   }
   > div {
-    width: 17rem;
+    width: 326px;
+
     div {
       display: flex;
       justify-content: space-between;

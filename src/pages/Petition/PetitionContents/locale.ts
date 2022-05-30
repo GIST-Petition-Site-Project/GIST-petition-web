@@ -30,7 +30,7 @@ const locale: Locale = {
     prior: 'Prior Consent',
 
     total: 'Total ',
-    signed: ' have agreed.',
+    signed: ' people have agreed.',
 
     description: 'Description',
     answer: 'Answer',

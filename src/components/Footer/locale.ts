@@ -13,7 +13,7 @@ const locale: Locale = {
     aboutTeam: 'About Better IT Team',
 
     contact: 'Contact',
-    graduate: 'GIST Graduate Student Union',
+    graduate: 'Graduate Student Union',
     emc: 'Temporary Student Council',
     betterIT: 'Better IT',
   },

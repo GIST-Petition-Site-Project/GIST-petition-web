@@ -9,7 +9,7 @@ const locale: Locale = {
     about: 'About',
     petition: 'Create a Petition',
     all: 'Browse',
-    answered: 'Answers',
+    answered: 'Answered',
   },
 }
 
