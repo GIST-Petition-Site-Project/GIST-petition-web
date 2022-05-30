@@ -7,9 +7,9 @@ const locale: Locale = {
   },
   en: {
     about: 'About',
-    petition: 'Make Petition',
-    all: 'All Petitions',
-    answered: 'Answered Petitions',
+    petition: 'Create a Petition',
+    all: 'Browse',
+    answered: 'Answers',
   },
 }
 

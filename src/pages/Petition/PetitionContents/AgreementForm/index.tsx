@@ -4,6 +4,8 @@ import { postAgreePetition } from '@api/petitionAPI'
 import { SAgreementForm } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelect } from '@redux/store.hooks'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 interface IProps {
   id: string
@@ -11,9 +13,11 @@ interface IProps {
 }
 
 const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
+  const t = useTranslate(locale)
+
   const isAuthorized = useAppSelect(select => select.auth.isAuthorized)
   const [input, setInput] = useState<AgreePetition>({
-    description: '동의합니다',
+    description: t('consent'),
   })
 
   const handleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -42,7 +46,7 @@ const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
           {isAuthorized ? (
             <div className="wrapper">
               <textarea
-                placeholder={isConsented ? '동의했습니다' : '동의합니다'}
+                placeholder={t('consent')}
                 onChange={handleChange}
                 value={input.description}
                 maxLength={100}
@@ -53,7 +57,7 @@ const AgreementForm = ({ id, isConsented }: IProps): JSX.Element => {
                 disabled={isConsented}
                 type="submit"
               >
-                {!isConsented ? '동의하기' : '동의완료'}
+                {!isConsented ? t('signBtn') : t('signedBtn')}
               </button>
             </div>
           ) : (

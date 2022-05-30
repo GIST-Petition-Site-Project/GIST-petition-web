@@ -80,7 +80,6 @@ const ChangePassword = (): JSX.Element => {
         <Stack spacing={4}>
           <span>비밀번호 변경</span>
           <UserInput
-            text="현재 비밀번호"
             name="prevPassword"
             type="password"
             value={input.prevPassword}
@@ -90,7 +89,6 @@ const ChangePassword = (): JSX.Element => {
             onPassword={true}
           ></UserInput>
           <UserInput
-            text="새로운 비밀번호"
             name="newPassword"
             type="password"
             value={input.newPassword}
@@ -100,7 +98,6 @@ const ChangePassword = (): JSX.Element => {
             onPassword={true}
           ></UserInput>
           <UserInput
-            text="새로운 비밀번호 확인"
             name="newPasswordConfirm"
             type="password"
             value={input.newPasswordConfirm}

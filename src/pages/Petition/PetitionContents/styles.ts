@@ -53,16 +53,11 @@ const SharingPetition = styled.div`
             display: none;
           }
         }
-      }
-      button::before {
-        font-family: xeicon;
-        content: '';
-        color: white;
-        @media screen and (min-width: ${theme.breakpoints.sm}) {
-          content: '복사';
-          font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
-            Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
-            'Noto Sans KR', 'Malgun Gothic', sans-serif;
+        span {
+          display: none;
+          @media screen and (min-width: ${theme.breakpoints.sm}) {
+            display: inline;
+          }
         }
       }
     }

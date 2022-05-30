@@ -16,7 +16,7 @@ const MainPetitions = (): JSX.Element => {
     <PetitionsSection>
       <Inner>
         <div className="petitions_title">
-          <span>{t('recommened')}</span>
+          <span>{t('consented')}</span>
         </div>
         <PetitionList
           getPetitions={() =>

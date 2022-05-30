@@ -1,5 +1,7 @@
 import UserInput from '@components/UserInput'
 import React from 'react'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 interface Iprops {
   value: string
@@ -8,13 +10,14 @@ interface Iprops {
 }
 
 const Email = ({ value, onChange, disabled }: Iprops) => {
+  const t = useTranslate(locale)
+
   return (
     <UserInput
-      text="이메일"
       name="username"
       type="email"
       value={value}
-      placeholder="지스트 이메일을 입력하세요"
+      placeholder={t('email')}
       onChange={onChange}
       disabled={disabled}
       onPassword={false}

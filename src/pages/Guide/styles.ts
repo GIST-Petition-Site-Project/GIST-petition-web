@@ -34,7 +34,7 @@ const ContentContainer = styled.div`
   }
   .box-text {
     padding: 29px;
-    color: ${theme.color.QUATERNARY_GRAY};
+    color: #333;
     background: #cccccc82;
     line-height: 1.3;
     a {
@@ -65,6 +65,7 @@ const StepHeadContainer = styled.ul`
       width: 120px;
       height: 120px;
       display: block;
+      white-space: pre-line;
       @media screen and (min-width: ${theme.breakpoints.sm}) {
         margin: 0;
         width: 140px;
@@ -137,7 +138,7 @@ const StepContainer = styled.ul`
     padding: 15px;
     .content-wrap {
       padding: 29px;
-      color: ${theme.color.QUATERNARY_GRAY};
+      color: #333;
       background: #cccccc82;
       line-height: 1.3;
       > li {

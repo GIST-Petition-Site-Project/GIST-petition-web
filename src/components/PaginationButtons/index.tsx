@@ -12,6 +12,8 @@ import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SPaginationContainer } from './styles'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 interface PaginationButton {
   getPetitions: (query: QueryParams) => Promise<AxiosResponse<any, any>>
@@ -22,6 +24,8 @@ const PaginationButtons = ({
   getPetitions,
   pathname,
 }: PaginationButton): JSX.Element => {
+  const t = useTranslate(locale)
+
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
@@ -64,13 +68,13 @@ const PaginationButtons = ({
       onPageChange={handlePageChange}
     >
       <SPaginationContainer>
-        <PaginationPrevious>이전</PaginationPrevious>
+        <PaginationPrevious>{t('previous')}</PaginationPrevious>
         <PaginationPageGroup separator={<PaginationSeparator jumpSize={10} />}>
           {pages.map((page: number) => (
             <PaginationPage key={`pagination_page_${page}`} page={page} />
           ))}
         </PaginationPageGroup>
-        <PaginationNext>다음</PaginationNext>
+        <PaginationNext>{t('next')}</PaginationNext>
       </SPaginationContainer>
     </Pagination>
   )

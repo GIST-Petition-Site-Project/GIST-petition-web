@@ -63,7 +63,6 @@ const Withdrawal = (): JSX.Element => {
         <Stack spacing={4}>
           <span>회원 탈퇴</span>
           <UserInput
-            text="비밀번호"
             name="password"
             type="password"
             value={password}

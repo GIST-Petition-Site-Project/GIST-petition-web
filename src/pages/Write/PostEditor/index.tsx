@@ -18,12 +18,17 @@ import {
 import { EditorSection } from './styles'
 import { postCreatePetition } from '@api/petitionAPI'
 import { useNavigate } from 'react-router-dom'
-import { Category } from '../../../types/enums'
+import { koCategory, enCategory } from '../../../types/enums'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
+import { useAppSelect } from '@redux/store.hooks'
 
 const PostEditor = () => {
+  const t = useTranslate(locale)
+
   const countCategoryIdx = useMemo(() => {
     const numberOfCategory =
-      Object.keys(Category).filter(el => isNaN(Number(el))).length - 1
+      Object.keys(koCategory).filter(el => isNaN(Number(el))).length - 1
 
     const catergoryIdx = Array(numberOfCategory)
       .fill(0)
@@ -70,7 +75,7 @@ const PostEditor = () => {
       } catch (error) {
         console.log(error)
         if (petitionInput.title === ' ' || petitionInput.description === ' ') {
-          alert('제목 또는 내용을 추가해주세요')
+          alert(t('fill'))
         }
       }
     },
@@ -83,12 +88,11 @@ const PostEditor = () => {
         <Stack spacing={6}>
           <FormControl className="subject_form contents" isRequired>
             <div>
-              <FormLabel>제목</FormLabel>
+              <FormLabel>{t('title')}</FormLabel>
               <span>{petitionInput.title.length}/100</span>
             </div>
             <InputGroup borderColor="#ccc">
               <Input
-                placeholder="제목을 작성해 주세요."
                 onChange={handleChange}
                 name="title"
                 focusBorderColor="none"
@@ -99,17 +103,19 @@ const PostEditor = () => {
           </FormControl>
 
           <FormControl className="category_form" isRequired>
-            <FormLabel>카테고리</FormLabel>
+            <FormLabel>{t('category')}</FormLabel>
             <Select
               focusBorderColor="none"
               onChange={handleChange}
               name="categoryId"
               value={petitionInput.categoryId}
             >
-              <option disabled>카테고리를 선택해주세요.</option>
+              <option disabled>{t('select')}</option>
               {countCategoryIdx.map(idx => (
                 <option value={idx} key={idx}>
-                  {Category[idx]}
+                  {useAppSelect(select => select.lang.mode) === 'ko'
+                    ? koCategory[idx]
+                    : enCategory[idx]}
                 </option>
               ))}
             </Select>
@@ -117,11 +123,10 @@ const PostEditor = () => {
 
           <FormControl className="description_form contents" isRequired>
             <div>
-              <FormLabel> 청원내용</FormLabel>
+              <FormLabel>{t('description')}</FormLabel>
               <span>{petitionInput.description.length}/10000</span>
             </div>
             <Textarea
-              placeholder="내용을 작성해 주세요."
               onChange={handleChange}
               name="description"
               value={petitionInput.description}
@@ -138,10 +143,10 @@ const PostEditor = () => {
                 navigate(-1)
               }}
             >
-              작성 취소
+              {t('cancle')}
             </button>
             <button className="submit_btn" type="submit">
-              작성 완료
+              {t('complete')}
             </button>
           </ButtonGroup>
         </Stack>

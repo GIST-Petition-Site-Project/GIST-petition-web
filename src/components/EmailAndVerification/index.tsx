@@ -1,6 +1,8 @@
 import UserInput from '@components/UserInput'
 import React from 'react'
 import Email from '../Email'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 interface Iprops {
   emailValue: string
@@ -15,15 +17,16 @@ const EmailAndVerification = ({
   onChange,
   disabled,
 }: Iprops) => {
+  const t = useTranslate(locale)
+
   return (
     <>
       <Email value={emailValue} onChange={onChange} disabled={true}></Email>
       <UserInput
-        text="인증 코드"
         name="verificationCode"
         type="text"
         value={verificationValue}
-        placeholder="이메일로 온 인증 코드를 입력하세요"
+        placeholder={t('emailVerification')}
         onChange={onChange}
         disabled={disabled}
         onPassword={false}

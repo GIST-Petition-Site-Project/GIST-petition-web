@@ -12,9 +12,12 @@ import {
   CancleButton,
   GuideModalContent,
 } from './styles'
-import steps from './steps.json'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const GuideModal = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <div style={{ margin: '0 auto' }}>
@@ -23,23 +26,45 @@ const GuideModal = (): JSX.Element => {
         onClick={onOpen}
         _focus={{ outline: 'none' }}
       >
-        청원 작성 요령 안내
+        {t('btn')}
       </ViewWriteMethodButton>
 
       <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
         <ModalOverlay />
         <GuideModalContent>
-          <ModalHeader m="15px"> GIST 청원, 이렇게 등록하세요</ModalHeader>
+          <ModalHeader m="15px">{t('mainTitle')}</ModalHeader>
           <ModalBody>
             <List>
-              {steps.map(step => (
-                <ListItem key={step.id}>
-                  <Heading as="h2" className="modal-font">
-                    Step {step.id}. {step.title}
-                  </Heading>
-                  <Container className="modal-font">{step.contents}</Container>
-                </ListItem>
-              ))}
+              <ListItem>
+                <Heading as="h2" className="modal-font">
+                  Step 1. {t('title1')}
+                </Heading>
+                <Container className="modal-font">{t('contents1')}</Container>
+              </ListItem>
+              <ListItem>
+                <Heading as="h2" className="modal-font">
+                  Step 2. {t('title2')}
+                </Heading>
+                <Container className="modal-font">{t('contents2')}</Container>
+              </ListItem>
+              <ListItem>
+                <Heading as="h2" className="modal-font">
+                  Step 3. {t('title3')}
+                </Heading>
+                <Container className="modal-font">{t('contents3')}</Container>
+              </ListItem>
+              <ListItem>
+                <Heading as="h2" className="modal-font">
+                  Step 4. {t('title4')}
+                </Heading>
+                <Container className="modal-font">{t('contents4')}</Container>
+              </ListItem>
+              <ListItem>
+                <Heading as="h2" className="modal-font">
+                  Step 5. {t('title5')}
+                </Heading>
+                <Container className="modal-font">{t('contents5')}</Container>
+              </ListItem>
             </List>
           </ModalBody>
 

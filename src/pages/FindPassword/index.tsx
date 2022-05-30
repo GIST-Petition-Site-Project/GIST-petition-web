@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { Stack, useToast } from '@chakra-ui/react'
 import { FindPasswordBtn, Container } from './styles'
 import { useNavigate } from 'react-router-dom'
@@ -12,8 +12,12 @@ import UserInput from '@components/UserInput'
 import LoadingSpinner from '@components/LoadingSpinner'
 import EmailAndVerification from '@components/EmailAndVerification'
 import Email from '@components/Email'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const FindingPassword = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   const navigate = useNavigate()
   const [input, setInput] = useState<RegisterForm>({
     username: '',
@@ -45,7 +49,7 @@ const FindingPassword = (): JSX.Element => {
     setErrorText('')
     const emailRegex = /@(gm.)?gist.ac.kr$/
     if (!emailRegex.test(input.username)) {
-      setErrorText('지스트 메일을 이용해주세요')
+      setErrorText(t('useGistEmail'))
       return
     }
     setBtnUI('Loading')
@@ -54,17 +58,14 @@ const FindingPassword = (): JSX.Element => {
     })
     const status = response?.status
     const message = response?.data.message
-    setErrorText(message)
-    if (message === '이미 존재하는 회원입니다.') {
-      setInput({ ...input, username: '' })
-      setBtnUI('Default')
-    } else if (message === '존재하지 않는 회원입니다.') {
+    if (message === '존재하지 않는 회원입니다.') {
+      setErrorText(t('notUser'))
       setInput({ ...input, username: '' })
       setBtnUI('Default')
     } else if (status < 400) {
       setContentUI('CodeVerification')
       setBtnUI('CodeRequested')
-      setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
+      setErrorText(`${input.username}${t('codeSent')}`)
     }
   }
 
@@ -82,10 +83,12 @@ const FindingPassword = (): JSX.Element => {
     }
     switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
+        setErrorText(t('notCode'))
         setInput({ ...input, verificationCode: '' })
         break
       }
       case '만료된 인증 코드입니다.': {
+        setErrorText(t('expiredCode'))
         setInput({ ...input, verificationCode: '' })
         setContentUI('Email')
         setBtnUI('Expired')
@@ -95,7 +98,6 @@ const FindingPassword = (): JSX.Element => {
         throw Error('API 호출에 실패했습니다')
       }
     }
-    setErrorText(message)
   }
 
   const handleResendCode = async () => {
@@ -129,7 +131,7 @@ const FindingPassword = (): JSX.Element => {
     setErrorText('')
     const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
     if (!passwordRegex.test(input.password)) {
-      setErrorText('영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요')
+      setErrorText(t('formatPwd'))
       return
     }
     if (input.password === input.passwordConfirm) {
@@ -146,8 +148,8 @@ const FindingPassword = (): JSX.Element => {
         toast({
           status: 'success',
           duration: 3000,
-          title: '비밀번호 재설정',
-          description: '비밀번호가 재설정되었습니다',
+          title: t('success'),
+          description: t('pwdChanged'),
           isClosable: true,
         })
         navigate('/login')
@@ -155,7 +157,7 @@ const FindingPassword = (): JSX.Element => {
         setBtnUI('Invalid')
       }
     } else {
-      setErrorText('비밀번호가 일치하지 않습니다')
+      setErrorText(t('diffPwd'))
     }
   }
 
@@ -163,7 +165,7 @@ const FindingPassword = (): JSX.Element => {
     <Container className="register">
       <form onSubmit={handleSubmit} className="register_form">
         <Stack spacing={4}>
-          <span>비밀번호 찾기</span>
+          <span>{t('findPassword')}</span>
           {contentUI === 'Email' && (
             <Email
               value={input.username}
@@ -189,21 +191,19 @@ const FindingPassword = (): JSX.Element => {
                 onChange={handleChange}
               ></EmailAndVerification>
               <UserInput
-                text="비밀번호"
                 name="password"
                 type="password"
                 value={input.password}
-                placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
+                placeholder={t('newPwd')}
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
               ></UserInput>
               <UserInput
-                text="비밀번호 확인"
                 name="passwordConfirm"
                 type="password"
                 value={input.passwordConfirm}
-                placeholder="비밀번호를 재입력하세요"
+                placeholder={t('confirmPwd')}
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
@@ -213,27 +213,27 @@ const FindingPassword = (): JSX.Element => {
           {btnUI === 'Loading' && <LoadingSpinner></LoadingSpinner>}
           {btnUI === 'Default' && (
             <FindPasswordBtn type="button" onClick={handleCreateCode}>
-              인증 코드 전송
+              {t('codeBtn')}
             </FindPasswordBtn>
           )}
           {btnUI === 'Expired' && (
             <FindPasswordBtn type="button" onClick={handleResendCode}>
-              인증코드 재전송
+              {t('reCodeBtn')}
             </FindPasswordBtn>
           )}
           {btnUI === 'CodeRequested' && (
             <FindPasswordBtn type="button" onClick={handleConfirmCode}>
-              인증
+              {t('verifyBtn')}
             </FindPasswordBtn>
           )}
           {btnUI === 'Invalid' && (
             <FindPasswordBtn type="button" onClick={handleReverify}>
-              다시 인증하기
+              {t('reVerifyBtn')}
             </FindPasswordBtn>
           )}
           {btnUI === 'Valid' && (
             <FindPasswordBtn type="submit" className="submit__btn">
-              비밀번호 재설정
+              {t('changePwdBtn')}
             </FindPasswordBtn>
           )}
           <span className="err_msg">{errorText}</span>

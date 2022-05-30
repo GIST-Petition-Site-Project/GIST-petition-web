@@ -1,6 +1,10 @@
 import { Flex, Spinner } from '@chakra-ui/react'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const LoadingSpinner = () => {
+  const t = useTranslate(locale)
+
   return (
     <Flex flexDirection="column" alignItems="center">
       <Spinner
@@ -12,7 +16,7 @@ const LoadingSpinner = () => {
         size="xl"
         mb="10px"
       />
-      잠시만 기다려주세요...
+      {t('wait')}
     </Flex>
   )
 }

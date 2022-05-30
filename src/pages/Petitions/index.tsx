@@ -3,7 +3,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import PetitionList from '@components/PetitionList'
 import PaginationButtons from '@components/PaginationButtons'
 import qs from 'qs'
-import { Category } from '../../types/enums'
+import { koCategory, enCategory } from '../../types/enums'
 import { useNavigate } from 'react-router-dom'
 import {
   getPetitionsByQuery,
@@ -12,8 +12,11 @@ import {
 } from '@api/petitionAPI'
 import { Container, PetitionBoard } from './styles'
 import Inner from '@components/Inner'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
+import { useAppSelect } from '@redux/store.hooks'
 
-const numberOfCategory = Object.keys(Category).filter(el =>
+const numberOfCategory = Object.keys(koCategory).filter(el =>
   isNaN(Number(el)),
 ).length
 
@@ -73,19 +76,21 @@ const Petitions = (): JSX.Element => {
     })
   }
 
+  const t = useTranslate(locale)
+
   return (
     <Container>
       <Inner>
         <PetitionBoard>
           <div className="petition_type">
-            <span>모든 청원</span>
+            <span>{t('allPetitions')}</span>
 
             <div className="selects">
               <div className="select_wrapper">
                 <select onChange={handleSortSelect} value={sortSelected}>
-                  <option value={'createdAt,desc'}>최신순</option>
-                  <option value={'agreeCount,desc'}>추천순</option>
-                  <option value={'createdAt,asc'}>만료임박순</option>
+                  <option value={'createdAt,desc'}>{t('latest')}</option>
+                  <option value={'agreeCount,desc'}>{t('consented')}</option>
+                  <option value={'createdAt,asc'}>{t('expiredNear')}</option>
                 </select>
               </div>
               <div className="select_wrapper">
@@ -95,7 +100,9 @@ const Petitions = (): JSX.Element => {
                 >
                   {catergoryIdx.map(item => (
                     <option value={item} key={item}>
-                      {Category[item]}
+                      {useAppSelect(select => select.lang.mode) === 'ko'
+                        ? koCategory[item]
+                        : enCategory[item]}
                     </option>
                   ))}
                 </select>
@@ -105,9 +112,9 @@ const Petitions = (): JSX.Element => {
 
           <Tabs isFitted colorScheme="red">
             <TabList>
-              <Tab onClick={setInitialState}>진행중인 청원</Tab>
-              <Tab onClick={setInitialState}>만료된 청원</Tab>
-              <Tab onClick={setInitialState}>반려된 청원</Tab>
+              <Tab onClick={setInitialState}>{t('progress')}</Tab>
+              <Tab onClick={setInitialState}>{t('expired')}</Tab>
+              <Tab onClick={setInitialState}>{t('rejected')}</Tab>
             </TabList>
 
             <TabPanels>

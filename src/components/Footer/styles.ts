@@ -56,7 +56,7 @@ const Text = styled.p`
       }
     }
   }
-  p {
+  > div {
     width: 17rem;
     div {
       display: flex;

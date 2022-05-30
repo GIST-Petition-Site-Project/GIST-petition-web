@@ -13,8 +13,12 @@ import UserInput from '@components/UserInput'
 import { useAppSelect } from '@redux/store.hooks'
 import Email from '../../components/Email'
 import EmailAndVerification from '../../components/EmailAndVerification'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const Register = (): JSX.Element => {
+  const t = useTranslate(locale)
+
   const navigate = useNavigate()
 
   const [input, setInput] = useState<RegisterForm>({
@@ -94,7 +98,7 @@ const Register = (): JSX.Element => {
     setErrorText('')
     const emailRegex = /@(gm.)?gist.ac.kr$/
     if (!emailRegex.test(input.username)) {
-      setErrorText('지스트 메일을 이용해주세요')
+      setErrorText(t('useGistEmail'))
       return
     }
     setBtnUI('Loading')
@@ -108,7 +112,7 @@ const Register = (): JSX.Element => {
       if (status < 400) {
         setContentUI('CodeVerification')
         setBtnUI('CodeRequested')
-        setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
+        setErrorText(`${input.username}${t('codeSent')}`)
       } else {
         setInput({ ...input, username: '' })
         setBtnUI('Agreed')
@@ -133,10 +137,14 @@ const Register = (): JSX.Element => {
     }
     switch (message) {
       case '존재하지 않는 인증 정보입니다.': {
+        setErrorText(t('notCode'))
+
         setInput({ ...input, verificationCode: '' })
         break
       }
       case '만료된 인증 코드입니다.': {
+        setErrorText(t('expiredCode'))
+
         setInput({ ...input, verificationCode: '' })
         setContentUI('Email')
         setBtnUI('Expired')
@@ -146,7 +154,6 @@ const Register = (): JSX.Element => {
         throw Error('API 호출에 실패했습니다')
       }
     }
-    setErrorText(message)
   }
 
   const handleResendCode = async () => {
@@ -159,7 +166,7 @@ const Register = (): JSX.Element => {
     if (status < 400) {
       setBtnUI('CodeRequested')
       setContentUI('CodeVerification')
-      setErrorText(`${input.username}으로 인증 코드가 전송되었습니다`)
+      setErrorText(`${input.username}${t('codeSent')}`)
     }
   }
 
@@ -170,9 +177,7 @@ const Register = (): JSX.Element => {
       setErrorText('')
       const passwordRegex = /(?=.*\d)(?=.*[a-z]).{8,}/
       if (!passwordRegex.test(input.password)) {
-        setErrorText(
-          '영문과 숫자를 포함한 8자리 이상의 비밀번호를 설정해주세요',
-        )
+        setErrorText(t('formatPwd'))
         return
       }
       if (input.password === input.passwordConfirm) {
@@ -189,8 +194,8 @@ const Register = (): JSX.Element => {
           toast({
             status: 'success',
             duration: 3000,
-            description: '회원가입이 완료되었습니다',
-            title: '계정 생성완료',
+            description: t('success'),
+            title: t('registered'),
             isClosable: true,
           })
           navigate(
@@ -202,7 +207,7 @@ const Register = (): JSX.Element => {
         }
       } else {
         // passwordRef.current && passwordRef.current.focus()
-        setErrorText('비밀번호가 일치하지 않습니다')
+        setErrorText(t('diffPwd'))
       }
     }
   }
@@ -222,7 +227,7 @@ const Register = (): JSX.Element => {
     <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
         <RegisterStack spacing={4}>
-          <span>회원가입</span>
+          <span>{t('signup')}</span>
           {contentUI === 'TermsOfUse' && (
             <>
               <TermsOfUse
@@ -230,7 +235,7 @@ const Register = (): JSX.Element => {
                 onAgree={handleAgreeBtnClick}
               ></TermsOfUse>
               <RegisterButton onClick={handleAgreeBtn}>
-                다음 단계
+                {t('nextBtn')}
               </RegisterButton>
             </>
           )}
@@ -259,21 +264,19 @@ const Register = (): JSX.Element => {
                 onChange={handleChange}
               ></EmailAndVerification>
               <UserInput
-                text="비밀번호"
                 name="password"
                 type="password"
                 value={input.password}
-                placeholder="영문, 숫자 혼합 8자 이상의 비밀번호 입력하세요"
+                placeholder={t('password')}
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
               ></UserInput>
               <UserInput
-                text="비밀번호 확인"
                 name="passwordConfirm"
                 type="password"
                 value={input.passwordConfirm}
-                placeholder="비밀번호를 재입력하세요"
+                placeholder={t('confirmPwd')}
                 onChange={handleChange}
                 disabled={false}
                 onPassword={true}
@@ -283,31 +286,31 @@ const Register = (): JSX.Element => {
           {btnUI === 'Loading' && <LoadingSpinner></LoadingSpinner>}
           {btnUI === 'Agreed' && (
             <RegisterButton type="button" onClick={handleCreateCode}>
-              인증 코드 전송
+              {t('codeBtn')}
             </RegisterButton>
           )}
           {btnUI === 'Expired' && (
             <RegisterButton type="button" onClick={handleResendCode}>
-              인증코드 재전송
+              {t('reCodeBtn')}
             </RegisterButton>
           )}
           {btnUI === 'CodeRequested' && (
             <RegisterButton type="button" onClick={handleConfirmCode}>
-              인증
+              {t('verifyBtn')}
             </RegisterButton>
           )}
           {btnUI === 'Invalid' && (
             <RegisterButton type="button" onClick={handleReverify}>
-              다시 인증하기
+              {t('reVerifyBtn')}
             </RegisterButton>
           )}
           {btnUI === 'Valid' && (
             <RegisterButton type="submit" className="submit__btn">
-              회원가입
+              {t('signup')}
             </RegisterButton>
           )}
           <span className="login_link">
-            이미 가입하셨나요?{' '}
+            {t('already')}{' '}
             <a
               onClick={_e => {
                 navigate(
@@ -316,7 +319,7 @@ const Register = (): JSX.Element => {
                 )
               }}
             >
-              로그인
+              {t('signin')}
             </a>
           </span>
 

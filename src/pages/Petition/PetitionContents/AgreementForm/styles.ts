@@ -17,7 +17,7 @@ const SAgreementForm = styled.div`
     font-size: 0.875rem;
     resize: none;
     box-sizing: border-box;
-    width: 100%auto;
+    width: 100%;
     padding: 0.6rem;
     color: '#ccc';
     cursor: pointer;
