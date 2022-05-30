@@ -230,7 +230,9 @@ const PetitionContents = ({
           <AgreementsSection>
             <Stack>
               <span className="num_of_agree">
-                청원동의 <span>{petition?.agreeCount} </span>명
+                {t('agree')}
+                <span>{petition?.agreeCount} </span>
+                {t('people')}
               </span>
               {!petition?.expired && petition?.status !== 'REJECTED' && (
                 <AgreementForm {...agreementFormProps}></AgreementForm>

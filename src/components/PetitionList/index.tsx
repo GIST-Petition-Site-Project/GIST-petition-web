@@ -58,7 +58,9 @@ const PetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                   {getDay(petition.createdAt)} ~{' '}
                   {getDay(petition.createdAt + 2592000000)}
                 </div>
-                <div className="agreements">{petition.agreeCount}</div>
+                <div className="agreements">
+                  {petition.agreeCount} <span>{t('people')}</span>
+                </div>
               </li>
             ))}
           </>

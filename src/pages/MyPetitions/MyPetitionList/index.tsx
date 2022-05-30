@@ -4,8 +4,12 @@ import { Link, Outlet } from 'react-router-dom'
 import { getDay } from '@utils/getTime'
 
 import { PetitionsUl, PetitionsHead, Status } from './styles'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
+  const t = useTranslate(locale)
+
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
@@ -24,21 +28,21 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     <>
       <PetitionsHead>
         <div className="head_wrap">
-          <div className="head_status">진행 상황</div>
-          <div className="head_category">분류</div>
-          <div className="head_subject">제목</div>
-          <div className="head_date">청원 기간</div>
-          <div className="head_agreements">참여인원</div>
+          <div className="head_status">{t('prgoress')}</div>
+          <div className="head_category">{t('category')}</div>
+          <div className="head_subject">{t('title')}</div>
+          <div className="head_date">{t('duration')}</div>
+          <div className="head_agreements">{t('supporters')}</div>
         </div>
       </PetitionsHead>
 
       <PetitionsUl className="petition_list">
         {petitionList.length === 0 ? (
           <div className="empty_message">
-            <span>나의 청원이 없습니다.</span>
+            <span>{t('empty')}</span>
             <br />
             <br />
-            <span>청원을 등록해주세요!</span>
+            <span>{t('create')}</span>
           </div>
         ) : (
           <>
@@ -52,16 +56,16 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                 >
                   <div className="status_box">
                     {petition.status === 'ANSWERED'
-                      ? '답변완료'
+                      ? t('answered')
                       : petition.status === 'REJECTED'
-                      ? '반려된청원'
+                      ? t('rejected')
                       : petition.expired
-                      ? '청원기간만료'
+                      ? t('expired')
                       : petition.status === 'RELEASED'
                       ? petition?.agreeCount >= 50
-                        ? '답변대기중'
-                        : '청원진행중'
-                      : '사전동의진행중'}
+                        ? t('waiting')
+                        : t('inProgress')
+                      : t('prior')}
                   </div>
                 </Status>
                 <div className="category">{petition.categoryName}</div>
@@ -75,8 +79,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                   {getDay(petition.createdAt + 2592000000)}
                 </div>
                 <div className="agreements">
-                  {petition.agreeCount}
-                  <span>명</span>
+                  {petition.agreeCount} <span>{t('people')}</span>
                 </div>
               </li>
             ))}

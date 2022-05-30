@@ -17,6 +17,9 @@ const locale: Locale = {
     copyBtn: '복사',
     copied: 'URL이 복사되었습니다.',
     share: '공유하기',
+
+    agree: '청원동의 ',
+    people: ' 명',
   },
   en: {
     answered: 'Answered',
@@ -27,7 +30,7 @@ const locale: Locale = {
     prior: 'Prior Consent',
 
     total: 'Total ',
-    signed: ' have signed.',
+    signed: ' have agreed.',
 
     description: 'Description',
     answer: 'Answer',
@@ -36,6 +39,9 @@ const locale: Locale = {
     copyBtn: 'Copy',
     copied: 'URL Copied.',
     share: 'Share',
+
+    agree: '',
+    people: ' people agreed to this',
   },
 }
 

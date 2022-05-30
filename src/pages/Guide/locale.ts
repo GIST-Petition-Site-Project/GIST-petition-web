@@ -76,7 +76,7 @@ const locale: Locale = {
     process: 'The GIST petition will proceed to the next step.',
     step1: `Create a\nPetition`,
     step2: 'Prior \nConsent',
-    step3: 'Progress a\nPetition',
+    step3: 'Petition \nIn Progress',
     step4: 'Answer a\nPetition',
 
     content1:
@@ -89,17 +89,17 @@ const locale: Locale = {
       GIST petition adopted this policy to minimize \
       the exposure of inappropriate petitions and efficiently \
       recieve opinions of GIST members. \
-      A petition with more than 5 consent will be posted on 'Browse' page \
+      A petition with more than 5 agreements will be posted on 'Browse' page \
       after approval by the administrator. \
       Please get prior consent from your acquaintances through the sharing the petition's URL.",
     content3:
       "Approved petitions are open to 'Browse' page \
-      and are accessible to anyone, and all GIST members can consent to the petition. \
-      Once you consent to the petition, \
-      you cannot withdraw the consent or modify the contents.\
+      and are accessible to anyone, and all GIST members can agree to the petition. \
+      Once you agree to the petition, \
+      you cannot withdraw the agreement or modify the contents.\
       Please take this into consideration and participate carefully.",
     content4:
-      "The petition with more than 50 consent, \
+      "The petition with more than 50 agreements, \
       will be answered within two weeks by the related department. \
       Answered petitions will be posted on the 'Answers' page.",
 

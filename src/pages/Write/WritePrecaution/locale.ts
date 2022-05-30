@@ -41,7 +41,7 @@ const locale: Locale = {
     content2:
       'The petition approved by the administrator after receiving more than 5 prior consent will be released on the petition list. \
       Within 30 days from the date of writing the petition, \
-      a petition with more than 50 consent will be sent to the relevant department of GIST College and posted with answer.',
+      a petition with more than 50 agreements will be sent to the relevant department of GIST College and posted with answer.',
 
     content3_1: 'Once a petition has been made, ',
     content3_2: 'it cannot be modified or deleted',
@@ -52,7 +52,7 @@ const locale: Locale = {
     content4_1:
       'All petitions that have been repeatedly posted with similar content ',
     content4_2: 'could be rejected',
-    content4_3: ', except the petition with the highest number of supporters.',
+    content4_3: ', except the petition with the highest number of agreements.',
   },
 }
 

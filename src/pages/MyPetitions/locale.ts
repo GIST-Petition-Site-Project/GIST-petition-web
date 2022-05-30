@@ -1,11 +1,9 @@
 const locale: Locale = {
   ko: {
-    prev: '이전',
-    next: '다음',
+    mine: '나의 청원',
   },
   en: {
-    prev: 'prev',
-    next: 'next',
+    mine: 'My Petitions',
   },
 }
 
