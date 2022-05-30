@@ -13,6 +13,9 @@ import {
 import { getDayTime } from '@utils/getTime'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
+
 interface IProps {
   totalAgreement: number
   totalPages: number
@@ -24,6 +27,8 @@ const AgreementList = ({
   totalPages,
   agreements,
 }: IProps): JSX.Element => {
+  const t = useTranslate(locale)
+
   const queryParams: any = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   })
@@ -84,7 +89,7 @@ const AgreementList = ({
           onPageChange={handlePageChange}
         >
           <SPaginationContainer>
-            <PaginationPrevious>이전</PaginationPrevious>
+            <PaginationPrevious>{t('prev')}</PaginationPrevious>
             <PaginationPageGroup
               separator={<PaginationSeparator jumpSize={10} />}
             >
@@ -92,7 +97,7 @@ const AgreementList = ({
                 <PaginationPage key={`pagination_page_${page}`} page={page} />
               ))}
             </PaginationPageGroup>
-            <PaginationNext>다음</PaginationNext>
+            <PaginationNext>{t('next')}</PaginationNext>
           </SPaginationContainer>
         </Pagination>
       </div>

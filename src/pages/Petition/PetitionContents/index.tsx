@@ -11,8 +11,10 @@ import AgreementForm from './AgreementForm'
 import { getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Youtube from '@components/youtube'
+import locale from './locale'
+import { useTranslate } from '@hooks/useTranslate'
 
 interface IProps {
   id: string
@@ -31,6 +33,8 @@ const PetitionContents = ({
   totalAgreement,
   isConsented,
 }: IProps): JSX.Element => {
+  const t = useTranslate(locale)
+
   const [status, setStatus] = useState('')
   const sharingURL =
     process.env.NODE_ENV === 'development'
@@ -55,7 +59,7 @@ const PetitionContents = ({
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
-    alert('URL이 복사되었습니다.')
+    alert(t('copied'))
   }
 
   const shareFacebook = () => {
@@ -91,19 +95,19 @@ const PetitionContents = ({
     }
 
     if (petition?.status === 'ANSWERED') {
-      setStatus('답변완료')
+      setStatus(t('answered'))
     } else if (petition?.status === 'REJECTED') {
-      setStatus('청원반려')
+      setStatus(t('rejected'))
     } else if (petition?.expired) {
-      setStatus('청원기간만료')
+      setStatus(t('expired'))
     } else if (petition?.status === 'RELEASED') {
       if (petition?.agreeCount >= 50) {
-        setStatus('답변대기중')
+        setStatus(t('waiting'))
       } else {
-        setStatus('청원진행중')
+        setStatus(t('progress'))
       }
     } else if (petition?.status === 'TEMPORARY') {
-      setStatus('사전동의진행중')
+      setStatus(t('prior'))
     }
   }, [petition])
 
@@ -134,15 +138,16 @@ const PetitionContents = ({
               </div>
               <div className="current_agree">
                 <span className="num_of_agree">
-                  총 <span>{petition?.agreeCount}</span>
-                  명이 동의했습니다.
+                  {t('total')}
+                  <span>{petition?.agreeCount}</span>
+                  {t('signed')}
                 </span>
               </div>
             </Stack>
           </HeadSection>
           <DescriptionSection>
             <Stack spacing={4}>
-              <span>청원내용</span>
+              <span>{t('description')}</span>
               <Divider color={'#ccc'}></Divider>
               <div>
                 <div className="content">
@@ -156,8 +161,8 @@ const PetitionContents = ({
               <Stack spacing={4}>
                 <span>
                   {petition?.status === 'ANSWERED'
-                    ? '답변'
-                    : petition?.status === 'REJECTED' && '반려 사유'}
+                    ? t('answer')
+                    : petition?.status === 'REJECTED' && t('rejection')}
                 </span>
                 <Divider color={'#ccc'}></Divider>
                 <div>
@@ -182,7 +187,7 @@ const PetitionContents = ({
           )}
           <SharingPetition>
             <div className="share-btns">
-              <div>공유하기</div>
+              <div>{t('share')}</div>
               <ul className="sns">
                 <li className="kakaotalk">
                   <button
@@ -217,6 +222,7 @@ const PetitionContents = ({
               <div className="copy-btn">
                 <button onClick={clip}>
                   <IoMdAlbums />
+                  <span>{t('copyBtn')}</span>
                 </button>
               </div>
             </div>
