@@ -19,7 +19,7 @@ export enum enCategory {
   'register/scholarship',
   'student support/event/club',
   'planning/budget/public relations',
-  'foreign cooperation',
+  'external cooperation',
   'rights/interest communication',
   'etc',
 }

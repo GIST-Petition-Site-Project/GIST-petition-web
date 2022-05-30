@@ -7,7 +7,7 @@ const locale: Locale = {
   en: {
     above1: 'Total ',
     above2: ' petitions are requested, ',
-    below: ' are answered',
+    below: ' are responded',
   },
 }
 

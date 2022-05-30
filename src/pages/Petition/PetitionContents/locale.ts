@@ -22,7 +22,7 @@ const locale: Locale = {
     people: ' 명',
   },
   en: {
-    answered: 'Answered',
+    answered: 'Responded',
     rejected: 'Rejected',
     expired: 'Expired',
     waiting: 'Waiting for Answer',

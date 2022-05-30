@@ -3,7 +3,7 @@ const locale: Locale = {
     petition: '청원하기',
   },
   en: {
-    petition: 'Create a Petition',
+    petition: 'Create a New Petition',
   },
 }
 

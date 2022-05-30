@@ -54,7 +54,7 @@ const locale: Locale = {
     matters: '청원 유의사항',
   },
   en: {
-    about: 'About',
+    about: 'About GIST Petition',
     slogan: 'A Student Requests, The College Responses!',
     aboutDesc:
       'GIST petition is a service that students can share their opinions \

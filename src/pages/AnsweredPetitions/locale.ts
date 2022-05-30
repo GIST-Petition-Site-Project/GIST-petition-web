@@ -3,7 +3,7 @@ const locale: Locale = {
     answered: '답변된 청원',
   },
   en: {
-    answered: 'Answered Petitions',
+    answered: 'Responded Petitions',
   },
 }
 
