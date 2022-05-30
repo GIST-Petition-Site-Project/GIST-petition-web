@@ -26,7 +26,7 @@ const Footer = (): JSX.Element => {
               </div>
             </button>
           </a>
-          <p>
+          <div>
             <div>
               <span>{t('contact')}</span>
             </div>
@@ -42,7 +42,7 @@ const Footer = (): JSX.Element => {
               <span>{t('betterIT')}</span>
               <span> rjsgh7943@gist.ac.kr</span>
             </div>
-          </p>
+          </div>
         </Text>
       </Inner>
     </FooterContainer>

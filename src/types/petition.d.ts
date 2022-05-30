@@ -1,7 +1,7 @@
 interface Petition {
   agreeCount: number
   answer: Answer
-  categoryName: string
+  categoryId: number
   createdAt: number
   description: string
   expired: boolean

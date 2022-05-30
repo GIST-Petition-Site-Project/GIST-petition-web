@@ -5,7 +5,10 @@ import { getDay } from '@utils/getTime'
 
 import { PetitionsUl, PetitionsHead, Status } from './styles'
 import locale from './locale'
+// import { useAppSelect } from '@redux/store.hooks'
 import { useTranslate } from '@hooks/useTranslate'
+import { useAppSelect } from '@redux/store.hooks'
+import { koCategory, enCategory } from '../../../types/enums'
 
 const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
   const t = useTranslate(locale)
@@ -18,7 +21,7 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
     const response = await getPetitions(query)
     setPetitionList(response?.data?.content || [])
   }
-
+  const lang = useAppSelect(select => select.lang.mode)
   const [petitionList, setPetitionList] = useState<Array<Petition>>([])
   useEffect(() => {
     fetch(queryParams)
@@ -68,7 +71,11 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                       : t('prior')}
                   </div>
                 </Status>
-                <div className="category">{petition.categoryName}</div>
+                <div className="category">
+                  {lang === 'ko'
+                    ? koCategory[petition.categoryId]
+                    : enCategory[petition.categoryId]}
+                </div>
                 <div className="subject">
                   <Link to={`/petitions/temp/${petition.tempUrl}`}>
                     {petition.title}
