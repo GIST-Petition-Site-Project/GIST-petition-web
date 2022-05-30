@@ -14,7 +14,7 @@ const locale: Locale = {
 
     contact: 'Contact',
     graduate: 'GIST Graduate Student Union',
-    emc: 'Emergency Measures Committee',
+    emc: 'Temporary Student Council',
     betterIT: 'Better IT',
   },
 }

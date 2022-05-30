@@ -67,7 +67,7 @@ const locale: Locale = {
     manage1: ' ',
     graduate: 'GIST Graduate Student Union',
     and: ' and ',
-    emc: 'Emergency Measures Committee Communication Department ',
+    emc: 'Temporary Student Council ',
     manage2: 'do management of the GIST petition. ',
 
     purpose:
