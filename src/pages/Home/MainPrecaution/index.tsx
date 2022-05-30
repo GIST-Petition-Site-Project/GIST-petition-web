@@ -88,7 +88,9 @@ const MainPrecaution = (): JSX.Element => {
           </Inner>
         </div>
       </PrecautionContents>
-      <MainPetitionBtn onClick={onPetitionBtn}>청원하기</MainPetitionBtn>
+      <MainPetitionBtn onClick={onPetitionBtn}>
+        {t('petitionBtn')}
+      </MainPetitionBtn>
     </PrecautionSection>
   )
 }

@@ -22,6 +22,8 @@ const locale: Locale = {
       '부패/예산부당집행‚ 인권침해‚ 성희롱‚ 괴롭힘‚ 연구관련 부정행위 등의 일반 민원 신고는 GIST ',
     center: 'GIST 공익신고센터',
     content2_4_2: '를 이용할 수 있습니다.',
+
+    petitionBtn: '청원하기',
   },
   en: {
     title1: 'Such a petition could be deleted or hidden',
@@ -51,6 +53,8 @@ const locale: Locale = {
       sexual harassment, harassment, and research-related irregularities can be reported to the ',
     center: 'GIST Public Interest Reporting Center',
     content2_4_2: '.',
+
+    petitionBtn: 'Start a Petition',
   },
 }
 
