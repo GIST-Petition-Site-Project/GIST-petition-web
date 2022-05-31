@@ -55,7 +55,7 @@ const locale: Locale = {
   },
   en: {
     about: 'About GIST Petition',
-    slogan: 'A Student Requests, The College Responses!',
+    slogan: 'A Student Requests, The GIST Responses!',
     aboutDesc:
       'GIST petition is a service that students can share their opinions \
       related to the college policy and request their demands to the college to receive direct answer.',

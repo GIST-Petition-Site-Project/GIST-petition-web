@@ -32,15 +32,15 @@ const Footer = (): JSX.Element => {
             </div>
             <div>
               <span>{t('graduate')}</span>
-              <span>haeinjung@gm.gist.ac.kr</span>
+              <span>gsa@gist.ac.kr</span>
             </div>
             <div>
               <span>{t('emc')}</span>
-              <span> heejupark@gm.gist.ac.kr</span>
+              <span>giststu2022@gmail.com</span>
             </div>
             <div>
               <span>{t('betterIT')}</span>
-              <span> rjsgh7943@gist.ac.kr</span>
+              <span>rjsgh7943@gist.ac.kr</span>
             </div>
           </div>
         </Text>
