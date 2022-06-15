@@ -11,8 +11,10 @@
 > [지스트 소통마당 지톡지톡](https://www.gist.ac.kr/site/gtalk/index.html)에서도 확인하실 수 있습니다.
 
 
-## Timeline
+## 📆 Timeline
 
+- 21.07 ~
+  Better IT 팀빌딩
 - [22.03.14 출시](https://www.gist-petition.com/petitions/2)  
 
   <img src="https://user-images.githubusercontent.com/65757344/173832953-27639f34-5a42-4f8a-8319-b1eb37689780.png" alt="지스트 청원 포스터" width="360"/>
