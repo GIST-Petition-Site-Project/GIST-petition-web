@@ -8,6 +8,7 @@ export enum koCategory {
   '기획/예산/홍보',
   '대외협력',
   '권익소통',
+  '자치회',
   '기타',
 }
 
@@ -21,5 +22,6 @@ export enum enCategory {
   'planning/budget/public relations',
   'external cooperation',
   'rights/interest communication',
+  'student council',
   'etc',
 }
