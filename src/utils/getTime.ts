@@ -14,6 +14,10 @@ export const getDay = (timestamp: number) => {
 }
 
 export const getDate = (timestamp: number) => {
-  const date = new Date(timestamp)
-  return date.toLocaleString()
+  const dateObj = new Date(timestamp)
+  return dateObj.toLocaleString('sv-SE', {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+  })
 }
