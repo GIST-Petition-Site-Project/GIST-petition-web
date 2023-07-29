@@ -8,7 +8,7 @@ import {
 } from './styles'
 import AgreementList from './AgreementList'
 import AgreementForm from './AgreementForm'
-import { getDay } from '@utils/getTime'
+import { getDate, getDay } from '@utils/getTime'
 import { RiKakaoTalkFill, RiFacebookFill } from 'react-icons/ri'
 import { IoMdAlbums } from 'react-icons/io'
 import { useEffect, useState } from 'react'
@@ -130,8 +130,8 @@ const PetitionContents = ({
                   &nbsp;
                 </span>
                 <span className="duration">
-                  ({getDay(Number(petition?.createdAt))}~
-                  {getDay(Number(petition?.createdAt) + 2592000000)})
+                  ({getDate(Number(petition?.createdAt))}~
+                  {getDate(Number(petition?.createdAt) + 2592000000)})
                 </span>
               </div>
               <div className="title">
