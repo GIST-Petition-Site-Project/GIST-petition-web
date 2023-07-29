@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import { getDay } from '@utils/getTime'
+import { getDate } from '@utils/getTime'
 
 import { PetitionsUl, PetitionsHead, Status } from './styles'
 import locale from './locale'
@@ -82,8 +82,8 @@ const MyPetitionList = ({ getPetitions }: GetPetitions): JSX.Element => {
                   </Link>
                 </div>
                 <div className="date">
-                  {getDay(petition.createdAt)} ~{' '}
-                  {getDay(petition.createdAt + 2592000000)}
+                  {getDate(petition.createdAt)} ~{' '}
+                  {getDate(petition.createdAt + 2592000000)}
                 </div>
                 <div className="agreements">
                   {petition.agreeCount} <span>{t('people')}</span>
