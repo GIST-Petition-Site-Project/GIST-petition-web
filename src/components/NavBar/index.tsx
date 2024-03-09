@@ -43,6 +43,11 @@ const NavBar = (): JSX.Element => {
           <div onClick={closeMenu}>
             <ListItem>
               <ItemName>
+                <Link to="/answer">{t('answered')}</Link>
+              </ItemName>
+            </ListItem>
+            <ListItem>
+              <ItemName>
                 <Link to="/guide">{t('about')}</Link>
               </ItemName>
             </ListItem>
@@ -54,11 +59,6 @@ const NavBar = (): JSX.Element => {
             <ListItem>
               <ItemName>
                 <Link to="/petitions">{t('all')}</Link>
-              </ItemName>
-            </ListItem>
-            <ListItem>
-              <ItemName>
-                <Link to="/answer">{t('answered')}</Link>
               </ItemName>
             </ListItem>
             <ListItem>
