@@ -16,6 +16,14 @@ const MainPetitions = (): JSX.Element => {
     <PetitionsSection>
       <Inner>
         <div className="petitions_title">
+          <span>{t('recent')}</span>
+        </div>
+        <PetitionList
+          getPetitions={() =>
+            getAnsweredByQuery({ size: 5, sort: 'createdAt,desc' })
+          }
+        ></PetitionList>
+        <div className="petitions_title">
           <span>{t('consented')}</span>
         </div>
         <PetitionList
@@ -35,14 +43,6 @@ const MainPetitions = (): JSX.Element => {
               size: 5,
               sort: 'agreeCount,desc',
             })
-          }
-        ></PetitionList>
-        <div className="petitions_title">
-          <span>{t('recent')}</span>
-        </div>
-        <PetitionList
-          getPetitions={() =>
-            getAnsweredByQuery({ size: 5, sort: 'createdAt,desc' })
           }
         ></PetitionList>
         <div className="petitions_title">
