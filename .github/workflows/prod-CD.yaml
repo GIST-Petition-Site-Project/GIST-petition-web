@@ -23,9 +23,16 @@ jobs: # Job 설정
 
       - name: Build # React Build
         run: yarn build
+        
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
 
-      - name: Deploy # Upload build file to S3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
-        run: aws s3 cp --recursive --region ap-northeast-2 build s3://petition-bucket
+      - name: Upload To S3
+        run: aws s3 sync --delete build s3://petition-bucket/prod
+        
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id E18QP4Q8ZHLODO --paths "/*"
