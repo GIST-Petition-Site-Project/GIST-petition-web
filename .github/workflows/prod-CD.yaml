@@ -31,8 +31,8 @@ jobs: # Job 설정
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
-      - name: Upload To S3 # TODO: prod bucket 분리 & aws sync 명령어 사용
-        run: aws s3 cp --recursive build s3://petition-bucket
+      - name: Upload To S3
+        run: aws s3 sync --delete build s3://petition-bucket/prod
         
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id E18QP4Q8ZHLODO --paths "/*"
